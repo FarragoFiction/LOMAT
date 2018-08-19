@@ -1,10 +1,13 @@
 .parallaxLayer{
-    width: 800px;
     position: absolute;
+    left: 0px;
+    top: 0px;
 }
 
 .parallaxParent{
     width: 800px;
     position: relative;
+    overflow: hidden;
+    height: 600px;
 }
 .

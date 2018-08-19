@@ -8,16 +8,18 @@ class ParallaxLayer {
     String imageLocation;
     ImageElement image;
     int speed;
-    int frameRate = 77;
+    int frameRate = 100;
     PhysicalLocation parent;
     int width;
     bool removeMePlease = false;
 
-    ParallaxLayer(String this.imageLocation, PhysicalLocation parent, int this.speed) {
+    ParallaxLayer(String this.imageLocation, PhysicalLocation this.parent, int this.speed) {
         image = new ImageElement(src: imageLocation);
-        image.style.zIndex = "$speed px"; //auto sorts things by speed
+        image.style.zIndex = "$speed"; //auto sorts things by speed
+        image.style.left = "0px";
         image.classes.add("parallaxLayer");
         parent.container.append(image);
+        animate();
     }
 
     Future<Null> animate() async{
@@ -30,7 +32,7 @@ class ParallaxLayer {
 
     void move() {
         print("moving");
-        int x = int.parse(image.style.left);
+        int x = int.parse(image.style.left.replaceAll("px", ""));
         x = x - speed;
         //if i am less than -0, no longer on screen, go away
         if(x<0){
@@ -38,7 +40,7 @@ class ParallaxLayer {
             removeMePlease = true;
             return;
         }
-        image.style.left = "$x px";
+        image.style.left = "${x}px";
     }
 }
 
@@ -50,11 +52,15 @@ class ParallaxLayerLooping extends ParallaxLayer{
 
     @override
     void move() {
-        int x = int.parse(image.style.left);
+        int x = int.parse(image.style.left.replaceAll("px", ""));
         x = x - speed;
         //if i am less than -width/2, go back to start
-        if(x<parent.width/2*-1) x = 0;
-        image.style.left = "$x px";
+        double max = -1* parent.width;
+        if(x<max) {
+            print("resetting");
+            x = 0;
+        }
+        image.style.left = "${x}px";
     }
 }
 
