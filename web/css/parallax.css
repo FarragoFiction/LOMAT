@@ -10,4 +10,11 @@
     overflow: hidden;
     height: 600px;
 }
+
+.wagon{
+    z-index: 10;
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
 .

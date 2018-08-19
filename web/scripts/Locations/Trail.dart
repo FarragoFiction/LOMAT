@@ -1,3 +1,4 @@
+import '../Wagon.dart';
 import 'ParallaxLayers.dart';
 import 'PhysicalLocation.dart';
 import 'dart:async';
@@ -6,6 +7,7 @@ import 'dart:html';
 //eventually subclasses will have events and shit hwatever, not doing now
 class Trail extends PhysicalLocation {
     List<ParallaxLayer> paralaxLayers = new List<ParallaxLayer>();
+    Wagon wagon;
 
   Trail(Element container) : super(container);
 
@@ -17,6 +19,7 @@ class Trail extends PhysicalLocation {
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg2.png", this, 8));
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
+      wagon = new Wagon(this.container);
 
   }
 }
