@@ -1,0 +1,10 @@
+.parallaxLayer{
+    width: 800px;
+    position: absolute;
+}
+
+.parallaxParent{
+    width: 800px;
+    position: relative;
+}
+.
