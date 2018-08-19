@@ -56,18 +56,12 @@ class ParallaxLayerLooping extends ParallaxLayer{
 
     ParallaxLayerLooping(String imageLocation, PhysicalLocation parent, int speed) : super(imageLocation, parent, speed);
 
-    Future<Null> animate() async{
-        if(removeMePlease) return;
-        move();
-        await window.animationFrame;
-        new Timer(new Duration(milliseconds: frameRate), () => animate());
-    }
 
     void init() {
         super.init();
         image2 = new ImageElement(src: imageLocation);
         image2.style.zIndex = "$speed"; //auto sorts things by speed
-        image2.style.left = "800px"; //at the right side
+        image2.style.left = "1600px"; //at the right side
         image2.classes.add("parallaxLayer");
         parent.container.append(image2);
     }
@@ -76,21 +70,20 @@ class ParallaxLayerLooping extends ParallaxLayer{
     void move() {
         int x = int.parse(image.style.left.replaceAll("px", ""));
         x = x - speed;
-        //if i am less than -width/2, go back to start
-        int max = -1* parent.width;
+        //if i am less than double width (i.e. my own width), go back to start
+        int max = -2* parent.width;
         if(x<max) {
-            print("resetting");
-            x = 0;
+            print("resetting x");
+            x = 1600-speed;
         }
 
         int x2 = int.parse(image2.style.left.replaceAll("px", ""));
         x2 = x2 - speed;
-        //if i am less than -width/2, go back to start
-        int max2 = -1* parent.width;
-        if(x2<max2) {
-            print("resetting");
-            x2 = 0;
+        if(x2<max) {
+            print("resetting x2");
+            x2 = 1600-speed;
         }
+        image.style.left = "${x}px";
         image2.style.left = "${x2}px";
     }
 }

@@ -14,6 +14,9 @@ class Trail extends PhysicalLocation {
       //TODO make trees/wind procedural
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg0.png", this, 1));
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg1.png", this, 5));
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg2.png", this, 10));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg2.png", this, 8));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
+
   }
 }
