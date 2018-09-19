@@ -8,7 +8,7 @@ class ParallaxLayer {
     String imageLocation;
     ImageElement image;
     int speed;
-    int frameRate = 100;
+    int frameRate = (1000/30).round();
     PhysicalLocation parent;
     int width;
     bool removeMePlease = false;
