@@ -1,26 +1,26 @@
 import 'PhysicalLocation.dart';
+import 'StaticLayer.dart';
 import 'dart:async';
 import 'dart:html';
 
 //for things that are just procedurally generated parts of the background
 //always moves to the left
-class ParallaxLayer {
-    String imageLocation;
-    ImageElement image;
-    int speed;
+class ParallaxLayer extends StaticLayer {
+
     int frameRate = (1000/30).round();
-    PhysicalLocation parent;
     int width;
     bool removeMePlease = false;
 
-    ParallaxLayer(String this.imageLocation, PhysicalLocation this.parent, int this.speed) {
-        init();
-        animate();
-    }
+  ParallaxLayer(String imageLocation, PhysicalLocation parent, int zIndexOrSpeed) : super(imageLocation, parent, zIndexOrSpeed) {
+    //parent will init
+      animate();
+  }
+
+
 
     void init() {
       image = new ImageElement(src: imageLocation);
-      image.style.zIndex = "$speed"; //auto sorts things by speed
+      image.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
       image.style.left = "0px";
       image.classes.add("parallaxLayer");
       parent.container.append(image);
@@ -37,7 +37,7 @@ class ParallaxLayer {
     void move() {
         print("moving");
         int x = int.parse(image.style.left.replaceAll("px", ""));
-        x = x - speed;
+        x = x - zIndexOrSpeed;
         //if i am less than -0, no longer on screen, go away
         if(x<0){
             image.remove();
@@ -60,7 +60,7 @@ class ParallaxLayerLooping extends ParallaxLayer{
     void init() {
         super.init();
         image2 = new ImageElement(src: imageLocation);
-        image2.style.zIndex = "$speed"; //auto sorts things by speed
+        image2.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
         image2.style.left = "1600px"; //at the right side
         image2.classes.add("parallaxLayer");
         parent.container.append(image2);
@@ -69,19 +69,19 @@ class ParallaxLayerLooping extends ParallaxLayer{
     @override
     void move() {
         int x = int.parse(image.style.left.replaceAll("px", ""));
-        x = x - speed;
+        x = x - zIndexOrSpeed;
         //if i am less than double width (i.e. my own width), go back to start
         int max = -2* parent.width;
         if(x<max) {
             print("resetting x");
-            x = 1600-speed;
+            x = 1600-zIndexOrSpeed;
         }
 
         int x2 = int.parse(image2.style.left.replaceAll("px", ""));
-        x2 = x2 - speed;
+        x2 = x2 - zIndexOrSpeed;
         if(x2<max) {
             print("resetting x2");
-            x2 = 1600-speed;
+            x2 = 1600-zIndexOrSpeed;
         }
         image.style.left = "${x}px";
         image2.style.left = "${x2}px";
