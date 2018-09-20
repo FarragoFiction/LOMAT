@@ -13,6 +13,8 @@ environment:
 dev_dependencies:
   browser: ^0.10.0
   dart_to_js_script_rewriter: ^1.0.1
+  CommonLib:
+      git: git://github.com/FarragoFiction/CommonLib.git
 
 transformers:
 - dart_to_js_script_rewriter

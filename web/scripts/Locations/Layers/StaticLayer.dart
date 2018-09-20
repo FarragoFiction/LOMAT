@@ -19,4 +19,15 @@ class StaticLayer {
         image.classes.add("parallaxLayer");
         parent.container.append(image);
     }
+
+    static styleLikeStaticLayer(DivElement div, int zIndexOrSpeed, int width, int height, int x, int y) {
+        div.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
+        div.style.left = "${x}px";
+        div.style.top = "${y}px";
+        div.style.width = "${width} px";
+        div.style.height="${height} px";
+
+        div.classes.add("parallaxLayer");
+
+    }
 }
