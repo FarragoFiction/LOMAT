@@ -1,5 +1,5 @@
 import '../Wagon.dart';
-import 'ParallaxLayers.dart';
+import 'Layers/ParallaxLayers.dart';
 import 'PhysicalLocation.dart';
 import 'dart:async';
 import 'dart:html';
@@ -16,9 +16,9 @@ class Trail extends PhysicalLocation {
       //TODO make trees/wind procedural
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg0.png", this, 1));
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg1.png", this, 5));
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist.png", this, 8));
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist.png", this, 12));
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist.png", this, 16));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist0.png", this, 8));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist1.png", this, 12));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist2.png", this, 16));
       wagon = new Wagon(this.container);
 
   }

@@ -1,6 +1,6 @@
-import 'ParallaxLayers.dart';
+import 'Layers/ParallaxLayers.dart';
 import 'PhysicalLocation.dart';
-import 'StaticLayer.dart';
+import 'Layers/StaticLayer.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -16,9 +16,9 @@ class HuntingGrounds extends PhysicalLocation {
         //TODO eventually which 0 bg is used is based on nearest location
         layers.add(new StaticLayer("images/BGs/bg0.png", this, 1));
         layers.add(new StaticLayer("images/BGs/bg1.png", this, 5));
-        layers.add(new ParallaxLayer("images/BGs/bg2.png", this, 8));
-        layers.add(new ParallaxLayer("images/BGs/bg3.png", this, 12));
-        layers.add(new ParallaxLayer("images/BGs/bg4.png", this, 16));
+        layers.add(new ParallaxLayerLooping("images/BGs/bg2.png", this, 8));
+        layers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
+        layers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
 
     }
 }

@@ -1,4 +1,4 @@
-import 'PhysicalLocation.dart';
+import '../PhysicalLocation.dart';
 import 'StaticLayer.dart';
 import 'dart:async';
 import 'dart:html';
@@ -12,7 +12,7 @@ class ParallaxLayer extends StaticLayer {
     bool removeMePlease = false;
 
   ParallaxLayer(String imageLocation, PhysicalLocation parent, int zIndexOrSpeed) : super(imageLocation, parent, zIndexOrSpeed) {
-    //parent will init
+      //dont call init here it breaks shit
       animate();
   }
 

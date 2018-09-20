@@ -1,4 +1,4 @@
-import 'PhysicalLocation.dart';
+import '../PhysicalLocation.dart';
 import 'dart:html';
 
 class StaticLayer {
