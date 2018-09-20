@@ -1,21 +1,49 @@
 import '../PhysicalLocation.dart';
 import 'StaticLayer.dart';
 import 'dart:html';
+import 'package:CommonLib/Random.dart';
+import "dart:math" as Math;
 //doesn't move but also isn't forced to be at 0,0
 
 
 class ProceduralLayer extends StaticLayer {
     int x = 0;
     int y = 0;
-  ProceduralLayer(int this.x, int this.y, String imageLocation, PhysicalLocation parent, int zIndexOrSpeed) : super(imageLocation, parent, zIndexOrSpeed);
+    int width = 0;
+    int height = 0;
+    bool turnways = false;
+  ProceduralLayer(int this.x, int this.y, int this.height,bool this.turnways, String imageLocation, PhysicalLocation parent) : super(imageLocation, parent, 5);
 
   void init() {
+      zIndexOrSpeed = yToZIndex(y);
       image = new ImageElement(src: imageLocation);
+      image.style.height = "$height px";
+      image.height = height;
       image.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
       image.style.left = "${x}px";
+      //bottom gets ignored for dumb reasons
       image.style.top = "${y}px";
+      if(turnways) {
+          image.style.transform = "scaleX(-1)";
+      }
       image.classes.add("parallaxLayer");
       parent.container.append(image);
+  }
+
+  static int yToZIndex(int y) {
+      return (y/10).floor();
+  }
+
+  static ProceduralLayer spawnTree(PhysicalLocation parent, int seed) {
+      int maxX = 800;
+      int maxY = 290;
+      int maxHeightModifier = 150;
+      Random rand = new Random(seed);
+      List<String> treeLocations = <String>["0.png","1.png","2.png","3.png","4.png","5.png"];
+      int y = rand.nextInt(maxY);
+      int height = rand.nextIntRange(10,maxHeightModifier)+y;
+      y += 300-height;
+      return new ProceduralLayer(rand.nextInt(maxX), y,height,rand.nextBool(), "images/BGs/Trees/${rand.pickFrom(treeLocations)}", parent);
   }
 
 }

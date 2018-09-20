@@ -1,11 +1,14 @@
 import 'Layers/ParallaxLayers.dart';
+import 'Layers/ProceduralLayer.dart';
 import 'PhysicalLocation.dart';
 import 'Layers/StaticLayer.dart';
 import 'dart:async';
 import 'dart:html';
 import "package:CommonLib/Colours.dart";
+import 'package:CommonLib/Random.dart';
 //eventually subclasses will have events and shit hwatever, not doing now
 class HuntingGrounds extends PhysicalLocation {
+    int numTrees = 8;
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
     List<StaticLayer> layers = new List<StaticLayer>();
 
@@ -20,7 +23,11 @@ class HuntingGrounds extends PhysicalLocation {
         DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
         container.append(ground);
         //StaticLayer.styleLikeStaticLayer(ground,5,800,300,0,300);
+        Random rand = new Random();
         ground.classes.add("ground");
+        for(int i = 0; i<numTrees; i++) {
+            ProceduralLayer.spawnTree(this,rand.nextInt());
+        }
         //layers.add(new ParallaxLayerLooping("images/BGs/bg2.png", this, 8));
         //layers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
         //layers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
