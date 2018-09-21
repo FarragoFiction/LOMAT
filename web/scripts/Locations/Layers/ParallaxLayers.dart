@@ -11,8 +11,9 @@ class ParallaxLayer extends StaticLayer {
     int width;
     bool removeMePlease = false;
 
-  ParallaxLayer(String imageLocation, PhysicalLocation parent, int zIndexOrSpeed) : super(imageLocation, parent, zIndexOrSpeed) {
+  ParallaxLayer(String imageLocation, PhysicalLocation parent, int z, int speed) : super(imageLocation, parent, z) {
       //dont call init here it breaks shit
+      this.speed = speed;
       animate();
   }
 
@@ -20,7 +21,7 @@ class ParallaxLayer extends StaticLayer {
 
     void init() {
       image = new ImageElement(src: imageLocation);
-      image.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
+      image.style.zIndex = "$zIndex"; //auto sorts things by speed
       image.style.left = "0px";
       image.classes.add("parallaxLayer");
       parent.container.append(image);
@@ -37,7 +38,7 @@ class ParallaxLayer extends StaticLayer {
     void move() {
         print("moving");
         int x = int.parse(image.style.left.replaceAll("px", ""));
-        x = x - zIndexOrSpeed;
+        x = x - zIndex;
         //if i am less than -0, no longer on screen, go away
         if(x<0){
             image.remove();
@@ -54,13 +55,14 @@ class ParallaxLayer extends StaticLayer {
 class ParallaxLayerLooping extends ParallaxLayer{
     ImageElement image2;
 
-    ParallaxLayerLooping(String imageLocation, PhysicalLocation parent, int speed) : super(imageLocation, parent, speed);
+  ParallaxLayerLooping(String imageLocation, PhysicalLocation parent, int z, int speed) : super(imageLocation, parent, z, speed);
+
 
 
     void init() {
         super.init();
         image2 = new ImageElement(src: imageLocation);
-        image2.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
+        image2.style.zIndex = "$zIndex"; //auto sorts things by speed
         image2.style.left = "1600px"; //at the right side
         image2.classes.add("parallaxLayer");
         parent.container.append(image2);
@@ -69,19 +71,19 @@ class ParallaxLayerLooping extends ParallaxLayer{
     @override
     void move() {
         int x = int.parse(image.style.left.replaceAll("px", ""));
-        x = x - zIndexOrSpeed;
+        x = x - zIndex;
         //if i am less than double width (i.e. my own width), go back to start
         int max = -2* parent.width;
         if(x<max) {
             print("resetting x");
-            x = 1600-zIndexOrSpeed;
+            x = 1600-zIndex;
         }
 
         int x2 = int.parse(image2.style.left.replaceAll("px", ""));
-        x2 = x2 - zIndexOrSpeed;
+        x2 = x2 - zIndex;
         if(x2<max) {
             print("resetting x2");
-            x2 = 1600-zIndexOrSpeed;
+            x2 = 1600-zIndex;
         }
         image.style.left = "${x}px";
         image2.style.left = "${x2}px";

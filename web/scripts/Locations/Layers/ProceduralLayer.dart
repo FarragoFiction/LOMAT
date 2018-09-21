@@ -16,11 +16,11 @@ class ProceduralLayer extends StaticLayer {
   ProceduralLayer(int this.x, int this.y, int this.height,bool this.turnways, String imageLocation, PhysicalLocation parent) : super(imageLocation, parent, 5);
 
   void init() {
-      zIndexOrSpeed = yToZIndex(y,height);
+      zIndex = yToZIndex(y,height);
       image = new ImageElement(src: imageLocation);
       image.style.height = "$height px";
       image.height = height;
-      image.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
+      image.style.zIndex = "$zIndex"; //auto sorts things by speed
       image.style.left = "${x}px";
       //bottom gets ignored for dumb reasons
       image.style.top = "${y}px";

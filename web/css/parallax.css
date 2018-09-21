@@ -12,7 +12,7 @@
 }
 
 .wagon{
-    z-index: 10;
+    z-index: 999;
     position: absolute;
     bottom: 10px;
     left: 0px;

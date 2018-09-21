@@ -5,16 +5,18 @@ class StaticLayer {
     String imageLocation;
     ImageElement image;
     PhysicalLocation parent;
-    int zIndexOrSpeed;
+    int zIndex;
+    int speed;
 
 
-    StaticLayer(String this.imageLocation, PhysicalLocation this.parent, int this.zIndexOrSpeed) {
+
+    StaticLayer(String this.imageLocation, PhysicalLocation this.parent, int this.zIndex) {
         init();
     }
 
     void init() {
         image = new ImageElement(src: imageLocation);
-        image.style.zIndex = "$zIndexOrSpeed"; //auto sorts things by speed
+        image.style.zIndex = "$zIndex"; //auto sorts things by speed
         image.style.left = "0px";
         image.classes.add("parallaxLayer");
         parent.container.append(image);

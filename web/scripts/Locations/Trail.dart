@@ -21,7 +21,7 @@ class Trail extends PhysicalLocation {
   @override
   void init() {
       //TODO make trees/wind procedural
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/SimpleLomatBackground.png", this, 1));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/SimpleLomatBackground.png", this, 1,1));
       DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
       container.append(ground);
       //StaticLayer.styleLikeStaticLayer(ground,5,800,300,0,300);
@@ -33,10 +33,10 @@ class Trail extends PhysicalLocation {
           ProceduralLayerParallax.spawnTree(this,rand.nextInt());
       }
 
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist1.png", this, 5));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist1.png", this, 5,5));
 
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist0.png", this, 12));
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist2.png", this, 16));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist0.png", this, 33,10));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist2.png", this, 1000,13));
       wagon = new Wagon(this.container);
 
   }

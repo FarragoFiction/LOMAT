@@ -25,21 +25,34 @@ class ProceduralLayerParallax extends ProceduralLayer {
       print("moving");
       int x = int.parse(image.style.left.replaceAll("px", ""));
       //trees move WAY too fast
-      x = x - ((zIndexOrSpeed/10).round());
+      x = x - ((zIndex/10).round());
       //if i am less than -0, no longer on screen, go away
-      if(x<0){
+      if(x<image.width*-1){
           image.remove();
           removeMePlease = true;
+          spawnTreeOffScreen(parent, new Random().nextInt());
           return;
       }
       image.style.left = "${x}px";
   }
 
+    static ProceduralLayerParallax spawnTreeOffScreen(PhysicalLocation parent, int seed) {
+        int maxX = 800;
+        int maxY = 290;
+        int maxHeightModifier = 300;
+        Random rand = new Random(seed);
+        List<String> treeLocations = <String>["0.png","1.png","2.png","3.png","4.png","5.png"];
+        int y = rand.nextInt(maxY);
+        int height = rand.nextIntRange(10,maxHeightModifier)+y;
+        y += 300-height;
+        return new ProceduralLayerParallax(maxX +rand.nextInt(maxX), y,height,rand.nextBool(), "images/BGs/Trees/${rand.pickFrom(treeLocations)}", parent);
+    }
+
 
   static ProceduralLayerParallax spawnTree(PhysicalLocation parent, int seed) {
       int maxX = 800;
       int maxY = 290;
-      int maxHeightModifier = 150;
+      int maxHeightModifier = 200;
       Random rand = new Random(seed);
       List<String> treeLocations = <String>["0.png","1.png","2.png","3.png","4.png","5.png"];
       int y = rand.nextInt(maxY);
