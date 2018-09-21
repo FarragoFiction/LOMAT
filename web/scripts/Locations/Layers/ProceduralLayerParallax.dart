@@ -24,7 +24,8 @@ class ProceduralLayerParallax extends ProceduralLayer {
   void move() {
       print("moving");
       int x = int.parse(image.style.left.replaceAll("px", ""));
-      x = x - zIndexOrSpeed;
+      //trees move WAY too fast
+      x = x - ((zIndexOrSpeed/10).round());
       //if i am less than -0, no longer on screen, go away
       if(x<0){
           image.remove();

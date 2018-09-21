@@ -7,6 +7,7 @@ import "dart:math" as Math;
 
 
 class ProceduralLayer extends StaticLayer {
+    static int viewportHeight = 600;
     int x = 0;
     int y = 0;
     int width = 0;
@@ -15,7 +16,7 @@ class ProceduralLayer extends StaticLayer {
   ProceduralLayer(int this.x, int this.y, int this.height,bool this.turnways, String imageLocation, PhysicalLocation parent) : super(imageLocation, parent, 5);
 
   void init() {
-      zIndexOrSpeed = yToZIndex(y);
+      zIndexOrSpeed = yToZIndex(y,height);
       image = new ImageElement(src: imageLocation);
       image.style.height = "$height px";
       image.height = height;
@@ -28,10 +29,13 @@ class ProceduralLayer extends StaticLayer {
       }
       image.classes.add("parallaxLayer");
       parent.container.append(image);
+
   }
 
-  static int yToZIndex(int y) {
-      return (y/10).floor();
+  //every so often it doesn't look quite right, especially for short trees, what should math be???
+    //discord is down so i can't ramble my thoughts there.
+  static int yToZIndex(int y, int height) {
+      return ((y+height)/10).floor();
   }
 
   static ProceduralLayer spawnTree(PhysicalLocation parent, int seed) {

@@ -20,7 +20,7 @@ class Enemy {
     Enemy(this.x, int this.y,int this.height,String imageLocation,  int this.speed,double this.direction,PhysicalLocation this.location) {
         image = new ImageElement(src: imageLocation);
         image.classes.add('enemy');
-        image.style.zIndex = "${ProceduralLayer.yToZIndex(y)}}"; //auto sorts things by speed
+        image.style.zIndex = "${ProceduralLayer.yToZIndex(y,height)}}"; //auto sorts things by speed
 
     }
 
