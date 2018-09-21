@@ -76,14 +76,14 @@ class ParallaxLayerLooping extends ParallaxLayer{
         int max = -2* parent.width;
         if(x<max) {
             print("resetting x");
-            x = 1600-zIndex;
+            x = 1600-speed;
         }
 
         int x2 = int.parse(image2.style.left.replaceAll("px", ""));
         x2 = x2 - zIndex;
         if(x2<max) {
             print("resetting x2");
-            x2 = 1600-zIndex;
+            x2 = 1600-speed;
         }
         image.style.left = "${x}px";
         image2.style.left = "${x2}px";
