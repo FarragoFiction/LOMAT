@@ -44,6 +44,6 @@ class ProceduralLayerParallax extends ProceduralLayer {
       int y = rand.nextInt(maxY);
       int height = rand.nextIntRange(10,maxHeightModifier)+y;
       y += 300-height;
-      return new ProceduralLayerParallax(maxX*rand.nextInt(maxX), y,height,rand.nextBool(), "images/BGs/Trees/${rand.pickFrom(treeLocations)}", parent);
+      return new ProceduralLayerParallax(rand.nextInt(maxX), y,height,rand.nextBool(), "images/BGs/Trees/${rand.pickFrom(treeLocations)}", parent);
   }
 }
