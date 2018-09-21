@@ -38,7 +38,7 @@ class ParallaxLayer extends StaticLayer {
     void move() {
         print("moving");
         int x = int.parse(image.style.left.replaceAll("px", ""));
-        x = x - zIndex;
+        x = x - speed;
         //if i am less than -0, no longer on screen, go away
         if(x<0){
             image.remove();
@@ -71,7 +71,7 @@ class ParallaxLayerLooping extends ParallaxLayer{
     @override
     void move() {
         int x = int.parse(image.style.left.replaceAll("px", ""));
-        x = x - zIndex;
+        x = x - speed;
         //if i am less than double width (i.e. my own width), go back to start
         int max = -2* parent.width;
         if(x<max) {
@@ -80,7 +80,7 @@ class ParallaxLayerLooping extends ParallaxLayer{
         }
 
         int x2 = int.parse(image2.style.left.replaceAll("px", ""));
-        x2 = x2 - zIndex;
+        x2 = x2 - speed;
         if(x2<max) {
             print("resetting x2");
             x2 = 1600-speed;
