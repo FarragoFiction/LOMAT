@@ -1,6 +1,7 @@
 import '../Wagon.dart';
 import 'Layers/ParallaxLayers.dart';
 import 'Layers/ProceduralLayer.dart';
+import 'Layers/ProceduralLayerParallax.dart';
 import 'PhysicalLocation.dart';
 import 'dart:async';
 import 'dart:html';
@@ -20,8 +21,8 @@ class Trail extends PhysicalLocation {
   @override
   void init() {
       //TODO make trees/wind procedural
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/LomatCastleBackground.png", this, 1));
-      /*DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/SimpleLomatBackground.png", this, 1));
+      DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
       container.append(ground);
       //StaticLayer.styleLikeStaticLayer(ground,5,800,300,0,300);
       Random rand = new Random();
@@ -31,11 +32,10 @@ class Trail extends PhysicalLocation {
       for(int i = 0; i<numTrees; i++) {
           ProceduralLayerParallax.spawnTree(this,rand.nextInt());
       }
-      */
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/bg1.png", this, 5));
 
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist0.png", this, 8));
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist1.png", this, 12));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist1.png", this, 5));
+
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist0.png", this, 12));
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist2.png", this, 16));
       wagon = new Wagon(this.container);
 
