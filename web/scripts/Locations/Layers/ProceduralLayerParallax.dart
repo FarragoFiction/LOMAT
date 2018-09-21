@@ -1,9 +1,38 @@
 import '../PhysicalLocation.dart';
 import 'ProceduralLayer.dart';
+import 'dart:async';
+import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 class ProceduralLayerParallax extends ProceduralLayer {
-  ProceduralLayerParallax(int x, int y, int height, bool turnways, String imageLocation, PhysicalLocation parent) : super(x, y, height, turnways, imageLocation, parent);
+    int frameRate = (1000/30).round();
+    bool removeMePlease = false;
+
+  ProceduralLayerParallax(int x, int y, int height, bool turnways, String imageLocation, PhysicalLocation parent) : super(x, y, height, turnways, imageLocation, parent) {
+      animate();
+  }
+
+  Future<Null> animate() async{
+      //todo when i go off screen spawn a new tree
+      if(removeMePlease) return;
+      move();
+      await window.animationFrame;
+      new Timer(new Duration(milliseconds: frameRate), () => animate());
+  }
+
+
+  void move() {
+      print("moving");
+      int x = int.parse(image.style.left.replaceAll("px", ""));
+      x = x - zIndexOrSpeed;
+      //if i am less than -0, no longer on screen, go away
+      if(x<0){
+          image.remove();
+          removeMePlease = true;
+          return;
+      }
+      image.style.left = "${x}px";
+  }
 
 
   static ProceduralLayerParallax spawnTree(PhysicalLocation parent, int seed) {
