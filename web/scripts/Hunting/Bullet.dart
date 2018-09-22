@@ -3,16 +3,21 @@ import 'dart:async';
 import 'dart:html';
 import "dart:math" as Math;
 
+import 'package:CommonLib/Random.dart';
+
 class Bullet {
     ImageElement image;
     int x = 400;
     int y = 590;
-    int speed = 13;
+    int speed = 17;
+    //TODO make sure you actually hook this up
+    int costToFire = 1;
     PhysicalLocation location;
     int goalX = 0;
     int goalY = 0;
     bool  removeMePlease = false;
     int frameRate = (1000/30).round();
+
     double angle;
 
 
@@ -44,6 +49,7 @@ class Bullet {
     }
 
     //TODO keep asking your parent if you hit anything, if you did, vanish (or if you went off screen)
+    //TODO this is slightly off sometimes from where i would expect it to hit
     void move() {
         //TODO move x and y to be closer to goal, i know i've done this math before but...what was it again?
         //oh right distance is the hypotenuse
@@ -60,8 +66,8 @@ class Bullet {
 
         //double angle = 91* 180/Math.PI;
 
-        int newX = x + (speed * Math.cos(angle)).ceil();
-        int newY = y + (speed * Math.sin(angle)).ceil();
+        int newX = x + (speed * Math.cos(angle)).round();
+        int newY = y + (speed * Math.sin(angle)).round();
         print("moving to $newX, $newY, speed is $speed");
         if(newX > location.width || newX < 0) {
             removeMePlease = true;
@@ -78,6 +84,8 @@ class Bullet {
         syncLocation();
 
     }
+
+
 
 
 }
