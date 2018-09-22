@@ -7,7 +7,7 @@ class Bullet {
     ImageElement image;
     int x = 400;
     int y = 590;
-    int speed = 13;
+    int speed = 1;
     PhysicalLocation location;
     int goalX = 0;
     int goalY = 0;
@@ -38,7 +38,7 @@ class Bullet {
         }
         move();
         await window.animationFrame;
-        new Timer(new Duration(milliseconds: frameRate), () => move());
+        new Timer(new Duration(milliseconds: frameRate), () => tick());
 
     }
 
@@ -49,10 +49,11 @@ class Bullet {
         //so i need to calc x = cos and y = sing of the distance
         //which means i'll need to know the angel too. hrm
 
-        double angle = 0.0;
+        double angle = 15* 180/Math.PI;
 
-        int newX = (speed * Math.cos(angle)).ceil();
-        int newY = (speed * Math.sin(angle)).ceil();
+        int newX = x + (speed * Math.cos(angle)).ceil();
+        int newY = y + (speed * Math.sin(angle)).ceil();
+        print("moving to $newX, $newY, speed is $speed");
         if(newX > location.width || newX < 0) {
             removeMePlease = true;
             image.remove();

@@ -24,7 +24,7 @@ class HuntingGrounds extends PhysicalLocation {
         //TODO eventually which 0 bg is used is based on nearest location
         layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
         container.onClick.listen((MouseEvent event){
-            window.alert("clicked");
+           // window.alert("clicked");
             Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.client.x, event.client.y);
             bullets.add(bullet);
         });
