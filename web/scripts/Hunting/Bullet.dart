@@ -7,7 +7,7 @@ class Bullet {
     ImageElement image;
     int x = 400;
     int y = 590;
-    int speed = 1;
+    int speed = 13;
     PhysicalLocation location;
     int goalX = 0;
     int goalY = 0;
@@ -49,7 +49,11 @@ class Bullet {
         //so i need to calc x = cos and y = sing of the distance
         //which means i'll need to know the angel too. hrm
 
-        double angle = 15* 180/Math.PI;
+        int dx = x - goalX;
+        int dy = y - goalY;
+        double angle = Math.atan2(dy,dx);
+
+        //double angle = 91* 180/Math.PI;
 
         int newX = x + (speed * Math.cos(angle)).ceil();
         int newY = y + (speed * Math.sin(angle)).ceil();
