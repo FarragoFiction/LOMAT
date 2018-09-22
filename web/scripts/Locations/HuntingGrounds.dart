@@ -1,3 +1,4 @@
+import '../Hunting/Bullet.dart';
 import '../Hunting/Enemy.dart';
 import 'Layers/ParallaxLayers.dart';
 import 'Layers/ProceduralLayer.dart';
@@ -21,6 +22,9 @@ class HuntingGrounds extends PhysicalLocation {
         //TODO make trees/wind procedural
         //TODO eventually which 0 bg is used is based on nearest location
         layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
+        layers.last.image.onClick.listen((MouseEvent event){
+            Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.client.x, event.client.y);
+        });
         //layers.add(new StaticLayer("images/BGs/bg1.png", this, 5));
         DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
         container.append(ground);
