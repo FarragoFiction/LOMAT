@@ -13,6 +13,7 @@ class Bullet {
     int goalY = 0;
     bool  removeMePlease = false;
     int frameRate = (1000/30).round();
+    double angle;
 
 
     Bullet(String imageLocation, PhysicalLocation this.location, int this.goalX, int this.goalY) {
@@ -51,7 +52,11 @@ class Bullet {
 
         int dx = goalX -x ;
         int dy = goalY -y;
-        double angle = Math.atan2(dy,dx);
+        //only do it once or the bullets will stop moving when they get to wear you clicked
+        //and its kinda adorable
+        if(angle == null || true) {
+            angle = Math.atan2(dy,dx);
+        }
 
         //double angle = 91* 180/Math.PI;
 
