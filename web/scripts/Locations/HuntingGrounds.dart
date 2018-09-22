@@ -25,7 +25,7 @@ class HuntingGrounds extends PhysicalLocation {
         layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
         container.onClick.listen((MouseEvent event){
            // window.alert("clicked");
-            Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.client.x, event.client.y);
+            Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
             bullets.add(bullet);
         });
         //layers.add(new StaticLayer("images/BGs/bg1.png", this, 5));

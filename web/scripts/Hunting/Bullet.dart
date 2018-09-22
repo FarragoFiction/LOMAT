@@ -54,7 +54,7 @@ class Bullet {
         int dy = goalY -y;
         //only do it once or the bullets will stop moving when they get to wear you clicked
         //and its kinda adorable
-        if(angle == null || true) {
+        if(angle == null) {
             angle = Math.atan2(dy,dx);
         }
 
