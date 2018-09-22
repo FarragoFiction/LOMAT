@@ -14,6 +14,7 @@ class HuntingGrounds extends PhysicalLocation {
     Random rand = new Random();
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
     List<StaticLayer> layers = new List<StaticLayer>();
+    List<Bullet> bullets = new List<Bullet>();
 
     HuntingGrounds(Element container) : super(container);
 
@@ -22,8 +23,10 @@ class HuntingGrounds extends PhysicalLocation {
         //TODO make trees/wind procedural
         //TODO eventually which 0 bg is used is based on nearest location
         layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
-        layers.last.image.onClick.listen((MouseEvent event){
+        container.onClick.listen((MouseEvent event){
+            window.alert("clicked");
             Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.client.x, event.client.y);
+            bullets.add(bullet);
         });
         //layers.add(new StaticLayer("images/BGs/bg1.png", this, 5));
         DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
