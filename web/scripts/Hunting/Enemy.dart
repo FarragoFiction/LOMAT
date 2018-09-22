@@ -20,7 +20,19 @@ class Enemy {
     Enemy(this.x, int this.y,int this.height,String imageLocation,  int this.speed,double this.direction,PhysicalLocation this.location) {
         image = new ImageElement(src: imageLocation);
         image.classes.add('enemy');
-        image.style.zIndex = "${ProceduralLayer.yToZIndex(y,height)}}"; //auto sorts things by speed
+        int z = ProceduralLayer.yToZIndex(y,height);
+        image.id = "zShouldBe$z";
+        image.style.zIndex = "$z"; //auto sorts things by speed
+        location.container.append(image);
+        image.classes.add("parallaxLayer");
+        image.height = height;
+
+        syncLocation();
+    }
+
+    void syncLocation() {
+        image.style.left = "${x}px";
+        image.style.top = "${y}px";
 
     }
 
@@ -31,16 +43,16 @@ class Enemy {
 
 
     static Enemy spawnImps(PhysicalLocation parent, int seed) {
+        print("doing imp)");
         int maxX = 800;
         int maxY = 290;
-        int maxHeightModifier = 150;
         Random rand = new Random(seed);
-        List<String> treeLocations = <String>["0.png","1.png","2.png","3.png","4.png","5.png"];
+        List<String> enemyLocations = <String>["0.png"];
         int y = rand.nextInt(maxY);
-        int height = rand.nextIntRange(10,maxHeightModifier)+y;
+        int height = (60*((y/maxY*2))).ceil()+30;
         y += 300-height;
         List<double> directions = <double>[-1.0, 1.0];
-        return new Enemy(rand.nextInt(maxX), y,height, "images/BGs/Trees/${rand.pickFrom(treeLocations)}",13,rand.pickFrom(directions), parent);
+        return new Enemy(rand.nextInt(maxX), y,height, "images/Enemies/${rand.pickFrom(enemyLocations)}",13,rand.pickFrom(directions), parent);
     }
 
 
