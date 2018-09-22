@@ -49,8 +49,8 @@ class Bullet {
         //so i need to calc x = cos and y = sing of the distance
         //which means i'll need to know the angel too. hrm
 
-        int dx = x - goalX;
-        int dy = y - goalY;
+        int dx = goalX -x ;
+        int dy = goalY -y;
         double angle = Math.atan2(dy,dx);
 
         //double angle = 91* 180/Math.PI;
