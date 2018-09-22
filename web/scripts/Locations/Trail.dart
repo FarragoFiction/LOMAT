@@ -20,7 +20,7 @@ class Trail extends PhysicalLocation {
 
   @override
   void init() {
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/SimpleLomatBackground.png", this, 1,1));
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/SimpleSnowyPlainsLomat.png", this, 1,1));
       DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
       container.append(ground);
       //StaticLayer.styleLikeStaticLayer(ground,5,800,300,0,300);

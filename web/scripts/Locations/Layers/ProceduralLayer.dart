@@ -46,7 +46,7 @@ class ProceduralLayer extends StaticLayer {
       List<String> treeLocations = <String>["0.png","1.png","2.png","3.png","4.png","5.png"];
       int y = rand.nextInt(maxY);
       int height = rand.nextIntRange(10,maxHeightModifier)+y;
-      y += 300-height;
+      y += maxY - 10 -height;
       return new ProceduralLayer(rand.nextInt(maxX), y,height,rand.nextBool(), "images/BGs/Trees/${rand.pickFrom(treeLocations)}", parent);
   }
 

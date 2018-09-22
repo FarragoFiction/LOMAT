@@ -26,7 +26,7 @@ class HuntingGrounds extends PhysicalLocation {
         Random rand = new Random();
         //TODO eventually how wooded an area will be will be determined by location
         numTrees = rand.nextIntRange(1,13);
-        ground.classes.add("ground");
+        ground.classes.add("huntingGround");
         for(int i = 0; i<numTrees; i++) {
             ProceduralLayer.spawnTree(this,rand.nextInt());
         }
