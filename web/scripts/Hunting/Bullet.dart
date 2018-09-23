@@ -28,7 +28,6 @@ class Bullet {
         image.style.zIndex = "4037"; //auto sorts things by speed
         location.container.append(image);
         image.classes.add("parallaxLayer");
-        //TODO animate traveling to goal location
         syncLocation();
         tick();
 
@@ -69,7 +68,7 @@ class Bullet {
 
         int newX = x + (speed * Math.cos(angle)).round();
         int newY = y + (speed * Math.sin(angle)).round();
-        print("moving to $newX, $newY, speed is $speed");
+       // print("moving to $newX, $newY, speed is $speed");
         if(newX > location.width || newX < 0) {
             die();
         }

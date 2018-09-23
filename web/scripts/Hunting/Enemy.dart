@@ -1,5 +1,6 @@
 import '../Locations/Layers/ProceduralLayer.dart';
 import '../Locations/PhysicalLocation.dart';
+import 'dart:async';
 import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
@@ -16,7 +17,9 @@ class Enemy {
     PhysicalLocation location;
     double direction = 0.0; //mostly they'll just go forwards and backwards but whatever, could need diff directions in a sub class
     int height;
-    bool removeMePlease = true;
+    bool removeMePlease = false;
+    int frameRate = (1000/30).round();
+
 
     Enemy(this.x, int this.y,int this.height,String imageLocation,  int this.speed,double this.direction,PhysicalLocation this.location) {
         image = new ImageElement(src: imageLocation);
@@ -29,6 +32,7 @@ class Enemy {
         image.height = height;
 
         syncLocation();
+        tick();
     }
 
     void syncLocation() {
@@ -38,11 +42,36 @@ class Enemy {
     }
 
     //sub classes override this to move a differnet way (such as at an angle
-    void tick() {
-        x += (speed*direction).ceil();
+    Future<Null> tick() async {
+        print("ticking imp");
+        if(removeMePlease) {
+            return;
+        }
+        move();
+        await window.animationFrame;
+        new Timer(new Duration(milliseconds: frameRate), () => tick());
+
     }
 
+    void move() {
+        x += (speed*direction).ceil();
+        if(x > location.width || x < 0) {
+            vanish();
+        }
+
+        if(y > location.height || y < 0) {
+            vanish();
+        }
+        syncLocation();
+    }
+
+    //TODO play sound effect, explode into/reward grist etc
     void die() {
+        removeMePlease = true;
+        image.remove();
+    }
+
+    void vanish() {
         removeMePlease = true;
         image.remove();
     }
