@@ -14,7 +14,7 @@ class HuntingGrounds extends PhysicalLocation {
     Random rand = new Random();
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
     List<StaticLayer> layers = new List<StaticLayer>();
-    List<Bullet> bullets = new List<Bullet>();
+
 
     HuntingGrounds(Element container) : super(container);
 
@@ -46,6 +46,6 @@ class HuntingGrounds extends PhysicalLocation {
     }
 
     Future<Null> impLoop() {
-        Enemy.spawnImps(this, rand.nextInt());
+        enemies.add(Enemy.spawnImps(this, rand.nextInt()));
     }
 }

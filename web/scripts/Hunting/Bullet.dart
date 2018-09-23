@@ -1,4 +1,5 @@
 import '../Locations/PhysicalLocation.dart';
+import 'Enemy.dart';
 import 'dart:async';
 import 'dart:html';
 import "dart:math" as Math;
@@ -82,7 +83,34 @@ class Bullet {
         x = newX;
         y = newY;
         syncLocation();
+        checkHits();
 
+    }
+
+    void checkHits() {
+        for(Enemy enemy in location.enemies) {
+            if(collision(enemy.image, image)){
+                window.alert("hit!!!");
+            }
+        }
+    }
+
+    static bool collision(Element div1, Element div2) {
+        int x1 = div1.offset.left;
+        int y1 = div1.offset.top;
+        int h1 = div1.offsetHeight;
+        int w1 = div1.offsetWidth;
+        int b1 = y1 + h1;
+        int r1 = x1 + w1;
+        int x2 = div2.offset.left;
+        int y2 = div2.offset.top;
+        int h2 = div2.offsetHeight;
+        int w2 = div2.offsetWidth;
+        int b2 = y2 + h2;
+        int r2 = x2 + w2;
+
+        if (b1 < y2 || y1 > b2 || r1 < x2 || x1 > r2) return false;
+        return true;
     }
 
 
