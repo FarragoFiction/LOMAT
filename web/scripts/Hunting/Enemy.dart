@@ -12,7 +12,7 @@ class Enemy {
     ImageElement image;
     int x = 0;
     int y = 0;
-    int speed = 13;
+    int speed = 5;
     int gristDropped = 13;
     PhysicalLocation location;
     double direction = 0.0; //mostly they'll just go forwards and backwards but whatever, could need diff directions in a sub class
@@ -30,6 +30,7 @@ class Enemy {
         location.container.append(image);
         image.classes.add("parallaxLayer");
         image.height = height;
+        if(direction >0)           image.style.transform = "scaleX(-1)";
 
         syncLocation();
         tick();
@@ -55,7 +56,7 @@ class Enemy {
 
     void move() {
         x += (speed*direction).ceil();
-        if(x > location.width || x < 0) {
+        if(x > location.width || x < height*-1) {
             vanish();
         }
 
@@ -87,7 +88,11 @@ class Enemy {
         int height = (60*((y/maxY*2))).ceil()+30;
         y += 300-height;
         List<double> directions = <double>[-1.0, 1.0];
-        return new Enemy(rand.nextInt(maxX), y,height, "images/Enemies/${rand.pickFrom(enemyLocations)}",13,rand.pickFrom(directions), parent);
+
+        double chosenDirection = rand.pickFrom(directions);
+        int x = 0;
+        if(chosenDirection < 0) x = maxX;
+        return new Enemy(x, y,height, "images/Enemies/${rand.pickFrom(enemyLocations)}",13,chosenDirection, parent);
     }
 
 
