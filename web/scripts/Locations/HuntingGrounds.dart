@@ -45,7 +45,10 @@ class HuntingGrounds extends PhysicalLocation {
 
     }
 
-    Future<Null> impLoop() {
+    Future<Null> impLoop() async{
         enemies.add(Enemy.spawnImps(this, rand.nextInt()));
+        await window.animationFrame;
+        int duartion = new Random().nextIntRange(1000,3000);
+        new Timer(new Duration(milliseconds: duartion), () => impLoop());
     }
 }
