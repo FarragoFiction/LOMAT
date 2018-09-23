@@ -71,13 +71,11 @@ class Bullet {
         int newY = y + (speed * Math.sin(angle)).round();
         print("moving to $newX, $newY, speed is $speed");
         if(newX > location.width || newX < 0) {
-            removeMePlease = true;
-            image.remove();
+            die();
         }
 
         if(newY > location.height || newY < 0) {
-            removeMePlease = true;
-            image.remove();
+            die();
         }
 
         x = newX;
@@ -87,13 +85,21 @@ class Bullet {
 
     }
 
+    void die() {
+      removeMePlease = true;
+      image.remove();
+    }
+
     void checkHits() {
         for(Enemy enemy in location.enemies) {
             if(collision(enemy.image, image)){
-                window.alert("hit!!!");
+                enemy.die();
+                die();
+                //window.alert("hit!!!");
             }
         }
     }
+
 
     static bool collision(Element div1, Element div2) {
         int x1 = div1.offset.left;

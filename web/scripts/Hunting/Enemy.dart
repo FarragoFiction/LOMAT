@@ -16,6 +16,7 @@ class Enemy {
     PhysicalLocation location;
     double direction = 0.0; //mostly they'll just go forwards and backwards but whatever, could need diff directions in a sub class
     int height;
+    bool removeMePlease = true;
 
     Enemy(this.x, int this.y,int this.height,String imageLocation,  int this.speed,double this.direction,PhysicalLocation this.location) {
         image = new ImageElement(src: imageLocation);
@@ -39,6 +40,11 @@ class Enemy {
     //sub classes override this to move a differnet way (such as at an angle
     void tick() {
         x += (speed*direction).ceil();
+    }
+
+    void die() {
+        removeMePlease = true;
+        image.remove();
     }
 
 
