@@ -1,9 +1,11 @@
 import '../Locations/HuntingGrounds.dart';
-import '../Screens/DialogueScreen.dart';
+import '../NPCs/LOMATNPC.dart';
+import '../Screens/TalkyScreen.dart';
 import 'dart:html';
 
-DialogueScreen grounds;
+TalkyScreen screen;
 DivElement div = querySelector('#output');
 void main() {
-    grounds = new DialogueScreen(div);
+    LOMATNPC testNPC = new LOMATNPC();
+    screen = new TalkyScreen(testNPC,div);
 }
