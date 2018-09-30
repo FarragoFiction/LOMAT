@@ -1,6 +1,6 @@
 import 'dart:html';
 
-class LOMATScreen {
+abstract class LOMATScreen {
     int width = 800;
     int height = 600;
     Element parent;
@@ -12,7 +12,8 @@ class LOMATScreen {
     LOMATScreen(Element this.parent) {
         myContainer = new DivElement()..classes.add("screen");
         parent.append(myContainer);
-
+        init();
     }
 
+    void init();
 }
