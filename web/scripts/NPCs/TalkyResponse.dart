@@ -1,3 +1,4 @@
+import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'dart:html';
 
@@ -7,7 +8,9 @@ class TalkyResponse extends TalkyItem {
     List<TalkyItem> results = new List<TalkyItem>();
     String associatedEmotion;
 
-  TalkyResponse(List<TalkyItem> this.results,String displayText,String this.associatedEmotion) : super(displayText);
+  TalkyResponse(List<TalkyItem> this.results,String displayText,String this.associatedEmotion) : super(displayText) {
+        results.add(new TalkyEnd());
+  }
 
     @override
     void display(Element container, TalkyItem myOwner) {

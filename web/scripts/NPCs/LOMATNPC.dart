@@ -1,3 +1,4 @@
+import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'dart:html';
 
@@ -13,6 +14,7 @@ class LOMATNPC {
 
     LOMATNPC(String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, List<TalkyItem> this.dialogueItems ) {
         displayImage = new ImageElement(src: positiveEmotion);
+        dialogueItems.add(new TalkyEnd());
     }
 
     void displayDialogue(Element container) {
