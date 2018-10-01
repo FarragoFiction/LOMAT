@@ -5,7 +5,9 @@ import 'dart:html';
 
 class TalkyQuestion extends TalkyItem {
     TalkyResponse response;
-  TalkyQuestion(String displayText,TalkyResponse this.response, TalkyLevel owner) : super(displayText,owner);
+  TalkyQuestion(String displayText,TalkyResponse this.response, TalkyLevel owner) : super(displayText,owner) {
+        response.talkyLevel.parent = owner;
+  }
 
   @override
     void display(Element container) {

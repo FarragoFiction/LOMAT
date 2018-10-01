@@ -11,11 +11,7 @@ class TalkyEnd extends TalkyItem {
     void display(Element container) {
         super.display(container);
         div.onClick.listen((Event e) {
-           if(owner != null) {
-               owner.display(container);
-           }else {
-               container.setInnerHtml("TODO: have this go back to the previous screen.");
-           }
+           owner.goUpALevel(container);
         });
     }
 }

@@ -24,14 +24,7 @@ abstract class TalkyItem {
         div.setInnerHtml("$displayText");
     }
 
-    void goUpALevel(Element container) {
-        container.setInnerHtml("");
-        if(owner != null) {
-            owner.display(container);
-        }else {
-            container.setInnerHtml("TODO: have this go back to the previous screen.");
-        }
-    }
+
 
 
 }
