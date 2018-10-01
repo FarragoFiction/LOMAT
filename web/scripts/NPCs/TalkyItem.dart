@@ -16,7 +16,7 @@ abstract class TalkyItem {
     void display(Element container) {
         div = new DivElement()..classes.add("dialogueItem");
         container.append(div);
-        div.text = "$displayText";
+        div.setInnerHtml("$displayText");
     }
 
 

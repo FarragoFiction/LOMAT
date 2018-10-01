@@ -10,7 +10,8 @@ class TalkyQuestion extends TalkyItem {
     void display(Element container) {
         super.display(container);
         div.onClick.listen((Event e) {
-            div.style.backgroundColor = "red";
+            container.setInnerHtml("");
+            response.display(container);
         });
     }
 

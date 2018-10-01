@@ -19,7 +19,7 @@ void main() {
     TalkyQuestion question1 = new TalkyQuestion("What about THING A?",tr);
 
 
-    TalkyResponse tr2 = new TalkyResponse(<TalkyItem>[tr],"Well you see Thing B is happy and... $pain", TalkyItem.HAPPY);
+    TalkyResponse tr2 = new TalkyResponse(<TalkyItem>[question1],"Well you see Thing B is happy and... $pain", TalkyItem.HAPPY);
     TalkyQuestion question2 = new TalkyQuestion("What about THING B?",tr2);
 
     TalkyResponse tr3 = new TalkyResponse(<TalkyItem>[question2],"Well you see Thing C is sad and... $pain", TalkyItem.SAD);
