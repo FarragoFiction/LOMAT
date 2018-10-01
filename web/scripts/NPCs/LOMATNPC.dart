@@ -13,13 +13,15 @@ class LOMATNPC {
     //TODO add all the shit they'll need as party members, maybe in a sub class (since not all townsfolk are potential party members)
     //health, hunger, etc.
     TalkyLevel talkyLevel;
+    TalkyEnd talkyEnd;
 
     LOMATNPC(String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
-        displayImage = new ImageElement(src: positiveEmotion)..classes.add("npcImage");
-        talkyLevel.talkyItems.add(new TalkyEnd(talkyLevel));
+        displayImage = new ImageElement(src: neutralEmotion)..classes.add("npcImage");
     }
 
     void displayDialogue(Element container) {
+        if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
+
         div = new DivElement()..classes.add("dialogueContainer");
         container.append(displayImage);
         container.append(div);

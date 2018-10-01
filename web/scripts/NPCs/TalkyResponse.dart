@@ -11,10 +11,10 @@ class TalkyResponse extends TalkyItem {
     String associatedEmotion;
     //needed to emote
     LOMATNPC npc;
+    TalkyEnd talkyEnd;
 
   TalkyResponse(LOMATNPC this.npc, List<TalkyItem> results,String displayText,String this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
         talkyLevel = new TalkyLevel(results, owner);
-        results.add(new TalkyEnd(talkyLevel));
 
       //talkyLevel.talkyItems.add(this);
   }
@@ -22,6 +22,7 @@ class TalkyResponse extends TalkyItem {
     @override
     void display(Element container) {
         super.display(container);
+        if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
         npc.emote(associatedEmotion);
         for(TalkyItem talkyItem in talkyLevel.talkyItems) {
             talkyItem.display(container);
