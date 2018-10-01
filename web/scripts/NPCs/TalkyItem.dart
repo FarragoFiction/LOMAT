@@ -10,13 +10,25 @@ abstract class TalkyItem {
     DivElement div;
 
     String displayText;
+    TalkyItem owner;
 
     TalkyItem(String this.displayText);
 
-    void display(Element container) {
+    void display(Element container, TalkyItem myOwner) {
+        if(myOwner != null) owner = myOwner;
+        //if i'm passed in null use whatever owner i have cached
         div = new DivElement()..classes.add("dialogueItem");
         container.append(div);
         div.setInnerHtml("$displayText");
+    }
+
+    void goUpALevel(Element container) {
+        container.setInnerHtml("");
+        if(owner != null) {
+            owner.display(container, null);
+        }else {
+            container.setInnerHtml("TODO: have this go back to the previous screen.");
+        }
     }
 
 

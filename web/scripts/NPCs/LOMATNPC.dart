@@ -19,7 +19,7 @@ class LOMATNPC {
         div = new DivElement()..classes.add("dialogueContainer");
         container.append(div);
         for(TalkyItem talkyItem in dialogueItems) {
-            talkyItem.display(div);
+            talkyItem.display(div,null);
         }
     }
 

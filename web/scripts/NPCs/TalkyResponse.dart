@@ -7,13 +7,13 @@ class TalkyResponse extends TalkyItem {
     List<TalkyItem> results = new List<TalkyItem>();
     String associatedEmotion;
 
-  TalkyResponse(List<TalkyItem> this.results,String displayText,String this.associatedEmotion ) : super(displayText);
+  TalkyResponse(List<TalkyItem> this.results,String displayText,String this.associatedEmotion) : super(displayText);
 
     @override
-    void display(Element container) {
-        super.display(container);
+    void display(Element container, TalkyItem myOwner) {
+        super.display(container,myOwner);
         for(TalkyItem talkyItem in results) {
-            talkyItem.display(container);
+            talkyItem.display(container, this);
         }
     }
 }

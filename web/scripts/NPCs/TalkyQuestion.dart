@@ -7,11 +7,11 @@ class TalkyQuestion extends TalkyItem {
   TalkyQuestion(String displayText,TalkyResponse this.response) : super(displayText);
 
   @override
-    void display(Element container) {
-        super.display(container);
+    void display(Element container, TalkyItem myOwner) {
+        super.display(container, myOwner);
         div.onClick.listen((Event e) {
             container.setInnerHtml("");
-            response.display(container);
+            response.display(container,this);
         });
     }
 
