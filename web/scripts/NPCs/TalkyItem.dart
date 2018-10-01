@@ -6,9 +6,8 @@ abstract class TalkyItem {
     static final String NEUTRAL = "_blank";
 
     String displayText;
-    String associatedEmotion;
 
-    TalkyItem(String this.displayText, String this.associatedEmotion);
+    TalkyItem(String this.displayText);
 
 
 }
