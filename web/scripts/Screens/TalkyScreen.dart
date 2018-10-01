@@ -8,6 +8,6 @@ class TalkyScreen extends LOMATScreen {
 
   @override
   void init() {
-    // TODO: implement init
+    npc.displayDialogue(myContainer);
   }
 }
