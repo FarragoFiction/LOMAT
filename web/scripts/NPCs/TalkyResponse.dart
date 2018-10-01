@@ -1,3 +1,4 @@
+import 'LOMATNPC.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -8,16 +9,19 @@ class TalkyResponse extends TalkyItem {
     //could have sub questions
     TalkyLevel talkyLevel;
     String associatedEmotion;
+    //needed to emote
+    LOMATNPC npc;
 
-  TalkyResponse(List<TalkyItem> results,String displayText,String this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
+  TalkyResponse(LOMATNPC npc, List<TalkyItem> results,String displayText,String this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
         results.add(new TalkyEnd(owner));
         talkyLevel = new TalkyLevel(results);
-        talkyLevel.talkyItems.add(this);
+        //talkyLevel.talkyItems.add(this);
   }
 
     @override
     void display(Element container) {
         super.display(container);
+        npc.emote(associatedEmotion);
         for(TalkyItem talkyItem in talkyLevel.talkyItems) {
             talkyItem.display(container);
         }

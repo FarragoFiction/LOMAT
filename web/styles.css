@@ -29,3 +29,8 @@ html, body {
     padding: 30px;
 }
 
+.npcImage{
+    display: inline;
+    text-align: left;
+    float: left;
+}
