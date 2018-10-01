@@ -7,16 +7,16 @@ abstract class TalkyItem {
     static final String HAPPY = "_happy";
     static final String SAD = "_sad";
     static final String NEUTRAL = "_blank";
+    DivElement div;
 
     String displayText;
 
     TalkyItem(String this.displayText);
 
     void display(Element container) {
-        DivElement div = new DivElement()..classes.add("dialogueItem");
+        div = new DivElement()..classes.add("dialogueItem");
         container.append(div);
         div.text = "$displayText";
-
     }
 
 

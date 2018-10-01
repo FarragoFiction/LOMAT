@@ -6,6 +6,7 @@ class LOMATNPC {
     String positiveEmotion;
     String neutralEmotion;
     String negativeEmotion;
+    DivElement div;
     //TODO add all the shit they'll need as party members, maybe in a sub class (since not all townsfolk are potential party members)
     //health, hunger, etc.
     List<TalkyItem> dialogueItems = new List<TalkyItem>();
@@ -15,7 +16,7 @@ class LOMATNPC {
     }
 
     void displayDialogue(Element container) {
-        DivElement div = new DivElement()..classes.add("dialogueContainer");
+        div = new DivElement()..classes.add("dialogueContainer");
         container.append(div);
         for(TalkyItem talkyItem in dialogueItems) {
             talkyItem.display(div);
