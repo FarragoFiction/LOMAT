@@ -1,5 +1,6 @@
 //'dialogue' is too easy to typo, i am officially declaring 'talky' just as good.
 
+import 'TalkyLevel.dart';
 import 'dart:html';
 
 abstract class TalkyItem {
@@ -10,12 +11,13 @@ abstract class TalkyItem {
     DivElement div;
 
     String displayText;
-    TalkyItem owner;
+    TalkyLevel owner;
 
-    TalkyItem(String this.displayText);
+    TalkyItem(String this.displayText, TalkyLevel this.owner) {
+        owner.talkyItems.add(this);
+    }
 
-    void display(Element container, TalkyItem myOwner) {
-        if(myOwner != null) owner = myOwner;
+    void display(Element container) {
         //if i'm passed in null use whatever owner i have cached
         div = new DivElement()..classes.add("dialogueItem");
         container.append(div);
@@ -25,7 +27,7 @@ abstract class TalkyItem {
     void goUpALevel(Element container) {
         container.setInnerHtml("");
         if(owner != null) {
-            owner.display(container, null);
+            owner.display(container);
         }else {
             container.setInnerHtml("TODO: have this go back to the previous screen.");
         }

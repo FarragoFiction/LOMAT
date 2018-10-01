@@ -1,22 +1,24 @@
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
+import 'TalkyLevel.dart';
 import 'dart:html';
 
 class TalkyResponse extends TalkyItem {
     //for most it will just be the "go back" button, but
     //could have sub questions
-    List<TalkyItem> results = new List<TalkyItem>();
+    TalkyLevel talkyLevel;
     String associatedEmotion;
 
-  TalkyResponse(List<TalkyItem> this.results,String displayText,String this.associatedEmotion) : super(displayText) {
-        results.add(new TalkyEnd());
+  TalkyResponse(List<TalkyItem> results,String displayText,String this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
+        results.add(new TalkyEnd(owner));
+        talkyLevel = new TalkyLevel(results);
   }
 
     @override
-    void display(Element container, TalkyItem myOwner) {
-        super.display(container,myOwner);
-        for(TalkyItem talkyItem in results) {
-            talkyItem.display(container, this);
+    void display(Element container) {
+        super.display(container);
+        for(TalkyItem talkyItem in talkyLevel.talkyItems) {
+            talkyItem.display(container);
         }
     }
 }
