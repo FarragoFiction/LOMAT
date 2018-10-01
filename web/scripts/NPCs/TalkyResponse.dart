@@ -12,6 +12,7 @@ class TalkyResponse extends TalkyItem {
   TalkyResponse(List<TalkyItem> results,String displayText,String this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
         results.add(new TalkyEnd(owner));
         talkyLevel = new TalkyLevel(results);
+        talkyLevel.talkyItems.add(this);
   }
 
     @override

@@ -14,7 +14,7 @@ abstract class TalkyItem {
     TalkyLevel owner;
 
     TalkyItem(String this.displayText, TalkyLevel this.owner) {
-        owner.talkyItems.add(this);
+        if(owner != null) owner.talkyItems.add(this);
     }
 
     void display(Element container) {
