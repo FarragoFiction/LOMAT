@@ -16,15 +16,15 @@ void main() {
     TalkyLevel level = new TalkyLevel(talkyItems);
 
 
-    TalkyResponse tr = new TalkyResponse(new List<TalkyItem>(),"Well you see Thing A is neutral and... $pain", TalkyItem.NEUTRAL,level);
+    TalkyResponse tr = new TalkyResponse(new List<TalkyItem>(),"Well you see Thing A is neutral and... $pain", TalkyItem.NEUTRAL,null);
 
     TalkyQuestion question1 = new TalkyQuestion("What about THING A?",tr,level);
 
 
-    TalkyResponse tr2 = new TalkyResponse(<TalkyItem>[question1],"Well you see Thing B is happy and... $pain", TalkyItem.HAPPY,level);
+    TalkyResponse tr2 = new TalkyResponse(<TalkyItem>[question1],"Well you see Thing B is happy and... $pain", TalkyItem.HAPPY,null);
     TalkyQuestion question2 = new TalkyQuestion("What about THING B?",tr2,level);
 
-    TalkyResponse tr3 = new TalkyResponse(<TalkyItem>[question2],"Well you see Thing C is sad and... $pain", TalkyItem.SAD,level);
+    TalkyResponse tr3 = new TalkyResponse(<TalkyItem>[question2],"Well you see Thing C is sad and... $pain", TalkyItem.SAD,null);
     TalkyQuestion question3 = new TalkyQuestion("What about THING C?",tr3,level);
 
 
