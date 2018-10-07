@@ -35,6 +35,10 @@ class Town extends PhysicalLocation {
       rand.setSeed(name.length);
       layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
       layers.add(new StaticLayer("images/BGs/${name}.png", this, 1));
+      parent.onClick.listen((Event e)
+      {
+          dismissFlavorText();
+      });
       showFlavorText();
       menu = new MenuHolder(parent,this);
       createMenuItems();
@@ -52,5 +56,9 @@ class Town extends PhysicalLocation {
         flavorTextElement.classes.add("flavorText");
         flavorTextElement.setInnerHtml(introductionText);
         container.append(flavorTextElement);
+  }
+
+  void dismissFlavorText() {
+      flavorTextElement.remove();
   }
 }

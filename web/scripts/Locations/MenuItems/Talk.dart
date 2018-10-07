@@ -7,6 +7,6 @@ class Talk extends MenuItem {
 
   @override
   void onClick() {
-    window.alert("TODO");
+    window.alert("TODO do the dialogue with a random npc");
   }
 }
