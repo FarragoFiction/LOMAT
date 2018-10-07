@@ -9,6 +9,9 @@
     position: relative;
     overflow: hidden;
     height: 600px;
+    border: 3px solid #00164f;
+    background-color: #033476;
+    display: inline-block;
 }
 
 .wagon{
