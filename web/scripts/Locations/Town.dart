@@ -28,6 +28,7 @@ class Town extends PhysicalLocation {
       rand.setSeed(name.length);
       layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
       layers.add(new StaticLayer("images/BGs/${name}.png", this, 1));
+      showFlavorText();
   }
 
   void showFlavorText() {
