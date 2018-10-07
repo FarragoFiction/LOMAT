@@ -61,4 +61,8 @@ class Town extends PhysicalLocation {
   void dismissFlavorText() {
       flavorTextElement.remove();
   }
+
+    void doTalky() {
+        window.alert("gonna find an npc to talk to for town $name");
+    }
 }
