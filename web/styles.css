@@ -34,3 +34,8 @@ html, body {
     text-align: left;
     float: left;
 }
+
+.flavorText{
+    border: 3px; solid; #00164f;
+    border-radius: 13px;
+}

@@ -1,8 +1,9 @@
 import 'dart:html';
+import 'scripts/Locations/Town.dart';
 import 'scripts/Locations/Trail.dart';
 
-Trail trail;
+Town town;
 DivElement div = querySelector('#output');
 void main() {
-  trail = new Trail(div);
+  town = new Town(div);
 }
