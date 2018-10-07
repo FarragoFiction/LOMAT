@@ -1,3 +1,5 @@
+import '../NPCs/LOMATNPC.dart';
+import '../Screens/TalkyScreen.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/StaticLayer.dart';
 import 'MenuItems/MenuHolder.dart';
@@ -27,7 +29,10 @@ class Town extends PhysicalLocation {
     MenuHolder menu;
     Element parent;
 
-  Town(Element this.parent) : super(parent);
+    //who is in this town right now?
+    List<LOMATNPC> npcs = new List<LOMATNPC>();
+
+  Town(String this.name, Element this.parent, List<LOMATNPC> npcs) : super(parent);
 
 
   @override
@@ -63,6 +68,7 @@ class Town extends PhysicalLocation {
   }
 
     void doTalky() {
-        window.alert("gonna find an npc to talk to for town $name");
+        //window.alert("gonna find an npc to talk to for town $name");
+        TalkyScreen screen = new TalkyScreen(rand.pickFrom(npcs), container);
     }
 }

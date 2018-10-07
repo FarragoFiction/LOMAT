@@ -16,4 +16,8 @@ abstract class LOMATScreen {
     }
 
     void init();
+
+    void teardown() {
+        myContainer.remove();
+    }
 }
