@@ -1,3 +1,4 @@
+import '../../Screens/TalkyScreen.dart';
 import 'MenuHolder.dart';
 import 'MenuItem.dart';
 import 'dart:html';
@@ -7,6 +8,6 @@ class Talk extends MenuItem {
 
   @override
   void onClick() {
-    window.alert("TODO do the dialogue with a random npc");
+    holder.location.doTalky();
   }
 }

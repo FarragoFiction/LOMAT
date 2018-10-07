@@ -19,4 +19,8 @@ abstract class PhysicalLocation {
         init();
     }
     void init();
+
+    void doTalky() {
+        window.alert("ERROR: This Screen Does Not Support Talk");
+    }
 }
