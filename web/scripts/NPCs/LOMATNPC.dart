@@ -65,7 +65,7 @@ class LOMATNPC {
 
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
-        List<String> avatars = <String>["classic","red"];
+        List<String> avatars = <String>["classic","red","blue","yellow"];
         LOMATNPC testNPC = new LOMATNPC(rand.pickFrom(avatars),"images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
 
 
