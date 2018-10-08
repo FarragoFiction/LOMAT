@@ -27,13 +27,12 @@ class Town extends PhysicalLocation {
     String introductionText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lobortis in purus non egestas. Aliquam erat volutpat. Aenean luctus tellus purus, non ultrices augue sagittis ut. Morbi ac luctus mauris, blandit euismod magna. Sed mauris nisi, feugiat eu accumsan sit amet, elementum eget orci. Nullam vel magna at leo feugiat sagittis. Praesent convallis vel lectus et convallis. Cras vel imperdiet eros. Sed interdum efficitur malesuada. Morbi iaculis ex dolor, sed rutrum eros malesuada a. Proin vel ligula id mi euismod vestibulum ac non augue. Praesent aliquam dui vel neque vehicula feugiat. <br><br>Praesent nec accumsan enim. Duis euismod, risus tincidunt efficitur vulputate, orci dui feugiat lorem, non pretium lorem erat sed odio. Quisque semper ipsum mauris, sit amet tincidunt tortor efficitur in. Donec ultricies nisl eget sapien posuere, vitae pellentesque elit mollis. Suspendisse vitae augue sapien. Vivamus cursus vehicula blandit. Sed eu sem ac nulla porttitor malesuada. Suspendisse et laoreet ipsum. In eget viverra magna, id dignissim est. Cras a augue blandit, fermentum justo ac, fermentum lectus.";
     Element flavorTextElement;
     List<StaticLayer> layers = new List<StaticLayer>();
-    MenuHolder menu;
     Element parent;
 
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, String this.introductionText, Element this.parent, List<LOMATNPC> this.npcs) : super(parent);
+  Town(String this.name, String this.introductionText, Element this.parent, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(parent,prev);
 
 
   @override
@@ -49,6 +48,7 @@ class Town extends PhysicalLocation {
       menu = new MenuHolder(parent,this);
       createMenuItems();
   }
+
 
   void createMenuItems() {
       menu.addTalk();
@@ -77,7 +77,7 @@ class Town extends PhysicalLocation {
         container.remove();
         menu.teardown();
         //new screen
-        new HuntingGrounds(parent);
+        new HuntingGrounds(parent,this);
 
     }
 }

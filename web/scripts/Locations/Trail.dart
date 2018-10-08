@@ -16,7 +16,7 @@ class Trail extends PhysicalLocation {
     int numTrees = 8;
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
 
-  Trail(Element container) : super(container);
+  Trail(Element container, PhysicalLocation prev) : super(container,prev);
 
   @override
   void init() {

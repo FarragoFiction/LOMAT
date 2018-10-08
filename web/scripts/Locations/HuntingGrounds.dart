@@ -2,6 +2,7 @@ import '../Hunting/Bullet.dart';
 import '../Hunting/Enemy.dart';
 import 'Layers/ParallaxLayers.dart';
 import 'Layers/ProceduralLayer.dart';
+import 'MenuItems/MenuHolder.dart';
 import 'PhysicalLocation.dart';
 import 'Layers/StaticLayer.dart';
 import 'dart:async';
@@ -16,7 +17,7 @@ class HuntingGrounds extends PhysicalLocation {
     List<StaticLayer> layers = new List<StaticLayer>();
 
 
-    HuntingGrounds(Element container) : super(container);
+    HuntingGrounds(Element container, PhysicalLocation prev) : super(container, prev);
 
     @override
     void init() {
@@ -42,7 +43,15 @@ class HuntingGrounds extends PhysicalLocation {
         //layers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
         //layers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
         impLoop();
+        menu = new MenuHolder(parent,this);
+        createMenuItems();
 
+    }
+
+    void createMenuItems() {
+        if(prevLocation != null) {
+            menu.addBack();
+        }
     }
 
     Future<Null> impLoop() async{

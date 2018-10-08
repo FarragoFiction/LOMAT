@@ -1,4 +1,5 @@
 import '../PhysicalLocation.dart';
+import 'Back.dart';
 import 'Hunt.dart';
 import 'MenuItem.dart';
 import 'Talk.dart';
@@ -35,6 +36,10 @@ class MenuHolder {
 
     void addHunt() {
         _items.add(new Hunt(this));
+    }
+
+    void addBack() {
+        _items.add(new Back(this));
     }
 
 
