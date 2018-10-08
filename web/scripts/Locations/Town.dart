@@ -1,5 +1,6 @@
 import '../NPCs/LOMATNPC.dart';
 import '../Screens/TalkyScreen.dart';
+import 'HuntingGrounds.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/StaticLayer.dart';
 import 'MenuItems/MenuHolder.dart';
@@ -70,5 +71,13 @@ class Town extends PhysicalLocation {
     void doTalky() {
         //window.alert("gonna find an npc to talk to for town $name");
         TalkyScreen screen = new TalkyScreen(rand.pickFrom(npcs), container);
+    }
+
+    void doHunt() {
+        container.remove();
+        menu.teardown();
+        //new screen
+        new HuntingGrounds(parent);
+
     }
 }

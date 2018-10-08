@@ -17,6 +17,10 @@ class MenuHolder {
         container.classes.add("menuHolder");
     }
 
+    void teardown() {
+        container.remove();
+    }
+
     void addTalk() {
         _items.add(new Talk(this));
     }

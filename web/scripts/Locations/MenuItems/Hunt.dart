@@ -7,6 +7,6 @@ class Hunt extends MenuItem {
 
   @override
   void onClick() {
-    window.alert("TODO");
+    holder.location.doHunt();
   }
 }

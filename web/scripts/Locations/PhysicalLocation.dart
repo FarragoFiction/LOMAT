@@ -23,4 +23,8 @@ abstract class PhysicalLocation {
     void doTalky() {
         window.alert("ERROR: This Screen Does Not Support Talk");
     }
+
+    void doHunt() {
+        window.alert("ERROR: This Screen Does Not Support Hunt");
+    }
 }
