@@ -10,6 +10,7 @@ class TalkyEnd extends TalkyItem {
     @override
     void display(Element container) {
         super.display(container);
+        div.setInnerHtml(">$displayText");
         div.onClick.listen((Event e) {
            owner.goUpALevel(container);
         });

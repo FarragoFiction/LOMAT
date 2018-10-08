@@ -12,6 +12,7 @@ class TalkyQuestion extends TalkyItem {
   @override
     void display(Element container) {
         super.display(container);
+        div.setInnerHtml(">$displayText");
         div.onClick.listen((Event e) {
             container.setInnerHtml("");
             response.display(container);
