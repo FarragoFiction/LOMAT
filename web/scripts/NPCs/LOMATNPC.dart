@@ -36,11 +36,11 @@ class LOMATNPC {
 
     void emote(String emotion) {
         if(emotion == TalkyItem.HAPPY) {
-            displayImage.src = positiveEmotion;
+            displayImage.src = "${positiveEmotion}_${imageModifier}.gif";
         }else if(emotion == TalkyItem.NEUTRAL) {
-            displayImage.src = neutralEmotion;
+            displayImage.src = "${neutralEmotion}_${imageModifier}.gif";;
         }else if (emotion == TalkyItem.SAD) {
-            displayImage.src = negativeEmotion;
+            displayImage.src = "${negativeEmotion}_${imageModifier}.gif";;
         }
     }
 
@@ -65,13 +65,15 @@ class LOMATNPC {
 
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
-        LOMATNPC testNPC = new LOMATNPC("classic","images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
+        List<String> avatars = <String>["classic","red"];
+        LOMATNPC testNPC = new LOMATNPC(rand.pickFrom(avatars),"images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
+
 
         List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
         List<String> gameQuips = <String>["This game is going to be based on the retro game 'Oregon Trail'.","This game will involve ferrying the 'souls of the dead' to their final resting place.","This game is the Land of Mists and Trails."];
         List<String> townQuips = <String>["This town is a default test town scribbled by JR.","This town is snowy, and has some huge trees in it.","This town will probably be redrawn by an actual artist at some point.","Everyone in this town can't figure out how to leave it."];
         List<String> meQuips = <String>["You are the Guide of Void.","You are the prophesied Hero who will guide the lost souls of this land to their final resting place.","Your horns are very nice."];
-        List<String> youQuips = <String>["I'm not DRESSED like a ghost, I AM a ghost.", "Behold my robes y/n?", "Because I AM a ghost!"];
+        List<String> youQuips = <String>["I'm not DRESSED like a ghost, I AM a ghost.", "Behold my robes y/n?", "Because I AM a ghost!", "I am a lost soul!"];
 
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(gameQuips)), rand.pickFrom(emotions),null);
