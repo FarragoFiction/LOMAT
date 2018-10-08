@@ -7,6 +7,7 @@ import 'MenuItems/MenuHolder.dart';
 import 'MenuItems/Talk.dart';
 import 'PhysicalLocation.dart';
 import 'Road.dart';
+import 'Trail.dart';
 import 'dart:html';
 
 import 'package:CommonLib/Colours.dart';
@@ -21,6 +22,7 @@ class Town extends PhysicalLocation {
     Random rand = new Random();
     int numTrees = 3;
     String name = "city2";
+    //TODO a road can spawn a trail if you choose to travel down it
     List<Road> roads = new List<Road>();
     //what text displays when you show up in a town.
     //think about fallen london
@@ -78,6 +80,14 @@ class Town extends PhysicalLocation {
         menu.teardown();
         //new screen
         new HuntingGrounds(parent,this);
+
+    }
+
+    void doTravel() {
+        container.remove();
+        menu.teardown();
+        //new screen
+        new Trail(parent,this);
 
     }
 }

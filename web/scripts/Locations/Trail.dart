@@ -2,6 +2,7 @@ import '../Wagon.dart';
 import 'Layers/ParallaxLayers.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/ProceduralLayerParallax.dart';
+import 'MenuItems/MenuHolder.dart';
 import 'PhysicalLocation.dart';
 import 'dart:async';
 import 'dart:html';
@@ -39,5 +40,14 @@ class Trail extends PhysicalLocation {
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/mist2.png", this, 1000,13));
       wagon = new Wagon(this.container);
 
+      menu = new MenuHolder(parent,this);
+      createMenuItems();
+
   }
+
+    void createMenuItems() {
+        if(prevLocation != null) {
+            menu.addBack();
+        }
+    }
 }
