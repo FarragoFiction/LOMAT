@@ -10,6 +10,7 @@ import 'package:CommonLib/Random.dart';
 
 class LOMATNPC {
     ImageElement displayImage;
+    String imageModifier;
     String positiveEmotion;
     String neutralEmotion;
     String negativeEmotion;
@@ -19,8 +20,8 @@ class LOMATNPC {
     TalkyLevel talkyLevel;
     TalkyEnd talkyEnd;
 
-    LOMATNPC(String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
-        displayImage = new ImageElement(src: neutralEmotion)..classes.add("npcImage");
+    LOMATNPC(String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
+        displayImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif")..classes.add("npcImage");
     }
 
     void displayDialogue(Element container, LOMATScreen screen) {
@@ -64,7 +65,7 @@ class LOMATNPC {
 
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
-        LOMATNPC testNPC = new LOMATNPC("images/Seagulls/happy.gif","images/Seagulls/middle.gif","images/Seagulls/trepidation.gif", level);
+        LOMATNPC testNPC = new LOMATNPC("classic","images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
 
         List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
         List<String> gameQuips = <String>["This game is going to be based on the retro game 'Oregon Trail'.","This game will involve ferrying the 'souls of the dead' to their final resting place.","This game is the Land of Mists and Trails."];
