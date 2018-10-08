@@ -52,4 +52,8 @@ abstract class PhysicalLocation {
     void doHunt() {
         window.alert("ERROR: This Screen Does Not Support Hunt");
     }
+
+    void doTravel() {
+        window.alert("ERROR: This Screen Does Not Support Travel");
+    }
 }

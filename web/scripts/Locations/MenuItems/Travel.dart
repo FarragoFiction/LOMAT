@@ -7,6 +7,6 @@ class Travel extends MenuItem {
 
   @override
   void onClick() {
-    window.alert("TODO");
+    holder.location.doTravel();
   }
 }
