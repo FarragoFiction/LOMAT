@@ -1,3 +1,4 @@
+import '../Screens/LOMATScreen.dart';
 import 'TalkyItem.dart';
 import 'dart:html';
 
@@ -6,6 +7,7 @@ class TalkyLevel {
     List<TalkyItem> talkyItems = new List<TalkyItem>();
     //simple linked list
     TalkyLevel parent;
+    LOMATScreen screen;
 
     TalkyLevel(List<TalkyItem> this.talkyItems, TalkyLevel this.parent);
 
@@ -20,7 +22,7 @@ class TalkyLevel {
         if(parent != null) {
             parent.display(container);
         }else {
-            container.setInnerHtml("TODO: have this go back to the previous screen (this is top level)");
+            screen.teardown();
         }
     }
 }

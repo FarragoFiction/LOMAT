@@ -1,3 +1,4 @@
+import '../Screens/LOMATScreen.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -22,7 +23,8 @@ class LOMATNPC {
         displayImage = new ImageElement(src: neutralEmotion)..classes.add("npcImage");
     }
 
-    void displayDialogue(Element container) {
+    void displayDialogue(Element container, LOMATScreen screen) {
+        talkyLevel.screen = screen;
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
 
         div = new DivElement()..classes.add("dialogueContainer");
@@ -59,12 +61,13 @@ class LOMATNPC {
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),rand.pickFrom(gameQuips), rand.pickFrom(emotions),null);
         TalkyQuestion question1 = new TalkyQuestion("What can you tell me about this game?",tr,level);
 
-        TalkyResponse tr2 = new TalkyResponse(testNPC,new List<TalkyItem>(),rand.pickFrom(gameQuips), rand.pickFrom(emotions),null);
-        TalkyQuestion question2 = new TalkyQuestion("What can you tell me about this game?",tr2,level);
+        TalkyResponse tr2 = new TalkyResponse(testNPC,new List<TalkyItem>(),rand.pickFrom(townQuips), rand.pickFrom(emotions),null);
+        TalkyQuestion question2 = new TalkyQuestion("What can you tell me about this town?",tr2,level);
 
-        TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),rand.pickFrom(gameQuips), rand.pickFrom(emotions),null);
-        TalkyQuestion question3 = new TalkyQuestion("What can you tell me about this game?",tr3,level);
+        TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),rand.pickFrom(meQuips), rand.pickFrom(emotions),null);
+        TalkyQuestion question3 = new TalkyQuestion("What can you tell me about me?",tr3,level);
 
+        return testNPC;
     }
 
 }

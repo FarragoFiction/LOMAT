@@ -27,31 +27,56 @@ html, body {
 
 .dialogueItem{
     padding: 20px;
-    width: 600px;
+    width: 475px;
+    font-size: 18px;
 }
 
 .dialogueContainer{
     padding: 30px;
+    position: absolute;
+    text-align: left;
+    left: 250px;
+
 }
+
 
 .npcImage{
     display: inline;
     text-align: left;
     float: left;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
 }
 
 .flavorText{
     border: 3px solid #00164f;
     background-color: #033476;
     padding: 25px;
+    font-size: 18px;
     font-family: 'cabin', sans-serif;
     position: absolute;
     box-shadow: 0px 3px 13px #000000;
     width: 400px;
-    height: 400px;
-    bottom: 75px;
+    top: 75px;
     color: #ccc4b5;
     left: 200px;
+    border-radius: 13px;
+    z-index: 10;
+}
+
+.talkyScreen{
+    border: 3px solid #00164f;
+    background-color: #033476;
+    padding: 25px;
+    font-family: 'cabin', sans-serif;
+    position: absolute;
+    box-shadow: 0px 3px 13px #000000;
+    width: 800px;
+    height: 400px;
+    bottom: 0px;
+    color: #ccc4b5;
+    left: 0px;
     border-radius: 13px;
     z-index: 10;
 }

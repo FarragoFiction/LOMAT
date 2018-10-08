@@ -8,6 +8,7 @@ class TalkyScreen extends LOMATScreen {
 
   @override
   void init() {
-    npc.displayDialogue(myContainer);
+    myContainer.classes.add("talkyScreen");
+    npc.displayDialogue(myContainer, this);
   }
 }

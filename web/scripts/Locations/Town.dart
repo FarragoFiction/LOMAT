@@ -32,7 +32,7 @@ class Town extends PhysicalLocation {
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, Element this.parent, List<LOMATNPC> npcs) : super(parent);
+  Town(String this.name, String this.introductionText, Element this.parent, List<LOMATNPC> this.npcs) : super(parent);
 
 
   @override
