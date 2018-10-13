@@ -48,6 +48,7 @@ abstract class Enemy {
     //sub classes override this to move a differnet way (such as at an angle
     Future<Null> tick() async {
         if(removeMePlease) {
+            location.enemies.remove(this);
             return;
         }
         move();
@@ -68,9 +69,8 @@ abstract class Enemy {
         syncLocation();
     }
 
-    //TODO play sound effect, explode into/reward grist etc
+    //TODO  explode into/reward grist etc
     void die() {
-        SoundControl.instance.playSoundEffect("85846__mwlandi__meat-slap-2");
         removeMePlease = true;
         image.remove();
     }
@@ -94,6 +94,10 @@ abstract class Enemy {
         int x = -1*height -1;
         if(chosenDirection < 0) x = maxX;
         return new SpawnData(x,y,height, chosenDirection);
+    }
+
+    String toString() {
+        return("${runtimeType}: (x: $x, y: $y)");
     }
 
 

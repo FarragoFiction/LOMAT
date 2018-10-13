@@ -34,7 +34,7 @@ abstract class PhysicalLocation {
     void setup() {
         container = new DivElement();
         container.classes.add("parallaxParent");
-        print("class added, width is ${container.style.width}");
+        //sprint("class added, width is ${container.style.width}");
         parent.append(container);
         init();
     }

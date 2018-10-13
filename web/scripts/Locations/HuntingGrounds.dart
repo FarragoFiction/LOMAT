@@ -39,9 +39,7 @@ class HuntingGrounds extends PhysicalLocation {
         for(int i = 0; i<numTrees; i++) {
             ProceduralLayer.spawnTree(this,rand.nextInt());
         }
-        //layers.add(new ParallaxLayerLooping("images/BGs/bg2.png", this, 8));
-        //layers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
-        //layers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
+
         impLoop();
         ogreLoop();
         menu = new MenuHolder(parent,this);
