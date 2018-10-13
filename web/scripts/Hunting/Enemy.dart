@@ -1,5 +1,7 @@
 import '../Locations/Layers/ProceduralLayer.dart';
 import '../Locations/PhysicalLocation.dart';
+import 'Imp.dart';
+import 'Ogre.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -8,7 +10,7 @@ import 'package:CommonLib/Random.dart';
 /*
     enemies have an image and have an ai
  */
-class Enemy {
+abstract class Enemy {
     ImageElement image;
     int x = 0;
     int y = 0;
@@ -77,13 +79,10 @@ class Enemy {
         image.remove();
     }
 
-
-    static Enemy spawnImps(PhysicalLocation parent, int seed) {
+    static SpawnData randomSpawnData(Random rand) {
         print("doing imp)");
         int maxX = 800;
         int maxY = 290;
-        Random rand = new Random(seed);
-        List<String> enemyLocations = <String>["0.png"];
         int y = rand.nextInt(maxY);
         int height = (60*((y/maxY*2))).ceil()+30;
         y += 300-height;
@@ -92,9 +91,31 @@ class Enemy {
         double chosenDirection = rand.pickFrom(directions);
         int x = 0;
         if(chosenDirection < 0) x = maxX;
-        return new Enemy(x, y,height, "images/Enemies/${rand.pickFrom(enemyLocations)}",13,chosenDirection, parent);
+        return new SpawnData(x,y,height, chosenDirection);
+    }
+
+
+    static Enemy spawnImps(PhysicalLocation parent, int seed) {
+        Random rand = new Random(seed);
+        SpawnData spawn = randomSpawnData(rand);
+        return new Imp(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",13,spawn.chosenDirection, parent);
+    }
+
+    static Enemy spawnOgres(PhysicalLocation parent, int seed) {
+        Random rand = new Random(seed);
+        SpawnData spawn = randomSpawnData(rand);
+        return new Ogre(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",13,spawn.chosenDirection, parent);
     }
 
 
 
+}
+
+class SpawnData
+{
+    int x;
+    int y;
+    int height;
+    double chosenDirection;
+    SpawnData(int this.x, int this.y, int this.height, double this.chosenDirection);
 }
