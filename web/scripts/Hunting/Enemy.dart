@@ -22,6 +22,7 @@ abstract class Enemy {
     int height;
     bool removeMePlease = false;
     int frameRate = (1000/30).round();
+    String deathSound = "85846__mwlandi__meat-slap-2";
 
 
     Enemy(this.x, int this.y,int this.height,String imageLocation, double this.direction,PhysicalLocation this.location) {
@@ -44,6 +45,8 @@ abstract class Enemy {
         image.style.top = "${y}px";
 
     }
+
+
 
     //sub classes override this to move a differnet way (such as at an angle
     Future<Null> tick() async {

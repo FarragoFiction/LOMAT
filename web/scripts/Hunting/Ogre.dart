@@ -2,6 +2,8 @@ import '../Locations/PhysicalLocation.dart';
 import 'Enemy.dart';
 
 class Ogre extends Enemy {
+    @override
+    String deathSound = "428114__higgs01__squeakfinal";
 
     static List<String> enemyLocations = <String>["30frames.gif","bugbear.gif"];
     @override

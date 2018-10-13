@@ -93,10 +93,8 @@ class Bullet {
 
     void checkHits() {
         for(Enemy enemy in location.enemies) {
-            print("did I hit enemy $enemy");
             if(collision(enemy.image, image)){
-                print("I think i hit enemy $enemy");
-                SoundControl.instance.playSoundEffect("85846__mwlandi__meat-slap-2");
+                SoundControl.instance.playSoundEffect(enemy.deathSound);
                 enemy.die();
                 die();
                 break;
