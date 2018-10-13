@@ -20,12 +20,16 @@ class TalkyResponse extends TalkyItem {
   }
 
     @override
-    void display(Element container) {
-        super.display(container);
+    void display(Element cont) {
+        super.display(cont);
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
         npc.emote(associatedEmotion);
         for(TalkyItem talkyItem in talkyLevel.talkyItems) {
             talkyItem.display(container);
         }
+    }
+
+    void onClick() {
+        //does nothing.
     }
 }

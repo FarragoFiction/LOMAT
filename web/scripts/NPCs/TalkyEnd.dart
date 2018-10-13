@@ -8,11 +8,13 @@ class TalkyEnd extends TalkyItem {
     TalkyEnd(TalkyLevel level) : super("Shit Go Back",level);
 
     @override
-    void display(Element container) {
-        super.display(container);
+    void display(Element cont) {
+        super.display(cont);
         div.setInnerHtml(">$displayText");
-        div.onClick.listen((Event e) {
-           owner.goUpALevel(container);
-        });
+
+    }
+
+    void onClick() {
+        owner.goUpALevel(container);
     }
 }

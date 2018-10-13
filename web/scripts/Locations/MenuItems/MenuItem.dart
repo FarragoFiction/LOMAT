@@ -1,3 +1,4 @@
+import '../../SoundControl.dart';
 import 'MenuHolder.dart';
 import 'dart:html';
 
@@ -17,7 +18,10 @@ abstract class MenuItem {
         //print("I appended it to the menu holder with children ${holder.container.children.length}");
         container.classes.add("menuItem");
         container.text = name;
-        container.onClick.listen((Event e) => onClick());
+        container.onClick.listen((Event e){
+            SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+            onClick();
+        });
     }
 
     void onClick();

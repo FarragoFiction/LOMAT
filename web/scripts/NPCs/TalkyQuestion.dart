@@ -10,13 +10,14 @@ class TalkyQuestion extends TalkyItem {
   }
 
   @override
-    void display(Element container) {
-        super.display(container);
+    void display(Element cont) {
+        super.display(cont);
         div.setInnerHtml(">$displayText");
-        div.onClick.listen((Event e) {
-            container.setInnerHtml("");
-            response.display(container);
-        });
+    }
+
+    void onClick() {
+        container.setInnerHtml("");
+        response.display(container);
     }
 
 }
