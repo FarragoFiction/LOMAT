@@ -79,12 +79,12 @@ abstract class Enemy {
         image.remove();
     }
 
-    static SpawnData randomSpawnData(Random rand) {
+    static SpawnData randomSpawnData(Random rand, int baseHeight) {
         print("doing imp)");
         int maxX = 800;
         int maxY = 290;
         int y = rand.nextInt(maxY);
-        int height = (60*((y/maxY*2))).ceil()+30;
+        int height = (baseHeight*((y/maxY*2))).ceil()+30;
         y += 300-height;
         List<double> directions = <double>[-1.0, 1.0];
 
@@ -97,13 +97,13 @@ abstract class Enemy {
 
     static Enemy spawnImps(PhysicalLocation parent, int seed) {
         Random rand = new Random(seed);
-        SpawnData spawn = randomSpawnData(rand);
+        SpawnData spawn = randomSpawnData(rand,60);
         return new Imp(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",13,spawn.chosenDirection, parent);
     }
 
     static Enemy spawnOgres(PhysicalLocation parent, int seed) {
         Random rand = new Random(seed);
-        SpawnData spawn = randomSpawnData(rand);
+        SpawnData spawn = randomSpawnData(rand,100);
         return new Ogre(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",13,spawn.chosenDirection, parent);
     }
 

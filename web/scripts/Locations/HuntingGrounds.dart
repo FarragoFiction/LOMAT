@@ -43,6 +43,7 @@ class HuntingGrounds extends PhysicalLocation {
         //layers.add(new ParallaxLayerLooping("images/BGs/bg3.png", this, 12));
         //layers.add(new ParallaxLayerLooping("images/BGs/bg4.png", this, 16));
         impLoop();
+        ogreLoop();
         menu = new MenuHolder(parent,this);
         createMenuItems();
 
@@ -57,7 +58,14 @@ class HuntingGrounds extends PhysicalLocation {
     Future<Null> impLoop() async{
         enemies.add(Enemy.spawnImps(this, rand.nextInt()));
         await window.animationFrame;
-        int duartion = new Random().nextIntRange(1000,3000);
+        int duartion = new Random().nextIntRange(2000,4000);
         new Timer(new Duration(milliseconds: duartion), () => impLoop());
+    }
+
+    Future<Null> ogreLoop() async{
+        enemies.add(Enemy.spawnOgres(this, rand.nextInt()));
+        await window.animationFrame;
+        int duartion = new Random().nextIntRange(3000,10000);
+        new Timer(new Duration(milliseconds: duartion), () => ogreLoop());
     }
 }
