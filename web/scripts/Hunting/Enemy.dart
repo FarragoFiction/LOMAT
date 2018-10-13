@@ -1,5 +1,6 @@
 import '../Locations/Layers/ProceduralLayer.dart';
 import '../Locations/PhysicalLocation.dart';
+import '../SoundControl.dart';
 import 'Imp.dart';
 import 'Ogre.dart';
 import 'dart:async';
@@ -23,7 +24,7 @@ abstract class Enemy {
     int frameRate = (1000/30).round();
 
 
-    Enemy(this.x, int this.y,int this.height,String imageLocation,  int this.speed,double this.direction,PhysicalLocation this.location) {
+    Enemy(this.x, int this.y,int this.height,String imageLocation, double this.direction,PhysicalLocation this.location) {
         image = new ImageElement(src: imageLocation);
         image.classes.add('enemy');
         int z = ProceduralLayer.yToZIndex(y,height);
@@ -46,7 +47,6 @@ abstract class Enemy {
 
     //sub classes override this to move a differnet way (such as at an angle
     Future<Null> tick() async {
-        print("ticking imp");
         if(removeMePlease) {
             return;
         }
@@ -70,6 +70,7 @@ abstract class Enemy {
 
     //TODO play sound effect, explode into/reward grist etc
     void die() {
+        SoundControl.instance.playSoundEffect("85846__mwlandi__meat-slap-2");
         removeMePlease = true;
         image.remove();
     }
@@ -80,16 +81,17 @@ abstract class Enemy {
     }
 
     static SpawnData randomSpawnData(Random rand, int baseHeight) {
-        print("doing imp)");
         int maxX = 800;
         int maxY = 290;
         int y = rand.nextInt(maxY);
-        int height = (baseHeight*((y/maxY*2))).ceil()+30;
+        //what is this math again? obviously trying to scale it to be smaller if further away...
+        int height = (baseHeight*((y/maxY))).ceil()+30;
         y += 300-height;
         List<double> directions = <double>[-1.0, 1.0];
 
         double chosenDirection = rand.pickFrom(directions);
-        int x = 0;
+        //if you spawn at zero you will pop in, the code that kills you when you're off screen checks for height
+        int x = -1*height -1;
         if(chosenDirection < 0) x = maxX;
         return new SpawnData(x,y,height, chosenDirection);
     }
@@ -97,14 +99,14 @@ abstract class Enemy {
 
     static Enemy spawnImps(PhysicalLocation parent, int seed) {
         Random rand = new Random(seed);
-        SpawnData spawn = randomSpawnData(rand,60);
-        return new Imp(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",13,spawn.chosenDirection, parent);
+        SpawnData spawn = randomSpawnData(rand,120);
+        return new Imp(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",spawn.chosenDirection, parent);
     }
 
     static Enemy spawnOgres(PhysicalLocation parent, int seed) {
         Random rand = new Random(seed);
-        SpawnData spawn = randomSpawnData(rand,100);
-        return new Ogre(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",13,spawn.chosenDirection, parent);
+        SpawnData spawn = randomSpawnData(rand,300);
+        return new Ogre(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Ogre.enemyLocations)}",spawn.chosenDirection, parent);
     }
 
 

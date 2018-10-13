@@ -1,4 +1,5 @@
 import '../Locations/PhysicalLocation.dart';
+import '../SoundControl.dart';
 import 'Enemy.dart';
 import 'dart:async';
 import 'dart:html';
@@ -23,6 +24,7 @@ class Bullet {
 
 
     Bullet(String imageLocation, PhysicalLocation this.location, int this.goalX, int this.goalY) {
+        SoundControl.instance.playSoundEffect("392976__morganpurkis__supersonic-bullet-snap-11");
         image = new ImageElement(src: imageLocation);
         image.classes.add('bullet');
         image.style.zIndex = "4037"; //auto sorts things by speed
