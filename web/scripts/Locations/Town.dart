@@ -22,6 +22,9 @@ class Town extends PhysicalLocation {
     Random rand = new Random();
     int numTrees = 3;
     String name = "city2";
+
+    //TODO towns have traits that contribute introductionText and graphics and the kinds of events they have???
+
     //TODO a road can spawn a trail if you choose to travel down it
     List<Road> roads = new List<Road>();
     //what text displays when you show up in a town.
@@ -34,7 +37,7 @@ class Town extends PhysicalLocation {
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, String this.introductionText, Element this.parent, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(parent,prev);
+  Town(String this.name, String this.introductionText, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev);
 
 
   @override
@@ -49,6 +52,32 @@ class Town extends PhysicalLocation {
       showFlavorText();
       menu = new MenuHolder(parent,this);
       createMenuItems();
+  }
+
+  static Town generateProceduralTown(Element div) {
+      Town town = new Town(generateProceduralName(),generateProceduralIntroduction(), generateProceduralNPCs(),null);
+      return town;
+  }
+
+  static String generateProceduralName() {
+      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Absolute","Utter","Total","Complete","Incredible"];
+      List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap"];
+      return "${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+  }
+
+  static String generateProceduralIntroduction() {
+      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in NAMEGOESHERE.","Exhausted, you arrive in NAMEGOESHERE.","You stroll into NAMEGOESHERE."];
+      List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
+      return "${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+  }
+
+  static List<LOMATNPC> generateProceduralNPCs() {
+      List<LOMATNPC> ret = new List<LOMATNPC>();
+      int npcAmount = new Random().nextInt(5)+1;
+      for(int i = 0; i<npcAmount; i++) {
+          ret.add(LOMATNPC.generateRandomNPC());
+      }
+      return ret;
   }
 
 
@@ -87,7 +116,8 @@ class Town extends PhysicalLocation {
         container.remove();
         menu.teardown();
         //new screen
-        new Trail(parent,this);
+        //TODO don't make a new trail
+        new Trail(this)..setup(parent);
 
     }
 }

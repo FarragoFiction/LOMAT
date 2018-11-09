@@ -17,7 +17,7 @@ class HuntingGrounds extends PhysicalLocation {
     List<StaticLayer> layers = new List<StaticLayer>();
 
 
-    HuntingGrounds(Element container, PhysicalLocation prev) : super(container, prev);
+    HuntingGrounds(Element container, PhysicalLocation prev) : super(prev);
 
     @override
     void init() {

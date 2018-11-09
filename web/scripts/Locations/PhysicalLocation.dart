@@ -15,7 +15,7 @@ abstract class PhysicalLocation {
     int height = 600;
     MenuHolder menu;
 
-    PhysicalLocation(Element this.parent, PhysicalLocation this.prevLocation) {
+    PhysicalLocation(PhysicalLocation this.prevLocation) {
         setup();
 
     }
@@ -31,7 +31,8 @@ abstract class PhysicalLocation {
     }
 
     //used both for setting up the first time, and for reiniting if any screen needs to come back here
-    void setup() {
+    void setup([Element div]) {
+        if(div != null) parent = div;
         container = new DivElement();
         container.classes.add("parallaxParent");
         //sprint("class added, width is ${container.style.width}");

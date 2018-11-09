@@ -73,6 +73,7 @@ abstract class Enemy {
     }
 
     //TODO  explode into/reward grist etc
+    //farther away they are, more grist they should be worth, this is a game, not oregon trail
     void die() {
         removeMePlease = true;
         image.remove();
