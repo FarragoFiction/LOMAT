@@ -16,22 +16,20 @@ abstract class PhysicalLocation {
     MenuHolder menu;
 
     PhysicalLocation(PhysicalLocation this.prevLocation) {
-        setup();
-
     }
 
     void shitGoBack() {
         if(prevLocation != null) {
             teardown();
             menu.teardown();
-            prevLocation.setup();
+            prevLocation.displayOnScreen(null);
         }else {
             window.alert("ERROR there is no where to go back TO");
         }
     }
 
     //used both for setting up the first time, and for reiniting if any screen needs to come back here
-    void setup([Element div]) {
+    void displayOnScreen(Element div) {
         if(div != null) parent = div;
         container = new DivElement();
         container.classes.add("parallaxParent");

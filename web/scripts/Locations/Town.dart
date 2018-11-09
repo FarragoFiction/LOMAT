@@ -19,6 +19,7 @@ import 'package:CommonLib/Random.dart';
 //but might have gently wobbling mist (like hunting?)
 
 class Town extends PhysicalLocation {
+    static String INSERTNAMEHERE = "INSERTNAMEHERE";
     Random rand = new Random();
     int numTrees = 3;
     String name = "city2";
@@ -66,7 +67,7 @@ class Town extends PhysicalLocation {
   }
 
   static String generateProceduralIntroduction() {
-      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in NAMEGOESHERE.","Exhausted, you arrive in NAMEGOESHERE.","You stroll into NAMEGOESHERE."];
+      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in INSERTNAMEHERE.","Exhausted, you arrive in INSERTNAMEHERE.","You stroll into INSERTNAMEHERE."];
       List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
       return "${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
@@ -88,7 +89,12 @@ class Town extends PhysicalLocation {
       menu.addHunt();
   }
 
+  void replaceTemplateText() {
+      introductionText = introductionText.replaceAll(INSERTNAMEHERE,"$name");
+  }
+
   void showFlavorText() {
+        replaceTemplateText();
         flavorTextElement = new DivElement();
         flavorTextElement.classes.add("flavorText");
         flavorTextElement.setInnerHtml(introductionText);
@@ -108,7 +114,8 @@ class Town extends PhysicalLocation {
         container.remove();
         menu.teardown();
         //new screen
-        new HuntingGrounds(parent,this);
+        new HuntingGrounds(this)..displayOnScreen(parent);
+
 
     }
 
@@ -117,7 +124,7 @@ class Town extends PhysicalLocation {
         menu.teardown();
         //new screen
         //TODO don't make a new trail
-        new Trail(this)..setup(parent);
+        new Trail(this)..displayOnScreen(parent);
 
     }
 }

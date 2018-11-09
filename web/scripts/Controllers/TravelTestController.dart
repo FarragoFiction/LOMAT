@@ -5,5 +5,5 @@ Trail trail;
 DivElement div = querySelector('#output');
 void main() {
     trail = new Trail(null);
-    trail.setup(div);
+    trail.displayOnScreen(div);
 }
