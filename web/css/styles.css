@@ -31,6 +31,10 @@ html, body {
     font-size: 18px;
 }
 
+.dialogueSelectableItem:hover{
+    text-decoration: underline;
+}
+
 .dialogueContainer{
     padding: 30px;
     position: absolute;
@@ -95,6 +99,11 @@ html, body {
     color: #ccc4b5;
     border-radius: 13px;
     z-index: 13;
+}
+
+.menuItem:hover{
+    box-shadow: 0px 3px 13px #888888;
+
 }
 
 

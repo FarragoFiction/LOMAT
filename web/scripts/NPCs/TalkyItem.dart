@@ -2,6 +2,7 @@
 
 import '../SoundControl.dart';
 import 'TalkyLevel.dart';
+import 'TalkyResponse.dart';
 import 'dart:html';
 
 abstract class TalkyItem {
@@ -24,8 +25,12 @@ abstract class TalkyItem {
         container = parentContainer;
         //if i'm passed in null use whatever owner i have cached
         div = new DivElement()..classes.add("dialogueItem");
+        if(!(this is TalkyResponse)) {
+            div.classes.add("dialogueSelectableItem");
+        }
         container.append(div);
         div.setInnerHtml("$displayText");
+
         div.onClick.listen((Event t) {
             SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
             onClick();
