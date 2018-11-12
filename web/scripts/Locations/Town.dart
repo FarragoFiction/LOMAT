@@ -59,8 +59,20 @@ class Town extends PhysicalLocation {
       createMenuItems();
   }
 
-  static makeAdjacentTowns() {
+  @override
+  void displayOnScreen(Element div) {
+      makeAdjacentTowns();
+      super.displayOnScreen(div);
+  }
+
+  static List<Town> makeAdjacentTowns() {
       //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
+      int adjAmount = new Random().nextInt(4)+1;
+      List<Town> ret = new List<Town>();
+      for(int i = 0; i<adjAmount; i++) {
+          ret.add(generateProceduralTown());
+      }
+      return ret;
   }
 
   static Town generateProceduralTown() {
