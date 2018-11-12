@@ -20,9 +20,13 @@ import 'package:CommonLib/Random.dart';
 
 class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
+    //TODO store this in json
+    static int nextTownSeed = 0;
     Random rand = new Random();
     int numTrees = 3;
     String name = "city2";
+
+
 
     //TODO towns have traits that contribute introductionText and graphics and the kinds of events they have???
 
@@ -55,7 +59,11 @@ class Town extends PhysicalLocation {
       createMenuItems();
   }
 
-  static Town generateProceduralTown(Element div) {
+  static makeAdjacentTowns() {
+      //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
+  }
+
+  static Town generateProceduralTown() {
       Town town = new Town(generateProceduralName(),generateProceduralIntroduction(), generateProceduralNPCs(),null);
       return town;
   }
@@ -63,20 +71,22 @@ class Town extends PhysicalLocation {
   static String generateProceduralName() {
       List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Absolute","Utter","Total","Complete","Incredible"];
       List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap"];
-      return "${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
 
   static String generateProceduralIntroduction() {
       List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in INSERTNAMEHERE.","Exhausted, you arrive in INSERTNAMEHERE.","You stroll into INSERTNAMEHERE."];
       List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
-      return "${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
 
   static List<LOMATNPC> generateProceduralNPCs() {
       List<LOMATNPC> ret = new List<LOMATNPC>();
-      int npcAmount = new Random().nextInt(5)+1;
+      int npcAmount = new Random(nextTownSeed).nextInt(5)+1;
       for(int i = 0; i<npcAmount; i++) {
-          ret.add(LOMATNPC.generateRandomNPC());
+          //should at least mean adjacent towns don't have blatant repetition, town 3 has 3*1+1, 3*2+2, while 4 has 4*1+1,4*2+2
+          //if no multiplication it would be 3,4,5 and then 4,5,6, so 2 incommon (assuming 3 npcs in each town)
+          ret.add(LOMATNPC.generateRandomNPC((nextTownSeed*i)+i));
       }
       return ret;
   }

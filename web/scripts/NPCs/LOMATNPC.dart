@@ -59,8 +59,8 @@ class LOMATNPC {
     }
 
     //TODO not gonna use this for the real game or anything, but good for testing
-    static LOMATNPC generateRandomNPC() {
-        Random rand = new Random();
+    static LOMATNPC generateRandomNPC(int seed) {
+        Random rand = new Random(seed);
         List<TalkyItem> talkyItems = new List<TalkyItem>();
 
 
