@@ -145,7 +145,7 @@ class Town extends PhysicalLocation {
         container.remove();
         menu.teardown();
         //new screen
-        //TODO don't make a new trail
+        //TODO display popup of towns you can travel to
         new Trail(this)..displayOnScreen(parent);
 
     }
