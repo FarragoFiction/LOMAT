@@ -85,6 +85,11 @@ class Town extends PhysicalLocation {
       return new Town("The Void","You arrive in INSERTNAMEHERE. You are not supposed to be here.",[],null);
   }
 
+  @override
+  String toString() {
+    return "$name";
+  }
+
   static String generateProceduralName() {
       List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Absolute","Utter","Total","Complete","Incredible"];
       List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap"];

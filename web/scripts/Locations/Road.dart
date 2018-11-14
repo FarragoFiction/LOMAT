@@ -29,8 +29,8 @@ class Road {
         List<Town> towns = Town.makeAdjacentTowns();
         List<Road> ret = new List<Road>();
         Random rand = new Random();
-        towns.forEach((Town town) {
-            ret.add(new Road(sourceTown: town, destinationTown: town, travelTimeInMS: rand.nextIntRange(minTimeInMS,maxTimeInMS)));
+        towns.forEach((Town destinationTown) {
+            ret.add(new Road(sourceTown: town, destinationTown: destinationTown, travelTimeInMS: rand.nextIntRange(minTimeInMS,maxTimeInMS)));
         });
         return ret;
     }
