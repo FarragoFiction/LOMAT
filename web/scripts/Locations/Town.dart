@@ -61,7 +61,7 @@ class Town extends PhysicalLocation {
 
   @override
   void displayOnScreen(Element div) {
-      makeAdjacentTowns();
+      roads = Road.spawnRandomRoadsForTown(this);
       super.displayOnScreen(div);
   }
 
@@ -78,6 +78,11 @@ class Town extends PhysicalLocation {
   static Town generateProceduralTown() {
       Town town = new Town(generateProceduralName(),generateProceduralIntroduction(), generateProceduralNPCs(),null);
       return town;
+  }
+
+  //should never spawn, technically
+  static Town getVoidTown() {
+      return new Town("The Void","You arrive in INSERTNAMEHERE. You are not supposed to be here.",[],null);
   }
 
   static String generateProceduralName() {
@@ -146,6 +151,7 @@ class Town extends PhysicalLocation {
         menu.teardown();
         //new screen
         //TODO display popup of towns you can travel to
+        window.alert("adjacent towns are: $roads ");
         new Trail(this)..displayOnScreen(parent);
 
     }
