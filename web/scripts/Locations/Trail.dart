@@ -4,6 +4,7 @@ import 'Layers/ProceduralLayer.dart';
 import 'Layers/ProceduralLayerParallax.dart';
 import 'MenuItems/MenuHolder.dart';
 import 'PhysicalLocation.dart';
+import 'Road.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -16,8 +17,10 @@ class Trail extends PhysicalLocation {
     Wagon wagon;
     int numTrees = 8;
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
+    //lets you know where you are going and how long it will take to get there and what events will be there.
+    Road road;
 
-  Trail(PhysicalLocation prev) : super(prev);
+  Trail(Road this.road,PhysicalLocation prev) : super(prev);
 
   @override
   void init() {

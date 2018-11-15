@@ -1,4 +1,8 @@
+import '../SoundControl.dart';
+import 'PhysicalLocation.dart';
 import 'Town.dart';
+import 'Trail.dart';
+import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 class Road {
@@ -23,6 +27,19 @@ class Road {
     @override
     String toString() {
         return "${sourceTown} to ${destinationTown} in ${travelTimeInMS} ms.";
+    }
+
+    void displayOption(PhysicalLocation prevLocation,Element parent,Element container) {
+        Element div = new DivElement()..classes.add("dialogueItem");
+        container.append(div);
+        div.setInnerHtml("$destinationTown (Estimated ${travelTimeInMS/60} minutes)");
+
+        div.onClick.listen((Event t) {
+            container.remove();
+            prevLocation.teardown();
+            SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+            new Trail(this,prevLocation)..displayOnScreen(parent);
+        });
     }
 
     static List<Road> spawnRandomRoadsForTown(Town town) {

@@ -152,12 +152,13 @@ class Town extends PhysicalLocation {
     }
 
     void doTravel() {
-        container.remove();
-        menu.teardown();
         //new screen
-        //TODO display popup of towns you can travel to
         window.alert("adjacent towns are: $roads ");
-        new Trail(this)..displayOnScreen(parent);
-
+        DivElement travelContainer = new DivElement()..classes.add("talkyScreen");
+        parent.append(travelContainer);
+        //if  clicked, will handle loading trail
+        roads.forEach((Road road) {
+            road.displayOption(this,parent,travelContainer);
+        });
     }
 }
