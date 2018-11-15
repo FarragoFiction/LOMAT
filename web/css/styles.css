@@ -69,6 +69,22 @@ html, body {
     z-index: 10;
 }
 
+.travelPopup{
+    border: 3px solid #00164f;
+    background-color: #033476;
+    padding: 25px;
+    text-align: left;
+    font-size: 18px;
+    font-family: 'cabin', sans-serif;
+    position: absolute;
+    box-shadow: 0px 3px 13px #000000;
+    top: 25%;
+    color: #ccc4b5;
+    left: 25%;
+    border-radius: 13px;
+    z-index: 10;
+}
+
 .talkyScreen{
     border: 3px solid #00164f;
     background-color: #033476;

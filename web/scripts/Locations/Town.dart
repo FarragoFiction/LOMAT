@@ -1,5 +1,6 @@
 import '../NPCs/LOMATNPC.dart';
 import '../Screens/TalkyScreen.dart';
+import '../SoundControl.dart';
 import 'HuntingGrounds.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/StaticLayer.dart';
@@ -61,6 +62,7 @@ class Town extends PhysicalLocation {
 
   @override
   void displayOnScreen(Element div) {
+      SoundControl.instance.playMusic("Campfire_In_the_Void");
       roads = Road.spawnRandomRoadsForTown(this);
       super.displayOnScreen(div);
   }
@@ -153,8 +155,8 @@ class Town extends PhysicalLocation {
 
     void doTravel() {
         //new screen
-        window.alert("adjacent towns are: $roads ");
-        DivElement travelContainer = new DivElement()..classes.add("talkyScreen");
+        DivElement travelContainer = new DivElement()..classes.add("travelPopup");
+        travelContainer.appendHtml("<h2>Travel To Neighboring City:</h2>");
         parent.append(travelContainer);
         //if  clicked, will handle loading trail
         roads.forEach((Road road) {

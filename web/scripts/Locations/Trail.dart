@@ -1,3 +1,4 @@
+import '../SoundControl.dart';
 import '../Wagon.dart';
 import 'Layers/ParallaxLayers.dart';
 import 'Layers/ProceduralLayer.dart';
@@ -24,6 +25,7 @@ class Trail extends PhysicalLocation {
 
   @override
   void init() {
+      new Timer(new Duration(milliseconds: road.travelTimeInMS), () => arrive());
       paralaxLayers.add(new ParallaxLayerLooping("images/BGs/SimpleSnowyPlainsLomat.png", this, 1,1));
       DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
       container.append(ground);
@@ -46,6 +48,13 @@ class Trail extends PhysicalLocation {
       menu = new MenuHolder(parent,this);
       createMenuItems();
 
+  }
+
+  void arrive() {
+      SoundControl.instance.playSoundEffect("Dead_Jingle_light");
+      teardown();
+      road.destinationTown.prevLocation = this;
+      road.destinationTown.displayOnScreen(parent);
   }
 
     void createMenuItems() {

@@ -30,9 +30,9 @@ class Road {
     }
 
     void displayOption(PhysicalLocation prevLocation,Element parent,Element container) {
-        Element div = new DivElement()..classes.add("dialogueItem");
+        Element div = new DivElement()..classes.add("dialogueSelectableItem");
         container.append(div);
-        div.setInnerHtml("$destinationTown (Estimated ${travelTimeInMS/60} minutes)");
+        div.setInnerHtml("> $destinationTown (Estimated ${(travelTimeInMS).round()} ms)");
 
         div.onClick.listen((Event t) {
             container.remove();
