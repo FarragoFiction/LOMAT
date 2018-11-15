@@ -21,11 +21,13 @@ import 'package:CommonLib/Random.dart';
 
 class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
+    String bgMusic  = "Campfire_In_the_Void";
     //TODO store this in json
     static int nextTownSeed = 0;
     Random rand = new Random();
     int numTrees = 3;
     String name = "city2";
+    Element travelContainer;
 
 
 
@@ -43,7 +45,9 @@ class Town extends PhysicalLocation {
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, String this.introductionText, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev);
+  Town(String this.name, String this.introductionText, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev) {
+        nextTownSeed ++;
+  }
 
 
   @override
@@ -61,10 +65,26 @@ class Town extends PhysicalLocation {
   }
 
   @override
+  void teardown() {
+      super.teardown();
+      SoundControl.instance.stopMusic();
+      if(travelContainer != null) travelContainer.remove();
+  }
+
+  @override
   void displayOnScreen(Element div) {
-      SoundControl.instance.playMusic("Campfire_In_the_Void");
+
       roads = Road.spawnRandomRoadsForTown(this);
       super.displayOnScreen(div);
+      //auto play not allowed
+      container.onClick.listen((Event e)
+      {
+          if(!SoundControl.instance.musicPlaying) {
+              SoundControl.instance.playMusic(bgMusic);
+          }
+      });
+      Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
+      container.append(labelElement);
   }
 
   static List<Town> makeAdjacentTowns() {
@@ -95,13 +115,13 @@ class Town extends PhysicalLocation {
   static String generateProceduralName() {
       List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Absolute","Utter","Total","Complete","Incredible"];
       List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap"];
-      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
 
   static String generateProceduralIntroduction() {
       List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in INSERTNAMEHERE.","Exhausted, you arrive in INSERTNAMEHERE.","You stroll into INSERTNAMEHERE."];
       List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
-      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random().pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
 
   static List<LOMATNPC> generateProceduralNPCs() {
@@ -145,8 +165,7 @@ class Town extends PhysicalLocation {
     }
 
     void doHunt() {
-        container.remove();
-        menu.teardown();
+        teardown();
         //new screen
         new HuntingGrounds(this)..displayOnScreen(parent);
 
@@ -155,7 +174,7 @@ class Town extends PhysicalLocation {
 
     void doTravel() {
         //new screen
-        DivElement travelContainer = new DivElement()..classes.add("travelPopup");
+        travelContainer = new DivElement()..classes.add("travelPopup");
         travelContainer.appendHtml("<h2>Travel To Neighboring City:</h2>");
         parent.append(travelContainer);
         //if  clicked, will handle loading trail

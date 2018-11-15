@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: land;
+    src: url("../Fonts/CARIMA.TTF");
+}
+
+@font-face {
     font-family: norse;
     src: url("../Fonts/viking/Viking.ttf");
 }
@@ -13,6 +18,17 @@ html, body {
   margin: 0;
   padding: 0;
   font-family: 'cabin', sans-serif;
+}
+
+.townLable{
+    font-family: "land",serif;
+    font-size: 32px;
+    position: absolute;
+    top: 0px;
+    color: #ccc4b5;
+    left: 20px;
+    text-shadow: 1px 1px #000000;
+    z-index: 10;
 }
 
 #output {

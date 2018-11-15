@@ -8,8 +8,8 @@ import 'package:CommonLib/Random.dart';
 class Road {
     //maybe let progress in the game, or what consorts you have with you (should they have stats???)
     //effect this
-    static int minTimeInMS = 100;
-    static int maxTimeInMS = 1000;
+    static int minTimeInMS = 1000;
+    static int maxTimeInMS = 10000;
 
     Town sourceTown;
     Town destinationTown;

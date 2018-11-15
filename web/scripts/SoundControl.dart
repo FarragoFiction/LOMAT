@@ -11,7 +11,9 @@ class SoundControl { //to major tom
         return _instance;
     }
 
-
+    bool get  musicPlaying {
+        return !bgMusic.paused;
+    }
 
 
     AudioElement soundEffects = new AudioElement();
@@ -19,10 +21,15 @@ class SoundControl { //to major tom
 
     //manicInsomniac
     void playMusic(String locationWithoutExtension) {
-        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "SoundFX/${locationWithoutExtension}.mp3";
-        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "SoundFX/${locationWithoutExtension}.ogg";
+        print("starting music $locationWithoutExtension");
+        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.mp3";
+        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.ogg";
         bgMusic.play();
+    }
 
+    void stopMusic() {
+        print("stopping music");
+        bgMusic.pause();
     }
 
     //https://freesound.org
