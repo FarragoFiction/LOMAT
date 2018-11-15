@@ -23,6 +23,8 @@ class Trail extends PhysicalLocation {
 
   Trail(Road this.road,PhysicalLocation prev) : super(prev);
 
+
+
   @override
   void init() {
       new Timer(new Duration(milliseconds: road.travelTimeInMS), () => arrive());
@@ -47,6 +49,9 @@ class Trail extends PhysicalLocation {
 
       menu = new MenuHolder(parent,this);
       createMenuItems();
+
+      Element labelElement = new DivElement()..text = "${road.label}}"..classes.add("townLable");
+      container.append(labelElement);
 
   }
 

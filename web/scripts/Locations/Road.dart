@@ -17,12 +17,18 @@ class Road {
     int travelTimeInMS;
     //TODO also has events
 
+    String get label {
+        return "Traveling to $destinationTown";
+    }
+
     Road({this.sourceTown,this.destinationTown, this.travelTimeInMS:13}) {
         //.......once i realized i needed error handing well....one thing lead to another
         if(sourceTown == null) sourceTown = Town.getVoidTown();
         if(destinationTown == null) destinationTown = Town.getVoidTown();
 
     }
+
+
 
     @override
     String toString() {

@@ -22,6 +22,7 @@ class SoundControl { //to major tom
     //manicInsomniac
     void playMusic(String locationWithoutExtension) {
         print("starting music $locationWithoutExtension");
+        bgMusic.loop  = true;
         if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.mp3";
         if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.ogg";
         bgMusic.play();
