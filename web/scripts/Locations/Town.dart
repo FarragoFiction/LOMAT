@@ -53,7 +53,7 @@ class Town extends PhysicalLocation {
   @override
   void init() {
       rand.setSeed(name.length);
-      layers.add(new StaticLayer("images/BGs/SimpleSnowyPlainsLomat.png", this, 1));
+      layers.add(new StaticLayer("images/BGs/Backgrounds/SimpleSnowyPlainsLomat.png", this, 1));
       layers.add(new StaticLayer("images/BGs/${name}.png", this, 1));
       parent.onClick.listen((Event e)
       {
