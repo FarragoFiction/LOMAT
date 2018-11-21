@@ -28,7 +28,8 @@ class Trail extends PhysicalLocation {
   @override
   void init() {
       new Timer(new Duration(milliseconds: road.travelTimeInMS), () => arrive());
-      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/Backgrounds/SimpleSnowyPlainsLomat.png", this, 1,1));
+      //TODO have bg layer match town you left from
+      paralaxLayers.add(new ParallaxLayerLooping("images/BGs/Towns/backgrounds/1.png", this, 1,1));
       DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
       container.append(ground);
       //StaticLayer.styleLikeStaticLayer(ground,5,800,300,0,300);

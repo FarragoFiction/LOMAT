@@ -22,7 +22,8 @@ import 'package:CommonLib/Random.dart';
 
 class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
-    TownGenome genome = new TownGenome(null);
+    int seed = 0;
+    TownGenome genome;
     String bgMusic  = "Campfire_In_the_Void";
     //TODO store this in json
     static int nextTownSeed = 0;
@@ -48,7 +49,9 @@ class Town extends PhysicalLocation {
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
   Town(String this.name, String this.introductionText, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev) {
-        nextTownSeed ++;
+      seed = nextTownSeed;
+      nextTownSeed ++;
+      genome = new TownGenome(new Random(seed),null);
   }
 
 

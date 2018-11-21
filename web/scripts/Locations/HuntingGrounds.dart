@@ -23,7 +23,7 @@ class HuntingGrounds extends PhysicalLocation {
     void init() {
         //TODO make trees/wind procedural
         //TODO eventually which 0 bg is used is based on nearest location
-        layers.add(new StaticLayer("images/BGs/Backgrounds/SimpleLomatBackground.png", this, 1));
+        layers.add(new StaticLayer("images/BGs/Towns/backgrounds/1.png", this, 1));
         container.onClick.listen((MouseEvent event){
            // window.alert("clicked");
             Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
