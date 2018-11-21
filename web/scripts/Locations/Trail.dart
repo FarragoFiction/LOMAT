@@ -15,6 +15,7 @@ import 'package:CommonLib/Random.dart';
 //eventually subclasses will have events and shit hwatever, not doing now
 class Trail extends PhysicalLocation {
     List<ParallaxLayer> paralaxLayers = new List<ParallaxLayer>();
+    List<ProceduralLayerParallax> treeLayers = new List<ProceduralLayerParallax>();
     Wagon wagon;
     int numTrees = 8;
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
@@ -38,7 +39,7 @@ class Trail extends PhysicalLocation {
       numTrees = rand.nextIntRange(1,13);
       ground.classes.add("ground");
       for(int i = 0; i<numTrees; i++) {
-          ProceduralLayerParallax.spawnTree(this,rand.nextInt());
+          treeLayers.add(ProceduralLayerParallax.spawnTree(this,rand.nextInt()));
       }
 
       //TODO figure out the right speed for things its being weird
@@ -58,12 +59,17 @@ class Trail extends PhysicalLocation {
 
   void arrive() {
       SoundControl.instance.playSoundEffect("Dead_Jingle_light");
+      paralaxLayers.forEach((ParallaxLayer layer) {
+          layer.removeMePlease = true;
+      });
+
+      treeLayers.forEach((ProceduralLayerParallax layer) {
+          layer.removeMePlease = true;
+      });
       teardown();
       road.destinationTown.prevLocation = this;
       road.destinationTown.displayOnScreen(parent);
-      paralaxLayers.forEach((ParallaxLayer layer) {
-        layer.removeMePlease = true;
-      });
+
   }
 
     void createMenuItems() {
@@ -71,4 +77,6 @@ class Trail extends PhysicalLocation {
             menu.addBack();
         }
     }
+  @override
+  String get bg => road.bg;
 }

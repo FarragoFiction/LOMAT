@@ -18,6 +18,8 @@ abstract class PhysicalLocation {
     PhysicalLocation(PhysicalLocation this.prevLocation) {
     }
 
+    String get bg;
+
     void shitGoBack() {
         if(prevLocation != null) {
             teardown();

@@ -22,7 +22,7 @@ class ProceduralLayerParallax extends ProceduralLayer {
 
 
   void move() {
-      print("moving");
+      print("moving $this");
       int x = int.parse(image.style.left.replaceAll("px", ""));
       //trees move WAY too fast
       x = x - ((zIndex/10).round());
