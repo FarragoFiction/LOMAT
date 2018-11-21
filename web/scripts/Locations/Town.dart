@@ -8,6 +8,7 @@ import 'MenuItems/MenuHolder.dart';
 import 'MenuItems/Talk.dart';
 import 'PhysicalLocation.dart';
 import 'Road.dart';
+import 'TownGenome.dart';
 import 'Trail.dart';
 import 'dart:html';
 
@@ -21,6 +22,7 @@ import 'package:CommonLib/Random.dart';
 
 class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
+    TownGenome genome = new TownGenome(null);
     String bgMusic  = "Campfire_In_the_Void";
     //TODO store this in json
     static int nextTownSeed = 0;
@@ -53,8 +55,8 @@ class Town extends PhysicalLocation {
   @override
   void init() {
       rand.setSeed(name.length);
-      layers.add(new StaticLayer("images/BGs/Backgrounds/SimpleSnowyPlainsLomat.png", this, 1));
-      layers.add(new StaticLayer("images/BGs/${name}.png", this, 1));
+      drawTown();
+
       parent.onClick.listen((Event e)
       {
           dismissFlavorText();
@@ -62,6 +64,13 @@ class Town extends PhysicalLocation {
       showFlavorText();
       menu = new MenuHolder(parent,this);
       createMenuItems();
+  }
+
+  void drawTown() {
+      layers.add(new StaticLayer(genome.genes[TownGenome.BGIMAGEKEY], this, 1));
+      layers.add(new StaticLayer(genome.genes[TownGenome.GROUNDKEY], this, 1));
+      layers.add(new StaticLayer(genome.genes[TownGenome.MIDGROUNDKEY], this, 1));
+      layers.add(new StaticLayer(genome.genes[TownGenome.FOREGROUNDKEY], this, 1));
   }
 
   @override
