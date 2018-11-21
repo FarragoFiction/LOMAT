@@ -28,6 +28,10 @@ class Road {
 
     }
 
+    String get bg {
+        return sourceTown.bg;
+    }
+
 
 
     @override

@@ -43,6 +43,7 @@ class TownGenome {
     //later towns have sail decorations cuz they alchemized the hive
     static String randomBackground(Random rand) {
         int fileNumber = rand.nextIntRange(1,maxBGs);
+        print('bg number is $fileNumber');
         return "$backgroundBase$fileNumber.png";
     }
 

@@ -76,6 +76,11 @@ class Town extends PhysicalLocation {
       layers.add(new StaticLayer(genome.genes[TownGenome.FOREGROUNDKEY], this, 1));
   }
 
+   String get bg {
+      return genome.genes[TownGenome.BGIMAGEKEY];
+   }
+
+
   @override
   void teardown() {
       super.teardown();
