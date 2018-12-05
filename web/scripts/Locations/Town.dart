@@ -48,7 +48,7 @@ class Town extends PhysicalLocation {
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, String this.introductionText, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev) {
+  Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev) {
       seed = nextTownSeed;
       nextTownSeed ++;
       genome = new TownGenome(new Random(seed),null);
@@ -115,13 +115,14 @@ class Town extends PhysicalLocation {
   }
 
   static Town generateProceduralTown() {
-      Town town = new Town(generateProceduralName(),generateProceduralIntroduction(), generateProceduralNPCs(),null);
+      Town town = new Town(generateProceduralName(), generateProceduralNPCs(),null);
+      town.introductionText = "${town.genome.startText}<br><Br>${town.genome.middleText}<br><br>${town.genome.endText}";
       return town;
   }
 
   //should never spawn, technically
   static Town getVoidTown() {
-      return new Town("The Void","You arrive in INSERTNAMEHERE. You are not supposed to be here.",[],null);
+      return new Town("The Void",[],null)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here.";
   }
 
   @override
@@ -135,11 +136,6 @@ class Town extends PhysicalLocation {
       return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
 
-  static String generateProceduralIntroduction() {
-      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in INSERTNAMEHERE.","Exhausted, you arrive in INSERTNAMEHERE.","You stroll into INSERTNAMEHERE."];
-      List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
-      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
-  }
 
   static List<LOMATNPC> generateProceduralNPCs() {
       List<LOMATNPC> ret = new List<LOMATNPC>();
