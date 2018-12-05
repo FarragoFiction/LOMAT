@@ -6,6 +6,10 @@ class TownGenome {
     //TODO if it turns out all the values are strings just make 'em strings
     Map<String, dynamic> genes;
     Random rand;
+
+
+
+
     static String imagesLocationBase = "images/BGs/Towns/";
     static String backgroundBase = "${imagesLocationBase}/backgrounds/";
     static String groundBase = "${imagesLocationBase}/grounds/";
@@ -15,10 +19,26 @@ class TownGenome {
     static int maxGs =2;
     static int maxMGs = 2;
     static int maxFGs = 2;
+    //TODO add begining, middle and ending flavor text slots (should it integrate with text engine???)
+    //TODO add begining middle and ending song clips
+    //TODO add list of npc genomes
+    //ALSO TODO integrate with kr's new beartifly enemy
+    //ALSO TODO make preset towns who combine to make towns
+    //ALSO TODO have some prest towns not contribute genes and instead go in raw with a trigger (like kill 85 catapillars)
     static String BGIMAGEKEY = "backgroundImgLoc";
     static String GROUNDKEY = "groundImgLoc";
     static String MIDGROUNDKEY = "midgroundImgLoc";
     static String FOREGROUNDKEY = "foregroundImgLoc";
+    static String STARTTEXT = "starttext";
+    static String MIDDLETEXT = "middletext";
+    static String ENDTEXT = "foregroundtext";
+    static String STARTSONG1 = "startSong1";
+    static String MIDDLESONG1 = "middlesong1";
+    static String ENDSONG1 = "endsong1";
+    static String STARTSONG2 = "startsong2";
+    static String MIDDLESONG2 = "middlesong2";
+    static String ENDSONG2 = "endsong2";
+
 
 
 
