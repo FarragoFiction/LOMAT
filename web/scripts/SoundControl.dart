@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:CommonLib/src/utility/predicates.dart';
+
 class SoundControl { //to major tom
 
     static SoundControl _instance;
@@ -26,6 +28,19 @@ class SoundControl { //to major tom
         if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.mp3";
         if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.ogg";
         bgMusic.play();
+    }
+
+    //calback should be whatever handles setting up the next part of the song.
+    void playMusicList(String locationWithoutExtension, Action callback) {
+        print("starting music $locationWithoutExtension");
+        bgMusic.loop  = false;
+        if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.mp3";
+        if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.ogg";
+        bgMusic.play();
+        //WARNING TO FUTURE JR, IF I EVER WANT TO SUDDENLY CHANGE TEH MUSIC, THIS CALLBACK PROBABLY WILL STILL BE CALLED. WORRY ABOUT THIS.
+        bgMusic.onEnded.listen((Event event) {
+            callback();
+        });
     }
 
     void stopMusic() {

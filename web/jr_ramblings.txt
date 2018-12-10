@@ -1,0 +1,28 @@
+okay, one thing i want to do is focus more on coding while i do it. i don't HAVE all day every day to work on farrago anymore so i gotta
+get back to basics, back to discipline.
+
+so that means no discord, so that means i ramble here instead. (hi wastes)
+
+right now i'm going to spend at LEAST one hour coding LOMAT without being on discord or getting distracted.
+
+My goals (in order) are:
+
+* Integrate with Manic's procedural music.
+* Integrate with KR's butterfly enemy
+* Let towns fuck.
+* Allow town caching.
+* Let neighbor towns be random or cached.
+* Create 'premade' towns.
+* let neighbor towns also draw from premade
+* implement a "triggerCondition" thing towns can have
+* the default condition returns true.
+* a town only is an option for triggering if its trigger condition is true
+* premade towns have custom conditions (like, cattapillars killed is multiple of 85)
+* allow premade towns to be built from a form and loaded from text (like big bads)
+* implement travel events (effect currency, items, npc hp, time to travel, etc)
+* actually have currency
+* actually have an inventory/items
+* actually let you pick up npcs and take them places
+* allow gravestone generation (online feature???)
+
+I think i can get 2.5 bullet points done.

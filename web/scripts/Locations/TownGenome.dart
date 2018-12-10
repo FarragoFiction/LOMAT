@@ -33,6 +33,8 @@ class TownGenome {
     static String STARTTEXT = "starttext";
     static String MIDDLETEXT = "middletext";
     static String ENDTEXT = "foregroundtext";
+    //JR NOTE from 12/10/18: i can't remember why there is start middle end x2 combob??? i know i wanted 60 seconds total... why did
+    //i name them that way tho???
     static String STARTSONG1 = "startSong1";
     static String MIDDLESONG1 = "middlesong1";
     static String ENDSONG1 = "endsong1";
@@ -43,7 +45,8 @@ class TownGenome {
     String get startText => genes[STARTTEXT];
     String get middleText => genes[MIDDLETEXT];
     String get endText => genes[ENDTEXT];
-
+    List<String> get playList => <String>[genes[STARTSONG1],genes[MIDDLESONG1],genes[ENDSONG1],genes[STARTSONG2],genes[MIDDLESONG2],genes[ENDSONG2]];
+    int get playListLength => playList.length;
 
     //lets you take in a list of genes for premade towns
     //TODO let towns breed plz
@@ -61,6 +64,14 @@ class TownGenome {
         genes[STARTTEXT] = randomStartText(rand);
         genes[MIDDLETEXT] = randomMiddleText(rand);
         genes[ENDTEXT] = randomEndText(rand);
+        genes[STARTSONG1] = randomSong(rand);
+        genes[STARTSONG2] = randomSong(rand);
+        genes[MIDDLESONG1] = randomSong(rand);
+        genes[MIDDLESONG2] = randomSong(rand);
+        genes[ENDSONG1] = randomSong(rand);
+        genes[ENDSONG2] = randomSong(rand);
+
+
         //TODO should there be any mist??? animated gif??? ask artists
     }
 
@@ -82,6 +93,14 @@ class TownGenome {
     static String randomMiddleText(Random rand) {
         List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
         return rand.pickFrom(bullshitNamesPLZReplaceWithTextEngine) ;
+    }
+
+    static String randomSong(Random rand) {
+        String songBaseName = "Trails_Slice";
+        String ret = "$songBaseName${rand.nextIntRange(1,7)}";
+        //confirm the code is right
+        print("song chosen was $ret");
+        return ret;
     }
 
     static String randomEndText(Random rand) {

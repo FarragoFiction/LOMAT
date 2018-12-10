@@ -24,13 +24,13 @@ class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
     int seed = 0;
     TownGenome genome;
-    String bgMusic  = "Campfire_In_the_Void";
     //TODO store this in json
     static int nextTownSeed = 0;
     Random rand = new Random();
     int numTrees = 3;
     String name = "city2";
     Element travelContainer;
+    int playListIndex = 0;
 
 
 
@@ -97,11 +97,22 @@ class Town extends PhysicalLocation {
       container.onClick.listen((Event e)
       {
           if(!SoundControl.instance.musicPlaying) {
-              SoundControl.instance.playMusic(bgMusic);
+             startPlayingMusic();
           }
       });
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
+  }
+
+  void startPlayingMusic() {
+      SoundControl.instance.playMusicList(nextSong, startPlayingMusic);
+  }
+
+  String get nextSong {
+      if(genome.playListLength <= playListIndex) {
+          playListIndex == 1;
+      }
+      return genome.playList[playListIndex];
   }
 
   static List<Town> makeAdjacentTowns() {
