@@ -109,23 +109,26 @@ class Town extends PhysicalLocation {
   }
 
   String get nextSong {
-      if(genome.playListLength <= playListIndex) {
-          playListIndex == 1;
+      if(playListIndex >= genome.playListLength-1) {
+          playListIndex = 1;
       }
-      return genome.playList[playListIndex];
+      String ret =  genome.playList[playListIndex];
+      //print("playListINdex is ${playListIndex} and i'm returning ${ret}");
+      playListIndex ++;
+      return ret;
   }
 
-  static List<Town> makeAdjacentTowns() {
+  static List<Town> makeAdjacentTowns(Random rand) {
       //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
-      int adjAmount = new Random().nextInt(4)+1;
+      int adjAmount = rand.nextInt(4)+1;
       List<Town> ret = new List<Town>();
       for(int i = 0; i<adjAmount; i++) {
-          ret.add(generateProceduralTown());
+          ret.add(generateProceduralTown(rand));
       }
       return ret;
   }
 
-  static Town generateProceduralTown() {
+  static Town generateProceduralTown(Random rand) {
       Town town = new Town(generateProceduralName(), generateProceduralNPCs(),null);
       town.introductionText = "${town.genome.startText}<br><Br>${town.genome.middleText}<br><br>${town.genome.endText}";
       return town;

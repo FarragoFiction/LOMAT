@@ -42,6 +42,7 @@ class HuntingGrounds extends PhysicalLocation {
 
         impLoop();
         ogreLoop();
+        butterflyLoop();
         menu = new MenuHolder(parent,this);
         createMenuItems();
 
@@ -58,6 +59,14 @@ class HuntingGrounds extends PhysicalLocation {
         await window.animationFrame;
         int duartion = new Random().nextIntRange(2000,4000);
         new Timer(new Duration(milliseconds: duartion), () => impLoop());
+    }
+
+    //fairly rare
+    Future<Null> butterflyLoop() async{
+        enemies.add(Enemy.spawnButterflies(this, rand.nextInt()));
+        await window.animationFrame;
+        int duartion = new Random().nextIntRange(1000,6000);
+        new Timer(new Duration(milliseconds: duartion), () => butterflyLoop());
     }
 
     Future<Null> ogreLoop() async{

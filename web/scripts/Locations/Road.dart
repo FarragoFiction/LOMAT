@@ -53,9 +53,9 @@ class Road {
     }
 
     static List<Road> spawnRandomRoadsForTown(Town town) {
-        List<Town> towns = Town.makeAdjacentTowns();
+        Random rand = new Random(Town.nextTownSeed);
+        List<Town> towns = Town.makeAdjacentTowns(rand);
         List<Road> ret = new List<Road>();
-        Random rand = new Random();
         towns.forEach((Town destinationTown) {
             ret.add(new Road(sourceTown: town, destinationTown: destinationTown, travelTimeInMS: rand.nextIntRange(minTimeInMS,maxTimeInMS)));
         });

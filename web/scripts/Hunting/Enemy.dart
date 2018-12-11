@@ -2,6 +2,7 @@ import '../Locations/Layers/ProceduralLayer.dart';
 import '../Locations/PhysicalLocation.dart';
 import '../SoundControl.dart';
 import 'Imp.dart';
+import 'Butterfly.dart';
 import 'Ogre.dart';
 import 'dart:async';
 import 'dart:html';
@@ -84,6 +85,7 @@ abstract class Enemy {
         image.remove();
     }
 
+    //what is base height again??? oh the image size...
     static SpawnData randomSpawnData(Random rand, int baseHeight) {
         int maxX = 800;
         int maxY = 290;
@@ -105,10 +107,17 @@ abstract class Enemy {
     }
 
 
+    //TODO eventually image chosen is based on town genome
     static Enemy spawnImps(PhysicalLocation parent, int seed) {
         Random rand = new Random(seed);
         SpawnData spawn = randomSpawnData(rand,120);
         return new Imp(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",spawn.chosenDirection, parent);
+    }
+
+    static Enemy spawnButterflies(PhysicalLocation parent, int seed) {
+        Random rand = new Random(seed);
+        SpawnData spawn = randomSpawnData(rand,100);
+        return new Butterfly(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Butterfly.enemyLocations)}",spawn.chosenDirection, parent);
     }
 
     static Enemy spawnOgres(PhysicalLocation parent, int seed) {

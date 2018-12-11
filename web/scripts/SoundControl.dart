@@ -31,6 +31,7 @@ class SoundControl { //to major tom
     }
 
     //calback should be whatever handles setting up the next part of the song.
+    //intial problems are the pause between songs, is it loading?
     void playMusicList(String locationWithoutExtension, Action callback) {
         print("starting music $locationWithoutExtension");
         bgMusic.loop  = false;
