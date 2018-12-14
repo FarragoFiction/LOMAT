@@ -51,16 +51,16 @@ class Town extends PhysicalLocation {
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome genome) : super(prev) {
+  Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
+      print("passed in genome is $genome");
       seed = nextTownSeed;
       nextTownSeed ++;
       if(genome == null) {
           genome = new TownGenome(new Random(seed), null);
+      }else {
+        print("genome wasn't null for $name");
       }
-      if (introductionText == null) {
-          introductionText = "${genome.startText}<br><Br>${genome
-              .middleText}<br><br>${genome.endText}";
-      }
+      introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
   }
 
   @override
@@ -157,7 +157,16 @@ class Town extends PhysicalLocation {
 
   //should never spawn, technically
   static Town getVoidTown() {
-      return new Town("The Void",[],null,null)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of DENNIS.";
+      TownGenome ret = new TownGenome(new Random(13),null);
+      ret.startText = "";
+      ret.middleText = "";
+      ret.endText = "";
+      ret.playList = <String>["","","","","",""];
+      ret.foreground = "${TownGenome.foregroundBase}/0.png";
+      ret.midGround = "${TownGenome.midgroundBase}/0.png";
+      ret.ground = "${TownGenome.groundBase}/0.png";
+      ret.background = "${TownGenome.backgroundBase}/0.png";;
+      return new Town("The Void",[],null,ret)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of DENNIS.";
   }
 
   @override
