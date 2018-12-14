@@ -180,8 +180,8 @@ class Town extends PhysicalLocation {
   }
 
   static String generateProceduralName() {
-      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Absolute","Utter","Total","Complete","Incredible"];
-      List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap"];
+      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Pirate","Mining","Absolute","Utter","Total","Complete","Incredible","Viking","Seaside","Empty","Abandoned","Snake","Troll","Elf","Consort","Seagull","Ghost"];
+      List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap","Village","Burg","Town","City","Vista","Placeholder","Island"];
       return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
   }
 
