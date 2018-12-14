@@ -24,7 +24,8 @@ class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
     //TODO load from localStorage
     static List<Town> cachedTowns = [];
-    static int maxTowns = 113; //TODO configure this.
+    static int maxTowns = 85; //TODO configure this.
+    static int minTowns = 5;
     int seed = 0;
     TownGenome genome;
     //TODO store this in json
@@ -62,6 +63,7 @@ class Town extends PhysicalLocation {
         print("genome wasn't null for $name");
       }
       introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
+      cachedTowns.add(this);
   }
 
   @override
@@ -120,7 +122,7 @@ class Town extends PhysicalLocation {
   //if there is room in the cache, 70% chance of making a child
     //otherwise 30% chance of it being batshit insane
   Town makeBaby() {
-      if(cachedTowns.length < maxTowns && rand.nextDouble()>0.7) {
+      if(cachedTowns.length < minTowns ||(cachedTowns.length < maxTowns && rand.nextDouble()>0.7)) {
           Town coparentSource = rand.pickFrom(cachedTowns);
           TownGenome coparent = null;
           if(coparentSource != null) {
@@ -213,7 +215,7 @@ class Town extends PhysicalLocation {
         flavorTextElement.classes.add("flavorText");
         String before = "";
         if(firstTime == false) {
-            before = "<Br><br>You have been here before.";
+            before = "<Br><br>You could swear you have been here before.";
         }
         flavorTextElement.setInnerHtml("$introductionText$before");
         container.append(flavorTextElement);
