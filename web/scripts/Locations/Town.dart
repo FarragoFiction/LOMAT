@@ -22,6 +22,9 @@ import 'package:CommonLib/Random.dart';
 
 class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
+    //TODO load from localStorage
+    static List<Town> cachedTowns = [];
+    static int maxTowns = 113; //TODO configure this.
     int seed = 0;
     TownGenome genome;
     //TODO store this in json
@@ -48,12 +51,17 @@ class Town extends PhysicalLocation {
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
 
-  Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev) : super(prev) {
+  Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome genome) : super(prev) {
       seed = nextTownSeed;
       nextTownSeed ++;
-      genome = new TownGenome(new Random(seed),null);
+      if(genome == null) {
+          genome = new TownGenome(new Random(seed), null);
+      }
+      if (introductionText == null) {
+          introductionText = "${genome.startText}<br><Br>${genome
+              .middleText}<br><br>${genome.endText}";
+      }
   }
-
 
   @override
   void init() {
@@ -108,6 +116,21 @@ class Town extends PhysicalLocation {
       SoundControl.instance.playMusicList(nextSong, startPlayingMusic);
   }
 
+  //if there is room in the cache, 70% chance of making a child
+    //otherwise 30% chance of it being batshit insane
+  Town makeBaby() {
+      if(cachedTowns.length < maxTowns && rand.nextDouble()>0.7) {
+          Town coparentSource = rand.pickFrom(cachedTowns);
+          TownGenome coparent = null;
+          if(coparentSource != null) {
+              coparent = coparentSource.genome;
+          }
+          return new Town(generateProceduralName(), generateProceduralNPCs(),null,genome.breed(coparent));
+      }else {
+          generateProceduralTown(rand, this);
+      }
+  }
+
   String get nextSong {
       if(playListIndex >= genome.playListLength-1) {
           playListIndex = 1;
@@ -118,25 +141,23 @@ class Town extends PhysicalLocation {
       return ret;
   }
 
-  static List<Town> makeAdjacentTowns(Random rand) {
+  static List<Town> makeAdjacentTowns(Random rand,Town town) {
       //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
       int adjAmount = rand.nextInt(4)+1;
       List<Town> ret = new List<Town>();
       for(int i = 0; i<adjAmount; i++) {
-          ret.add(generateProceduralTown(rand));
+          ret.add(town.makeBaby());
       }
       return ret;
   }
 
-  static Town generateProceduralTown(Random rand) {
-      Town town = new Town(generateProceduralName(), generateProceduralNPCs(),null);
-      town.introductionText = "${town.genome.startText}<br><Br>${town.genome.middleText}<br><br>${town.genome.endText}";
-      return town;
+  static Town generateProceduralTown(Random rand,Town town) {
+      return new Town(generateProceduralName(), generateProceduralNPCs(),null,null);
   }
 
   //should never spawn, technically
   static Town getVoidTown() {
-      return new Town("The Void",[],null)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here.";
+      return new Town("The Void",[],null,null)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of DENNIS.";
   }
 
   @override

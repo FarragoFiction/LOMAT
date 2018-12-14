@@ -29,3 +29,19 @@ I think i can get 2.5 bullet points done.
 
 
 At the end of nearly an hour and a half got music done, and butterfly done. 2 bullet points.
+
+
+12/12/18
+
+Alright. Time to make towns fuck.
+
+Step 1:
+
+Make initial town have a set genome, no randomness.
+
+Have its children be related to IT and one randomly chosen cached town.
+
+each town created is cached.
+
+once cache hits 113, just start repeating.
+

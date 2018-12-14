@@ -15,10 +15,10 @@ class TownGenome {
     static String groundBase = "${imagesLocationBase}/grounds/";
     static String midgroundBase = "${imagesLocationBase}/midgrounds/";
     static String foregroundBase = "${imagesLocationBase}/foregrounds/";
-    static int maxBGs = 3;
-    static int maxGs =2;
+    static int maxBGs = 4;
+    static int maxGs =3;
     static int maxMGs = 2;
-    static int maxFGs = 2;
+    static int maxFGs = 3;
     //TODO breed two towns together because i have problems and that problem is loving genetic algorithms
     //TODO add list of npc genomes
     //TODO add list of ENEMY genmoes (base and modifier)
@@ -47,6 +47,40 @@ class TownGenome {
     String get endText => genes[ENDTEXT];
     List<String> get playList => <String>[genes[STARTSONG1],genes[MIDDLESONG1],genes[ENDSONG1],genes[STARTSONG2],genes[MIDDLESONG2],genes[ENDSONG2]];
     int get playListLength => playList.length;
+    String get background => genes[BGIMAGEKEY];
+    String get ground => genes[GROUNDKEY];
+    String get midGround => genes[MIDGROUNDKEY];
+    String get foreground => genes[FOREGROUNDKEY];
+
+     set background(String content) => genes[BGIMAGEKEY]=content;
+     set ground(String content) => genes[GROUNDKEY]=content;
+     set midGround(String content) => genes[MIDGROUNDKEY]=content;
+     set foreground(String content) => genes[FOREGROUNDKEY]=content;
+     set startText(String content) => genes[STARTTEXT]=content;
+     set middleText(String content) => genes[MIDDLETEXT]=content;
+     set endText(String content) => genes[ENDTEXT]=content;
+
+     set startSong1(String content) => genes[STARTSONG1]=content;
+     set middleSong1(String content) => genes[MIDDLESONG1]=content;
+     set endSong1(String content) => genes[ENDSONG1]=content;
+     set startSong2(String content) => genes[STARTSONG2]=content;
+     set middleSong2(String content) => genes[MIDDLESONG2]=content;
+     set endSong2(String content) => genes[ENDSONG2]=content;
+
+     set playList(List<String> songs) {
+         if(songs.length != playListLength) {
+            throw "ERROR: NOT ENOUGH SONGS IN PLAYLIST, WAS EXPECTING ${playListLength}";
+         }
+         startSong1 = songs[0];
+         middleSong1 = songs[1];
+         endSong1 = songs[2];
+         startSong2 = songs[3];
+         middleSong2 = songs[4];
+         endSong2 = songs[5];
+     }
+
+
+
 
     //lets you take in a list of genes for premade towns
     //TODO let towns breed plz
@@ -70,9 +104,11 @@ class TownGenome {
         genes[MIDDLESONG2] = randomSong(rand);
         genes[ENDSONG1] = randomSong(rand);
         genes[ENDSONG2] = randomSong(rand);
-
-
         //TODO should there be any mist??? animated gif??? ask artists
+    }
+
+    TownGenome breed(TownGenome coparent) {
+
     }
 
     //to draw: village, farm, train station, carnival, mine, port, logging station (with no trees), stonehenge???
