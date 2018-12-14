@@ -42,7 +42,9 @@ class Road {
     void displayOption(PhysicalLocation prevLocation,Element parent,Element container) {
         Element div = new DivElement()..classes.add("dialogueSelectableItem");
         container.append(div);
-        div.setInnerHtml("> $destinationTown (Estimated ${(travelTimeInMS).round()} ms)");
+        String before = "";
+        if(destinationTown.firstTime == true) before = "[NEW!!!]";
+        div.setInnerHtml("> $destinationTown (Estimated ${(travelTimeInMS).round()} ms) $before");
 
         div.onClick.listen((Event t) {
             container.remove();

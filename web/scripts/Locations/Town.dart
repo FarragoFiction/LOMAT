@@ -34,6 +34,7 @@ class Town extends PhysicalLocation {
     String name = "city2";
     Element travelContainer;
     int playListIndex = 0;
+    bool firstTime = true;
 
 
 
@@ -127,7 +128,9 @@ class Town extends PhysicalLocation {
           }
           return new Town(generateProceduralName(), generateProceduralNPCs(),null,genome.breed(coparent,rand));
       }else {
-          generateProceduralTown(rand, this);
+          Town ret = rand.pickFrom(cachedTowns);
+          ret.firstTime = false;
+          return ret;
       }
   }
 
@@ -208,7 +211,11 @@ class Town extends PhysicalLocation {
         replaceTemplateText();
         flavorTextElement = new DivElement();
         flavorTextElement.classes.add("flavorText");
-        flavorTextElement.setInnerHtml(introductionText);
+        String before = "";
+        if(firstTime == false) {
+            before = "<Br><br>You have been here before.";
+        }
+        flavorTextElement.setInnerHtml("$introductionText$before");
         container.append(flavorTextElement);
   }
 
