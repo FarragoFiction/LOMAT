@@ -107,8 +107,39 @@ class TownGenome {
         //TODO should there be any mist??? animated gif??? ask artists
     }
 
-    TownGenome breed(TownGenome coparent) {
+    TownGenome breed(TownGenome coparent, Random rand) {
+         //child will have random values so to get mutations just don't over ride
+         TownGenome child = new TownGenome(rand,null);
+         //take each key and pick either parent or coparent or mutate (3% chance)
+        for(String key in genes.keys) {
+            if(rand.nextDouble() > .97) {
+                if (coparent != null && coparent.genes.keys.contains(key) && rand.nextBool()) {
+                    child.genes[key] = coparent.genes[key];
+                }else {
+                    child.genes[key] = genes[key];
+                }
+            }
+        }
+        return child;
+    }
 
+    //for mutations except i just realized i wouldn't need it i just don't need to over ride the child
+    //oh well.
+    static keyToRandomValue(String key, Random rand) {
+        if(key == BGIMAGEKEY) return randomBackground(rand);
+        if(key == GROUNDKEY) return randomGround(rand);
+        if(key == MIDGROUNDKEY) return randomMidground(rand);
+        if(key == FOREGROUNDKEY) return randomForeground(rand);
+        if(key == STARTTEXT) return randomStartText(rand);
+        if(key == MIDDLETEXT) return randomMiddleText(rand);
+        if(key == ENDTEXT) return randomEndText(rand);
+        if(key == STARTSONG1) return randomSong(rand);
+        if(key == STARTSONG2) return randomSong(rand);
+        if(key == MIDDLESONG1) return randomSong(rand);
+        if(key == MIDDLESONG2) return randomSong(rand);
+        if(key == ENDSONG1) return randomSong(rand);
+        if(key == ENDSONG2) return randomSong(rand);
+        return "??? UNKNOWN KEY ???";
     }
 
     //to draw: village, farm, train station, carnival, mine, port, logging station (with no trees), stonehenge???

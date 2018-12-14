@@ -125,7 +125,7 @@ class Town extends PhysicalLocation {
           if(coparentSource != null) {
               coparent = coparentSource.genome;
           }
-          return new Town(generateProceduralName(), generateProceduralNPCs(),null,genome.breed(coparent));
+          return new Town(generateProceduralName(), generateProceduralNPCs(),null,genome.breed(coparent,rand));
       }else {
           generateProceduralTown(rand, this);
       }
