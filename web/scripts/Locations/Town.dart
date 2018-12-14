@@ -25,7 +25,7 @@ class Town extends PhysicalLocation {
     //TODO load from localStorage
     static List<Town> cachedTowns = [];
     static int maxTowns = 85; //TODO configure this.
-    static int minTowns = 5;
+    static int minTowns = 13; //just long enough that you don't notice at first what's going on.
     int seed = 0;
     TownGenome genome;
     //TODO store this in json

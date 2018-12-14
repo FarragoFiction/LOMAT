@@ -1,4 +1,5 @@
 import '../PhysicalLocation.dart';
+import '../Trail.dart';
 import 'ProceduralLayer.dart';
 import 'dart:async';
 import 'dart:html';
@@ -10,6 +11,10 @@ class ProceduralLayerParallax extends ProceduralLayer {
 
   ProceduralLayerParallax(int x, int y, int height, bool turnways, String imageLocation, PhysicalLocation parent) : super(x, y, height, turnways, imageLocation, parent) {
       animate();
+      if(parent is Trail) {
+          //so it knows how to remove you.
+          parent.treeLayers.add(this);
+      }
   }
 
   Future<Null> animate() async{
@@ -22,15 +27,18 @@ class ProceduralLayerParallax extends ProceduralLayer {
 
 
   void move() {
-      print("moving $this");
+      print("moving $this, remove me is $removeMePlease");
       int x = int.parse(image.style.left.replaceAll("px", ""));
       //trees move WAY too fast
       x = x - ((zIndex/10).round());
       //if i am less than -0, no longer on screen, go away
       if(x<image.width*-1){
           image.remove();
+          if(!removeMePlease) {
+              spawnTreeOffScreen(parent, new Random().nextInt());
+          }
           removeMePlease = true;
-          spawnTreeOffScreen(parent, new Random().nextInt());
+
           return;
       }
       image.style.left = "${x}px";
