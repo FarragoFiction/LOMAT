@@ -18,8 +18,8 @@ TownGenome  startingGenome() {
   ret.middleText = "Or at least that's what you'd think if it were in its finished state.  Sadly, it appears to have been shittly drawn by a WASTE or something, and everything in it is in test mode and half finished.";
   ret.endText = " well, beats looking at a blank white screen, you suppose.";
   ret.playList = <String>["Trails_Slice1","Trails_Slice2","Trails_Slice3","Trails_Slice4","Trails_Slice5","Trails_Slice6"];
-  ret.foreground = "${TownGenome.foregroundBase}/1.png";
-  ret.midGround = "${TownGenome.midgroundBase}/1.png";
+  ret.foreground = "${TownGenome.foregroundBase}/2.png";
+  ret.midGround = "${TownGenome.midgroundBase}/2.png";
   ret.ground = "${TownGenome.groundBase}/1.png";
   ret.background = "${TownGenome.backgroundBase}/1.png";;
   return ret;

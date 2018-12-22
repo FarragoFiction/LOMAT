@@ -1,4 +1,48 @@
 
+12/21/18
+
+I'm trying to de-stress. Releasing MonGirlTile on steam was great and all, but really stressful.
+
+So.
+
+I want to do the funnest possible thing next and that means events. Just. Just do it.
+
+And event should have flavor text and an effect. Effects....don't really make sense yet
+since there's not party members or cash or anything...well there IS how long it will take?
+
+Maybe flavor text should be tied to the effect itself? Or should an event have one and only one effect?
+
+Does it make sense to let them breed to? like?
+
+PARTYMEMBER caught DYSSENTRY: LOSE ONE DAY
+vs
+PARTYMEMBER caught DYSSENTRY: PAY 13 GRIST.
+
+Probably not, an effect is an effect is an effect. They should be hella simple.
+
+So. Text + single effect? What about rarity?
+
+PL is always talking about rare events make playing a game funner.
+
+So, an Event has  text, oddsOfHappening and effect?
+
+So the use case is...
+
+User clicks "Travel" which puts them on a road.  The road has 0 or more events associated with it.
+Every....second? Ten seconds? The road checks for events. ( could be configurable based on towns)
+
+each event in the list rolls its dice, if the number is below its oddsOfHappening it goes.
+
+Event: "GET BIT BY SNAKE" happens. (so events have a title too).
+ User has to spend 1 more second on the raod.
+ text displays "A SNAKE comes out of nowhere and bites INSERT PARTY MEMBER HERE. They roll around on the ground for awhile in agony. You never did trust snakes."
+
+Title, flavorText (room for text engine (in title too), effect,oddsOfHapening
+
+
+
+
+
 ~~When I get back, wire town names up to TextEngine. have specific names be tied to genes???~~
 
 actually wait NO DO NOT DO THAT.  You want word clouds to be tied to the premade towns. This is fine.

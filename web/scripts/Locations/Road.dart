@@ -28,6 +28,11 @@ class Road {
 
     }
 
+    void addDelay(int delayInMS) {
+        travelTimeInMS += delayInMS;
+        //TODO stop the parallax from happening maybe??? wagon is stopped.
+    }
+
     String get bg {
         return sourceTown.bg;
     }
