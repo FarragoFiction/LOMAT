@@ -1,4 +1,5 @@
 import '../SoundControl.dart';
+import 'Events/RoadEvent.dart';
 import 'PhysicalLocation.dart';
 import 'Town.dart';
 import 'Trail.dart';
@@ -15,7 +16,8 @@ class Road {
     Town destinationTown;
     //distance is voided at first
     int travelTimeInMS;
-    //TODO also has events
+    //TODO comes from  source and destination towns
+    List<RoadEvent> events = new List<RoadEvent>();
 
     String get label {
         return "Traveling to $destinationTown";

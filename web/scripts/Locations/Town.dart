@@ -1,6 +1,7 @@
 import '../NPCs/LOMATNPC.dart';
 import '../Screens/TalkyScreen.dart';
 import '../SoundControl.dart';
+import 'Events/RoadEvent.dart';
 import 'HuntingGrounds.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/StaticLayer.dart';
@@ -36,8 +37,6 @@ class Town extends PhysicalLocation {
     Element travelContainer;
     int playListIndex = 0;
     bool firstTime = true;
-
-
 
     //TODO towns have traits that contribute introductionText and graphics and the kinds of events they have???
 
@@ -81,14 +80,14 @@ class Town extends PhysicalLocation {
   }
 
   void drawTown() {
-      layers.add(new StaticLayer(genome.genes[TownGenome.BGIMAGEKEY], this, 1));
-      layers.add(new StaticLayer(genome.genes[TownGenome.GROUNDKEY], this, 1));
-      layers.add(new StaticLayer(genome.genes[TownGenome.MIDGROUNDKEY], this, 1));
-      layers.add(new StaticLayer(genome.genes[TownGenome.FOREGROUNDKEY], this, 1));
+      layers.add(new StaticLayer(genome.simpleGenes[TownGenome.BGIMAGEKEY], this, 1));
+      layers.add(new StaticLayer(genome.simpleGenes[TownGenome.GROUNDKEY], this, 1));
+      layers.add(new StaticLayer(genome.simpleGenes[TownGenome.MIDGROUNDKEY], this, 1));
+      layers.add(new StaticLayer(genome.simpleGenes[TownGenome.FOREGROUNDKEY], this, 1));
   }
 
    String get bg {
-      return genome.genes[TownGenome.BGIMAGEKEY];
+      return genome.simpleGenes[TownGenome.BGIMAGEKEY];
    }
 
 

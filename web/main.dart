@@ -1,5 +1,7 @@
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
+import 'scripts/Locations/Events/Effects/DelayEffect.dart';
+import 'scripts/Locations/Events/RoadEvent.dart';
 import 'scripts/Locations/Town.dart';
 import 'scripts/Locations/TownGenome.dart';
 import 'scripts/Locations/Trail.dart';
@@ -12,6 +14,7 @@ void main() {
   town.displayOnScreen(div);
 }
 
+//eventually load from JSON
 TownGenome  startingGenome() {
   TownGenome ret = new TownGenome(new Random(13),null);
   ret.startText = "You arrive in beautiful INSERTNAMEHERE, the jewel of LOMAT.";
@@ -21,6 +24,14 @@ TownGenome  startingGenome() {
   ret.foreground = "${TownGenome.foregroundBase}/2.png";
   ret.midGround = "${TownGenome.midgroundBase}/2.png";
   ret.ground = "${TownGenome.groundBase}/1.png";
-  ret.background = "${TownGenome.backgroundBase}/1.png";;
+  ret.background = "${TownGenome.backgroundBase}/1.png";
+  DelayEffect smallDelay = new DelayEffect(1000);
+  DelayEffect mediumEffect = new DelayEffect(5000);
+  DelayEffect largeEffect = new DelayEffect(10000);
+  ret.events = new List<RoadEvent>();
+  ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
+  ret.events.add(new RoadEvent("Get Homaged","One of your currently nonexistant party members gets dysentery or something.", mediumEffect, 0.25));
+  ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.05));
+
   return ret;
 }
