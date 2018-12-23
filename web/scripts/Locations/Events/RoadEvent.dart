@@ -29,6 +29,7 @@ class RoadEvent {
     }
 
     bool triggered(Road road) {
+        print("checking trigger for event $title");
         if(random.nextDouble() < oddsOfHapening) {
             popup();
             effect.apply(road);

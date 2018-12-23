@@ -15,6 +15,7 @@ class Road {
 
     Town sourceTown;
     Town destinationTown;
+    bool plzStopKThnxBai = false;
     //distance is voided at first
     int travelTimeInMS;
     //TODO comes from  source and destination towns
@@ -43,7 +44,24 @@ class Road {
         return sourceTown.bg;
     }
 
+    //if this isn't called on arrival, then you will get lots of bad effects
+    //such as: events being able to trigger in town or while hunting
+    //events from the previous trail applying to the next trail and
+    //adding up until their are hundreds and hundreds of events spamming everywhere
+    //this is bad. don't let this happen.
+    void tearDown() {
+        plzStopKThnxBai = true;
+    }
+
+    Future<Null> startEventLoop() async {
+        //wait at least one second before starting because its jarring if you start right off the bat with an event.
+        new Timer(new Duration(milliseconds: 1000), () => eventLoop());
+    }
+
     Future<Null> eventLoop() async{
+        //no more loop plz.
+        print("doing event loop");
+        if(plzStopKThnxBai) return;
         await window.animationFrame;
         for(RoadEvent event in events) {
             if(event.triggered(this)){

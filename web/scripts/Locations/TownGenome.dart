@@ -9,7 +9,7 @@ class TownGenome {
     Map<String, String> simpleGenes;
     Random rand;
     //higher means more stable
-    double genomeStability = .97;
+    double genomeStability = .1;
 
     static String imagesLocationBase = "images/BGs/Towns/";
     static String backgroundBase = "${imagesLocationBase}/backgrounds/";
@@ -118,7 +118,7 @@ class TownGenome {
          TownGenome child = new TownGenome(rand,null);
          //take each key and pick either parent or coparent or mutate (3% chance)
         for(String key in simpleGenes.keys) {
-            if(rand.nextDouble() > genomeStability) {
+            if(rand.nextDouble() < genomeStability) {
                 if (coparent != null && coparent.simpleGenes.keys.contains(key) && rand.nextBool()) {
                     child.simpleGenes[key] = coparent.simpleGenes[key];
                 }else {
@@ -127,22 +127,24 @@ class TownGenome {
             }
         }
         child.events = breedEvents(coparent.events, child.events);
+        print("the childs events are ${child.events.length} after breeding");
         return child;
     }
 
     //for each event in list pick either mine, coparents or make a MUTATION.
     List<RoadEvent> breedEvents(List<RoadEvent> coParentEvents, List<RoadEvent> childMutations) {
+         print("attempting to breed events, my events are ${events.length} and your events are ${coParentEvents.length}");
          //it does mean that the number of events will be the "first" parents amount.
         List<RoadEvent> ret = new List<RoadEvent>();
         for(int i = 0; i<events.length; i++) {
-            if(rand.nextDouble() > genomeStability) {
+            if(rand.nextDouble() < genomeStability) {
                 if (coParentEvents != null && coParentEvents.length < i && rand.nextBool()) {
                     ret.add(coParentEvents[i]);
                 }else {
                    ret.add(events[i]);
                 }
             }else {
-                if(childMutations.length<i) {
+                if(childMutations.length>i) {
                     ret.add(childMutations[i]);
                 }
             }
@@ -193,7 +195,7 @@ class TownGenome {
         String songBaseName = "Trails_Slice";
         String ret = "$songBaseName${rand.nextIntRange(1,7)}";
         //confirm the code is right
-        print("song chosen was $ret");
+        //print("song chosen was $ret");
         return ret;
     }
 

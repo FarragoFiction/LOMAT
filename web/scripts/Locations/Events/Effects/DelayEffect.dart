@@ -14,6 +14,7 @@ class DelayEffect extends Effect {
 
   @override
   void apply(Road road) {
+    print("applying delay effect.");
     road.addDelay(amount);
   }
 }

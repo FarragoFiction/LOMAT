@@ -20,6 +20,8 @@ class Trail extends PhysicalLocation {
     int numTrees = 8;
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
     //lets you know where you are going and how long it will take to get there and what events will be there.
+    //JR NOTE: Its only 12/22/18 and i already don't remember why i decided a trail HAD a road instead of just
+    //rolling road functionality into a trail. smdh.
     Road road;
 
   Trail(Road this.road,PhysicalLocation prev) : super(prev);
@@ -51,6 +53,7 @@ class Trail extends PhysicalLocation {
 
       menu = new MenuHolder(parent,this);
       createMenuItems();
+      road.startEventLoop();
 
       Element labelElement = new DivElement()..text = "${road.label}}"..classes.add("townLable");
       container.append(labelElement);
@@ -69,6 +72,7 @@ class Trail extends PhysicalLocation {
       teardown();
       road.destinationTown.prevLocation = this;
       road.destinationTown.displayOnScreen(parent);
+      road.tearDown();
 
   }
 
