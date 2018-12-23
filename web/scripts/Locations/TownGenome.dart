@@ -222,10 +222,7 @@ class TownGenome {
 
     //most events will be carefully crafted. but mutations....mutations are fair game for my aesthetic
     static RoadEvent randomEvent(Random rand) {
-        DelayEffect smallDelay = new DelayEffect(1000);
-        DelayEffect mediumEffect = new DelayEffect(5000);
-        DelayEffect largeEffect = new DelayEffect(10000);
-        List<DelayEffect> effects = [smallDelay,mediumEffect, largeEffect];
+        List<DelayEffect> effects = [new DelayEffect(1000),new DelayEffect(5000), new DelayEffect(10000),new DelayEffect(-1000),new DelayEffect(-5000),new DelayEffect(-10000)];
         //TODO make them better at being random. use text engine and shit. these are for mutations.
         List<String> shittyNouns = <String> ["Vikings","Bears","Pirates","Ninjas","Bandits","Ghosts","Exorcists"];
         List<String> shittyAdj = <String> ["Screaming","Wailing","Pious","Angry","Hungry","Greedy","Shitty","Berserk"];

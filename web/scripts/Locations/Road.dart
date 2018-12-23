@@ -1,4 +1,5 @@
 import '../SoundControl.dart';
+import 'Events/Effects/ArriveEffect.dart';
 import 'Events/RoadEvent.dart';
 import 'PhysicalLocation.dart';
 import 'Town.dart';
@@ -12,6 +13,7 @@ class Road {
     //effect this
     static int minTimeInMS = 1000;
     static int maxTimeInMS = 10000;
+    static int maxElapsedTimeInMS= 30000;
 
     Town sourceTown;
     Town destinationTown;
@@ -20,6 +22,7 @@ class Road {
     //distance is voided at first
     int travelTimeInMS;
     int timeRemaining;
+    int elapsedTime = 0;
     //TODO comes from  source and destination towns
     List<RoadEvent> events = new List<RoadEvent>();
 
@@ -39,8 +42,12 @@ class Road {
     }
 
     void addDelay(int delayInMS) {
-        travelTimeInMS += delayInMS;
+        timeRemaining += delayInMS;
         //TODO stop the parallax from happening maybe??? wagon is stopped.
+    }
+
+    void applyArriveEffect() {
+        trail.arrive();
     }
 
     String get bg {
@@ -64,14 +71,22 @@ class Road {
     }
 
     Future<Null> timerLoop() async {
-        //wait at least one second before starting because its jarring if you start right off the bat with an event.
         trail.updateLabel();
-        timeRemaining += -1000;
-        if(timeRemaining > 0){
-            new Timer(new Duration(milliseconds: 1000), () => timerLoop());
+        if(elapsedTime > maxElapsedTimeInMS) {
+            //handles suddenly arriving out of nowhere.
+            new ArriveEffect(0).apply(this);
         }else {
-            trail.arrive();
+            progressTime();
         }
+    }
+
+    void progressTime() {
+      timeRemaining += -1000;
+      if (timeRemaining > 0) {
+          new Timer(new Duration(milliseconds: 1000), () => timerLoop());
+      } else {
+          trail.arrive();
+      }
     }
 
     Future<Null> eventLoop() async{
