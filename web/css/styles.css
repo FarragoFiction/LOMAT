@@ -82,7 +82,7 @@ html, body {
     color: #ccc4b5;
     left: 200px;
     border-radius: 13px;
-    z-index: 10;
+    z-index: 1000;
 }
 
 .travelPopup{

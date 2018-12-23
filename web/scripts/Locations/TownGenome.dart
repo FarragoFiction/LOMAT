@@ -17,7 +17,7 @@ class TownGenome {
     static String midgroundBase = "${imagesLocationBase}/midgrounds/";
     static String foregroundBase = "${imagesLocationBase}/foregrounds/";
     static int maxBGs = 4;
-    static int maxGs =3;
+    static int maxGs =2;
     static int maxMGs = 2;
     static int maxFGs = 3;
     //TODO breed two towns together because i have problems and that problem is loving genetic algorithms

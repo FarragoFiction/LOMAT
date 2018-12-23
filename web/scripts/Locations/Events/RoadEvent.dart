@@ -27,7 +27,6 @@ class RoadEvent {
 
     void popup(Road road) {
         //TODO make this nice and styled and everything and go away on dismiss
-        window.alert("$title $fullFlavorText");
         //TODO some events should cause effects on screen like stopping the
         //animation or displaying a grave stone or whatever.
         DivElement popupContainer = new DivElement()..classes.add("flavorText");
@@ -38,7 +37,7 @@ class RoadEvent {
         popupContainer.append(titleElement);
 
         flavorTextElement = new DivElement();
-        flavorTextElement.text = fullFlavorText;
+        flavorTextElement.setInnerHtml(fullFlavorText);
         popupContainer.append(flavorTextElement);
 
         road.container.onClick.listen((Event e)
