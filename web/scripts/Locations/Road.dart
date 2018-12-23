@@ -3,6 +3,7 @@ import 'Events/RoadEvent.dart';
 import 'PhysicalLocation.dart';
 import 'Town.dart';
 import 'Trail.dart';
+import 'dart:async';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
@@ -25,8 +26,11 @@ class Road {
 
     Road({this.sourceTown,this.destinationTown, this.travelTimeInMS:13}) {
         //.......once i realized i needed error handing well....one thing lead to another
+        //road to nowhere is go.
         if(sourceTown == null) sourceTown = Town.getVoidTown();
         if(destinationTown == null) destinationTown = Town.getVoidTown();
+        events.addAll(sourceTown.events);
+        events.addAll(destinationTown.events);
 
     }
 
@@ -39,6 +43,16 @@ class Road {
         return sourceTown.bg;
     }
 
+    Future<Null> eventLoop() async{
+        await window.animationFrame;
+        for(RoadEvent event in events) {
+            if(event.triggered(this)){
+                break;
+            }
+        }
+        int duration = new Random().nextIntRange((minTimeInMS/2).round(),(maxTimeInMS/2).round());
+        new Timer(new Duration(milliseconds: duration), () => eventLoop());
+    }
 
 
     @override
