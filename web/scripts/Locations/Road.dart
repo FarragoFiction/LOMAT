@@ -30,6 +30,8 @@ class Road {
         return "Traveling to $destinationTown: $timeRemaining";
     }
 
+    Element get container => trail.container;
+
     Road({this.sourceTown,this.destinationTown, this.travelTimeInMS:13}) {
         //.......once i realized i needed error handing well....one thing lead to another
         //road to nowhere is go.
@@ -72,6 +74,7 @@ class Road {
 
     Future<Null> timerLoop() async {
         trail.updateLabel();
+        print("elapsed time is $elapsedTime and max time is $maxElapsedTimeInMS");
         if(elapsedTime > maxElapsedTimeInMS) {
             //handles suddenly arriving out of nowhere.
             new ArriveEffect(0).apply(this);
@@ -81,9 +84,11 @@ class Road {
     }
 
     void progressTime() {
-      timeRemaining += -1000;
+      int amount = 1000;
+      timeRemaining += -1 * amount;
+      elapsedTime += amount;
       if (timeRemaining > 0) {
-          new Timer(new Duration(milliseconds: 1000), () => timerLoop());
+          new Timer(new Duration(milliseconds: amount), () => timerLoop());
       } else {
           trail.arrive();
       }
@@ -91,7 +96,6 @@ class Road {
 
     Future<Null> eventLoop() async{
         //no more loop plz.
-        print("doing event loop");
         if(plzStopKThnxBai) return;
         await window.animationFrame;
         for(RoadEvent event in events) {
@@ -99,8 +103,8 @@ class Road {
                 break;
             }
         }
-        int duration = new Random().nextIntRange((minTimeInMS/2).round(),(maxTimeInMS/2).round());
-        new Timer(new Duration(milliseconds: duration), () => eventLoop());
+        //every ten seconds
+        new Timer(new Duration(milliseconds: 10000), () => eventLoop());
     }
 
 
