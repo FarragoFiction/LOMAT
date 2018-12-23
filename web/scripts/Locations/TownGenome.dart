@@ -9,7 +9,7 @@ class TownGenome {
     Map<String, String> simpleGenes;
     Random rand;
     //higher means more stable
-    double genomeStability = .1;
+    double genomeStability = .5;
 
     static String imagesLocationBase = "images/BGs/Towns/";
     static String backgroundBase = "${imagesLocationBase}/backgrounds/";
