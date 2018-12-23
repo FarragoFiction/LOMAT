@@ -16,13 +16,15 @@ class Road {
     Town sourceTown;
     Town destinationTown;
     bool plzStopKThnxBai = false;
+    Trail trail;
     //distance is voided at first
     int travelTimeInMS;
+    int timeRemaining;
     //TODO comes from  source and destination towns
     List<RoadEvent> events = new List<RoadEvent>();
 
     String get label {
-        return "Traveling to $destinationTown";
+        return "Traveling to $destinationTown: $timeRemaining";
     }
 
     Road({this.sourceTown,this.destinationTown, this.travelTimeInMS:13}) {
@@ -32,6 +34,7 @@ class Road {
         if(destinationTown == null) destinationTown = Town.getVoidTown();
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
+        timeRemaining = travelTimeInMS;
 
     }
 
@@ -53,9 +56,22 @@ class Road {
         plzStopKThnxBai = true;
     }
 
-    Future<Null> startEventLoop() async {
+    Future<Null> startLoops(Trail trail) async {
+        this.trail = trail;
         //wait at least one second before starting because its jarring if you start right off the bat with an event.
         new Timer(new Duration(milliseconds: 1000), () => eventLoop());
+        new Timer(new Duration(milliseconds: 1000), () => timerLoop());
+    }
+
+    Future<Null> timerLoop() async {
+        //wait at least one second before starting because its jarring if you start right off the bat with an event.
+        trail.updateLabel();
+        timeRemaining += -1000;
+        if(timeRemaining > 0){
+            new Timer(new Duration(milliseconds: 1000), () => timerLoop());
+        }else {
+            trail.arrive();
+        }
     }
 
     Future<Null> eventLoop() async{

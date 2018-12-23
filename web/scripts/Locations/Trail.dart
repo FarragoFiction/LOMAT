@@ -17,6 +17,7 @@ class Trail extends PhysicalLocation {
     List<ParallaxLayer> paralaxLayers = new List<ParallaxLayer>();
     List<ProceduralLayerParallax> treeLayers = new List<ProceduralLayerParallax>();
     Wagon wagon;
+    Element labelElement;
     int numTrees = 8;
     Colour groundColor = new Colour.fromStyleString("#6aa7de");
     //lets you know where you are going and how long it will take to get there and what events will be there.
@@ -30,8 +31,8 @@ class Trail extends PhysicalLocation {
 
   @override
   void init() {
-      new Timer(new Duration(milliseconds: road.travelTimeInMS), () => arrive());
-      //TODO have bg layer match town you left from
+      //this is hte old way to do it before time remaining could be modified.
+      //new Timer(new Duration(milliseconds: road.travelTimeInMS), () => arrive());
       paralaxLayers.add(new ParallaxLayerLooping(road.bg, this, 1,1));
       DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
       container.append(ground);
@@ -53,12 +54,17 @@ class Trail extends PhysicalLocation {
 
       menu = new MenuHolder(parent,this);
       createMenuItems();
-      road.startEventLoop();
+      road.startLoops(this);
 
-      Element labelElement = new DivElement()..text = "${road.label}}"..classes.add("townLable");
+      labelElement = new DivElement()..text = "${road.label}}"..classes.add("townLable");
       container.append(labelElement);
 
   }
+
+  void updateLabel() {
+      labelElement.text = "${road.label}}";
+  }
+
 
   void arrive() {
       SoundControl.instance.playSoundEffect("Dead_Jingle_light");
