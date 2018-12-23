@@ -33,7 +33,7 @@ class RoadEvent {
         road.container.append(popupContainer);
 
         titleElement = new DivElement();
-        titleElement.text = title;
+        titleElement.setInnerHtml("<h2>$title</h2>");
         popupContainer.append(titleElement);
 
         flavorTextElement = new DivElement();
