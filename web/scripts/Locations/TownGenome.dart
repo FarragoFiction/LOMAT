@@ -10,6 +10,7 @@ class TownGenome {
     Random rand;
     //higher means more stable
     double genomeStability = .5;
+    //TODO censor tree related words
 
     static String imagesLocationBase = "images/BGs/Towns/";
     static String backgroundBase = "${imagesLocationBase}/backgrounds/";

@@ -3,7 +3,7 @@ import 'Enemy.dart';
 
 class Imp extends Enemy {
 
-    static List<String> enemyLocations = <String>["0.png"];
+    static List<String> enemyLocations = <String>["unprototyped_ant.gif"];
     @override
     int speed = 13;
     @override

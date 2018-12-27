@@ -5,7 +5,7 @@ import 'package:CommonLib/Random.dart';
 //TODO make them move around randomly and flutteringly but fast
 class Butterfly extends Enemy {
 
-    static List<String> enemyLocations = <String>["Bearterfly_fast.gif"];
+    static List<String> enemyLocations = <String>["Bearterfly_fast.gif","Duckiefly_fast.gif","Unproto-Butterfly_fast.gif"];
     @override
     int speed = 13;
     @override
