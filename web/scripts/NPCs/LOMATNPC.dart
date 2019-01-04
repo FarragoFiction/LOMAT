@@ -1,3 +1,4 @@
+import '../Locations/Town.dart';
 import '../Screens/LOMATScreen.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
@@ -14,6 +15,8 @@ class LOMATNPC {
     String positiveEmotion;
     String neutralEmotion;
     String negativeEmotion;
+    //where are they trying to get to?
+    Town goalTown;
     DivElement div;
     //TODO add all the shit they'll need as party members, maybe in a sub class (since not all townsfolk are potential party members)
     //health, hunger, etc.

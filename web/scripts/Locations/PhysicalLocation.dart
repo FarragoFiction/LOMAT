@@ -15,6 +15,7 @@ abstract class PhysicalLocation {
     int height = 600;
     MenuHolder menu;
 
+//if this were magical girl sim it would just be like, a Screen. past jr was bad at desginign
     PhysicalLocation(PhysicalLocation this.prevLocation) {
     }
 

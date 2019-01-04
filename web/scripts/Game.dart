@@ -21,6 +21,8 @@ class Game
     }
     int _funds = 0;
     int get funds => _funds;
+    List<LOMATNPC> partyMembers = new List<LOMATNPC>();
+
 
     Element container;
     Element moneyContainer;
