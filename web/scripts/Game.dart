@@ -35,6 +35,14 @@ class Game
     Element container;
     Element moneyContainer;
 
+    Game() {
+        partyMembers.add(LOMATNPC.generateRandomNPC(13));
+        partyMembers.add(LOMATNPC.generateRandomNPC(14));
+        partyMembers.add(LOMATNPC.generateRandomNPC(15));
+        partyMembers.add(LOMATNPC.generateRandomNPC(16));
+        partyMembers.add(LOMATNPC.generateRandomNPC(17));
+    }
+
     void addFunds(int amount) {
         _funds += amount;
         syncMoney();

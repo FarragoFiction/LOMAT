@@ -9,4 +9,6 @@ class Travel extends MenuItem {
   void onClick() {
     holder.location.doTravel();
   }
+
+
 }

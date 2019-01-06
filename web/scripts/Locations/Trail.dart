@@ -97,6 +97,13 @@ class Trail extends PhysicalLocation {
 
     }
 
+    @override
+    void displayOnScreen(Element div) {
+      super.displayOnScreen(div);
+      //if i paused before stop that shit now.
+      road.plzStopKThnxBai = false;
+    }
+
 
     void createMenuItems() {
         if(prevLocation != null) {
