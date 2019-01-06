@@ -21,6 +21,7 @@ TODO: npc builder
 class Game
 {
     static Game _instance;
+    bool partySectionDisplayed = false;
     PhysicalLocation currentLocation;
     static Game get instance {
         if(_instance == null) {
@@ -58,6 +59,9 @@ class Game
         partyMembers.add(await LOMATNPC.generateRandomNPC(15));
         partyMembers.add(await LOMATNPC.generateRandomNPC(16));
         partyMembers.add(await LOMATNPC.generateRandomNPC(17));
+        if(!partySectionDisplayed) {
+            displayPartySection();
+        }
     }
 
     Future<Null> display(Element parent) async {
@@ -67,11 +71,15 @@ class Game
         container.append(moneyContainer);
         syncMoney();
         displayStartingTown(container);
-        //always display npcs at bottom.
-        displayPartySection();
+        //ONLY NEEDED FOR TEST NPCS or otherwise loading npcs
+        if(partyMembers.length > 0) {
+            displayPartySection();
+        }
+
     }
 
     void displayPartySection() {
+        partySectionDisplayed = true;
       //always display npcs at bottom.
       Element partyContainer = querySelector("body");
       PartySection partySection = new PartySection(partyContainer);
