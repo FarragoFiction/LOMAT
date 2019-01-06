@@ -72,6 +72,11 @@ html, body {
     bottom: 0px;
 }
 
+
+.partyScreen{
+    height:200px;
+}
+
 .flavorText{
     border: 3px solid #00164f;
     background-color: #033476;

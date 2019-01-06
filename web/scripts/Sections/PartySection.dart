@@ -19,6 +19,14 @@ class PartySection extends LOMATSection {
       myContainer.append(subContainer);
       partyMembers.add(new SinglePartyMember(subContainer, npc));
     });
+    display();
+  }
+
+  void display() {
+    partyMembers.forEach((SinglePartyMember s)
+    {
+      s.display();
+    });
   }
 }
 
@@ -32,6 +40,7 @@ class SinglePartyMember {
   }
 
   void display() {
-    container.append(partyMember.displayImage);
+    //not in sync with bullshit
+    container.append(partyMember.imageCopy);
   }
 }

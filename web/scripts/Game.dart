@@ -64,13 +64,12 @@ class Game
         syncMoney();
         displayStartingTown(container);
         //always display npcs at bottom.
-        displayPartySection(parent);
+        displayPartySection();
     }
 
-    void displayPartySection(Element parent) {
+    void displayPartySection() {
       //always display npcs at bottom.
-      Element partyContainer = new DivElement();
-      parent.append(partyContainer);
+      Element partyContainer = querySelector("body");
       PartySection partySection = new PartySection(partyContainer);
     }
 

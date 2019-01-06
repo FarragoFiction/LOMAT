@@ -10,7 +10,12 @@ import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 class LOMATNPC {
+    ImageElement rawImage;
     ImageElement displayImage;
+
+    String get imageSrc => rawImage.src;
+    ImageElement get imageCopy => new ImageElement(src: rawImage.src);
+
     String imageModifier;
     String positiveEmotion;
     String neutralEmotion;
@@ -24,7 +29,12 @@ class LOMATNPC {
     TalkyEnd talkyEnd;
 
     LOMATNPC(String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
-        displayImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif")..classes.add("npcImage");
+        rawImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif");
+        displayImage = new ImageElement(src: imageSrc)..classes.add("npcImage");
+    }
+
+    void syncImages() {
+        displayImage.src = imageSrc;
     }
 
     void displayDialogue(Element container, LOMATSection screen) {
@@ -39,11 +49,11 @@ class LOMATNPC {
 
     void emote(String emotion) {
         if(emotion == TalkyItem.HAPPY) {
-            displayImage.src = "${positiveEmotion}_${imageModifier}.gif";
+            rawImage.src = "${positiveEmotion}_${imageModifier}.gif";
         }else if(emotion == TalkyItem.NEUTRAL) {
-            displayImage.src = "${neutralEmotion}_${imageModifier}.gif";;
+            rawImage.src = "${neutralEmotion}_${imageModifier}.gif";;
         }else if (emotion == TalkyItem.SAD) {
-            displayImage.src = "${negativeEmotion}_${imageModifier}.gif";;
+            rawImage.src = "${negativeEmotion}_${imageModifier}.gif";;
         }
     }
 
