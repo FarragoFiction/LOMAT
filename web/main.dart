@@ -12,6 +12,6 @@ Town town;
 DivElement div = querySelector('#output');
 void main() {
   Game game = Game.instance;
-  game.displayStartingTown(div);
+  game.display(div);
 }
 

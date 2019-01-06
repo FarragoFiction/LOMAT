@@ -62,9 +62,16 @@ class Game
         moneyContainer = new DivElement()..classes.add("money");
         container.append(moneyContainer);
         syncMoney();
+        displayStartingTown(container);
         //always display npcs at bottom.
-        Element partyContainer = new DivElement();
-        PartySection partySection = new PartySection(partyContainer);
+        displayPartySection(parent);
+    }
+
+    void displayPartySection(Element parent) {
+      //always display npcs at bottom.
+      Element partyContainer = new DivElement();
+      parent.append(partyContainer);
+      PartySection partySection = new PartySection(partyContainer);
     }
 
     void syncMoney() {
