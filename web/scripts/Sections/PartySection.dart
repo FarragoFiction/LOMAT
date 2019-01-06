@@ -15,9 +15,7 @@ class PartySection extends LOMATSection {
     myContainer.classes.add("partyScreen");
     myContainer.id = "PartySection";
     npcs.forEach((LOMATNPC npc) {
-      Element subContainer = new DivElement();
-      myContainer.append(subContainer);
-      partyMembers.add(new SinglePartyMember(subContainer, npc));
+      partyMembers.add(new SinglePartyMember(myContainer, npc));
     });
     display();
   }
@@ -33,14 +31,19 @@ class PartySection extends LOMATSection {
 class SinglePartyMember {
   LOMATNPC partyMember;
   Element container;
+  ImageElement npcPortrait;
 
-  SinglePartyMember(Element this.container, LOMATNPC this.partyMember) {
-
+  SinglePartyMember(Element parent, LOMATNPC this.partyMember) {
+    container = new DivElement();
+    parent.append(container);
+    container.classes.add("npcBox");
 
   }
 
   void display() {
     //not in sync with bullshit
-    container.append(partyMember.imageCopy);
+    npcPortrait = partyMember.imageCopy;
+    npcPortrait.classes.add("statPortrait");
+    container.append(npcPortrait);
   }
 }

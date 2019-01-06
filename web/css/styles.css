@@ -71,10 +71,28 @@ html, body {
     left: 0px;
     bottom: 0px;
 }
-
+.npcBox{
+    display: inline-block;
+    width: 200px;
+}
 
 .partyScreen{
-    height:200px;
+ margin: 25px;
+  padding: 20px;
+    height:250px;
+     margin: 25px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  border: 13px solid #00164f;
+  background-color: #033476;
+  border-radius: 13px;
+  width: 1000px;
+
+}
+
+.statPortrait{
+    width:200px;
 }
 
 .flavorText{
