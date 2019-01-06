@@ -1,4 +1,4 @@
-import '../../Screens/TalkyScreen.dart';
+import '../../Sections/TalkySection.dart';
 import 'MenuHolder.dart';
 import 'MenuItem.dart';
 import 'dart:html';

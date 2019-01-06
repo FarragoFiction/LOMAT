@@ -1,5 +1,6 @@
 import '../SoundControl.dart';
 import '../Wagon.dart';
+import 'HuntingGrounds.dart';
 import 'Layers/ParallaxLayers.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/ProceduralLayerParallax.dart';
@@ -78,13 +79,28 @@ class Trail extends PhysicalLocation {
       teardown();
       road.destinationTown.prevLocation = this;
       road.destinationTown.displayOnScreen(parent);
-      road.tearDown();
 
   }
 
+  @override
+  void teardown() {
+      super.teardown();
+      road.tearDown();
+  }
+    void doHunt() {
+        teardown();
+        //new screen
+        //TODO save how much travel progress we've made
+        //Or....don't? void is weird man.
+        new HuntingGrounds(this)..displayOnScreen(parent);
+
+
+    }
+
+
     void createMenuItems() {
         if(prevLocation != null) {
-            menu.addBack();
+            menu.addHunt();
         }
     }
   @override

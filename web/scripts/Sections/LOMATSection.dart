@@ -1,6 +1,6 @@
 import 'dart:html';
 
-abstract class LOMATScreen {
+abstract class LOMATSection {
     int width = 800;
     int height = 600;
     Element parent;
@@ -9,7 +9,7 @@ abstract class LOMATScreen {
     //TODO use this for bg details
     Location location;
 
-    LOMATScreen(Element this.parent) {
+    LOMATSection(Element this.parent) {
         myContainer = new DivElement()..classes.add("screen");
         parent.append(myContainer);
         init();

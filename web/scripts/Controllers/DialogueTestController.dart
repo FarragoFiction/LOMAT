@@ -4,10 +4,10 @@ import '../NPCs/TalkyItem.dart';
 import '../NPCs/TalkyLevel.dart';
 import '../NPCs/TalkyQuestion.dart';
 import '../NPCs/TalkyResponse.dart';
-import '../Screens/TalkyScreen.dart';
+import '../Sections/TalkySection.dart';
 import 'dart:html';
 
-TalkyScreen screen;
+TalkySection screen;
 DivElement div = querySelector('#output');
 void main() {
     List<TalkyItem> talkyItems = new List<TalkyItem>();
@@ -30,5 +30,5 @@ void main() {
     TalkyQuestion question3 = new TalkyQuestion("What about THING C?",tr3,level);
 
 
-    screen = new TalkyScreen(testNPC,div);
+    screen = new TalkySection(testNPC,div);
 }

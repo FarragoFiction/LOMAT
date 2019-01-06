@@ -75,7 +75,7 @@ class Road {
     Future<Null> timerLoop() async {
         trail.updateLabel();
         print("elapsed time is $elapsedTime and max time is $maxElapsedTimeInMS");
-        if(elapsedTime > maxElapsedTimeInMS) {
+        if(elapsedTime > maxElapsedTimeInMS && plzStopKThnxBai == false) {
             //handles suddenly arriving out of nowhere.
             new ArriveEffect(0).apply(this);
         }else {
@@ -84,6 +84,9 @@ class Road {
     }
 
     void progressTime() {
+        if(plzStopKThnxBai == true) {
+            return;
+        }
       int amount = 1000;
       timeRemaining += -1 * amount;
       elapsedTime += amount;

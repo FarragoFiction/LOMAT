@@ -1,5 +1,5 @@
 import '../Locations/Town.dart';
-import '../Screens/LOMATScreen.dart';
+import '../Sections/LOMATSection.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -27,7 +27,7 @@ class LOMATNPC {
         displayImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif")..classes.add("npcImage");
     }
 
-    void displayDialogue(Element container, LOMATScreen screen) {
+    void displayDialogue(Element container, LOMATSection screen) {
         talkyLevel.screen = screen;
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
 

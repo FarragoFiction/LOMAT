@@ -1,10 +1,10 @@
 import '../NPCs/LOMATNPC.dart';
-import 'LOMATScreen.dart';
+import 'LOMATSection.dart';
 import 'dart:html';
 
-class TalkyScreen extends LOMATScreen {
+class TalkySection extends LOMATSection {
   LOMATNPC npc;
-  TalkyScreen(LOMATNPC this.npc,Element parent) : super(parent);
+  TalkySection(LOMATNPC this.npc,Element parent) : super(parent);
 
   @override
   void init() {
