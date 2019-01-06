@@ -29,7 +29,7 @@ class LOMATNPC {
     TalkyLevel talkyLevel;
     TalkyEnd talkyEnd;
 
-    LOMATNPC(String name, String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
+    LOMATNPC(String this.name, String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
         rawImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif");
         displayImage = new ImageElement(src: imageSrc)..classes.add("npcImage");
     }

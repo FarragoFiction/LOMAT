@@ -45,5 +45,7 @@ class SinglePartyMember {
     npcPortrait = partyMember.imageCopy;
     npcPortrait.classes.add("statPortrait");
     container.append(npcPortrait);
+    DivElement name = new DivElement()..text = "${partyMember.name}"..classes.add("nameLabel");
+    container.append(name);
   }
 }
