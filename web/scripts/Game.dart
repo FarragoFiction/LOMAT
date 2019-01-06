@@ -54,11 +54,11 @@ class Game
     }
 
     Future testNPCs() async {
-        partyMembers.add(await LOMATNPC.generateRandomNPC(13));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(14));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(15));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(16));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(17));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(1));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(2));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(3));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(4));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(5));
         if(!partySectionDisplayed) {
             displayPartySection();
         }
@@ -92,7 +92,7 @@ class Game
     Future displayStartingTown(Element div) async {
         List<LOMATNPC> npcs = new List<LOMATNPC>();
         for(int i=0; i<3; i++) {
-            LOMATNPC npc1 = await LOMATNPC.generateRandomNPC(1);
+            LOMATNPC npc1 = await LOMATNPC.generateRandomNPC(i);
             npcs.add(npc1);
         }
         Town town = new Town("city2",npcs,null,startingGenome());
