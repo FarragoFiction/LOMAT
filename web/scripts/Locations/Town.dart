@@ -11,6 +11,7 @@ import 'PhysicalLocation.dart';
 import 'Road.dart';
 import 'TownGenome.dart';
 import 'Trail.dart';
+import 'dart:async';
 import 'dart:html';
 
 import 'package:CommonLib/Colours.dart';
@@ -100,9 +101,9 @@ class Town extends PhysicalLocation {
   }
 
   @override
-  void displayOnScreen(Element div) {
+  Future displayOnScreen(Element div) async {
 
-      roads = Road.spawnRandomRoadsForTown(this);
+      roads = await Road.spawnRandomRoadsForTown(this);
       super.displayOnScreen(div);
       //auto play not allowed
       container.onClick.listen((Event e)
@@ -121,14 +122,16 @@ class Town extends PhysicalLocation {
 
   //if there is room in the cache, 70% chance of making a child
     //otherwise 30% chance of it being batshit insane
-  Town makeBaby() {
+  Future<Town> makeBaby() async {
       if(cachedTowns.length < minTowns ||(cachedTowns.length < maxTowns && rand.nextDouble()>0.7)) {
           Town coparentSource = rand.pickFrom(cachedTowns);
           TownGenome coparent = null;
           if(coparentSource != null) {
               coparent = coparentSource.genome;
           }
-          return new Town(generateProceduralName(), generateProceduralNPCs(),null,genome.breed(coparent,rand));
+          List<LOMATNPC> npcs = await generateProceduralNPCs();
+
+          return new Town(generateProceduralName(), npcs,null,genome.breed(coparent,rand));
       }else {
           Town ret = rand.pickFrom(cachedTowns);
           ret.firstTime = false;
@@ -146,18 +149,20 @@ class Town extends PhysicalLocation {
       return ret;
   }
 
-  static List<Town> makeAdjacentTowns(Random rand,Town town) {
+  static Future<List<Town>> makeAdjacentTowns(Random rand,Town town) async {
       //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
       int adjAmount = rand.nextInt(4)+1;
       List<Town> ret = new List<Town>();
       for(int i = 0; i<adjAmount; i++) {
-          ret.add(town.makeBaby());
+          Town baby = await town.makeBaby();
+          ret.add(baby);
       }
       return ret;
   }
 
-  static Town generateProceduralTown(Random rand,Town town) {
-      return new Town(generateProceduralName(), generateProceduralNPCs(),null,null);
+  static Future<Town> generateProceduralTown(Random rand,Town town) async {
+      List<LOMATNPC> npcs = await generateProceduralNPCs();
+      return new Town(generateProceduralName(), npcs,null,null);
   }
 
   //should never spawn, technically
@@ -186,13 +191,13 @@ class Town extends PhysicalLocation {
   }
 
 
-  static List<LOMATNPC> generateProceduralNPCs() {
+  static Future<List<LOMATNPC>> generateProceduralNPCs() async {
       List<LOMATNPC> ret = new List<LOMATNPC>();
       int npcAmount = new Random(nextTownSeed).nextInt(5)+1;
       for(int i = 0; i<npcAmount; i++) {
           //should at least mean adjacent towns don't have blatant repetition, town 3 has 3*1+1, 3*2+2, while 4 has 4*1+1,4*2+2
           //if no multiplication it would be 3,4,5 and then 4,5,6, so 2 incommon (assuming 3 npcs in each town)
-          ret.add(LOMATNPC.generateRandomNPC((nextTownSeed*i)+i));
+          ret.add(await LOMATNPC.generateRandomNPC((nextTownSeed*i)+i));
       }
       return ret;
   }

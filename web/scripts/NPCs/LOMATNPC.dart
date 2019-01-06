@@ -5,6 +5,7 @@ import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
 import 'TalkyQuestion.dart';
 import 'TalkyResponse.dart';
+import 'dart:async';
 import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
@@ -15,7 +16,7 @@ class LOMATNPC {
 
     String get imageSrc => rawImage.src;
     ImageElement get imageCopy => new ImageElement(src: rawImage.src);
-
+    String name;
     String imageModifier;
     String positiveEmotion;
     String neutralEmotion;
@@ -28,7 +29,7 @@ class LOMATNPC {
     TalkyLevel talkyLevel;
     TalkyEnd talkyEnd;
 
-    LOMATNPC(String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
+    LOMATNPC(String name, String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
         rawImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif");
         displayImage = new ImageElement(src: imageSrc)..classes.add("npcImage");
     }
@@ -71,15 +72,21 @@ class LOMATNPC {
 
     }
 
+    static Future<String> randomName() async {
+        //TextEngine textEngine = new TextEngine(13, "/WordSource");
+        return "TODO";
+    }
+
     //TODO not gonna use this for the real game or anything, but good for testing
-    static LOMATNPC generateRandomNPC(int seed) {
+    static Future<LOMATNPC> generateRandomNPC(int seed) async {
         Random rand = new Random(seed);
         List<TalkyItem> talkyItems = new List<TalkyItem>();
 
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         List<String> avatars = <String>["classic","red","blue","yellow"];
-        LOMATNPC testNPC = new LOMATNPC(rand.pickFrom(avatars),"images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
+        String name = await randomName();
+        LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
 
 
         List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];

@@ -37,11 +37,7 @@ class Game
     Element moneyContainer;
 
     Game() {
-        partyMembers.add(LOMATNPC.generateRandomNPC(13));
-        partyMembers.add(LOMATNPC.generateRandomNPC(14));
-        partyMembers.add(LOMATNPC.generateRandomNPC(15));
-        partyMembers.add(LOMATNPC.generateRandomNPC(16));
-        partyMembers.add(LOMATNPC.generateRandomNPC(17));
+        testNPCs();
     }
 
     void addFunds(int amount) {
@@ -54,6 +50,14 @@ class Game
         _funds += -1*amount;
         syncMoney();
         //TODO save here.
+    }
+
+    Future testNPCs() async {
+        partyMembers.add(await LOMATNPC.generateRandomNPC(13));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(14));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(15));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(16));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(17));
     }
 
     Future<Null> display(Element parent) async {
@@ -77,8 +81,13 @@ class Game
         moneyContainer.text = "Funds: $funds";
     }
 
-    void displayStartingTown(Element div) {
-        Town town = new Town("city2",<LOMATNPC>[LOMATNPC.generateRandomNPC(1),LOMATNPC.generateRandomNPC(2),LOMATNPC.generateRandomNPC(3)],null,startingGenome());
+    Future displayStartingTown(Element div) async {
+        List<LOMATNPC> npcs = new List<LOMATNPC>();
+        for(int i=0; i<3; i++) {
+            LOMATNPC npc1 = await LOMATNPC.generateRandomNPC(1);
+            npcs.add(npc1);
+        }
+        Town town = new Town("city2",npcs,null,startingGenome());
         town.displayOnScreen(div);
     }
 
