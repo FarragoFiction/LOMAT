@@ -4,6 +4,7 @@ import 'Locations/PhysicalLocation.dart';
 import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
 import 'NPCs/LOMATNPC.dart';
+import 'Sections/PartySection.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -61,6 +62,9 @@ class Game
         moneyContainer = new DivElement()..classes.add("money");
         container.append(moneyContainer);
         syncMoney();
+        //always display npcs at bottom.
+        Element partyContainer = new DivElement();
+        PartySection partySection = new PartySection(partyContainer);
     }
 
     void syncMoney() {
