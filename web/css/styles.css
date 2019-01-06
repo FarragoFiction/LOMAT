@@ -81,6 +81,12 @@ html, body {
 
 }
 
+.statValue{
+    text-align: right;
+    display: inline-block;
+    width: 122px;
+}
+
 .partyScreen{
  margin: 25px;
   padding: 20px;

@@ -47,5 +47,16 @@ class SinglePartyMember {
     container.append(npcPortrait);
     DivElement name = new DivElement()..text = "${partyMember.name}"..classes.add("nameLabel");
     container.append(name);
+    displayHPLabel();
+
+
+  }
+
+  void displayHPLabel() {
+    LabelElement hpLabel = new LabelElement()..text = "Health:";
+    DivElement hpVAlue = new DivElement()..text = "${partyMember.healthPhrase}"..classes.add("statValue");
+    container.append(hpLabel);
+    container.append(hpVAlue);
+
   }
 }

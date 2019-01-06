@@ -21,6 +21,20 @@ class LOMATNPC {
     String positiveEmotion;
     String neutralEmotion;
     String negativeEmotion;
+    int hp = 85;
+    String get healthPhrase {
+        if(hp >= 85) {
+            return "Energetic";
+        }else if (hp > 50) {
+            return "Chipper";
+        }else if (hp > 17) {
+            return "Persevering";
+        }else if(hp > 0) {
+            return "Listliss";
+        }else {
+            return "Probably Dead";
+        }
+    }
     //where are they trying to get to?
     Town goalTown;
     DivElement div;
@@ -74,7 +88,7 @@ class LOMATNPC {
 
     static Future<String> randomName() async {
         //TextEngine textEngine = new TextEngine(13, "/WordSource");
-        return "TODO";
+        return "TODO: TE";
     }
 
     //TODO not gonna use this for the real game or anything, but good for testing
