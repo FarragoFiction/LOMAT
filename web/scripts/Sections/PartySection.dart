@@ -48,6 +48,7 @@ class SinglePartyMember {
     DivElement name = new DivElement()..text = "${partyMember.name}"..classes.add("nameLabel");
     container.append(name);
     displayHPLabel();
+    displayDiseaseLabel();
 
 
   }
@@ -55,6 +56,14 @@ class SinglePartyMember {
   void displayHPLabel() {
     LabelElement hpLabel = new LabelElement()..text = "Health:";
     DivElement hpVAlue = new DivElement()..text = "${partyMember.healthPhrase}"..classes.add("statValue");
+    container.append(hpLabel);
+    container.append(hpVAlue);
+
+  }
+
+  void displayDiseaseLabel() {
+    LabelElement hpLabel = new LabelElement()..text = "Disease:";
+    DivElement hpVAlue = new DivElement()..text = "${partyMember.diseasePhrase}"..classes.add("statValue");
     container.append(hpLabel);
     container.append(hpVAlue);
 

@@ -22,6 +22,13 @@ class LOMATNPC {
     String neutralEmotion;
     String negativeEmotion;
     int hp = 85;
+    //if its null its good
+    Disease disease;
+
+    String get diseasePhrase {
+        if(disease == null) return "None";
+        return disease.name;
+    }
     String get healthPhrase {
         if(hp >= 85) {
             return "Energetic";
@@ -124,5 +131,15 @@ class LOMATNPC {
 
         return testNPC;
     }
+
+}
+
+class Disease
+{
+    //make this text engine procedural
+    String name;
+    int healthDrainPerSecond;
+    //its worse if you aren't resting
+    double movingMultiplier;
 
 }
