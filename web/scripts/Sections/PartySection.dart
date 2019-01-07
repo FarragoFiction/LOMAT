@@ -20,6 +20,33 @@ class PartySection extends LOMATSection {
     display();
   }
 
+  void update(){
+    List<LOMATNPC> npcs = Game.instance.partyMembers;
+    List<SinglePartyMember> toRemove = new List<SinglePartyMember>();
+
+    partyMembers.forEach((SinglePartyMember member) {
+      //handles changing values or outright removing self
+      member.update(npcs);
+      //makes sure they don't get added
+      npcs.remove(member.partyMember);
+      if(member.noLongerValid) {
+        toRemove.add(member);
+      }
+    });
+    //grabs the new ones
+    npcs.forEach((LOMATNPC npc) {
+      SinglePartyMember member = new SinglePartyMember(myContainer, npc);
+      partyMembers.add(member);
+      member.update(npcs);
+    });
+
+    //you're not in the party any more
+    toRemove.forEach((SinglePartyMember member) {
+      partyMembers.remove(member);
+    });
+    
+  }
+
   void display() {
     partyMembers.forEach((SinglePartyMember s)
     {
@@ -32,6 +59,11 @@ class SinglePartyMember {
   LOMATNPC partyMember;
   Element container;
   ImageElement npcPortrait;
+  DivElement hpValue;
+  DivElement diseaseValue;
+  DivElement name;
+  //if true my parent should stop paying attention to me. (god that sounds depressing, but no child is invalid irl i promise)
+  bool noLongerValid = false;
 
   SinglePartyMember(Element parent, LOMATNPC this.partyMember) {
     container = new DivElement();
@@ -40,32 +72,52 @@ class SinglePartyMember {
 
   }
 
+  //if i'm not in the list, remove self.
+  void update(List<LOMATNPC> npcs) {
+    if(npcs.contains(partyMember)){
+      sync();
+    }else{
+      noLongerValid = true;
+      container.remove();
+    }
+  }
+
   void display() {
     //not in sync with bullshit
     npcPortrait = partyMember.imageCopy;
     npcPortrait.classes.add("statPortrait");
     container.append(npcPortrait);
-    DivElement name = new DivElement()..text = "${partyMember.name}"..classes.add("nameLabel");
+    name = new DivElement()..text = "${partyMember.name}"..classes.add("nameLabel");
     container.append(name);
     displayHPLabel();
     displayDiseaseLabel();
+    sync();
+  }
+
+  void sync() {
+    npcPortrait.src = partyMember.imageSrc;
+    hpValue.text = "${partyMember.healthPhrase}";
+    name.text = "${partyMember.name}";
+  }
 
 
+  void setDisease() {
+    diseaseValue.text = "${partyMember.diseasePhrase}";
   }
 
   void displayHPLabel() {
     LabelElement hpLabel = new LabelElement()..text = "Health:";
-    DivElement hpVAlue = new DivElement()..text = "${partyMember.healthPhrase}"..classes.add("statValue");
+    hpValue = new DivElement()..text = "${partyMember.healthPhrase}"..classes.add("statValue");
     container.append(hpLabel);
-    container.append(hpVAlue);
+    container.append(hpValue);
 
   }
 
   void displayDiseaseLabel() {
     LabelElement hpLabel = new LabelElement()..text = "Disease:";
-    DivElement hpVAlue = new DivElement()..text = "${partyMember.diseasePhrase}"..classes.add("statValue");
+    diseaseValue = new DivElement()..text = "${partyMember.diseasePhrase}"..classes.add("statValue");
     container.append(hpLabel);
-    container.append(hpVAlue);
+    container.append(diseaseValue);
 
   }
 }

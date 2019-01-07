@@ -1,4 +1,5 @@
 import '../Sections/LOMATSection.dart';
+import '../Sections/TalkySection.dart';
 import 'TalkyItem.dart';
 import 'dart:html';
 
@@ -7,7 +8,7 @@ class TalkyLevel {
     List<TalkyItem> talkyItems = new List<TalkyItem>();
     //simple linked list
     TalkyLevel parent;
-    LOMATSection screen;
+    TalkySection screen;
 
     TalkyLevel(List<TalkyItem> this.talkyItems, TalkyLevel this.parent);
 

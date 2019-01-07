@@ -23,6 +23,8 @@ class Game
     static Game _instance;
     bool partySectionDisplayed = false;
     PhysicalLocation currentLocation;
+    PartySection partySection;
+    int maxPartySize = 5;
     static Game get instance {
         if(_instance == null) {
             _instance = new Game();
@@ -39,6 +41,14 @@ class Game
 
     Game() {
         testNPCs();
+    }
+
+    bool recruit(LOMATNPC npc) {
+        if(partyMembers.length >= maxPartySize) {
+            return false;
+        }
+        partyMembers.add(npc);
+        partySection.update();
     }
 
     void addFunds(int amount) {
@@ -82,7 +92,7 @@ class Game
         partySectionDisplayed = true;
       //always display npcs at bottom.
       Element partyContainer = querySelector("body");
-      PartySection partySection = new PartySection(partyContainer);
+      partySection = new PartySection(partyContainer);
     }
 
     void syncMoney() {
