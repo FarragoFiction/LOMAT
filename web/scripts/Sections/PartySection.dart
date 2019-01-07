@@ -44,7 +44,7 @@ class PartySection extends LOMATSection {
     toRemove.forEach((SinglePartyMember member) {
       partyMembers.remove(member);
     });
-    
+
   }
 
   void display() {

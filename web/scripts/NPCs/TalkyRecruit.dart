@@ -9,6 +9,7 @@ class TalkyEnd extends TalkyItem {
     //could have sub questions
     TalkyEnd(TalkyLevel level) : super("Recruit?",level);
 
+    //TODO if already in party this shouldn't actually display
     @override
     void display(Element cont) {
         super.display(cont);

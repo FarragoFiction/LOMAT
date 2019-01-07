@@ -111,11 +111,12 @@ class LOMATNPC {
 
 
         List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
+        //so happy past jr made quirks automatic
         List<String> gameQuips = <String>["This game is going to be based on the retro game 'Oregon Trail'.","This game will involve ferrying the 'souls of the dead' to their final resting place.","This game is the Land of Mists and Trails."];
         List<String> townQuips = <String>["This town is a default test town scribbled by JR.","This town is snowy, and has some huge trees in it.","This town will probably be redrawn by an actual artist at some point.","Everyone in this town can't figure out how to leave it."];
         List<String> meQuips = <String>["You are the Guide of Void. Or was it dark?????","You are the prophesied Hero who will guide the lost souls of this land to their final resting place.","Your horns are very nice."];
         List<String> youQuips = <String>["I'm not DRESSED like a ghost, I AM a ghost.", "Behold my robes y/n?", "Because I AM a ghost!", "I am a lost soul!"];
-
+        List<String> recruitQuips = <String>["Let me just grab my bags!","Hell yes!","Would I!?"];
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(gameQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question1 = new TalkyQuestion("What can you tell me about this game?",tr,level);
@@ -128,6 +129,9 @@ class LOMATNPC {
 
         TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(meQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question3 = new TalkyQuestion("What can you tell me about me?",tr3,level);
+
+        TalkyResponse tr4 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(recruitQuips)), rand.pickFrom(emotions),null);
+        TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,level);
 
         return testNPC;
     }
