@@ -12,6 +12,7 @@ import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 class LOMATNPC {
+    //TODO have town they want to go to, have their recruit text mention it. maybe can mention CURRENT_NEAREST_TOWN or GOAL_TOWN
     ImageElement rawImage;
     ImageElement displayImage;
 
