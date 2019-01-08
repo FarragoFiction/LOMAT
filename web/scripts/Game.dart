@@ -76,10 +76,10 @@ class Game
     }
 
     Future testNPCs() async {
-        partyMembers.add(await LOMATNPC.generateRandomNPC(1));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(2));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(3));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(4));
+        partyMembers.add(await LOMATNPC.generateRandomNPC(1)..hp =50);
+        partyMembers.add(await LOMATNPC.generateRandomNPC(2)..hp =15);
+        partyMembers.add(await LOMATNPC.generateRandomNPC(3)..hp = 0);
+        partyMembers.add(await LOMATNPC.generateRandomNPC(4)..hp =88);
         if(!partySectionDisplayed) {
             displayPartySection();
         }

@@ -43,6 +43,17 @@ class LOMATNPC {
             return "Probably Dead";
         }
     }
+
+    //TODO maybe an unanimated one for 'dead'
+    String get emotionForCurrentHealth {
+        if(hp >= 66) {
+            return TalkyItem.HAPPY;
+        }else if (hp > 33) {
+            return TalkyItem.NEUTRAL;
+        }else {
+            return TalkyItem.SAD;
+        }
+    }
     //where are they trying to get to?
     Town goalTown;
     DivElement div;
@@ -70,14 +81,19 @@ class LOMATNPC {
         talkyLevel.display(div);
     }
 
-    void emote(String emotion) {
+    String imgSrcForEmotion(String emotion) {
         if(emotion == TalkyItem.HAPPY) {
-            rawImage.src = "${positiveEmotion}_${imageModifier}.gif";
+            return "${positiveEmotion}_${imageModifier}.gif";
         }else if(emotion == TalkyItem.NEUTRAL) {
-            rawImage.src = "${neutralEmotion}_${imageModifier}.gif";;
+            return  "${neutralEmotion}_${imageModifier}.gif";;
         }else if (emotion == TalkyItem.SAD) {
-            rawImage.src = "${negativeEmotion}_${imageModifier}.gif";;
+            return "${negativeEmotion}_${imageModifier}.gif";;
         }
+    }
+
+
+    void emote(String emotion) {
+        rawImage.src = imgSrcForEmotion(emotion);
     }
 
     static String seagullQuirk(String text) {

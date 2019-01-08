@@ -96,7 +96,7 @@ class SinglePartyMember {
   }
 
   void sync() {
-    npcPortrait.src = partyMember.imageSrc;
+    npcPortrait.src = partyMember.imgSrcForEmotion(partyMember.emotionForCurrentHealth);
     hpValue.text = "${partyMember.healthPhrase}";
     name.text = "${partyMember.name}";
   }
