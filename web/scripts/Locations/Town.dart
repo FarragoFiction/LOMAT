@@ -1,3 +1,4 @@
+import '../Game.dart';
 import '../NPCs/LOMATNPC.dart';
 import '../Sections/TalkySection.dart';
 import '../SoundControl.dart';
@@ -232,7 +233,7 @@ class Town extends PhysicalLocation {
 
     void doTalky() {
         //window.alert("gonna find an npc to talk to for town $name");
-        TalkySection screen = new TalkySection(rand.pickFrom(npcs), container);
+        Game.instance.popupTalkySection(rand.pickFrom(npcs), container);
     }
 
     void doHunt() {

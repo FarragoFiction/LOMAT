@@ -18,6 +18,7 @@ abstract class LOMATSection {
     void init();
 
     void teardown() {
+        window.alert("tearing down");
         myContainer.remove();
     }
 }

@@ -5,6 +5,7 @@ import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
 import 'NPCs/LOMATNPC.dart';
 import 'Sections/PartySection.dart';
+import 'Sections/TalkySection.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -24,6 +25,7 @@ class Game
     bool partySectionDisplayed = false;
     PhysicalLocation currentLocation;
     PartySection partySection;
+    TalkySection talkySection;
     int maxPartySize = 5;
     static Game get instance {
         if(_instance == null) {
@@ -43,12 +45,22 @@ class Game
         testNPCs();
     }
 
+    void dismissTalkySection() {
+        talkySection.teardown();
+        talkySection = null;
+    }
+
+    void popupTalkySection(LOMATNPC npc, Element parent) {
+        talkySection = new TalkySection(npc, parent);
+    }
+
     bool recruit(LOMATNPC npc) {
         if(partyMembers.length >= maxPartySize) {
             return false;
         }
         partyMembers.add(npc);
         partySection.update();
+        return true;
     }
 
     void addFunds(int amount) {
@@ -68,7 +80,6 @@ class Game
         partyMembers.add(await LOMATNPC.generateRandomNPC(2));
         partyMembers.add(await LOMATNPC.generateRandomNPC(3));
         partyMembers.add(await LOMATNPC.generateRandomNPC(4));
-        partyMembers.add(await LOMATNPC.generateRandomNPC(5));
         if(!partySectionDisplayed) {
             displayPartySection();
         }

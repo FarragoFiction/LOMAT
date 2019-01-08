@@ -37,6 +37,7 @@ class PartySection extends LOMATSection {
     npcs.forEach((LOMATNPC npc) {
       SinglePartyMember member = new SinglePartyMember(myContainer, npc);
       partyMembers.add(member);
+      member.display();
       member.update(npcs);
     });
 

@@ -4,6 +4,7 @@ import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
 import 'TalkyQuestion.dart';
+import 'TalkyRecruit.dart';
 import 'TalkyResponse.dart';
 import 'dart:async';
 import 'dart:html';
@@ -130,7 +131,7 @@ class LOMATNPC {
         TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(meQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question3 = new TalkyQuestion("What can you tell me about me?",tr3,level);
 
-        TalkyResponse tr4 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(recruitQuips)), rand.pickFrom(emotions),null);
+        TalkyResponse tr4 = new TalkyResponse(testNPC,<TalkyItem>[new TalkyRecruit(testNPC,null)],seagullQuirk(rand.pickFrom(recruitQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,level);
 
         return testNPC;
