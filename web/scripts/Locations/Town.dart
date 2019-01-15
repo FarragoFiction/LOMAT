@@ -106,10 +106,12 @@ class Town extends PhysicalLocation {
 
       roads = await Road.spawnRandomRoadsForTown(this);
       super.displayOnScreen(div);
-      //auto play not allowed
+      //auto play not allowed but we can try cuz this might not be first screen
+      startPlayingMusic();
       container.onClick.listen((Event e)
       {
-          if(!SoundControl.instance.musicPlaying) {
+          //don't play more than once unless you came from a diff place
+          if(!SoundControl.instance.musicPlaying && !SoundControl.instance.bgMusic.src.contains("Slice")) {
              startPlayingMusic();
           }
       });

@@ -102,6 +102,7 @@ class Trail extends PhysicalLocation {
       super.displayOnScreen(div);
       //if i paused before stop that shit now.
       road.plzStopKThnxBai = false;
+      SoundControl.instance.playMusic("The_Wagon_Song");
     }
 
 
