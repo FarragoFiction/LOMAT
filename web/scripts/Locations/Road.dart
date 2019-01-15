@@ -1,5 +1,6 @@
 import '../SoundControl.dart';
 import 'Events/Effects/ArriveEffect.dart';
+import 'Events/Effects/DelayEffect.dart';
 import 'Events/RoadEvent.dart';
 import 'PhysicalLocation.dart';
 import 'Town.dart';
@@ -11,9 +12,10 @@ import 'package:CommonLib/Random.dart';
 class Road {
     //maybe let progress in the game, or what consorts you have with you (should they have stats???)
     //effect this
-    static int minTimeInMS = 1000;
-    static int maxTimeInMS = 10000;
-    static int maxElapsedTimeInMS= 30000;
+    static int minTimeInS = 1;
+    static int maxTimeInS = 10;
+    //manic says multiple of 3.43 seconds are best for music reasons
+    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 10;
 
     Town sourceTown;
     Town destinationTown;
@@ -136,7 +138,7 @@ class Road {
         List<Town> towns = await Town.makeAdjacentTowns(rand,town);
         List<Road> ret = new List<Road>();
         towns.forEach((Town destinationTown) {
-            ret.add(new Road(sourceTown: town, destinationTown: destinationTown, travelTimeInMS: rand.nextIntRange(minTimeInMS,maxTimeInMS)));
+            ret.add(new Road(sourceTown: town, destinationTown: destinationTown, travelTimeInMS: DelayEffect.measureUnitInMS *rand.nextIntRange(minTimeInS,maxTimeInS)));
         });
         return ret;
     }

@@ -132,9 +132,9 @@ class Game
         ret.midGround = "${TownGenome.midgroundBase}/2.png";
         ret.ground = "${TownGenome.groundBase}/1.png";
         ret.background = "${TownGenome.backgroundBase}/1.png";
-        DelayEffect smallDelay = new DelayEffect(1000);
-        DelayEffect mediumEffect = new DelayEffect(5000);
-        DelayEffect largeEffect = new DelayEffect(10000);
+        DelayEffect smallDelay = new DelayEffect(1);
+        DelayEffect mediumEffect = new DelayEffect(2);
+        DelayEffect largeEffect = new DelayEffect(3);
         ret.events = new List<RoadEvent>();
         ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
         ret.events.add(new RoadEvent("Get Homaged","One of your currently nonexistant party members gets dysentery or something.", mediumEffect, 0.25));
