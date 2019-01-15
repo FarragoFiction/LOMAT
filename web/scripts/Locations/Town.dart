@@ -111,7 +111,7 @@ class Town extends PhysicalLocation {
       container.onClick.listen((Event e)
       {
           //don't play more than once unless you came from a diff place
-          if(!SoundControl.instance.musicPlaying && !SoundControl.instance.bgMusic.src.contains("Slice")) {
+          if(!SoundControl.instance.musicPlaying || !SoundControl.instance.bgMusic.src.contains("Slice")) {
              startPlayingMusic();
           }
       });
