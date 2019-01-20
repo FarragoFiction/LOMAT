@@ -116,7 +116,7 @@ class SinglePartyMember {
   }
 
   void displayGoalLabel() {
-    LabelElement goalLabel = new LabelElement()..text = "Destination:";
+    LabelElement goalLabel = new LabelElement()..text = "Goal:";
     DivElement goal = new DivElement()..text = "${partyMember.goalTownName}"..classes.add("statValue");
     container.append(goalLabel);
     container.append(goal);
