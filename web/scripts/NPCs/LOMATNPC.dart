@@ -56,7 +56,7 @@ class LOMATNPC {
         }
     }
     //where are they trying to get to?
-    Town goalTown;
+    String goalTownName;
     DivElement div;
     //TODO add all the shit they'll need as party members, maybe in a sub class (since not all townsfolk are potential party members)
     //health, hunger, etc.

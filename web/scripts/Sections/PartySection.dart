@@ -92,6 +92,8 @@ class SinglePartyMember {
     container.append(name);
     displayHPLabel();
     displayDiseaseLabel();
+    displayGoalLabel();
+
     sync();
   }
 
@@ -111,7 +113,13 @@ class SinglePartyMember {
     hpValue = new DivElement()..text = "${partyMember.healthPhrase}"..classes.add("statValue");
     container.append(hpLabel);
     container.append(hpValue);
+  }
 
+  void displayGoalLabel() {
+    LabelElement goalLabel = new LabelElement()..text = "Destination:";
+    DivElement goal = new DivElement()..text = "${partyMember.goalTownName}"..classes.add("statValue");
+    container.append(goalLabel);
+    container.append(goal);
   }
 
   void displayDiseaseLabel() {

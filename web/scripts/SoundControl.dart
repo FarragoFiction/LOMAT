@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:CommonLib/src/utility/predicates.dart';
@@ -39,7 +40,12 @@ class SoundControl { //to major tom
         if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.ogg";
         bgMusic.play();
         //WARNING TO FUTURE JR, IF I EVER WANT TO SUDDENLY CHANGE TEH MUSIC, THIS CALLBACK PROBABLY WILL STILL BE CALLED. WORRY ABOUT THIS.
-        bgMusic.onEnded.listen((Event event) {
+        StreamSubscription ss;
+        ss = bgMusic.onEnded.listen((Event event) {
+            print("$locationWithoutExtension ended so doing a callback???");
+            //if i don't cancel my listener after one use, then each new fragment of music will add listeners to it and the call back will
+            //be called exponentially. this is BAD. and also clogs up hte console.
+            ss.cancel();
             callback();
         });
     }

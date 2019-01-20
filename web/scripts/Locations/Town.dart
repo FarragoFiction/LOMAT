@@ -120,7 +120,9 @@ class Town extends PhysicalLocation {
   }
 
   void startPlayingMusic() {
-      SoundControl.instance.playMusicList(nextSong, startPlayingMusic);
+      String next = nextSong;
+      print("starting to play the next song $next from list ${genome.playList}");
+      SoundControl.instance.playMusicList(next, startPlayingMusic);
   }
 
   //if there is room in the cache, 70% chance of making a child
@@ -144,7 +146,7 @@ class Town extends PhysicalLocation {
 
   String get nextSong {
       if(playListIndex >= genome.playListLength-1) {
-          playListIndex = 1;
+          playListIndex = 0;
       }
       String ret =  genome.playList[playListIndex];
       //print("playListINdex is ${playListIndex} and i'm returning ${ret}");
