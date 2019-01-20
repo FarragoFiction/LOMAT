@@ -121,7 +121,7 @@ class Town extends PhysicalLocation {
 
   void startPlayingMusic() {
       String next = nextSong;
-      print("starting to play the next song $next from list ${genome.playList}");
+      //print("starting to play the next song $next from list ${genome.playList}");
       SoundControl.instance.playMusicList(next, startPlayingMusic);
   }
 
