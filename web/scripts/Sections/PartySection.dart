@@ -67,6 +67,7 @@ class SinglePartyMember {
   bool noLongerValid = false;
 
   SinglePartyMember(Element parent, LOMATNPC this.partyMember) {
+    partyMember.myStatsView = this;
     container = new DivElement();
     parent.append(container);
     container.classes.add("npcBox");

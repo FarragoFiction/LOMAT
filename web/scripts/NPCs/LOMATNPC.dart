@@ -1,5 +1,6 @@
 import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
+import '../Sections/PartySection.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -23,10 +24,18 @@ class LOMATNPC {
     String positiveEmotion;
     String neutralEmotion;
     String negativeEmotion;
+    SinglePartyMember myStatsView;
     String causeOfDeath = "absolutely nothing";
-    int hp = 85;
+    int _hp = 85;
     //if its null its good
     Disease disease;
+
+    int get hp => _hp;
+
+    set hp(int value) {
+        _hp = value;
+        myStatsView.sync();
+    }
 
     String get diseasePhrase {
         if(disease == null) return "None";

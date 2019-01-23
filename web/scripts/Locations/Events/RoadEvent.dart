@@ -50,8 +50,9 @@ class RoadEvent {
     bool triggered(Road road) {
         print("checking trigger for event $title");
         if(random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
-            popup(road);
+            //effect will set relevant info like target name, have it go first
             effect.apply(road);
+            popup(road);
             return true;
         }
         return false;
