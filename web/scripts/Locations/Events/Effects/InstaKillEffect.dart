@@ -25,4 +25,10 @@ class InstaKillEffect extends Effect {
     LOMATNPC target = new Random().pickFrom(game.partyMembers);
     target.die(causeOfDeath);
   }
+
+  @override
+    bool isValid(Road road) {
+        Game game = Game.instance;
+       return game.partyMembers.isNotEmpty;
+    }
 }
