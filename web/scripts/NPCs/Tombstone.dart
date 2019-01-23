@@ -21,6 +21,8 @@ import 'dart:html';
     i also want an already built tombstone to be able to be passed by (just like a tree). if you click on it time pauses
      and you can read the big version of it
 
+     TODO make a template an object that has three words attached to it maybe? otherwise WORD1 is gonna get repeated a LOT.
+
 
  */
 class Tombstone {
