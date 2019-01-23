@@ -234,7 +234,9 @@ class TownGenome {
         effects.add(new DelayEffect(-1), 1);
         effects.add(new DelayEffect(-2), 1);
         effects.add(new DelayEffect(-3), 1);
-        effects.add( new InstaKillEffect("Act of RNGsus."), 113);
+        effects.add( new InstaKillEffect("act of RNGsus"), 113);
+        effects.add( new InstaKillEffect("choked on Stolen Dorito"), 113);
+
 
         //TODO make them better at being random. use text engine and shit. these are for mutations.
         List<String> shittyNouns = <String> ["Vikings","Bears","Pirates","Ninjas","Bandits","Ghosts","Exorcists"];

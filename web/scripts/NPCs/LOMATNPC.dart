@@ -14,6 +14,7 @@ import 'package:CommonLib/Random.dart';
 
 class LOMATNPC {
     //TODO have town they want to go to, have their recruit text mention it. maybe can mention CURRENT_NEAREST_TOWN or GOAL_TOWN
+    //TODO most kleptomaniac birds, have them swipe shit out of your inventory as an effect
     ImageElement rawImage;
     ImageElement displayImage;
 
@@ -34,7 +35,9 @@ class LOMATNPC {
 
     set hp(int value) {
         _hp = value;
-        myStatsView.sync();
+        if(myStatsView != null) {
+            myStatsView.sync();
+        }
     }
 
     String get diseasePhrase {
