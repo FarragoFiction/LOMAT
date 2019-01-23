@@ -16,6 +16,12 @@ import 'dart:html';
     but the words themselves are in labeled drop downs
     so i guess each drop down has a button tied to it for "set to word"  1,2,or 3
 
+    i want to have a test page just for this builder, then i want to make sure travel stops when its time to make one of  these in a popup
+
+    i also want an already built tombstone to be able to be passed by (just like a tree). if you click on it time pauses
+     and you can read the big version of it
+
+
  */
 class Tombstone {
     //
