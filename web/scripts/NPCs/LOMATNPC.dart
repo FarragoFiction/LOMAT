@@ -23,6 +23,7 @@ class LOMATNPC {
     String positiveEmotion;
     String neutralEmotion;
     String negativeEmotion;
+    String causeOfDeath = "absolutely nothing";
     int hp = 85;
     //if its null its good
     Disease disease;
@@ -70,6 +71,12 @@ class LOMATNPC {
 
     void syncImages() {
         displayImage.src = imageSrc;
+    }
+
+    void die(String cod) {
+        causeOfDeath = cod;
+        hp = -1;
+        window.alert("time for tombstone builder");
     }
 
     void displayDialogue(Element container, LOMATSection screen) {

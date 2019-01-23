@@ -117,6 +117,19 @@ class Town extends PhysicalLocation {
       });
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
+      setNPCGoals();
+  }
+
+  //in theory an npc could accidentally be recruited befor they have a destination?
+    //probably should have a thing where if town name is null, just let them off at next stop?
+  Future<Null> setNPCGoals() async {
+      npcs.forEach((LOMATNPC npc) async {
+            Town town = rand.pickFrom(cachedTowns);
+            if(town == this) {
+                town = await makeBaby();
+            }
+            npc.goalTownName = town.name;
+      });
   }
 
   void startPlayingMusic() {
