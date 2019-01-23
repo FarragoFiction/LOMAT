@@ -1,7 +1,10 @@
 import 'Events/Effects/DelayEffect.dart';
+import 'Events/Effects/Effect.dart';
+import 'Events/Effects/InstaKillEffect.dart';
 import 'Events/RoadEvent.dart';
 import 'Layers/StaticLayer.dart';
 import 'package:CommonLib/Random.dart';
+import 'package:CommonLib/src/collection/weighted_lists.dart';
 
 class TownGenome {
     //its a hash so i can do genetic combination of towns because what can i say i love genetic algorithms
@@ -224,7 +227,15 @@ class TownGenome {
 
     //most events will be carefully crafted. but mutations....mutations are fair game for my aesthetic
     static RoadEvent randomEvent(Random rand) {
-        List<DelayEffect> effects = [new DelayEffect(1),new DelayEffect(2), new DelayEffect(3),new DelayEffect(-1),new DelayEffect(-2),new DelayEffect(-3)];
+        WeightedList<Effect> effects = new WeightedList<Effect>();
+        effects.add(new DelayEffect(1), 0.5);
+        effects.add(new DelayEffect(2), 0.5);
+        effects.add(new DelayEffect(3), 0.5);
+        effects.add(new DelayEffect(-1), 1);
+        effects.add(new DelayEffect(-2), 1);
+        effects.add(new DelayEffect(-3), 1);
+        effects.add( new InstaKillEffect("Act of RNGsus."), 113);
+
         //TODO make them better at being random. use text engine and shit. these are for mutations.
         List<String> shittyNouns = <String> ["Vikings","Bears","Pirates","Ninjas","Bandits","Ghosts","Exorcists"];
         List<String> shittyAdj = <String> ["Screaming","Wailing","Pious","Angry","Hungry","Greedy","Shitty","Berserk"];
