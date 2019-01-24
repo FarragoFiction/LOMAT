@@ -1,3 +1,34 @@
+1/23/19
+
+I need to think this through....
+
+i want to have bloodborne style templates for tombstones.
+
+they were always X.
+
+or
+
+They never were afraid of X Y.
+
+should hte blank be an object? just make an array of word/blanks?
+
+honestly....i think so?
+
+normally text replacement is simple but these blanks need to tie to a word list....
+
+wait.
+
+what if instead of templates it was just arrays even in the builder?
+
+like
+
+fridge
+magnet
+poetry.
+shit i like this.
+
+
+
 
 12/21/18
 

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="css/parallax.css">
 
     <link rel="icon" href="favicon.ico">
-    <script defer src="scripts/Controllers/TombTestController.dart" type="application/dart"></script>
+    <script defer src="scripts/Controllers/TombstoneTestController.dart" type="application/dart"></script>
     <script defer src="packages/browser/dart.js"></script>
 </head>
 
@@ -21,14 +21,15 @@ TODO:
 
   <div id="output" style = "text-align:left;">
       <ul>
-          <li>three template boxes, choose template from drop down (can be empty)</li>
-          <li>the three templates show up live on a canvas, along with "here lies X they died of Y" uses paldemic font</li>
+          <li>one phrase section show up live on a canvas, along with "here lies X they died of Y" uses paldemic font</li>
 
-          <li>for each box, depending on template chosen, have menu for the blanks in it
+          <li>for each phrase section box, pick what the phrase is
               <ul>
                   <li>super categories like objects, concepts, actions ,blank and ???</li>
                   <li>sub categories like people, places ,things, animals, towns</li>
                   <li>??? gets auto filled as you learn secrets, like Fenrir's name</li>
+                  <li> once you're drilled down to a bottom level pop up a new box and also update the canvas to have the new phrase</li>
+                  <li>ability to delete a box, which removes it from teh canvas</li>
               </ul>
           </li>
 

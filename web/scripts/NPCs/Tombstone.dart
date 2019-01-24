@@ -8,6 +8,7 @@
 import 'LOMATNPC.dart';
 import 'dart:async';
 import 'dart:html';
+import 'package:LoaderLib/Loader.dart';
 
 /*
     TODO i want to have a builder where you have drop downs or something of words to pick for up to three words
@@ -26,36 +27,42 @@ import 'dart:html';
 
  */
 class Tombstone {
-    //
     static String NAMETAG = "<<NAME>>";
     static String CODTAG = "<<COD>>";
-    static String WORD1 = "<<WORD1>>";
-    static String WORD2 = "<<WORD2>>";
-    static String WORD3 = "<<WORD3>>";
+    List<TombstoneContentCategory> content;
 
-
+    //if this is null its probably from online
     LOMATNPC npc;
     String imageLoc = "TODO";
     //the rest is procedural.
     String epilogue = "Here lies $NAMETAG. They died of $CODTAG.";
 
-    CanvasElement makeCanvas() {
-        throw("TODO");
+    Future<Null> drawSelf(Element container) async {
+        DivElement me = new DivElement();
+        container.append(me);
+        CanvasElement canvas = await makeCanvas();
+        me.append(canvas);
+        //TODO have canvas be cached so it can be drawn to.
+        //TODO have builder draw itself
+        makeBuilder();
     }
 
-    //TODO have this loaded from file async style so ppl can add stuff
-    Future<List<String>> get templates async {
-        List<String> ret = <String>[];
-        //when a given template is on screen, auto fill in the values of the drop downs ???
-        //can pick up to three templates at once?
-        ret.add("They were the <<WORD1>> <<WORD2>>. It was them.");
-        ret.add("They really did love <<WORD1>>ing.");
-        ret.add("No one misses them.");
-        ret.add("They are survived by their <<WORD1>>. ");
-        return ret;
+    Future<CanvasElement> makeCanvas() async {
+        CanvasElement canvas = new CanvasElement(width: 800, height: 600);
+        ImageElement img = await Loader.getResource("images/tombstone.png");
+        canvas.context2D.drawImage(img,0,0);
+        //TODO draw epilogue
+        return canvas;
     }
 
-    //todo load nouns from pl's text thingy
+    Element makeBuilder() {
+        throw ("TODO");
+        //need to display one TombstoneContentCategory box, once its drilled down to a value it
+        //pops up a new box (and displays current value into the canvas).
+        //any box without a final value just doesn't show up on the tombstone
+    }
+
+    //don't get any of these from file or people can hax
     Future<List<String>> get nouns async {
         List<String> ret = <String>[];
         ret.add("bird");
@@ -65,7 +72,6 @@ class Tombstone {
         return ret;
     }
 
-    //todo load verbs from pl's text thingy
     Future<List<String>> get verbs async {
         List<String> ret = <String>[];
         ret.add("sqwawk");
@@ -75,7 +81,6 @@ class Tombstone {
         return ret;
     }
 
-    //todo load adj from pl's text thingy
     Future<List<String>> get adj async {
         List<String> ret = <String>[];
         ret.add("best");
@@ -86,4 +91,18 @@ class Tombstone {
     }
 
 
+}
+
+//a category has a list of things inside it which might be sublists or might be end phrases
+class TombstoneContentCategory {
+    String displayText;
+    List<TombstoneContentCategory> content = new List<TombstoneContentCategory>();
+
+    static List<TombstoneContentCategory> topLevel() {
+
+    }
+}
+
+//when chosen modifies the Tombstone it blongs to
+ class  TombstonePhrase extends TombstoneContentCategory{
 }
