@@ -41,10 +41,48 @@ class Tombstone {
         DivElement me = new DivElement();
         container.append(me);
         CanvasElement canvas = await makeCanvas();
+        drawText(canvas);
         me.append(canvas);
         //TODO have canvas be cached so it can be drawn to.
         //TODO have builder draw itself
         makeBuilder();
+    }
+
+    void drawText(CanvasElement canvas) {
+        print("drawing text of $epilogue");
+        wrap_text(canvas.context2D, "$epilogue\n TODO: CHOSEN TEXT",100,100,15,800,"center");
+    }
+
+    static int wrap_text(CanvasRenderingContext2D ctx, String text, num x, num y, num lineHeight, int maxWidth, String textAlign) {
+        if (textAlign == null) textAlign = 'center';
+        ctx.textAlign = textAlign;
+        List<String> words = text.split(' ');
+        List<String> lines = <String>[];
+        int sliceFrom = 0;
+        for (int i = 0; i < words.length; i++) {
+            String chunk = words.sublist(sliceFrom, i).join(' ');
+            bool last = i == words.length - 1;
+            bool bigger = ctx
+                .measureText(chunk)
+                .width > maxWidth;
+            if (bigger) {
+                lines.add(words.sublist(sliceFrom, i).join(' '));
+                sliceFrom = i;
+            }
+            if (last) {
+                lines.add(words.sublist(sliceFrom, words.length).join(' '));
+                sliceFrom = i;
+            }
+        }
+        num offsetY = 0.0;
+        num offsetX = 0;
+        if (textAlign == 'center') offsetX = maxWidth ~/ 2;
+        for (int i = 0; i < lines.length; i++) {
+            ctx.fillText(lines[i], x + offsetX, y + offsetY);
+            offsetY = offsetY + lineHeight;
+        }
+        //need to return how many lines i created so that whatever called me knows where to put ITS next line.;
+        return lines.length;
     }
 
     Future<CanvasElement> makeCanvas() async {
