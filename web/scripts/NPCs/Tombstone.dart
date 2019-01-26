@@ -29,13 +29,20 @@ import 'package:LoaderLib/Loader.dart';
 class Tombstone {
     static String NAMETAG = "#NAME#";
     static String CODTAG = "#COD#";
-    List<TombstoneContentCategory> content;
+    //a tombstone has one piece of content for each "fridge magnet" attached to it.
+    //can have up to 8?
+    //each magent has everything possible inside it (don't drill too deep yo)
+    List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
 
     //if this is null its probably from online
     LOMATNPC npc;
     String imageLoc = "TODO";
     //the rest is procedural.
-    String epilogue = "Here lies $NAMETAG. They died of $CODTAG.";
+    String epilogue = "They died of $CODTAG.";
+
+    Tombstone() {
+        makeTestContent();
+    }
 
     Future<Null> drawSelf(Element container) async {
         DivElement me = new DivElement();
@@ -48,11 +55,19 @@ class Tombstone {
         makeBuilder();
     }
 
+    void makeTestContent() {
+        //these have no children so test that first
+        //TODO have at least one with children, test it drills down right
+        content.add(new TombstoneFridgeMagnet("peperony", []));
+        content.add(new TombstoneFridgeMagnet("and", []));
+        content.add(new TombstoneFridgeMagnet("cheese", []));
+    }
+
     String get npcName {
         if(npc != null) {
             return npc.name;
         }else {
-            return "?????";
+            return "WWWWWWWW";
         }
     }
 
@@ -60,10 +75,11 @@ class Tombstone {
         if(npc != null) {
             return npc.causeOfDeath;
         }else {
-            return "????????";
+            return "WWWWWWWW";
         }
     }
 
+    //peperony and chease
     String get fullEpilogue {
         String ret = "$epilogue";
         ret = ret.replaceAll(NAMETAG, npcName);
@@ -71,22 +87,39 @@ class Tombstone {
         return ret;
     }
 
+    //each line has a space i guess???
+    String get fullCustomBullshit {
+        String ret = "";
+        for(TombstoneFridgeMagnet line in content) {
+
+        }
+        return ret;
+    }
+
     void drawText(CanvasElement canvas) {
         print("drawing text of $epilogue");
-        int fontSize = 32;
-        int currentX = 300;
-        int currentY = 180;
+        int fontSize = 20;
+        int currentX = 275;
+        int currentY = 200;
         int buffer = 15;
         canvas.context2D.font  ="${fontSize}px norse";
         canvas.context2D.fillStyle = "#5f5f7f";
         canvas.context2D.fillText(npcName.toUpperCase(), currentX,currentY);
-        currentY= 230;
+        currentY= 250;
         currentX = 400;
-        fontSize = 24;
+        fontSize = 18;
         canvas.context2D.textAlign = "center";
         canvas.context2D.font  ="${fontSize}px norse";
 
         List<String> lines = wrap_text_lines(canvas.context2D, "$fullEpilogue".toUpperCase(),120,150);
+        for(String line in lines) {
+            canvas.context2D.fillText(line.toUpperCase(), currentX,currentY);
+            currentY += buffer + fontSize;
+        }
+
+        currentY += buffer+fontSize;
+
+        lines = wrap_text_lines(canvas.context2D, "$fullCustomBullshit".toUpperCase(),120,150);
         for(String line in lines) {
             canvas.context2D.fillText(line.toUpperCase(), currentX,currentY);
             currentY += buffer + fontSize;
@@ -165,16 +198,45 @@ class Tombstone {
 
 }
 
-//a category has a list of things inside it which might be sublists or might be end phrases
-class TombstoneContentCategory {
-    String displayText;
-    List<TombstoneContentCategory> content = new List<TombstoneContentCategory>();
+//builds an epilogue up like making fridge magnet poetry
+//one of these is an entire builder, shows all categories and subcategories
+//when a user makes a selection that words itself is put in the tombstone
+//and if its actually a category header it will drill down into (but not select anything in) its category
 
-    static List<TombstoneContentCategory> topLevel() {
+class TombstoneFridgeMagnet {
+    String displayText;
+    //so i can have compound words like play-ed
+    bool spaceBefore;
+    bool spaceAfter;
+    TombstoneFridgeMagnet selection;
+    List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+
+    String get displayTextWithSpaces {
+        String ret = "$displayText";
+        if(spaceAfter) {
+            ret = "$ret ";
+        }
+
+        if(spaceBefore) {
+            ret = " $ret";
+        }
+
+        return ret;
+    }
+
+    TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true, this.spaceAfter:true} );
+
+    //recursive
+    String getChosenRoot() {
+        if(content.isEmpty || selection == null) {
+            return displayTextWithSpaces;
+        }else {
+            return selection.getChosenRoot();
+        }
+    }
+
+    static List<TombstoneFridgeMagnet> topLevel() {
 
     }
 }
 
-//when chosen modifies the Tombstone it blongs to
- class  TombstonePhrase extends TombstoneContentCategory{
-}
