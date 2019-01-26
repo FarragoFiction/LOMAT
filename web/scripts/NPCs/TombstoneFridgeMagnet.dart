@@ -49,24 +49,51 @@ class TombstoneFridgeMagnet {
     //NONE of these get loaded from file becaues this has to be hax proof
 
     static TombstoneFridgeMagnet get topLevelMenu {
-        return new TombstoneFridgeMagnet("???", <TombstoneFridgeMagnet>[nouns, verbs, conjunctions, punctuation, phrases, suffix]);
+        return new TombstoneFridgeMagnet("???", <TombstoneFridgeMagnet>[nouns, verbs, conjunctions, punctuation, phrases, suffix,bullshit]);
 
     }
 
     //todo sub this out into categories
     static TombstoneFridgeMagnet get nouns {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
-        content.add(new TombstoneFridgeMagnet("cheese", []));
+        content.add(new TombstoneFridgeMagnet("it", []));
+        content.add(animate_nouns);
+        content.add(travel_nouns);
+        return new TombstoneFridgeMagnet("noun", content);
+    }
+
+    static TombstoneFridgeMagnet get travel_nouns {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("boat", []));
-        content.add(new TombstoneFridgeMagnet("troll", []));
-        content.add(new TombstoneFridgeMagnet("snake", []));
-        content.add(new TombstoneFridgeMagnet("ghost", []));
-        content.add(new TombstoneFridgeMagnet("bird", []));
         content.add(new TombstoneFridgeMagnet("wagon", []));
         content.add(new TombstoneFridgeMagnet("ice", []));
-        content.add(new TombstoneFridgeMagnet("it", []));
-        return new TombstoneFridgeMagnet("noun", content);
+        content.add(new TombstoneFridgeMagnet("snow", []));
+        content.add(new TombstoneFridgeMagnet("wheel", []));
+        content.add(new TombstoneFridgeMagnet("trail", []));
+        content.add(new TombstoneFridgeMagnet("mist", []));
+        content.add(new TombstoneFridgeMagnet("land", []));
+        content.add(new TombstoneFridgeMagnet("town", []));
 
+        return new TombstoneFridgeMagnet("travel", content);
+    }
+
+    static TombstoneFridgeMagnet get animate_nouns {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("troll", []));
+        content.add(new TombstoneFridgeMagnet("snake", []));
+        content.add(new TombstoneFridgeMagnet("bird", []));
+        content.add(new TombstoneFridgeMagnet("ghost", []));
+        content.add(new TombstoneFridgeMagnet("it", []));
+        content.add(new TombstoneFridgeMagnet("human", []));
+        content.add(new TombstoneFridgeMagnet("wolf", []));
+        content.add(new TombstoneFridgeMagnet("gull", []));
+        content.add(new TombstoneFridgeMagnet("butterfly", []));
+        content.add(new TombstoneFridgeMagnet("caterpillar", []));
+        content.add(new TombstoneFridgeMagnet("bug", []));
+        content.add(new TombstoneFridgeMagnet("bear", []));
+        content.add(new TombstoneFridgeMagnet("duck", []));
+        content.add(new TombstoneFridgeMagnet("ant", []));
+        return new TombstoneFridgeMagnet("animate", content);
     }
 
     //TODO sub this out into things like travel/fight
@@ -85,6 +112,23 @@ class TombstoneFridgeMagnet {
         return new TombstoneFridgeMagnet("verb", content);
     }
 
+    static TombstoneFridgeMagnet get gigglesnort {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("ghosts", []));
+        content.add(new TombstoneFridgeMagnet("bones", []));
+        content.add(new TombstoneFridgeMagnet("birds", []));
+        content.add(new TombstoneFridgeMagnet("fenrir", []));
+        content.add(new TombstoneFridgeMagnet("void", []));
+        content.add(new TombstoneFridgeMagnet("cipher", []));
+        content.add(new TombstoneFridgeMagnet("loss", []));
+        content.add(new TombstoneFridgeMagnet("null", []));
+        content.add(new TombstoneFridgeMagnet("psychopomp", []));
+        content.add(new TombstoneFridgeMagnet("yggdrasil", []));
+        //can't say tree/ wood etc
+        content.add(new TombstoneFridgeMagnet("hard brown plant material", []));
+        return new TombstoneFridgeMagnet("?????", content);
+    }
+
     static TombstoneFridgeMagnet get conjunctions {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("for", []));
@@ -96,8 +140,16 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("yet", []));
         content.add(new TombstoneFridgeMagnet("so", []));
         return new TombstoneFridgeMagnet("conjunction", content);
-
     }
+
+    static TombstoneFridgeMagnet get bullshit {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("lemme smash", []));
+        content.add(new TombstoneFridgeMagnet("pepperony and chease", []));
+        content.add(new TombstoneFridgeMagnet("is this a", []));
+        return new TombstoneFridgeMagnet("bullshit", content);
+    }
+
 
     static TombstoneFridgeMagnet get suffix {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
@@ -120,7 +172,6 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet(":", [], spaceBefore: false));
         content.add(new TombstoneFridgeMagnet(";", [], spaceBefore: false));
         return new TombstoneFridgeMagnet("punctuation", content);
-
     }
 
     static TombstoneFridgeMagnet get phrases {
