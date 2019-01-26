@@ -10,27 +10,22 @@ class TombstoneFridgeMagnet {
     String displayText;
     //so i can have compound words like play-ed
     bool spaceBefore;
-    bool spaceAfter;
     TombstoneFridgeMagnet selection;
     List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
 
     bool get isRoot => content.isEmpty;
 
     String get displayTextWithSpaces {
-        print("getting display text for $displayText and before is $spaceBefore and after is $spaceAfter");
+        print("getting display text for $displayText and before is $spaceBefore and after is");
         String ret = "$displayText";
-        if(spaceAfter) {
-            ret = "$ret ";
-        }
-
         if(spaceBefore) {
             ret = " $ret";
         }
-        print("returning ret of $ret");
+        print("returning ret of ~~~$ret~~~");
         return ret;
     }
 
-    TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true, this.spaceAfter:true} );
+    TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
 
     //chooses shit randomly till it hits an end
     //recursive
