@@ -27,8 +27,8 @@ import 'package:LoaderLib/Loader.dart';
 
  */
 class Tombstone {
-    static String NAMETAG = "<<NAME>>";
-    static String CODTAG = "<<COD>>";
+    static String NAMETAG = "#NAME#";
+    static String CODTAG = "#COD#";
     List<TombstoneContentCategory> content;
 
     //if this is null its probably from online
@@ -48,14 +48,55 @@ class Tombstone {
         makeBuilder();
     }
 
-    void drawText(CanvasElement canvas) {
-        print("drawing text of $epilogue");
-        wrap_text(canvas.context2D, "$epilogue\n TODO: CHOSEN TEXT",100,100,15,800,"center");
+    String get npcName {
+        if(npc != null) {
+            return npc.name;
+        }else {
+            return "?????";
+        }
     }
 
-    static int wrap_text(CanvasRenderingContext2D ctx, String text, num x, num y, num lineHeight, int maxWidth, String textAlign) {
-        if (textAlign == null) textAlign = 'center';
-        ctx.textAlign = textAlign;
+    String get npcCOD {
+        if(npc != null) {
+            return npc.causeOfDeath;
+        }else {
+            return "????????";
+        }
+    }
+
+    String get fullEpilogue {
+        String ret = "$epilogue";
+        ret = ret.replaceAll(NAMETAG, npcName);
+        ret = ret.replaceAll(CODTAG, npcCOD);
+        return ret;
+    }
+
+    void drawText(CanvasElement canvas) {
+        print("drawing text of $epilogue");
+        int fontSize = 32;
+        int currentX = 300;
+        int currentY = 180;
+        int buffer = 15;
+        canvas.context2D.font  ="${fontSize}px norse";
+        canvas.context2D.fillStyle = "#5f5f7f";
+        canvas.context2D.fillText(npcName.toUpperCase(), currentX,currentY);
+        currentY= 230;
+        currentX = 400;
+        fontSize = 24;
+        canvas.context2D.textAlign = "center";
+        canvas.context2D.font  ="${fontSize}px norse";
+
+        List<String> lines = wrap_text_lines(canvas.context2D, "$fullEpilogue".toUpperCase(),120,150);
+        for(String line in lines) {
+            canvas.context2D.fillText(line.toUpperCase(), currentX,currentY);
+            currentY += buffer + fontSize;
+        }
+
+
+    }
+
+    static List<String> wrap_text_lines(CanvasRenderingContext2D ctx, String text, num x, int maxWidth) {
+
         List<String> words = text.split(' ');
         List<String> lines = <String>[];
         int sliceFrom = 0;
@@ -74,15 +115,8 @@ class Tombstone {
                 sliceFrom = i;
             }
         }
-        num offsetY = 0.0;
-        num offsetX = 0;
-        if (textAlign == 'center') offsetX = maxWidth ~/ 2;
-        for (int i = 0; i < lines.length; i++) {
-            ctx.fillText(lines[i], x + offsetX, y + offsetY);
-            offsetY = offsetY + lineHeight;
-        }
         //need to return how many lines i created so that whatever called me knows where to put ITS next line.;
-        return lines.length;
+        return lines;
     }
 
     Future<CanvasElement> makeCanvas() async {
