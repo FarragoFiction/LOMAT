@@ -91,7 +91,7 @@ class Tombstone {
     String get fullCustomBullshit {
         String ret = "";
         for(TombstoneFridgeMagnet line in content) {
-
+            ret = "$ret${line.getChosenRoot()}";
         }
         return ret;
     }
