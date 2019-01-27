@@ -228,6 +228,10 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("bear", []));
         content.add(new TombstoneFridgeMagnet("duck", []));
         content.add(new TombstoneFridgeMagnet("ant", []));
+        content.add(new TombstoneFridgeMagnet("ayll", []));
+        content.add(new TombstoneFridgeMagnet("dvvk", []));
+        content.add(new TombstoneFridgeMagnet("iyhujo", []));
+
         return new TombstoneFridgeMagnet("animate", content);
     }
 
