@@ -193,6 +193,8 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("future", []));
         content.add(new TombstoneFridgeMagnet("past", []));
         content.add(new TombstoneFridgeMagnet("present", []));
+        content.add(new TombstoneFridgeMagnet("corruption", []));
+        content.add(new TombstoneFridgeMagnet("purification", []));
 
         return new TombstoneFridgeMagnet("concept", content);
     }
@@ -332,6 +334,8 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("happy", []));
         content.add(new TombstoneFridgeMagnet("sad", []));
         content.add(new TombstoneFridgeMagnet("excited", []));
+        content.add(new TombstoneFridgeMagnet("corrupt", []));
+        content.add(new TombstoneFridgeMagnet("pure", []));
 
         return new TombstoneFridgeMagnet("condition", content);
     }
