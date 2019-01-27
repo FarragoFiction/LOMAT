@@ -1,3 +1,4 @@
+import 'Tombstone.dart';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
@@ -28,15 +29,54 @@ class TombstoneFridgeMagnet {
 
     TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
 
-    Element makeBuilder() {
+    //if the parent is null i'm the top level
+    Element makeBuilder(Tombstone tombstone, TombstoneFridgeMagnet parent) {
         //initial state is just a box with your display text in it
         //its only if you get clicked that things change
         print("making a builder for $displayText");
         DivElement me = new DivElement()..classes.add("tombstoneMagnet");
-        me.text = displayText;
+
+        if(content.isNotEmpty) {
+            me.text = ">$displayText";
+        }else {
+            me.text = displayText;
+        }
+        DivElement myContentDiv = new DivElement();
+        me.append(myContentDiv);
+        bool expanded = false;
+        //TODO when you click one of these it should add all its children to itself?
+        //and also call draw on the tombstone???
+        me.onClick.listen((Event e) {
+            if(parent != null) {
+                parent.selection = this;
+            }
+            tombstone.redraw();
+            if(!expanded) {
+                show(myContentDiv,tombstone);
+                expanded = true;
+            } else {
+                //TODO when i click on a child technically i'm clicking on me too and i vanish
+                expanded =false;
+               hide(myContentDiv);
+                e.stopPropagation();
+            }
+        });
 
         return me;
+    }
 
+    void show(Element div, Tombstone tombstone) {
+        print("trying to show ${div.children.length} children");
+        if(div.children.isEmpty) {
+            content.forEach((TombstoneFridgeMagnet magnet) {
+                div.append(magnet.makeBuilder(tombstone, this));
+            });
+        }
+        div.style.display = "block";
+    }
+
+    void hide(Element div) {
+        div.style.display = "none";
     }
 
     //chooses shit randomly till it hits an end

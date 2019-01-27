@@ -34,6 +34,7 @@ class Tombstone {
     //can have up to 8?
     //each magent has everything possible inside it (don't drill too deep yo)
     List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+    CanvasElement cachedCanvas;
 
     //if this is null its probably from online
     LOMATNPC npc;
@@ -48,12 +49,19 @@ class Tombstone {
     Future<Null> drawSelf(Element container) async {
         DivElement me = new DivElement();
         container.append(me);
-        CanvasElement canvas = await makeCanvas();
-        drawText(canvas);
-        me.append(canvas);
+        cachedCanvas = await makeCanvas();
+        drawText(cachedCanvas);
+        me.append(cachedCanvas);
         //TODO have canvas be cached so it can be drawn to.
         //TODO have builder draw itself
         me.append(makeBuilder());
+    }
+
+    Future<Null> redraw() async {
+        CanvasElement tmp = await makeCanvas();
+        drawText(tmp);
+        cachedCanvas.context2D.clearRect(0,0,cachedCanvas.width, cachedCanvas.height);
+        cachedCanvas.context2D.drawImage(tmp,0,0);
     }
 
     void makeTestContent() {
@@ -74,11 +82,11 @@ class Tombstone {
         TombstoneFridgeMagnet seventh = TombstoneFridgeMagnet.topLevelMenu;
         TombstoneFridgeMagnet eighth = TombstoneFridgeMagnet.topLevelMenu;
         List<TombstoneFridgeMagnet> tmp = [first,second,third,fourth,fifth,sixth,seventh,eighth];
-        /* lets me test things work fast
-        for(TombstoneFridgeMagnet t in tmp) {
+        //lets me test things work fast
+        /*for(TombstoneFridgeMagnet t in tmp) {
             t.randomChoice();
-        }
-        */
+        }*/
+
         content.addAll(tmp);
     }
 
@@ -184,7 +192,7 @@ class Tombstone {
         DivElement container = new DivElement()..classes.add("tombstoneBuilderContainer");
         //for each content object, draw it (it'll handle making a menu box thingy)
         content.forEach((TombstoneFridgeMagnet magnet) {
-            container.append(magnet.makeBuilder());
+            container.append(magnet.makeBuilder(this, null));
         });
         return container;
     }

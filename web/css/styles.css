@@ -97,6 +97,7 @@ html, body {
     border-radius: 13px;
     display: inline-block;
     color: #5f5f7f;
+    vertical-align: top;
 }
 
 .tombstoneMagnet:hover{
