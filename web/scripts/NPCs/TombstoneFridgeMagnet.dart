@@ -433,6 +433,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("shhhh", []));
         content.add(new TombstoneFridgeMagnet("worm", []));
         content.add(new TombstoneFridgeMagnet("psst", []));
+        content.add(new TombstoneFridgeMagnet("doop", []));
         return new TombstoneFridgeMagnet("interjection", content);
     }
 
