@@ -49,13 +49,14 @@ class TombstoneFridgeMagnet {
                 me.text = displayText;
             }
         }
+        subContainer = new DivElement();
+        me.append(subContainer);
 
         //first level is opened
         if(parent == null) {
             show(tombstone);
         }
-        subContainer = new DivElement();
-        me.append(subContainer);
+
         me.onClick.listen((Event e) {
             e.stopPropagation();
             if(parent != null) {
@@ -84,7 +85,7 @@ class TombstoneFridgeMagnet {
         content.forEach((TombstoneFridgeMagnet child) {
             if(child != selection) {
                 child.unselect();
-                //child.hide();
+                child.hide();
             }
         });
     }
@@ -112,7 +113,9 @@ class TombstoneFridgeMagnet {
 
     void hide() {
         print("trying to hide $displayText");
-        subContainer.style.display = "none";
+        if(subContainer != null) {
+            subContainer.style.display = "none";
+        }
     }
 
     //chooses shit randomly till it hits an end
