@@ -1,3 +1,4 @@
+import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 
@@ -26,6 +27,15 @@ class TombstoneFridgeMagnet {
     }
 
     TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
+
+    Element makeBuilder() {
+        //make a div
+        //in that div is all my contents
+        //with a header box that has my display text?
+        //no that won't work...
+        //think of it from the other side
+        
+    }
 
     //chooses shit randomly till it hits an end
     //recursive

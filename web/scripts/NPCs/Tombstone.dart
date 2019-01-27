@@ -53,7 +53,7 @@ class Tombstone {
         me.append(canvas);
         //TODO have canvas be cached so it can be drawn to.
         //TODO have builder draw itself
-        makeBuilder();
+        me.append(makeBuilder());
     }
 
     void makeTestContent() {
@@ -110,7 +110,7 @@ class Tombstone {
         String ret = "";
         for(TombstoneFridgeMagnet line in content) {
             ret = "$ret${line.getChosenRoot()}";
-            print("custom bullshit is $ret");
+            //print("custom bullshit is $ret");
         }
         return ret;
     }
@@ -143,8 +143,6 @@ class Tombstone {
             canvas.context2D.fillText(line.toUpperCase(), currentX,currentY);
             currentY += buffer + fontSize;
         }
-
-
     }
 
     static List<String> wrap_text_lines(CanvasRenderingContext2D ctx, String text, num x, int maxWidth) {
@@ -180,10 +178,12 @@ class Tombstone {
     }
 
     Element makeBuilder() {
-        throw ("TODO");
-        //need to display one TombstoneContentCategory box, once its drilled down to a value it
-        //pops up a new box (and displays current value into the canvas).
-        //any box without a final value just doesn't show up on the tombstone
+        DivElement container = new DivElement();
+        //for each content object, draw it (it'll handle making a menu box thingy)
+        content.forEach((TombstoneFridgeMagnet magnet) {
+            container.append(magnet.makeBuilder());
+        });
+        return container;
     }
 
     //don't get any of these from file or people can hax
