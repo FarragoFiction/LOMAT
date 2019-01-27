@@ -140,7 +140,7 @@ class TombstoneFridgeMagnet {
     //NONE of these get loaded from file becaues this has to be hax proof
 
     static TombstoneFridgeMagnet get topLevelMenu {
-        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, adjs, suffix, preposition,conjunctions, interjection, punctuation, phrases,bullshit,gigglesnort, blank]);
+        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, adjs, adverb, suffix, preposition,conjunctions, interjection, punctuation, phrases,bullshit,gigglesnort, blank]);
 
     }
 
@@ -244,8 +244,34 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("give", []));
         content.add(new TombstoneFridgeMagnet("was", []));
         content.add(new TombstoneFridgeMagnet("talk", []));
+        content.add(new TombstoneFridgeMagnet("establish", []));
+        content.add(new TombstoneFridgeMagnet("ride", []));
+        content.add(new TombstoneFridgeMagnet("flaunt", []));
+        content.add(new TombstoneFridgeMagnet("brag", []));
+        content.add(new TombstoneFridgeMagnet("shrug", []));
         content.add(new TombstoneFridgeMagnet("dominance", []));
         return new TombstoneFridgeMagnet("verb", content);
+    }
+
+    static TombstoneFridgeMagnet get adverb {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("very", []));
+        content.add(new TombstoneFridgeMagnet("here", []));
+        content.add(new TombstoneFridgeMagnet("always", []));
+        content.add(new TombstoneFridgeMagnet("often", []));
+        content.add(new TombstoneFridgeMagnet("even", []));
+        content.add(new TombstoneFridgeMagnet("only", []));
+        content.add(new TombstoneFridgeMagnet("never", []));
+        content.add(new TombstoneFridgeMagnet("there", []));
+        content.add(new TombstoneFridgeMagnet("nowhere", []));
+        content.add(new TombstoneFridgeMagnet("somewhere", []));
+        content.add(new TombstoneFridgeMagnet("everywhere", []));
+        content.add(new TombstoneFridgeMagnet("now", []));
+        content.add(new TombstoneFridgeMagnet("then", []));
+        content.add(new TombstoneFridgeMagnet("nearly", []));
+
+
+        return new TombstoneFridgeMagnet("adverb", content);
     }
 
 
@@ -270,8 +296,9 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("every", []));
         content.add(new TombstoneFridgeMagnet("all", []));
         content.add(new TombstoneFridgeMagnet("none", []));
-        content.add(new TombstoneFridgeMagnet("always", []));
-        content.add(new TombstoneFridgeMagnet("almost", []));
+        content.add(new TombstoneFridgeMagnet("very", []));
+        content.add(new TombstoneFridgeMagnet("some", []));
+        content.add(new TombstoneFridgeMagnet("little", []));
         return new TombstoneFridgeMagnet("quantity", content);
     }
 
@@ -282,6 +309,10 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("very", []));
         content.add(new TombstoneFridgeMagnet("boring", []));
         content.add(new TombstoneFridgeMagnet("amazing", []));
+        content.add(new TombstoneFridgeMagnet("slow", []));
+        content.add(new TombstoneFridgeMagnet("fast", []));
+        content.add(new TombstoneFridgeMagnet("dumb", []));
+        content.add(new TombstoneFridgeMagnet("smart", []));
         content.add(new TombstoneFridgeMagnet("shitty", []));
         return new TombstoneFridgeMagnet("quality", content);
     }
@@ -332,7 +363,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("yellow", []));
         content.add(new TombstoneFridgeMagnet("dark", []));
         content.add(new TombstoneFridgeMagnet("light", []));
-        return new TombstoneFridgeMagnet("quantity", content);
+        return new TombstoneFridgeMagnet("material", content);
     }
 
     static TombstoneFridgeMagnet get purpose {
@@ -403,6 +434,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("a", []));
         content.add(new TombstoneFridgeMagnet("an", []));
         content.add(new TombstoneFridgeMagnet("of", []));
+        content.add(new TombstoneFridgeMagnet("bullshit", []));
         content.add(new TombstoneFridgeMagnet("lemme smash", []));
         content.add(new TombstoneFridgeMagnet("pepperony and chease", []));
         content.add(new TombstoneFridgeMagnet("is this a", []));
@@ -456,7 +488,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("like a mechanical bull", []));
         content.add(new TombstoneFridgeMagnet("hell of a mystery", []));
         content.add(new TombstoneFridgeMagnet("all of them", []));
-        content.add(new TombstoneFridgeMagnet("addiction is a powerful thing", []));
+        content.add(new TombstoneFridgeMagnet("is a powerful thing", []));
         content.add(new TombstoneFridgeMagnet("boggle vacantly", []));
         return new TombstoneFridgeMagnet("phrase", content);
     }
