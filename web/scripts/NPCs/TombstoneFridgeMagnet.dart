@@ -20,12 +20,12 @@ class TombstoneFridgeMagnet {
     bool get isRoot => content.isEmpty;
 
     String get displayTextWithSpaces {
-        print("getting display text for $displayText and before is $spaceBefore and after is");
+        //print("getting display text for $displayText and before is $spaceBefore and after is");
         String ret = "$displayText";
         if(spaceBefore) {
             ret = " $ret";
         }
-        print("returning ret of ~~~$ret~~~");
+        //print("returning ret of ~~~$ret~~~");
         return ret;
     }
 
@@ -36,7 +36,7 @@ class TombstoneFridgeMagnet {
         //initial state is just a box with your display text in it
         //its only if you get clicked that things change
         this.parent =parent;
-        print("making a builder for $displayText");
+        //print("making a builder for $displayText");
         me = new DivElement()..classes.add("tombstoneMagnet");
 
         if(content.isNotEmpty) {
@@ -50,12 +50,14 @@ class TombstoneFridgeMagnet {
         //TODO when you click one of these it should add all its children to itself?
         //and also call draw on the tombstone???
         me.onClick.listen((Event e) {
+            e.stopPropagation();
             if(parent != null) {
                 parent.selection = this;
                 //makes sure sibling are no longer selected
                 parent.unselect();
             }
             //will make sure parents are selected up the chain.
+            print("time to select");
             select();
 
             tombstone.redraw();
