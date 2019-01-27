@@ -56,9 +56,9 @@ class TombstoneFridgeMagnet {
                 expanded = true;
             } else {
                 //TODO when i click on a child technically i'm clicking on me too and i vanish
-                expanded =false;
-               hide(myContentDiv);
-                e.stopPropagation();
+               // expanded =false;
+               //hide(myContentDiv);
+                //e.stopPropagation();
             }
         });
 
