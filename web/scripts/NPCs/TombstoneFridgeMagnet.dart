@@ -14,6 +14,7 @@ class TombstoneFridgeMagnet {
     bool spaceBefore;
     TombstoneFridgeMagnet selection;
     Element me;
+    Element subContainer;
     TombstoneFridgeMagnet parent;
     List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
 
@@ -36,7 +37,7 @@ class TombstoneFridgeMagnet {
         //initial state is just a box with your display text in it
         //its only if you get clicked that things change
         this.parent =parent;
-        //print("making a builder for $displayText");
+        print("making a builder for $displayText");
         me = new DivElement()..classes.add("tombstoneMagnet");
 
         if(content.isNotEmpty) {
@@ -48,13 +49,13 @@ class TombstoneFridgeMagnet {
                 me.text = displayText;
             }
         }
-        DivElement myContentDiv = new DivElement();
-        me.append(myContentDiv);
-        bool expanded = false;
+
         //first level is opened
         if(parent == null) {
-            show(myContentDiv, tombstone);
+            show(tombstone);
         }
+        subContainer = new DivElement();
+        me.append(subContainer);
         me.onClick.listen((Event e) {
             e.stopPropagation();
             if(parent != null) {
@@ -66,18 +67,8 @@ class TombstoneFridgeMagnet {
             print("time to select");
             select();
             me.classes.add("tombstoneMagnetSuperSelected");
-
-
             tombstone.redraw();
-            if(!expanded) {
-                show(myContentDiv,tombstone);
-                expanded = true;
-            } else {
-                //TODO when i click on a child technically i'm clicking on me too and i vanish
-               // expanded =false;
-               //hide(myContentDiv);
-                //e.stopPropagation();
-            }
+            show(tombstone);
         });
 
         return me;
@@ -91,7 +82,10 @@ class TombstoneFridgeMagnet {
             me.classes.remove("tombstoneMagnetSuperSelected");
         }
         content.forEach((TombstoneFridgeMagnet child) {
-            child.unselect();
+            if(child != selection) {
+                child.unselect();
+                //child.hide();
+            }
         });
     }
 
@@ -106,18 +100,19 @@ class TombstoneFridgeMagnet {
         }
     }
 
-    void show(Element div, Tombstone tombstone) {
-        print("trying to show ${div.children.length} children");
-        if(div.children.isEmpty) {
+    void show(Tombstone tombstone) {
+        print("trying to show $displayText with tombstone $tombstone, children are ${subContainer.children.length}");
+        if(subContainer.children.isEmpty && tombstone != null) {
             content.forEach((TombstoneFridgeMagnet magnet) {
-                div.append(magnet.makeBuilder(tombstone, this));
+                subContainer.append(magnet.makeBuilder(tombstone, this));
             });
         }
-        div.style.display = "block";
+        subContainer.style.display = "inline-block";
     }
 
-    void hide(Element div) {
-        div.style.display = "none";
+    void hide() {
+        print("trying to hide $displayText");
+        subContainer.style.display = "none";
     }
 
     //chooses shit randomly till it hits an end
@@ -142,7 +137,7 @@ class TombstoneFridgeMagnet {
     //NONE of these get loaded from file becaues this has to be hax proof
 
     static TombstoneFridgeMagnet get topLevelMenu {
-        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, suffix, preposition,conjunctions, interjection, punctuation, phrases,bullshit, blank]);
+        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, adjs, suffix, preposition,conjunctions, interjection, punctuation, phrases,bullshit,gigglesnort, blank]);
 
     }
 
@@ -171,13 +166,14 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("mist", []));
         content.add(new TombstoneFridgeMagnet("land", []));
         content.add(new TombstoneFridgeMagnet("town", []));
-
+        content.add(new TombstoneFridgeMagnet("grave", []));
+        content.add(new TombstoneFridgeMagnet("resting place", []));
+        content.add(new TombstoneFridgeMagnet("tombstone", []));
         return new TombstoneFridgeMagnet("travel", content);
     }
 
     static TombstoneFridgeMagnet get concepts {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
-        content.add(new TombstoneFridgeMagnet("secret", []));
         content.add(new TombstoneFridgeMagnet("gigglesnort", []));
         content.add(new TombstoneFridgeMagnet("myserty", []));
         content.add(new TombstoneFridgeMagnet("mystery", []));
@@ -191,6 +187,9 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("rage", []));
         content.add(new TombstoneFridgeMagnet("blood", []));
         content.add(new TombstoneFridgeMagnet("nowhere", []));
+        content.add(new TombstoneFridgeMagnet("future", []));
+        content.add(new TombstoneFridgeMagnet("past", []));
+        content.add(new TombstoneFridgeMagnet("present", []));
 
         return new TombstoneFridgeMagnet("concept", content);
     }
@@ -240,11 +239,37 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("starve", []));
         content.add(new TombstoneFridgeMagnet("die", []));
         content.add(new TombstoneFridgeMagnet("give", []));
+        content.add(new TombstoneFridgeMagnet("was", []));
         content.add(new TombstoneFridgeMagnet("talk", []));
         content.add(new TombstoneFridgeMagnet("dominance", []));
         return new TombstoneFridgeMagnet("verb", content);
     }
 
+
+    static TombstoneFridgeMagnet get adjs {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("very", []));
+        content.add(new TombstoneFridgeMagnet("secret", []));
+        content.add(new TombstoneFridgeMagnet("ugly", []));
+        content.add(new TombstoneFridgeMagnet("pretty", []));
+        content.add(new TombstoneFridgeMagnet("old", []));
+        content.add(new TombstoneFridgeMagnet("young", []));
+        content.add(new TombstoneFridgeMagnet("new", []));
+        content.add(new TombstoneFridgeMagnet("boring", []));
+        content.add(new TombstoneFridgeMagnet("amazing", []));
+        content.add(new TombstoneFridgeMagnet("shitty", []));
+        content.add(new TombstoneFridgeMagnet("loyal", []));
+        content.add(new TombstoneFridgeMagnet("cold", []));
+        content.add(new TombstoneFridgeMagnet("hungry", []));
+        content.add(new TombstoneFridgeMagnet("tired", []));
+        content.add(new TombstoneFridgeMagnet("hidden", []));
+        content.add(new TombstoneFridgeMagnet("encrypted", []));
+        content.add(new TombstoneFridgeMagnet("lost", []));
+        content.add(new TombstoneFridgeMagnet("found", []));
+        content.add(new TombstoneFridgeMagnet("dead", []));
+
+        return new TombstoneFridgeMagnet("adjective", content);
+    }
     static TombstoneFridgeMagnet get gigglesnort {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("ghosts", []));
@@ -257,6 +282,8 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("null", []));
         content.add(new TombstoneFridgeMagnet("psychopomp", []));
         content.add(new TombstoneFridgeMagnet("yggdrasil", []));
+        content.add(new TombstoneFridgeMagnet("nidhogg", []));
+
         //can't say tree/ wood etc
         content.add(new TombstoneFridgeMagnet("hard brown plant material", []));
         return new TombstoneFridgeMagnet("?????", content);
@@ -296,6 +323,10 @@ class TombstoneFridgeMagnet {
 
     static TombstoneFridgeMagnet get bullshit {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("the", []));
+        content.add(new TombstoneFridgeMagnet("a", []));
+        content.add(new TombstoneFridgeMagnet("an", []));
+        content.add(new TombstoneFridgeMagnet("of", []));
         content.add(new TombstoneFridgeMagnet("lemme smash", []));
         content.add(new TombstoneFridgeMagnet("pepperony and chease", []));
         content.add(new TombstoneFridgeMagnet("is this a", []));
