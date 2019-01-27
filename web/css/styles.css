@@ -106,9 +106,11 @@ html, body {
 }
 
 .tombstoneMagnetSelected{
+    background-color: #999999;
+}
+.tombstoneMagnetSuperSelected{
     background-color: #888888;
 }
-
 
 .statValue{
     text-align: right;

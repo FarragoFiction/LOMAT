@@ -42,13 +42,19 @@ class TombstoneFridgeMagnet {
         if(content.isNotEmpty) {
             me.text = ">$displayText";
         }else {
-            me.text = displayText;
+            if(displayText.isEmpty) {
+                me.text = "BLANK";
+            }else {
+                me.text = displayText;
+            }
         }
         DivElement myContentDiv = new DivElement();
         me.append(myContentDiv);
         bool expanded = false;
-        //TODO when you click one of these it should add all its children to itself?
-        //and also call draw on the tombstone???
+        //first level is opened
+        if(parent == null) {
+            show(myContentDiv, tombstone);
+        }
         me.onClick.listen((Event e) {
             e.stopPropagation();
             if(parent != null) {
@@ -59,6 +65,8 @@ class TombstoneFridgeMagnet {
             //will make sure parents are selected up the chain.
             print("time to select");
             select();
+            me.classes.add("tombstoneMagnetSuperSelected");
+
 
             tombstone.redraw();
             if(!expanded) {
@@ -80,6 +88,7 @@ class TombstoneFridgeMagnet {
         print("trying to unselect $displayText");
         if(me != null) {
             me.classes.remove("tombstoneMagnetSelected");
+            me.classes.remove("tombstoneMagnetSuperSelected");
         }
         content.forEach((TombstoneFridgeMagnet child) {
             child.unselect();
@@ -133,7 +142,7 @@ class TombstoneFridgeMagnet {
     //NONE of these get loaded from file becaues this has to be hax proof
 
     static TombstoneFridgeMagnet get topLevelMenu {
-        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, conjunctions, punctuation, phrases, suffix,bullshit]);
+        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, suffix, preposition,conjunctions, interjection, punctuation, phrases,bullshit, blank]);
 
     }
 
@@ -143,7 +152,12 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("it", []));
         content.add(animate_nouns);
         content.add(travel_nouns);
+        content.add(concepts);
         return new TombstoneFridgeMagnet("noun", content);
+    }
+
+    static TombstoneFridgeMagnet get blank {
+        return new TombstoneFridgeMagnet("", []);
     }
 
     static TombstoneFridgeMagnet get travel_nouns {
@@ -159,6 +173,41 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("town", []));
 
         return new TombstoneFridgeMagnet("travel", content);
+    }
+
+    static TombstoneFridgeMagnet get concepts {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("secret", []));
+        content.add(new TombstoneFridgeMagnet("gigglesnort", []));
+        content.add(new TombstoneFridgeMagnet("myserty", []));
+        content.add(new TombstoneFridgeMagnet("mystery", []));
+        content.add(new TombstoneFridgeMagnet("[REDACTED]", []));
+        content.add(new TombstoneFridgeMagnet("life", []));
+        content.add(new TombstoneFridgeMagnet("void", []));
+        content.add(new TombstoneFridgeMagnet("time", []));
+        content.add(new TombstoneFridgeMagnet("light", []));
+        content.add(new TombstoneFridgeMagnet("space", []));
+        content.add(new TombstoneFridgeMagnet("doom", []));
+        content.add(new TombstoneFridgeMagnet("rage", []));
+        content.add(new TombstoneFridgeMagnet("blood", []));
+        content.add(new TombstoneFridgeMagnet("nowhere", []));
+
+        return new TombstoneFridgeMagnet("concept", content);
+    }
+
+    static TombstoneFridgeMagnet get preposition  {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("like", []));
+        content.add(new TombstoneFridgeMagnet("to", []));
+        content.add(new TombstoneFridgeMagnet("after", []));
+        content.add(new TombstoneFridgeMagnet("before", []));
+        content.add(new TombstoneFridgeMagnet("in", []));
+        content.add(new TombstoneFridgeMagnet("under", []));
+        content.add(new TombstoneFridgeMagnet("around", []));
+        content.add(new TombstoneFridgeMagnet("by", []));
+        content.add(new TombstoneFridgeMagnet("near", []));
+
+        return new TombstoneFridgeMagnet("preposition", content);
     }
 
     static TombstoneFridgeMagnet get animate_nouns {
@@ -226,6 +275,25 @@ class TombstoneFridgeMagnet {
         return new TombstoneFridgeMagnet("conjunction", content);
     }
 
+    static TombstoneFridgeMagnet get interjection {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("wow", []));
+        content.add(new TombstoneFridgeMagnet("oh", []));
+        content.add(new TombstoneFridgeMagnet("now", []));
+        content.add(new TombstoneFridgeMagnet("hey", []));
+        content.add(new TombstoneFridgeMagnet("hmmm", []));
+        content.add(new TombstoneFridgeMagnet("interesting", []));
+        content.add(new TombstoneFridgeMagnet("yes", []));
+        content.add(new TombstoneFridgeMagnet("god", []));
+        content.add(new TombstoneFridgeMagnet("shit", []));
+        content.add(new TombstoneFridgeMagnet("damn", []));
+        content.add(new TombstoneFridgeMagnet("bluh", []));
+        content.add(new TombstoneFridgeMagnet("shhhh", []));
+        content.add(new TombstoneFridgeMagnet("worm", []));
+        content.add(new TombstoneFridgeMagnet("psst", []));
+        return new TombstoneFridgeMagnet("interjection", content);
+    }
+
     static TombstoneFridgeMagnet get bullshit {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("lemme smash", []));
@@ -244,6 +312,8 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("d", [], spaceBefore: false));
         content.add(new TombstoneFridgeMagnet("es", [], spaceBefore: false));
         content.add(new TombstoneFridgeMagnet("est", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet("ly", [], spaceBefore: false));
+
         return new TombstoneFridgeMagnet("suffix", content);
     }
 
@@ -255,6 +325,13 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("?", [], spaceBefore: false));
         content.add(new TombstoneFridgeMagnet(":", [], spaceBefore: false));
         content.add(new TombstoneFridgeMagnet(";", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet(")", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet("(", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet("=", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet("D", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet("P", [], spaceBefore: false));
+        content.add(new TombstoneFridgeMagnet(">", [], spaceBefore: false));
+
         return new TombstoneFridgeMagnet("punctuation", content);
     }
 
