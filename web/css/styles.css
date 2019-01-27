@@ -101,9 +101,12 @@ html, body {
 }
 
 .tombstoneMagnet:hover{
-    background-color: #888888;
     text-decoration: underline;
 
+}
+
+.tombstoneMagnetSelected{
+    background-color: #888888;
 }
 
 

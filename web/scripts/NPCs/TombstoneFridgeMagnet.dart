@@ -13,6 +13,8 @@ class TombstoneFridgeMagnet {
     //so i can have compound words like play-ed
     bool spaceBefore;
     TombstoneFridgeMagnet selection;
+    Element me;
+    TombstoneFridgeMagnet parent;
     List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
 
     bool get isRoot => content.isEmpty;
@@ -33,8 +35,9 @@ class TombstoneFridgeMagnet {
     Element makeBuilder(Tombstone tombstone, TombstoneFridgeMagnet parent) {
         //initial state is just a box with your display text in it
         //its only if you get clicked that things change
+        this.parent =parent;
         print("making a builder for $displayText");
-        DivElement me = new DivElement()..classes.add("tombstoneMagnet");
+        me = new DivElement()..classes.add("tombstoneMagnet");
 
         if(content.isNotEmpty) {
             me.text = ">$displayText";
@@ -49,7 +52,12 @@ class TombstoneFridgeMagnet {
         me.onClick.listen((Event e) {
             if(parent != null) {
                 parent.selection = this;
+                //makes sure sibling are no longer selected
+                parent.unselect();
             }
+            //will make sure parents are selected up the chain.
+            select();
+
             tombstone.redraw();
             if(!expanded) {
                 show(myContentDiv,tombstone);
@@ -63,6 +71,28 @@ class TombstoneFridgeMagnet {
         });
 
         return me;
+    }
+
+    //unselect my children too
+    void unselect() {
+        print("trying to unselect $displayText");
+        if(me != null) {
+            me.classes.remove("tombstoneMagnetSelected");
+        }
+        content.forEach((TombstoneFridgeMagnet child) {
+            child.unselect();
+        });
+    }
+
+    //select my parent too (who will select their parent etc)
+    void select() {
+        print("trying to select $displayText");
+        if(me != null) {
+            me.classes.add("tombstoneMagnetSelected");
+        }
+        if(parent != null) {
+            parent.select();
+        }
     }
 
     void show(Element div, Tombstone tombstone) {
