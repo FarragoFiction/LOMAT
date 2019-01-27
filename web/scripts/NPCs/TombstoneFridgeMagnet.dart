@@ -251,28 +251,101 @@ class TombstoneFridgeMagnet {
 
     static TombstoneFridgeMagnet get adjs {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
-        content.add(new TombstoneFridgeMagnet("very", []));
-        content.add(new TombstoneFridgeMagnet("secret", []));
+        content.add(quantity);
+        content.add(quality);
+        content.add(condition);
+        content.add(shape);
+        content.add(age);
+        content.add(material);
+        content.add(purpose);
+        return new TombstoneFridgeMagnet("adjective", content);
+    }
+
+    static TombstoneFridgeMagnet get quantity {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("lots", []));
+        content.add(new TombstoneFridgeMagnet("few", []));
+        content.add(new TombstoneFridgeMagnet("many", []));
+        content.add(new TombstoneFridgeMagnet("most", []));
+        content.add(new TombstoneFridgeMagnet("every", []));
+        content.add(new TombstoneFridgeMagnet("all", []));
+        content.add(new TombstoneFridgeMagnet("none", []));
+        content.add(new TombstoneFridgeMagnet("always", []));
+        content.add(new TombstoneFridgeMagnet("almost", []));
+        return new TombstoneFridgeMagnet("quantity", content);
+    }
+
+    static TombstoneFridgeMagnet get quality {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("ugly", []));
         content.add(new TombstoneFridgeMagnet("pretty", []));
-        content.add(new TombstoneFridgeMagnet("old", []));
-        content.add(new TombstoneFridgeMagnet("young", []));
-        content.add(new TombstoneFridgeMagnet("new", []));
+        content.add(new TombstoneFridgeMagnet("very", []));
         content.add(new TombstoneFridgeMagnet("boring", []));
         content.add(new TombstoneFridgeMagnet("amazing", []));
         content.add(new TombstoneFridgeMagnet("shitty", []));
-        content.add(new TombstoneFridgeMagnet("loyal", []));
-        content.add(new TombstoneFridgeMagnet("cold", []));
-        content.add(new TombstoneFridgeMagnet("hungry", []));
-        content.add(new TombstoneFridgeMagnet("tired", []));
-        content.add(new TombstoneFridgeMagnet("hidden", []));
-        content.add(new TombstoneFridgeMagnet("encrypted", []));
+        return new TombstoneFridgeMagnet("quality", content);
+    }
+
+    static TombstoneFridgeMagnet get condition {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("lost", []));
         content.add(new TombstoneFridgeMagnet("found", []));
         content.add(new TombstoneFridgeMagnet("dead", []));
+        content.add(new TombstoneFridgeMagnet("cold", []));
+        content.add(new TombstoneFridgeMagnet("hungry", []));
+        content.add(new TombstoneFridgeMagnet("tired", []));
+        content.add(new TombstoneFridgeMagnet("happy", []));
+        content.add(new TombstoneFridgeMagnet("sad", []));
+        content.add(new TombstoneFridgeMagnet("excited", []));
 
-        return new TombstoneFridgeMagnet("adjective", content);
+        return new TombstoneFridgeMagnet("condition", content);
     }
+
+    static TombstoneFridgeMagnet get shape {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("round", []));
+        content.add(new TombstoneFridgeMagnet("big", []));
+        content.add(new TombstoneFridgeMagnet("small", []));
+        content.add(new TombstoneFridgeMagnet("square", []));
+        content.add(new TombstoneFridgeMagnet("tall", []));
+        content.add(new TombstoneFridgeMagnet("short", []));
+        return new TombstoneFridgeMagnet("shape", content);
+    }
+
+    static TombstoneFridgeMagnet get age {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("old", []));
+        content.add(new TombstoneFridgeMagnet("young", []));
+        content.add(new TombstoneFridgeMagnet("new", []));
+        content.add(new TombstoneFridgeMagnet("childish", []));
+        content.add(new TombstoneFridgeMagnet("mature", []));
+
+        return new TombstoneFridgeMagnet("age", content);
+    }
+
+    static TombstoneFridgeMagnet get material {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("icy", []));
+        content.add(new TombstoneFridgeMagnet("white", []));
+        content.add(new TombstoneFridgeMagnet("red", []));
+        content.add(new TombstoneFridgeMagnet("blue", []));
+        content.add(new TombstoneFridgeMagnet("yellow", []));
+        content.add(new TombstoneFridgeMagnet("dark", []));
+        content.add(new TombstoneFridgeMagnet("light", []));
+        return new TombstoneFridgeMagnet("quantity", content);
+    }
+
+    static TombstoneFridgeMagnet get purpose {
+        List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
+        content.add(new TombstoneFridgeMagnet("secret", []));
+        content.add(new TombstoneFridgeMagnet("loyal", []));
+        content.add(new TombstoneFridgeMagnet("hidden", []));
+        content.add(new TombstoneFridgeMagnet("encrypted", []));
+        return new TombstoneFridgeMagnet("purpose", content);
+    }
+
+
+
     static TombstoneFridgeMagnet get gigglesnort {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("ghosts", []));
