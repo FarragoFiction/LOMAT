@@ -74,9 +74,11 @@ class Tombstone {
         TombstoneFridgeMagnet seventh = TombstoneFridgeMagnet.topLevelMenu;
         TombstoneFridgeMagnet eighth = TombstoneFridgeMagnet.topLevelMenu;
         List<TombstoneFridgeMagnet> tmp = [first,second,third,fourth,fifth,sixth,seventh,eighth];
+        /* lets me test things work fast
         for(TombstoneFridgeMagnet t in tmp) {
             t.randomChoice();
         }
+        */
         content.addAll(tmp);
     }
 
@@ -178,7 +180,8 @@ class Tombstone {
     }
 
     Element makeBuilder() {
-        DivElement container = new DivElement();
+        print("making builder");
+        DivElement container = new DivElement()..classes.add("tombstoneBuilderContainer");
         //for each content object, draw it (it'll handle making a menu box thingy)
         content.forEach((TombstoneFridgeMagnet magnet) {
             container.append(magnet.makeBuilder());
@@ -186,33 +189,6 @@ class Tombstone {
         return container;
     }
 
-    //don't get any of these from file or people can hax
-    Future<List<String>> get nouns async {
-        List<String> ret = <String>[];
-        ret.add("bird");
-        ret.add("ghost");
-        ret.add("seagull");
-        ret.add("party member");
-        return ret;
-    }
-
-    Future<List<String>> get verbs async {
-        List<String> ret = <String>[];
-        ret.add("sqwawk");
-        ret.add("chatter");
-        ret.add("steal");
-        ret.add("clack");
-        return ret;
-    }
-
-    Future<List<String>> get adj async {
-        List<String> ret = <String>[];
-        ret.add("best");
-        ret.add("most");
-        ret.add("most average");
-        ret.add("flavorful");
-        return ret;
-    }
 
 
 }

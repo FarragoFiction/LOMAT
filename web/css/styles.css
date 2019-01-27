@@ -81,6 +81,31 @@ html, body {
 
 }
 
+.tombstoneBuilderContainer{
+    display: block;
+    width: 100%;
+    margin: 5px;
+    background-color: #6aa7de;
+    border: 3px solid #00164f;
+}
+
+.tombstoneMagnet{
+    padding: 5px;
+    width: 100px;
+    border: 3px solid #5f5f7f;
+    background-color: #9fa2ab;
+    border-radius: 13px;
+    display: inline-block;
+    color: #5f5f7f;
+}
+
+.tombstoneMagnet:hover{
+    background-color: #888888;
+    text-decoration: underline;
+
+}
+
+
 .statValue{
     text-align: right;
     display: inline-block;

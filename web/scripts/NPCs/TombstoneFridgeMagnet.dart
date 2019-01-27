@@ -29,12 +29,14 @@ class TombstoneFridgeMagnet {
     TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
 
     Element makeBuilder() {
-        //make a div
-        //in that div is all my contents
-        //with a header box that has my display text?
-        //no that won't work...
-        //think of it from the other side
-        
+        //initial state is just a box with your display text in it
+        //its only if you get clicked that things change
+        print("making a builder for $displayText");
+        DivElement me = new DivElement()..classes.add("tombstoneMagnet");
+        me.text = displayText;
+
+        return me;
+
     }
 
     //chooses shit randomly till it hits an end
@@ -59,7 +61,7 @@ class TombstoneFridgeMagnet {
     //NONE of these get loaded from file becaues this has to be hax proof
 
     static TombstoneFridgeMagnet get topLevelMenu {
-        return new TombstoneFridgeMagnet("???", <TombstoneFridgeMagnet>[nouns, verbs, conjunctions, punctuation, phrases, suffix,bullshit]);
+        return new TombstoneFridgeMagnet("word", <TombstoneFridgeMagnet>[nouns, verbs, conjunctions, punctuation, phrases, suffix,bullshit]);
 
     }
 
