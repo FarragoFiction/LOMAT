@@ -194,6 +194,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("past", []));
         content.add(new TombstoneFridgeMagnet("present", []));
         content.add(new TombstoneFridgeMagnet("corruption", []));
+        content.add(new TombstoneFridgeMagnet("loss", []));
         content.add(new TombstoneFridgeMagnet("purification", []));
 
         return new TombstoneFridgeMagnet("concept", content);
@@ -220,6 +221,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("snake", []));
         content.add(new TombstoneFridgeMagnet("bird", []));
         content.add(new TombstoneFridgeMagnet("ghost", []));
+        content.add(new TombstoneFridgeMagnet("soul", []));
         content.add(new TombstoneFridgeMagnet("it", []));
         content.add(new TombstoneFridgeMagnet("human", []));
         content.add(new TombstoneFridgeMagnet("wolf", []));

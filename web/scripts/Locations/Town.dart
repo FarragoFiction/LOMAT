@@ -22,7 +22,8 @@ import 'package:CommonLib/Random.dart';
 //and a list of 'dialogue' options talk/trade/travel/hunt
 //a town is also not parallax
 //but might have gently wobbling mist (like hunting?)
-
+//IMPORTANT  predesigned towns (besides secret ones) don't show up at all in the early or mid game
+//only their remixes do because of what fenrir did
 class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
     //TODO load from localStorage
