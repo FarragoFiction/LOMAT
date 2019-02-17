@@ -188,7 +188,7 @@ class Tombstone {
     }
 
     Element makeBuilder() {
-        print("making builder");
+        //print("making builder");
         DivElement container = new DivElement()..classes.add("tombstoneBuilderContainer");
         //for each content object, draw it (it'll handle making a menu box thingy)
         content.forEach((TombstoneFridgeMagnet magnet) {

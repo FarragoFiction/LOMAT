@@ -37,7 +37,7 @@ class TombstoneFridgeMagnet {
         //initial state is just a box with your display text in it
         //its only if you get clicked that things change
         this.parent =parent;
-        print("making a builder for $displayText");
+        //print("making a builder for $displayText");
         me = new DivElement()..classes.add("tombstoneMagnet");
 
         if(content.isNotEmpty) {
