@@ -1,3 +1,4 @@
+import '../CipherEngine.dart';
 import 'LOMATNPC.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
@@ -22,6 +23,7 @@ class TalkyResponse extends TalkyItem {
     @override
     void display(Element cont) {
         super.display(cont);
+        CipherEngine.applyRandom(div);
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
         npc.emote(associatedEmotion);
         for(TalkyItem talkyItem in talkyLevel.talkyItems) {

@@ -22,7 +22,7 @@ class SoundControl { //to major tom
 
 
     AudioElement soundEffects = new AudioElement();
-    AudioElement bgMusic = new AudioElement();
+    AudioElement bgMusic = new AudioElement()..volume = 0.1;
 
     //manicInsomniac
     void playMusic(String locationWithoutExtension) {

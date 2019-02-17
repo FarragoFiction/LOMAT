@@ -1,3 +1,4 @@
+import '../CipherEngine.dart';
 import '../Game.dart';
 import '../NPCs/LOMATNPC.dart';
 import '../Sections/TalkySection.dart';
@@ -242,6 +243,7 @@ class Town extends PhysicalLocation {
             before = "<Br><br>You could swear you have been here before.";
         }
         flavorTextElement.setInnerHtml("$introductionText$before");
+        CipherEngine.applyRandom(flavorTextElement);
         container.append(flavorTextElement);
   }
 

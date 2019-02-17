@@ -1,5 +1,6 @@
 //'dialogue' is too easy to typo, i am officially declaring 'talky' just as good.
 
+import '../CipherEngine.dart';
 import '../SoundControl.dart';
 import 'TalkyLevel.dart';
 import 'TalkyResponse.dart';

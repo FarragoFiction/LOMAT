@@ -88,7 +88,7 @@ class MouseOverSpecificWordCipher extends CipherEngine {
 
     String chosenKey;
     //simple examples, all lower case okay?
-    Map<String,String> maps = {"[redacted]":"tree","titan":"fenrir","reaper":"prince"};
+    Map<String,String> maps = {"[redacted]":"tree","titan":"fenrir","reaper":"prince","soul":"bones"};
 
 
     @override
