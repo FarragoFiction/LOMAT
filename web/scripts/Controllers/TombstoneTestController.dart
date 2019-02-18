@@ -11,6 +11,7 @@ void main() {
     CipherEngine.applyRandom(otherTest);
     for(int i = 0; i<5; i++) {
         GullAnimation gull = new GullAnimation("pimp");
+        gull.frameRateInMS = 20*i+20;
         div.append(gull.element);
     }
 
