@@ -63,7 +63,7 @@ class AnimationLayer {
             buffer.context2D.drawImage(img,0,0);
             //CanvasElement canvas, Palette source, Palette replacement
             if(palette != null) {
-                Renderer.swapPalette(canvas, paletteSource, palette);
+                Renderer.swapPalette(buffer, paletteSource, palette);
             }
             elements.add(buffer);
         }else {
