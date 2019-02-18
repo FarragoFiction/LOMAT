@@ -40,7 +40,7 @@ class AnimationObject {
 class AnimationLayer {
     List<String> frameLocations;
     //lazy load each frame as you need it, only add to elements when its there, same order as locations
-    List<ImageElement> elements = new List<ImageElement>();
+    List<CanvasElement> elements = new List<CanvasElement>();
     Palette palette;
     Palette paletteSource;
 
@@ -56,18 +56,20 @@ class AnimationLayer {
     }
 
     Future<Null> render(CanvasElement canvas) async {
-        ImageElement img;
+        CanvasElement buffer;
         if(animationFrameIndex > elements.length-1) {
-            img = await Loader.getResource(frameLocations[animationFrameIndex]);
-            elements.add(img);
+            ImageElement img = await Loader.getResource(frameLocations[animationFrameIndex]);
+            CanvasElement buffer = new CanvasElement(width: canvas.width, height: canvas.height);
+            buffer.context2D.drawImage(img,0,0);
+            //CanvasElement canvas, Palette source, Palette replacement
+            if(palette != null) {
+                Renderer.swapPalette(canvas, paletteSource, palette);
+            }
+            elements.add(buffer);
         }else {
-            img = elements[animationFrameIndex];
+            buffer = elements[animationFrameIndex];
         }
-        canvas.context2D.drawImage(img,0,0);
-        //CanvasElement canvas, Palette source, Palette replacement
-        if(palette != null) {
-            Renderer.swapPalette(canvas, paletteSource, palette);
-        }
+        canvas.context2D.drawImage(buffer,0,0);
         incrementIndex();
     }
 }
@@ -119,9 +121,13 @@ class GullAnimation  extends AnimationObject{
 
     AnimationLayer hatLayer() {
         List<String> ret = new List<String>();
-        ret.add("${baseLocationHat}${hatBase}0.png");
-        for(int i = 0; i<17; i++) {
-            ret.add("${baseLocationHat}${hatBase}1.png");
+        for(int i = 0; i<18; i++) {
+            if(i%4!=0){
+                ret.add("${baseLocationHat}${hatBase}0.png");
+            }else{
+                ret.add("${baseLocationHat}${hatBase}1.png");
+
+            }
         }
         return new AnimationLayer(ret, null,null);
     }
