@@ -9,7 +9,7 @@ void main() {
     Element otherTest = new DivElement()..text = "it is not the Titan, nor the Reaper.";
     div.append(otherTest);
     CipherEngine.applyRandom(otherTest);
-    for(int i = 0; i<13; i++) {
+    for(int i = 0; i<5; i++) {
         GullAnimation gull = new GullAnimation("pimp");
         div.append(gull.element);
     }
