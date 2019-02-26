@@ -130,7 +130,7 @@ class Game
         ret.endText = " well, beats looking at a blank white screen, you suppose.";
         ret.playList = <String>["Trails_Slice1","Trails_Slice2","Trails_Slice3","Trails_Slice4","Trails_Slice5","Trails_Slice6"];
         ret.foreground = "${TownGenome.foregroundBase}/2.png";
-        ret.midGround = "${TownGenome.midgroundBase}/2.png";
+        ret.midGround = "${TownGenome.midgroundBase}/4.png";
         ret.ground = "${TownGenome.groundBase}/1.png";
         ret.background = "${TownGenome.backgroundBase}/1.png";
         DelayEffect smallDelay = new DelayEffect(1);

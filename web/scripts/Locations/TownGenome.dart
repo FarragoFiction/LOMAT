@@ -23,7 +23,7 @@ class TownGenome {
     static int maxBGs = 4;
     static int maxGs =2;
     static int maxMGs = 2;
-    static int maxFGs = 3;
+    static int maxFGs = 4;
     //TODO what kinds of enemies can be hunted should also be a gene
     //TODO breed two towns together because i have problems and that problem is loving genetic algorithms
     //TODO add list of npc genomes
