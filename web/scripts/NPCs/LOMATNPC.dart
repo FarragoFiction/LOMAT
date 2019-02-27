@@ -1,3 +1,4 @@
+import '../Locations/Road.dart';
 import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
 import '../Sections/PartySection.dart';
@@ -7,6 +8,7 @@ import 'TalkyLevel.dart';
 import 'TalkyQuestion.dart';
 import 'TalkyRecruit.dart';
 import 'TalkyResponse.dart';
+import 'Tombstone.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -85,7 +87,8 @@ class LOMATNPC {
         displayImage.src = imageSrc;
     }
 
-    void die(String cod) {
+    //takes in a road becaue tombstones go on roads
+    void die(String cod, Road road) {
         causeOfDeath = cod;
         hp = -1;
         //okay what needs to happen here is the road needs to plzStopKThanxBai and then
@@ -93,7 +96,13 @@ class LOMATNPC {
         //and also the road div gets hidden and the builder gets created
         //there should be a button on the builder to tear down the builder, and give control back to the road
         //(as well as rendering the mini tombstone on the road)
-        window.alert("time for tombstone builder");
+        road.stop(); //you can turn this on again later
+        //it LOOKS like its still going, but the progresion is turned off which is what matters
+        //TODO i need to hide the trail when the road stops
+        //TODO i need to show the trail when the road starts
+        //TODO need to display the tombstone and shove the consort into it
+        //Tombstone grave = new Tombstone();
+        window.alert("time for tombstone builder, will pause the road");
     }
 
     void displayDialogue(Element container, LOMATSection screen) {

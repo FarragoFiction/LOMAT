@@ -24,7 +24,7 @@ class InstaKillEffect extends Effect {
     Game game = Game.instance;
     LOMATNPC target = new Random().pickFrom(game.partyMembers);
     targetName = target.name;
-    target.die(causeOfDeath);
+    target.die(causeOfDeath, road);
   }
 
   @override

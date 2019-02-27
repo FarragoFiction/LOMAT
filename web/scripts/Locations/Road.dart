@@ -15,7 +15,7 @@ class Road {
     static int minTimeInS = 1;
     static int maxTimeInS = 10;
     //manic says multiple of 3.43 seconds are best for music reasons
-    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 10;
+    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 100;
 
     Town sourceTown;
     Town destinationTown;
@@ -74,7 +74,20 @@ class Road {
         new Timer(new Duration(milliseconds: 1000), () => timerLoop());
     }
 
+    void stop() {
+        window.alert("going to stop");
+        plzStopKThnxBai = true;
+    }
+
+    void start() {
+        plzStopKThnxBai = false;
+    }
+
     Future<Null> timerLoop() async {
+        print("plz stop is $plzStopKThnxBai");
+        if(plzStopKThnxBai == true) {
+            return;
+        }
         trail.updateLabel();
         print("elapsed time is $elapsedTime and max time is $maxElapsedTimeInMS");
         if(elapsedTime > maxElapsedTimeInMS && plzStopKThnxBai == false) {
