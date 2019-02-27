@@ -88,6 +88,11 @@ class LOMATNPC {
     void die(String cod) {
         causeOfDeath = cod;
         hp = -1;
+        //okay what needs to happen here is the road needs to plzStopKThanxBai and then
+        //a tombstone is created and added to the game list while the consort is removed from the party (added to the tombstone)
+        //and also the road div gets hidden and the builder gets created
+        //there should be a button on the builder to tear down the builder, and give control back to the road
+        //(as well as rendering the mini tombstone on the road)
         window.alert("time for tombstone builder");
     }
 
