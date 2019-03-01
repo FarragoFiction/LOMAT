@@ -107,7 +107,6 @@ class LOMATNPC {
         Game.instance.eject(this);
         grave.drawSelf(Game.instance.container);
         road.trail.hide();
-        window.alert("time for tombstone builder, will pause the road");
     }
 
     void displayDialogue(Element container, LOMATSection screen) {

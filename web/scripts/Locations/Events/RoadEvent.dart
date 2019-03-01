@@ -1,5 +1,6 @@
 //displays a popup if triggered and applies an event to the game.
 
+import '../../Game.dart';
 import '../Road.dart';
 import 'Effects/DelayEffect.dart';
 import 'Effects/Effect.dart';
@@ -29,8 +30,9 @@ class RoadEvent {
         //TODO make this nice and styled and everything and go away on dismiss
         //TODO some events should cause effects on screen like stopping the
         //animation or displaying a grave stone or whatever.
-        DivElement popupContainer = new DivElement()..classes.add("flavorText");
-        road.container.append(popupContainer);
+        DivElement popupContainer = new DivElement()..classes.add("event");
+        //don't append to the road cuz things like deaths will hide it and then you wont see this
+        Game.instance.container.append(popupContainer);
 
         titleElement = new DivElement();
         titleElement.setInnerHtml("<h2>$title</h2>");
@@ -40,7 +42,7 @@ class RoadEvent {
         flavorTextElement.setInnerHtml(fullFlavorText);
         popupContainer.append(flavorTextElement);
 
-        road.container.onClick.listen((Event e)
+        Game.instance.container.onClick.listen((Event e)
         {
             popupContainer.remove();
         });

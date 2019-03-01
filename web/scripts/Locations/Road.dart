@@ -75,7 +75,7 @@ class Road {
     }
 
     void stop() {
-        window.alert("going to stop");
+        //window.alert("going to stop");
         plzStopKThnxBai = true;
     }
 

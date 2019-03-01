@@ -20,7 +20,7 @@ class InstaKillEffect extends Effect {
     //pick a random npc
   @override
   void apply(Road road) {
-    print("applying arrive effect.");
+    print("applying kill effect.");
     Game game = Game.instance;
     LOMATNPC target = new Random().pickFrom(game.partyMembers);
     targetName = target.name;
