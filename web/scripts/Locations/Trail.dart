@@ -62,6 +62,14 @@ class Trail extends PhysicalLocation {
 
   }
 
+  void hide() {
+        container.style.display = "none";
+  }
+
+  void show() {
+      container.style.display = "show";
+  }
+
   void updateLabel() {
       labelElement.text = "${road.label}}";
   }

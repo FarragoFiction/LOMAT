@@ -64,6 +64,12 @@ class Game
         return true;
     }
 
+    //i imagine they get shot out physics style tbh
+    void eject(LOMATNPC npc) {
+        partyMembers.remove(npc);
+        partySection.update();
+    }
+
     void addFunds(int amount) {
         _funds += amount;
         syncMoney();
@@ -77,10 +83,10 @@ class Game
     }
 
     Future testNPCs() async {
-        partyMembers.add(await LOMATNPC.generateRandomNPC(1)..hp =50);
-        partyMembers.add(await LOMATNPC.generateRandomNPC(2)..hp =15);
-        partyMembers.add(await LOMATNPC.generateRandomNPC(3)..hp = 0);
-        partyMembers.add(await LOMATNPC.generateRandomNPC(4)..hp =88);
+        partyMembers.add(await LOMATNPC.generateRandomNPC(1)..hp =50..name = "Firsty");
+        partyMembers.add(await LOMATNPC.generateRandomNPC(2)..hp =15..name = "Secondy");
+        partyMembers.add(await LOMATNPC.generateRandomNPC(3)..hp = 0..name = "Thirdy");
+        partyMembers.add(await LOMATNPC.generateRandomNPC(4)..hp =88..name="Fourthy");
         if(!partySectionDisplayed) {
             displayPartySection();
         }

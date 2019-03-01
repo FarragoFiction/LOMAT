@@ -1,3 +1,4 @@
+import '../Game.dart';
 import '../Locations/Road.dart';
 import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
@@ -101,7 +102,11 @@ class LOMATNPC {
         //TODO i need to hide the trail when the road stops
         //TODO i need to show the trail when the road starts
         //TODO need to display the tombstone and shove the consort into it
-        //Tombstone grave = new Tombstone();
+        Tombstone grave = new Tombstone();
+        grave.npc = this;
+        Game.instance.eject(this);
+        grave.drawSelf(Game.instance.container);
+        road.trail.hide();
         window.alert("time for tombstone builder, will pause the road");
     }
 
@@ -158,7 +163,7 @@ class LOMATNPC {
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         List<String> avatars = <String>["classic","red","blue","yellow"];
         String name = await randomName();
-        LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/happy","images/Seagulls/neutral","images/Seagulls/sad", level);
+        LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/oldshit/happy","images/Seagulls/oldshit/neutral","images/Seagulls/oldshit/sad", level);
 
 
         List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];

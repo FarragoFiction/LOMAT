@@ -43,7 +43,7 @@ class Tombstone {
     String epilogue = "They died of $CODTAG.";
 
     Tombstone() {
-        makeTestContent();
+        init();
     }
 
     Future<Null> drawSelf(Element container) async {
@@ -64,7 +64,7 @@ class Tombstone {
         cachedCanvas.context2D.drawImage(tmp,0,0);
     }
 
-    void makeTestContent() {
+    void init() {
         //these have no children so test that first
         //TODO have at least one with children, test it drills down right
         /*
@@ -83,9 +83,9 @@ class Tombstone {
         TombstoneFridgeMagnet eighth = TombstoneFridgeMagnet.topLevelMenu;
         List<TombstoneFridgeMagnet> tmp = [first,second,third,fourth,fifth,sixth,seventh,eighth];
         //lets me test things work fast
-        /*for(TombstoneFridgeMagnet t in tmp) {
+        for(TombstoneFridgeMagnet t in tmp) {
             t.randomChoice();
-        }*/
+        }
 
         content.addAll(tmp);
     }
