@@ -1,5 +1,6 @@
 import '../../Road.dart';
 import 'Effect.dart';
+import 'dart:html';
 
 class ArriveEffect extends Effect {
     @override
@@ -13,7 +14,7 @@ class ArriveEffect extends Effect {
     ArriveEffect(int this.amount);
 
   @override
-  void apply(Road road) {
+  void apply(Road road, Element popup) {
     print("applying arrive effect.");
     road.applyArriveEffect();
   }

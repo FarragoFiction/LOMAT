@@ -1,5 +1,6 @@
 import '../../Road.dart';
 import 'Effect.dart';
+import 'dart:html';
 
 class DelayEffect extends Effect {
     //manic says things should stop at measure marks which are 3.43 seconds for music reasons
@@ -17,7 +18,7 @@ class DelayEffect extends Effect {
     }
 
   @override
-  void apply(Road road) {
+  void apply(Road road, Element popup) {
     print("applying delay effect.");
     road.addDelay(amount);
   }

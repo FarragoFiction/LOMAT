@@ -1,6 +1,7 @@
 //displays a popup if triggered and applies an event to the game.
 
 import '../../Game.dart';
+import '../../SoundControl.dart';
 import '../Road.dart';
 import 'Effects/DelayEffect.dart';
 import 'Effects/Effect.dart';
@@ -13,8 +14,10 @@ class RoadEvent {
     //things like "Bitten by ANIMALNOUN" or whatever.
     //allowed to be true random or this shit would get boring.
     Random random = new Random();
+    static String PARTYMEMBER = "PARTYMEMBER"; //to replace
     String title = "???";
     String flavorText = "An event happens!!!";
+    DivElement container;
     String get fullFlavorText {
         return "$flavorText <br><br>${effect.flavorText}";
     }
@@ -29,22 +32,24 @@ class RoadEvent {
     void popup(Road road) {
         //TODO make this nice and styled and everything and go away on dismiss
         //TODO some events should cause effects on screen like stopping the
+        window.alert("???");
         //animation or displaying a grave stone or whatever.
-        DivElement popupContainer = new DivElement()..classes.add("event");
+        DivElement container = new DivElement()..classes.add("event");
         //don't append to the road cuz things like deaths will hide it and then you wont see this
-        Game.instance.container.append(popupContainer);
+        Game.instance.container.append(container);
 
         titleElement = new DivElement();
         titleElement.setInnerHtml("<h2>$title</h2>");
-        popupContainer.append(titleElement);
+        container.append(titleElement);
 
         flavorTextElement = new DivElement();
         flavorTextElement.setInnerHtml(fullFlavorText);
-        popupContainer.append(flavorTextElement);
+        container.append(flavorTextElement);
+        SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
 
         Game.instance.container.onClick.listen((Event e)
         {
-            popupContainer.remove();
+            container.remove();
         });
 
     }
@@ -53,7 +58,7 @@ class RoadEvent {
         print("checking trigger for event $title");
         if(random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
             //effect will set relevant info like target name, have it go first
-            effect.apply(road);
+            effect.apply(road,container);
             popup(road);
             return true;
         }

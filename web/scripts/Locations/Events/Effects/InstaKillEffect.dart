@@ -1,7 +1,9 @@
 import '../../../Game.dart';
 import '../../../NPCs/LOMATNPC.dart';
 import '../../Road.dart';
+import '../RoadEvent.dart';
 import 'Effect.dart';
+import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 class InstaKillEffect extends Effect {
@@ -19,10 +21,11 @@ class InstaKillEffect extends Effect {
 
     //pick a random npc
   @override
-  void apply(Road road) {
+  void apply(Road road, Element popup) {
     print("applying kill effect.");
     Game game = Game.instance;
     LOMATNPC target = new Random().pickFrom(game.partyMembers);
+    popup.text.replaceAll("${RoadEvent.PARTYMEMBER}","${target.name}");
     targetName = target.name;
     target.die(causeOfDeath, road);
   }

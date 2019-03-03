@@ -149,10 +149,11 @@ class Game
         DelayEffect mediumEffect = new DelayEffect(2);
         DelayEffect largeEffect = new DelayEffect(3);
         ret.events = new List<RoadEvent>();
-        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking a party member.", new InstaKillEffect("lightning to the face"), 0.5));
+        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 5));
+        ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.5));
 
         ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
-        ret.events.add(new RoadEvent("Get Homaged","One of your currently nonexistant party members gets dysentery or something.", mediumEffect, 0.25));
+        ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new InstaKillEffect("dysentery"), 0.25));
         ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.05));
 
         return ret;

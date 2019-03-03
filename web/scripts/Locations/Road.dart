@@ -98,7 +98,7 @@ class Road {
         print("elapsed time is $elapsedTime and max time is $maxElapsedTimeInMS");
         if(elapsedTime > maxElapsedTimeInMS && plzStopKThnxBai == false) {
             //handles suddenly arriving out of nowhere.
-            new ArriveEffect(0).apply(this);
+            new ArriveEffect(0).apply(this,null);
         }else {
             progressTime();
         }
