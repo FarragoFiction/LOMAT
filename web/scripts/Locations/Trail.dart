@@ -67,7 +67,7 @@ class Trail extends PhysicalLocation {
   }
 
   void show() {
-      container.style.display = "show";
+      container.style.display = "inline-block";
   }
 
   void updateLabel() {

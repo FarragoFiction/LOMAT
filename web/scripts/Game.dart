@@ -8,6 +8,7 @@ import 'NPCs/LOMATNPC.dart';
 import 'NPCs/Tombstone.dart';
 import 'Sections/PartySection.dart';
 import 'Sections/TalkySection.dart';
+import 'SoundControl.dart';
 import 'dart:async';
 import 'dart:html';
 
@@ -62,6 +63,8 @@ class Game
         if(partyMembers.length >= maxPartySize) {
             return false;
         }
+        SoundControl.instance.playSoundEffect("Dead_Jingle");
+
         partyMembers.add(npc);
         partySection.update();
         return true;

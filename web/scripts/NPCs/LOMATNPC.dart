@@ -3,6 +3,7 @@ import '../Locations/Road.dart';
 import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
 import '../Sections/PartySection.dart';
+import '../SoundControl.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -105,6 +106,7 @@ class LOMATNPC {
         Tombstone grave = new Tombstone();
         grave.npc = this;
         Game.instance.eject(this);
+        SoundControl.instance.playSoundEffect("Dead_Jingle");
         grave.drawSelf(Game.instance.container, road);
     }
 
