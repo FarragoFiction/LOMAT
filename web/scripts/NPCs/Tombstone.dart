@@ -6,6 +6,8 @@
 //TODO make page just for testing the builder in this
 
 import '../Game.dart';
+import '../Locations/Layers/ProceduralLayerParallax.dart';
+import '../Locations/PhysicalLocation.dart';
 import '../Locations/Road.dart';
 import 'LOMATNPC.dart';
 import 'TombstoneFridgeMagnet.dart';
@@ -83,6 +85,7 @@ class Tombstone {
         me.remove();
         me = null; //for garbage collection probably.
         road.start(); //will start up animation and dhow it too
+        spawnTrailsona(road.trail);
     }
 
     Future<Null> redraw() async {
@@ -117,6 +120,12 @@ class Tombstone {
 
         content.addAll(tmp);
     }
+
+    ProceduralLayerParallax spawnTrailsona(PhysicalLocation parent) {
+        //y is from top
+        return new ProceduralLayerParallax(600, 475,100,false, "images/tombstone.png", parent);
+    }
+
 
 
     String get npcName {
