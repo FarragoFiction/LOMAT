@@ -5,6 +5,8 @@
 //but yes , TODO if the cause of death is null the Tombstone tears itself down.
 //TODO make page just for testing the builder in this
 
+import '../Game.dart';
+import '../Locations/Road.dart';
 import 'LOMATNPC.dart';
 import 'TombstoneFridgeMagnet.dart';
 import 'dart:async';
@@ -42,11 +44,15 @@ class Tombstone {
     //the rest is procedural.
     String epilogue = "They died of $CODTAG.";
 
+    //need to match at least two of these for this to spawn
+    //no repeats plz
+    Set<String> townNames = new Set<String>();
+
     Tombstone() {
         init();
     }
 
-    Future<Null> drawSelf(Element container) async {
+    Future<Null> drawSelf(Element container, Road road) async {
         DivElement me = new DivElement();
         container.append(me);
         cachedCanvas = await makeCanvas();
@@ -55,6 +61,28 @@ class Tombstone {
         //TODO have canvas be cached so it can be drawn to.
         //TODO have builder draw itself
         me.append(makeBuilder());
+        ButtonElement button = new ButtonElement()..text ="Accept and Move On";
+        button.classes.add("menuItem");
+        button.style.width = "500px";
+        rememberRoad(road);
+        button.onClick.listen((Event e) {
+            acceptAndMoveOn(me,road);
+        });
+        me.append(button);
+    }
+
+
+    void rememberRoad(Road road) {
+        if(road == null) return;
+      townNames.add(road.sourceTown.name);
+      townNames.add(road.destinationTown.name);
+    }
+
+    void acceptAndMoveOn(Element me, Road road) {
+        Game.instance.graves.add(this);
+        me.remove();
+        me = null; //for garbage collection probably.
+        road.start(); //will start up animation and dhow it too
     }
 
     Future<Null> redraw() async {

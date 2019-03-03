@@ -77,10 +77,14 @@ class Road {
     void stop() {
         //window.alert("going to stop");
         plzStopKThnxBai = true;
+        trail.hide();
+
     }
 
     void start() {
         plzStopKThnxBai = false;
+        trail.show();
+
     }
 
     Future<Null> timerLoop() async {

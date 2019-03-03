@@ -105,8 +105,7 @@ class LOMATNPC {
         Tombstone grave = new Tombstone();
         grave.npc = this;
         Game.instance.eject(this);
-        grave.drawSelf(Game.instance.container);
-        road.trail.hide();
+        grave.drawSelf(Game.instance.container, road);
     }
 
     void displayDialogue(Element container, LOMATSection screen) {

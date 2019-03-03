@@ -5,6 +5,7 @@ import 'Locations/PhysicalLocation.dart';
 import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
 import 'NPCs/LOMATNPC.dart';
+import 'NPCs/Tombstone.dart';
 import 'Sections/PartySection.dart';
 import 'Sections/TalkySection.dart';
 import 'dart:async';
@@ -27,6 +28,8 @@ class Game
     PhysicalLocation currentLocation;
     PartySection partySection;
     TalkySection talkySection;
+    //TODO when spawning a new road need to see if it has an assocaited tombstone.
+    List<Tombstone> graves = new List<Tombstone>();
     int maxPartySize = 5;
     static Game get instance {
         if(_instance == null) {

@@ -16,7 +16,7 @@ void main() {
     }
 
     Tombstone t = new Tombstone();
-    t.drawSelf(div);
+    t.drawSelf(div,null);
 
 
 }
