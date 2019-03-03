@@ -84,8 +84,9 @@ class Road {
     void start() {
         plzStopKThnxBai = false;
         trail.show();
+
         //start it back up
-        timerLoop();
+        startLoops(trail);
 
     }
 

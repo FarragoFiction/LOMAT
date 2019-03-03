@@ -64,10 +64,12 @@ class Trail extends PhysicalLocation {
 
   void hide() {
         container.style.display = "none";
+        menu.container.style.display = "none";
   }
 
   void show() {
       container.style.display = "inline-block";
+      menu.container.style.display = "inline-block";
   }
 
   void updateLabel() {

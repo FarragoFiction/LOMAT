@@ -25,7 +25,9 @@ class InstaKillEffect extends Effect {
     print("applying kill effect.");
     Game game = Game.instance;
     LOMATNPC target = new Random().pickFrom(game.partyMembers);
-    popup.text.replaceAll("${RoadEvent.PARTYMEMBER}","${target.name}");
+    if(popup != null) {
+        popup.text.replaceAll("${RoadEvent.PARTYMEMBER}", "${target.name}");
+    }
     targetName = target.name;
     target.die(causeOfDeath, road);
   }
