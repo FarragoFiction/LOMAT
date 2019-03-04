@@ -123,7 +123,14 @@ class Tombstone {
 
     ProceduralLayerParallax spawnTrailsona(PhysicalLocation parent) {
         //y is from top
-        return new ProceduralLayerParallax(600, 475,100,false, "images/tombstone.png", parent);
+        ProceduralLayerParallax layer =  new ProceduralLayerParallax(600, 475,100,false, "images/tombstone.png", parent);
+        //TODO huh this doesn't seem to work
+        //is it becaue the fog is on top?
+        layer.image.style.pointerEvents = "auto";
+        layer.image.onClick.listen((Event e) {
+            window.alert("TODO: need to have a mouse  over that displays name, and on click need to make popup showing grave details.");
+        });
+        return layer;
     }
 
 
