@@ -106,7 +106,7 @@ class LOMATNPC {
         Tombstone grave = new Tombstone();
         grave.npc = this;
         Game.instance.eject(this);
-        SoundControl.instance.playSoundEffect("Dead_Jingle");
+        SoundControl.instance.playSoundEffect("Dead_jingle_bells");
         grave.drawSelf(Game.instance.container, road);
     }
 
