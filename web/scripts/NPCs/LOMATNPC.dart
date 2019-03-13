@@ -4,6 +4,7 @@ import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
 import '../Sections/PartySection.dart';
 import '../SoundControl.dart';
+import 'Disease.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -33,7 +34,8 @@ class LOMATNPC {
     String causeOfDeath = "absolutely nothing";
     int _hp = 85;
     //if its null its good
-    Disease disease;
+    //make sure this goes into the json yo
+    List<Disease> diseases =  new List<Disease>();
 
     int get hp => _hp;
 
@@ -45,8 +47,8 @@ class LOMATNPC {
     }
 
     String get diseasePhrase {
-        if(disease == null) return "None";
-        return disease.name;
+        if(diseases.isEmpty) return "None";
+        return diseases.join(",");
     }
     String get healthPhrase {
         if(hp >= 85) {
@@ -87,6 +89,10 @@ class LOMATNPC {
 
     void syncImages() {
         displayImage.src = imageSrc;
+    }
+
+    void removeDisease(Disease disease) {
+        diseases.remove(disease);
     }
 
     //takes in a road becaue tombstones go on roads
@@ -194,12 +200,3 @@ class LOMATNPC {
 
 }
 
-class Disease
-{
-    //make this text engine procedural
-    String name;
-    int healthDrainPerSecond;
-    //its worse if you aren't resting
-    double movingMultiplier;
-
-}

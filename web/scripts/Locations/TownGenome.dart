@@ -97,7 +97,7 @@ class TownGenome {
     }
 
     void init() {
-        simpleGenes = new Map<String, dynamic>();
+        simpleGenes = new Map<String, String>();
         simpleGenes[BGIMAGEKEY] = randomBackground(rand);
         simpleGenes[GROUNDKEY] = randomGround(rand);
         simpleGenes[MIDGROUNDKEY] = randomMidground(rand);
