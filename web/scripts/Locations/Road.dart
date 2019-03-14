@@ -124,7 +124,7 @@ class Road {
         if(plzStopKThnxBai) return;
         await window.animationFrame;
         for(RoadEvent event in events) {
-            if(event.triggered(this)){
+            if(await event.triggered(this)){
                 break;
             }
         }

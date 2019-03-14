@@ -14,7 +14,7 @@ class ArriveEffect extends Effect {
     ArriveEffect(int this.amount);
 
   @override
-  void apply(Road road, Element popup) {
+  Future<Null> apply(Road road, Element popup) async {
     print("applying arrive effect.");
     road.applyArriveEffect();
   }

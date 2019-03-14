@@ -6,22 +6,22 @@ import 'Effect.dart';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
-class InstaKillEffect extends Effect {
+class DiseaseEffect extends Effect {
     @override
-    String name = "InstaKillEffect";
+    String name = "DiseaseEffect";
     @override
     int amount;
     String targetName;
     String causeOfDeath;
 
     @override
-    String get flavorText =>  "$targetName dies.";
+    String get flavorText =>  "$targetName gets a terrible disease.";
 
-    InstaKillEffect(String this.causeOfDeath);
+    DiseaseEffect(String this.causeOfDeath);
 
     //pick a random npc
   @override
-  Future<Null> apply(Road road, Element popup) async{
+  Future<Null> apply(Road road, Element popup) async {
     print("applying kill effect.");
     Game game = Game.instance;
     LOMATNPC target = new Random().pickFrom(game.partyMembers);

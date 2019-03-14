@@ -52,12 +52,12 @@ class RoadEvent {
 
     }
 
-    bool triggered(Road road) {
+    Future<bool> triggered(Road road) async {
         print("checking trigger for event $title");
         if(random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
             //effect will set relevant info like target name, have it go first
             DivElement container = new DivElement()..classes.add("event");
-            effect.apply(road,container);
+            await effect.apply(road,container);
             popup(road, container);
             return true;
         }
