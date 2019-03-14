@@ -1,3 +1,5 @@
+import 'package:CommonLib/Collection.dart';
+
 import '../CipherEngine.dart';
 import '../Game.dart';
 import '../NPCs/LOMATNPC.dart';
@@ -55,7 +57,7 @@ class Town extends PhysicalLocation {
 
     //who is in this town right now?
     List<LOMATNPC> npcs = new List<LOMATNPC>();
-    List<RoadEvent> get events => genome.events;
+    WeightedList<RoadEvent> get events => genome.events;
 
   Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
       print("passed in genome is $genome");

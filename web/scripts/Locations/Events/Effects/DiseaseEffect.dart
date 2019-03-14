@@ -26,7 +26,7 @@ class DiseaseEffect extends Effect {
     //pick a random npc
   @override
   Future<Null> apply(Road road, Element popup) async {
-    print("applying kill effect.");
+    print("applying disease effect.");
     Game game = Game.instance;
     LOMATNPC target = new Random().pickFrom(game.partyMembers);
     if(popup != null) {
@@ -34,6 +34,8 @@ class DiseaseEffect extends Effect {
     }
     targetName = target.name;
     Disease disease = await Disease.generateProcedural(Disease.convertWordToNumber(road.sourceTown.name));
+    diseaseName = disease.name;
+    diseaseEffect = disease.description;
     target.addDisease(disease);
   }
 

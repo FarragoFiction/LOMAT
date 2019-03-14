@@ -48,7 +48,7 @@ class LOMATNPC {
 
     String get diseasePhrase {
         if(diseases.isEmpty) return "None";
-        return diseases.join(",");
+        return diseases.map((d) => d.name).toList().join(",");
     }
     String get healthPhrase {
         if(hp >= 85) {

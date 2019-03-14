@@ -1,3 +1,5 @@
+import 'package:CommonLib/Collection.dart';
+
 import 'Locations/Events/Effects/DelayEffect.dart';
 import 'Locations/Events/Effects/DiseaseEffect.dart';
 import 'Locations/Events/Effects/InstaKillEffect.dart';
@@ -149,13 +151,15 @@ class Game
         DelayEffect smallDelay = new DelayEffect(1);
         DelayEffect mediumEffect = new DelayEffect(2);
         DelayEffect largeEffect = new DelayEffect(3);
-        ret.events = new List<RoadEvent>();
-        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 0.5));
-        ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.5));
+        ret.events = new WeightedList<RoadEvent>();
+        //ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 0.5));
+        //ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.5));
+        ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} spends the night shivering in wet boots.", new DiseaseEffect(), 800.5));
+        ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} mentions finding interesting new friends back in the last town.", new DiseaseEffect(), 2.5));
 
-        ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
-        ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
-        ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.05));
+        //ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
+        //ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
+        //ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3));
 
         return ret;
     }

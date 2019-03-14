@@ -1,3 +1,5 @@
+import 'package:CommonLib/Collection.dart';
+
 import '../SoundControl.dart';
 import 'Events/Effects/ArriveEffect.dart';
 import 'Events/Effects/DelayEffect.dart';
@@ -26,7 +28,7 @@ class Road {
     int timeRemaining;
     int elapsedTime = 0;
     //TODO comes from  source and destination towns
-    List<RoadEvent> events = new List<RoadEvent>();
+    WeightedList<RoadEvent> events = new WeightedList<RoadEvent>();
 
     String get label {
         return "Traveling to $destinationTown: $timeRemaining";

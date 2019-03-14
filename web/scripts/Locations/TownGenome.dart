@@ -76,7 +76,8 @@ class TownGenome {
      set endSong2(String content) => simpleGenes[ENDSONG2]=content;
 
      //not part of normal genes but still a thing inherited
-     List<RoadEvent> events = new List<RoadEvent>();
+    //wow why wasn't this a weighted list
+     WeightedList<RoadEvent> events = new WeightedList<RoadEvent>();
 
      set playList(List<String> songs) {
          if(songs.length != playListLength) {
@@ -138,14 +139,14 @@ class TownGenome {
     }
 
     //for each event in list pick either mine, coparents or make a MUTATION.
-    List<RoadEvent> breedEvents(List<RoadEvent> coParentEvents, List<RoadEvent> childMutations) {
+    WeightedList<RoadEvent> breedEvents(WeightedList<RoadEvent> coParentEvents, WeightedList<RoadEvent> childMutations) {
          print("attempting to breed events, my events are ${events.length} and your events are ${coParentEvents.length}");
          //it does mean that the number of events will be the "first" parents amount.
-        List<RoadEvent> ret = new List<RoadEvent>();
+         WeightedList<RoadEvent> ret = new WeightedList<RoadEvent>();
         for(int i = 0; i<events.length; i++) {
             if(rand.nextDouble() < genomeStability) {
                 if (coParentEvents != null && coParentEvents.length < i && rand.nextBool()) {
-                    ret.add(coParentEvents[i]);
+                    ret.add(coParentEvents[i]); //TODO ask pl how to get the weight for this item out
                 }else {
                    ret.add(events[i]);
                 }
@@ -229,6 +230,7 @@ class TownGenome {
     //most events will be carefully crafted. but mutations....mutations are fair game for my aesthetic
     static RoadEvent randomEvent(Random rand) {
         WeightedList<Effect> effects = new WeightedList<Effect>();
+        //TODO while these are weighted, the bred towns aren't, so need to ask pl about how to get an items weight
         effects.add(new DelayEffect(1), 0.5);
         effects.add(new DelayEffect(2), 0.5);
         effects.add(new DelayEffect(3), 0.5);

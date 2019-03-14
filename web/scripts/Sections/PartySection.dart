@@ -102,6 +102,7 @@ class SinglePartyMember {
     npcPortrait.src = partyMember.imgSrcForEmotion(partyMember.emotionForCurrentHealth);
     hpValue.text = "${partyMember.healthPhrase}";
     name.text = "${partyMember.name}";
+    diseaseValue.text = "${partyMember.diseasePhrase}";
   }
 
 
