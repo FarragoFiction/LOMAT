@@ -1,4 +1,5 @@
 import 'Locations/Events/Effects/DelayEffect.dart';
+import 'Locations/Events/Effects/DiseaseEffect.dart';
 import 'Locations/Events/Effects/InstaKillEffect.dart';
 import 'Locations/Events/RoadEvent.dart';
 import 'Locations/PhysicalLocation.dart';
@@ -153,7 +154,7 @@ class Game
         ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.5));
 
         ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
-        ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new InstaKillEffect("dysentery"), 0.25));
+        ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
         ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.05));
 
         return ret;

@@ -13,7 +13,6 @@ class DiseaseEffect extends Effect {
     @override
     int amount;
     String targetName;
-    String causeOfDeath;
 
     //so i can refer to them in flavor text.
     String diseaseName;
@@ -22,7 +21,7 @@ class DiseaseEffect extends Effect {
     @override
     String get flavorText =>  "$targetName gets $diseaseName. $diseaseEffect";
 
-    DiseaseEffect(String this.causeOfDeath);
+    DiseaseEffect();
 
     //pick a random npc
   @override
