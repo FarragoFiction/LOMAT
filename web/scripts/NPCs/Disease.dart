@@ -33,4 +33,15 @@ class Disease {
             npc.die(name, road);
         }
     }
+
+    //useful for getting my seed
+    static int convertWordToNumber(String sentence) {
+        //print("converting sentence ${sentence}");
+        int ret = 0;
+        for(int s in sentence.codeUnits) {
+            //print ("code unit ${new String.fromCharCode(s)}");
+            ret += s;
+        }
+        return ret;
+    }
 }

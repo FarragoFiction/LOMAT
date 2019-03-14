@@ -1,4 +1,5 @@
 import '../../../Game.dart';
+import '../../../NPCs/Disease.dart';
 import '../../../NPCs/LOMATNPC.dart';
 import '../../Road.dart';
 import '../RoadEvent.dart';
@@ -14,8 +15,12 @@ class DiseaseEffect extends Effect {
     String targetName;
     String causeOfDeath;
 
+    //so i can refer to them in flavor text.
+    String diseaseName;
+    String diseaseEffect;
+
     @override
-    String get flavorText =>  "$targetName gets a terrible disease.";
+    String get flavorText =>  "$targetName gets $diseaseName. $diseaseEffect";
 
     DiseaseEffect(String this.causeOfDeath);
 
@@ -29,7 +34,8 @@ class DiseaseEffect extends Effect {
         popup.text.replaceAll("${RoadEvent.PARTYMEMBER}", "${target.name}");
     }
     targetName = target.name;
-    target.die(causeOfDeath, road);
+    Disease disease = await Disease.generateProcedural(Disease.convertWordToNumber(road.sourceTown.name));
+    target.addDisease(disease);
   }
 
   @override

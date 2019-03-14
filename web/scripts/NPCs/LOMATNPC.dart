@@ -93,6 +93,12 @@ class LOMATNPC {
 
     void removeDisease(Disease disease) {
         diseases.remove(disease);
+        myStatsView.sync();
+    }
+
+    void addDisease(Disease disease) {
+        diseases.add(disease);
+        myStatsView.sync();
     }
 
     //takes in a road becaue tombstones go on roads
