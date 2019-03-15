@@ -25,7 +25,7 @@ class HuntingGrounds extends PhysicalLocation {
         //TODO make trees/wind procedural
         //TODO eventually which 0 bg is used is based on nearest location
         layers.add(new StaticLayer(prevLocation.bg, this, 1));
-        SoundControl.instance.playMusic("Campfire_In_the_Void");
+        SoundControl.instance.playMusic("Shooting_Gallery");
         container.onClick.listen((MouseEvent event){
            // window.alert("clicked");
             Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
