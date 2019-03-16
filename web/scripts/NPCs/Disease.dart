@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
+import 'package:TextEngine/TextEngine.dart';
 
 import '../Locations/Road.dart';
 import 'LOMATNPC.dart';
@@ -19,7 +20,11 @@ class Disease {
     static Future<Disease> generateProcedural(int seed)  async{
         Random rand = new Random(seed);
         //TODO hook up the text engine here okay (yes that means we need to update it);
-        return Future.delayed( Duration(seconds: 1), () =>  new Disease("Impatience", "makes you code stubs that are async",rand.nextInt(10),rand.nextInt(10)));
+        TextEngine textEngine = new TextEngine(seed);
+        await textEngine.loadList("diseases");
+        String name  = "${textEngine.phrase("Diseases")}";
+
+        return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, "makes you code stubs that are async",rand.nextInt(10),rand.nextInt(10)));
     }
 
     //this should be called for each npc while traveling and traveling only

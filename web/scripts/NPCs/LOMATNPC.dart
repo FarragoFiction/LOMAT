@@ -109,7 +109,7 @@ class LOMATNPC {
         titleElement.setInnerHtml("<h2>${name} is cured!</h2>");
         container.append(titleElement);
         Element flavorTextElement = new DivElement();
-        flavorTextElement.setInnerHtml("$name no longer has ${disease.name}! Praise Fenrir!");
+        flavorTextElement.setInnerHtml("$name no longer has ${disease.name}! Praise the Sun Swallower!");
 
         container.append(flavorTextElement);
         SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");

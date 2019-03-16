@@ -1,0 +1,43 @@
+TextEngine Word List
+
+@nouns
+@verbs
+@adjectives
+
+Diseases
+    #noun# #diseaseKinds#
+    #adjective# #diseaseKinds#
+    ##verb@continuous## #diseaseKinds#
+
+
+diseaseKinds
+    Cough
+    Flu
+    Bug
+    Infection
+    Virus
+    Dysentery
+    Illness
+    Sickness
+    Malaise
+    Disease
+    Fever
+    Ache
+    Bumps
+    Measels
+    Cholera
+    Typhoid
+    Exhaustion
+    Lung
+    Rot
+
+noun_misc
+    bone: 85.0
+    skeleton: 85.0
+    corpse: 13.0
+    beak: 4.9
+
+
+
+
+
