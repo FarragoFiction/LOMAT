@@ -29,9 +29,9 @@ class RoadEvent {
     Effect effect;
     RoadEvent(String this.title, String this.flavorText, Effect this.effect, double this.oddsOfHapening);
 
-    void replaceText() {
+    void replaceText(Element targetContainer) {
         if(effect.target != null) {
-            container.text.replaceAll(
+            targetContainer.text.replaceAll(
                 "${PARTYMEMBER}", "${effect.target.name}");
         }
 
@@ -48,6 +48,8 @@ class RoadEvent {
         container.append(titleElement);
         flavorTextElement = new DivElement();
         flavorTextElement.setInnerHtml(fullFlavorText);
+        replaceText(flavorTextElement);
+
         container.append(flavorTextElement);
         SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
 

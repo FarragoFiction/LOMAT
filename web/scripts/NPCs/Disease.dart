@@ -19,12 +19,11 @@ class Disease {
     static Future<Disease> generateProcedural(int seed)  async{
         Random rand = new Random(seed);
         //TODO hook up the text engine here okay (yes that means we need to update it);
-        return Future.delayed( Duration(seconds: 1), () =>  new Disease("Impatience", "makes you code stubs that are async",rand.nextInt(100),rand.nextInt(100)));
+        return Future.delayed( Duration(seconds: 1), () =>  new Disease("Impatience", "makes you code stubs that are async",rand.nextInt(10),rand.nextInt(10)));
     }
 
     //this should be called for each npc while traveling and traveling only
     void tick(LOMATNPC npc, Road road, double powerModifier, double healingModifier) {
-        window.alert("ticking $this for $npc");
         npc.hp = npc.hp - (power * powerModifier.floor()); //setting auto handles updating the ui
         remainingDuration += (-1 * healingModifier.floor());
         if(remainingDuration <= 0) {

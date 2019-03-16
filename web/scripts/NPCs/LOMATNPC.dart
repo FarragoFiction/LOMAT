@@ -100,6 +100,24 @@ class LOMATNPC {
     void removeDisease(Disease disease) {
         diseases.remove(disease);
         myStatsView.sync();
+        DivElement container = new DivElement()..classes.add("event");
+        //animation or displaying a grave stone or whatever.
+        //don't append to the road cuz things like deaths will hide it and then you wont see this
+        Game.instance.container.append(container);
+
+        Element titleElement = new DivElement();
+        titleElement.setInnerHtml("<h2>${name} is cured!</h2>");
+        container.append(titleElement);
+        Element flavorTextElement = new DivElement();
+        flavorTextElement.setInnerHtml("$name no longer has ${disease.name}! Praise Fenrir!");
+
+        container.append(flavorTextElement);
+        SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+
+        Game.instance.container.onClick.listen((Event e)
+        {
+            container.remove();
+        });
     }
 
     void addDisease(Disease disease) {
