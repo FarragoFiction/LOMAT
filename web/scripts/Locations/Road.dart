@@ -1,5 +1,7 @@
 import 'package:CommonLib/Collection.dart';
 
+import '../Game.dart';
+import '../NPCs/LOMATNPC.dart';
 import '../SoundControl.dart';
 import 'Events/Effects/ArriveEffect.dart';
 import 'Events/Effects/DelayEffect.dart';
@@ -73,6 +75,7 @@ class Road {
         this.trail = trail;
         //wait at least one second before starting because its jarring if you start right off the bat with an event.
         new Timer(new Duration(milliseconds: 1000), () => eventLoop());
+        new Timer(new Duration(milliseconds: 1000), () => diseaseLoop());
         new Timer(new Duration(milliseconds: 1000), () => timerLoop());
     }
 
@@ -129,6 +132,17 @@ class Road {
             if(await event.triggered(this)){
                 break;
             }
+        }
+        //every ten seconds
+        new Timer(new Duration(milliseconds: 10000), () => eventLoop());
+    }
+
+    Future<Null> diseaseLoop() async{
+        //no more loop plz.
+        if(plzStopKThnxBai) return;
+        await window.animationFrame;
+        for(LOMATNPC npc in Game.instance.partyMembers) {
+            npc.diseaseTick(this);
         }
         //every ten seconds
         new Timer(new Duration(milliseconds: 10000), () => eventLoop());
