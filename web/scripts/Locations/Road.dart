@@ -145,7 +145,7 @@ class Road {
             npc.diseaseTick(this);
         }
         //every ten seconds
-        new Timer(new Duration(milliseconds: 10000), () => eventLoop());
+        new Timer(new Duration(milliseconds: 1000), () => diseaseLoop());
     }
 
 
