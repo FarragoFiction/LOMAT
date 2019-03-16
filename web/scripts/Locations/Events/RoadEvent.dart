@@ -29,9 +29,16 @@ class RoadEvent {
     Effect effect;
     RoadEvent(String this.title, String this.flavorText, Effect this.effect, double this.oddsOfHapening);
 
-    void popup(Road road, Element container) {
-        //TODO make this nice and styled and everything and go away on dismiss
-        //TODO some events should cause effects on screen like stopping the
+    void replaceText() {
+        if(effect.target != null) {
+            container.text.replaceAll(
+                "${PARTYMEMBER}", "${effect.target.name}");
+        }
+
+    }
+
+    void popup(Road road) {
+        DivElement container = new DivElement()..classes.add("event");
         //animation or displaying a grave stone or whatever.
         //don't append to the road cuz things like deaths will hide it and then you wont see this
         Game.instance.container.append(container);
@@ -39,7 +46,6 @@ class RoadEvent {
         titleElement = new DivElement();
         titleElement.setInnerHtml("<h2>$title</h2>");
         container.append(titleElement);
-
         flavorTextElement = new DivElement();
         flavorTextElement.setInnerHtml(fullFlavorText);
         container.append(flavorTextElement);
@@ -56,9 +62,8 @@ class RoadEvent {
         print("checking trigger for event $title");
         if(random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
             //effect will set relevant info like target name, have it go first
-            DivElement container = new DivElement()..classes.add("event");
-            await effect.apply(road,container);
-            popup(road, container);
+            await effect.apply(road);
+            popup(road);
             return true;
         }
         return false;

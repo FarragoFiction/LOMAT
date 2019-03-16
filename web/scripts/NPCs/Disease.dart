@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:CommonLib/Random.dart';
 
 import '../Locations/Road.dart';
@@ -22,6 +24,7 @@ class Disease {
 
     //this should be called for each npc while traveling and traveling only
     void tick(LOMATNPC npc, Road road, double powerModifier, double healingModifier) {
+        window.alert("ticking $this for $npc");
         npc.hp = npc.hp - (power * powerModifier.floor()); //setting auto handles updating the ui
         remainingDuration += (-1 * healingModifier.floor());
         if(remainingDuration <= 0) {

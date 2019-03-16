@@ -18,7 +18,7 @@ class DelayEffect extends Effect {
     }
 
   @override
-  Future<Null> apply(Road road, Element popup) async {
+  Future<Null> apply(Road road) async {
     print("applying delay effect.");
     road.addDelay(amount);
   }
