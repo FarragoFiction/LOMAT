@@ -2,7 +2,7 @@ import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
 import 'package:TextEngine/TextEngine.dart';
-
+import 'package:recase/recase.dart';
 import '../Locations/Road.dart';
 import 'LOMATNPC.dart';
 
@@ -23,6 +23,8 @@ class Disease {
         TextEngine textEngine = new TextEngine(seed);
         await textEngine.loadList("diseases");
         String name  = "${textEngine.phrase("Diseases")}";
+        ReCase rc = new ReCase(name);
+        name = rc.titleCase;
 
         return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, "makes you code stubs that are async",rand.nextInt(10),rand.nextInt(10)));
     }

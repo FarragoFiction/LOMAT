@@ -7,7 +7,7 @@ TextEngine Word List
 Diseases
     #noun# #diseaseKinds#
     #adjective# #diseaseKinds#
-    ##verb@continuous## #diseaseKinds#
+    #verb@continuous# #diseaseKinds#
 
 
 diseaseKinds
@@ -23,12 +23,14 @@ diseaseKinds
     Disease
     Fever
     Ache
+    Rash
     Bumps
     Measels
     Cholera
     Typhoid
     Exhaustion
     Lung
+    Pneumonia
     Rot
 
 noun_misc
@@ -36,6 +38,17 @@ noun_misc
     skeleton: 85.0
     corpse: 13.0
     beak: 4.9
+    #diseaseKinds#
+
+verb_action
+    cough: 85.0
+    sneeze: 85.0
+        pc:sneez
+    waste: 85.0
+            pc:wast
+    puke: 85.0
+        pc:puk
+
 
 
 

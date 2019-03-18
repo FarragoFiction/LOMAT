@@ -1,3 +1,5 @@
+import 'package:CommonLib/Random.dart';
+
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../Locations/HuntingGrounds.dart';
@@ -15,7 +17,7 @@ void main()  async{
 
 Future<Null> testDisease() async {
     Element otherTest = new DivElement()..text = "TODO: some disease shit";
-    Disease disease = await Disease.generateProcedural(13);
+    Disease disease = await Disease.generateProcedural(new Random().nextInt());
     otherTest.text = "${disease.name} ${disease.description}. Looks rough. It's doing ${disease.power} damage per tick, and will last for ${disease.remainingDuration} ticks.";
     div.append(otherTest);
 
