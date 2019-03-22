@@ -23,10 +23,11 @@ class Disease {
         TextEngine textEngine = new TextEngine(seed);
         await textEngine.loadList("diseases");
         String name  = "${textEngine.phrase("Diseases")}";
+        String desc  = "${textEngine.phrase("Descriptions")}";
         ReCase rc = new ReCase(name);
         name = rc.titleCase;
 
-        return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, "makes you code stubs that are async",rand.nextInt(10),rand.nextInt(10)));
+        return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, desc,rand.nextInt(10),rand.nextInt(10)));
     }
 
     //this should be called for each npc while traveling and traveling only

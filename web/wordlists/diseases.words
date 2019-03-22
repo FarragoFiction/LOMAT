@@ -9,6 +9,13 @@ Diseases
     #adjective# #diseaseKinds#
     #verb@continuous# #diseaseKinds#
 
+Descriptions
+    It makes them #verb_action# #adj_many# #noun@plural# constantly.
+    It makes you #verb_action# #adjective# #noun@plural#.
+    Symptoms include #adj_large# #verb_action@continuous#, #adj_tactile# #verb_action@continuous# and #adj_surprising# #verb_action@continuous#.
+    It is really hard to #verb_action# while they have it.
+    They are plagued with #adj_color# #noun@plural#.
+    Legend says that if you #verb_action# while you have it, your symptoms will last three more weeks.: 0.1
 
 diseaseKinds
     Cough
@@ -16,11 +23,15 @@ diseaseKinds
     Bug
     Infection
     Virus
+    Madness
     Dysentery
     Illness
     Sickness
     Malaise
     Disease
+    Dizzines
+    Vertigo
+    Blister
     Fever
     Ache
     Rash
@@ -42,10 +53,11 @@ noun_misc
 
 verb_action
     cough: 85.0
+    itch: 85.0
     sneeze: 85.0
         pc:sneez
     waste: 85.0
-            pc:wast
+        pc: wast
     puke: 85.0
         pc:puk
 
