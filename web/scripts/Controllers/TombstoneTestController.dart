@@ -9,7 +9,9 @@ import 'dart:html';
 
 DivElement div = querySelector('#output');
 void main()  async{
-    await testDisease();
+    for(int i = 0; i<10; i++) {
+        await testDisease();
+    }
     testCiphers();
     testAnimation();
     testTombstone();
@@ -18,7 +20,7 @@ void main()  async{
 Future<Null> testDisease() async {
     Element otherTest = new DivElement()..text = "TODO: some disease shit";
     Disease disease = await Disease.generateProcedural(new Random().nextInt());
-    otherTest.text = "${disease.name}. ${disease.description} Looks rough. It's doing ${disease.power} damage per tick, and will last for ${disease.remainingDuration} ticks.";
+    otherTest.text = "${disease.name}. ${disease.description}";
     div.append(otherTest);
 
 }

@@ -12,10 +12,19 @@ Diseases
 Descriptions
     It makes them #verb_action# #adj_many# #noun@plural# constantly.
     It makes you #verb_action# #adjective# #noun@plural#.
-    Symptoms include #adj_large# #verb_action@continuous#, #adj_tactile# #verb_action@continuous# and #adj_surprising# #verb_action@continuous#.
+    Symptoms include #randomSickSoundingAdj# #verb_action@continuous#, #randomSickSoundingAdj# #verb_action@continuous# and #adj_surprising# #verb_action@continuous#.
+    Symptoms include #verb_action@continuous#,  #verb_action@continuous# and #randomSickSoundingAdj# #verb_action@continuous#.: 0.5
+    Symptoms include #verb_action@continuous#,  #verb_action@continuous# and #verb_action@continuous#.: 0.5
     It is really hard to #verb_action# while they have it.
-    They are plagued with #adj_color# #noun@plural#.
+    They are plagued with #randomSickSoundingAdj# #noun@plural#.:0.3
     Legend says that if you #verb_action# while you have it, your symptoms will last three more weeks.: 0.1
+
+randomSickSoundingAdj
+    #adj_large#
+    #adj_tactile#
+    #adj_surprising#
+    #adj_color#: 0.3
+
 
 diseaseKinds
     Cough
@@ -23,16 +32,27 @@ diseaseKinds
     Bug
     Infection
     Virus
+    Fatigue
+    Ache
+    Appetite
+    Wheezing
+    Arthritis
+    Disorders
+    Breathing: 0.5
     Madness
     Dysentery
+    Confusion
     Illness
     Sickness
+    Puking
+    Friendship: 0.1
     Malaise
     Disease
-    Dizzines
+    Dizziness
     Vertigo
     Blister
     Fever
+    Vomiting
     Ache
     Rash
     Bumps
@@ -43,22 +63,37 @@ diseaseKinds
     Lung
     Pneumonia
     Rot
+    Phlegm
+    Pain
 
 noun_misc
-    bone: 85.0
-    skeleton: 85.0
+    bone: 13.0
+    skeleton: 13.0
     corpse: 13.0
     beak: 4.9
     #diseaseKinds#
 
 verb_action
-    cough: 85.0
-    itch: 85.0
-    sneeze: 85.0
+    cough: 13.0
+    retch: 3.0
+    throw up: 13.0
+        pc:throw upp
+    croak: 3.0
+    cry: 13.0
+    itch: 13.0
+    vomit: 13.0
+    barf: 13.0
+    honk: 3.0
+    sleep: 13.0
+    wheeze: 13.0
+        pc:wheez
+    sneeze: 13.0
         pc:sneez
-    waste: 85.0
+    waste: 13.0
         pc: wast
-    puke: 85.0
+    gag: 13.0
+        pc: gagg
+    puke: 13.0
         pc:puk
 
 
