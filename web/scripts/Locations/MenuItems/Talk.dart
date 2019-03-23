@@ -10,4 +10,11 @@ class Talk extends MenuItem {
   void onClick() {
     holder.location.doTalky();
   }
+
+
+  @override
+  void init() {
+    super.init();
+    container.id = "talkButton";
+  }
 }

@@ -11,4 +11,11 @@ class Back extends MenuItem {
   void onClick() {
     holder.location.shitGoBack();
   }
+
+
+  @override
+  void init() {
+    super.init();
+    container.id = "backButton";
+  }
 }

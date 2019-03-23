@@ -9,4 +9,10 @@ class Hunt extends MenuItem {
   void onClick() {
     holder.location.doHunt();
   }
+
+  @override
+  void init() {
+    super.init();
+    container.id = "huntingButton";
+  }
 }

@@ -11,4 +11,11 @@ class Travel extends MenuItem {
   }
 
 
+  @override
+  void init() {
+    super.init();
+    container.id = "travelButton";
+  }
+
+
 }

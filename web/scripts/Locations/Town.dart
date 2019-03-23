@@ -227,8 +227,9 @@ class Town extends PhysicalLocation {
 
   void createMenuItems() {
       menu.addTalk();
-      menu.addTrade();
+     // menu.addTrade();
       menu.addTravel();
+      menu.addBotButton();
       menu.addHunt();
   }
 

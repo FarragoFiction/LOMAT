@@ -9,4 +9,11 @@ class Trade extends MenuItem {
   void onClick() {
     window.alert("TODO");
   }
+
+
+  @override
+  void init() {
+    super.init();
+    container.id = "tradeButton";
+  }
 }

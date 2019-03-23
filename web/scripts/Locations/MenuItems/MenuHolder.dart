@@ -5,6 +5,7 @@ import 'MenuItem.dart';
 import 'Talk.dart';
 import 'Trade.dart';
 import 'Travel.dart';
+import 'GuideBotButton.dart';
 import 'dart:html';
 
 class MenuHolder {
@@ -28,6 +29,10 @@ class MenuHolder {
 
     void addTrade() {
         _items.add(new Trade(this));
+    }
+
+    void addBotButton() {
+        _items.add(new GuideBotButton(this));
     }
 
     void addTravel() {
