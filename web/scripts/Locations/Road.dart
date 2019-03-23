@@ -156,6 +156,7 @@ class Road {
 
     void displayOption(PhysicalLocation prevLocation,Element parent,Element container) {
         Element div = new DivElement()..classes.add("dialogueSelectableItem");
+        div.classes.add("travelOption");
         container.append(div);
         String before = "";
         if(destinationTown.firstTime == true) before = "[NEW!!!]";

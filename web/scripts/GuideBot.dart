@@ -1,5 +1,7 @@
 import 'dart:html';
 
+import 'package:CommonLib/Random.dart';
+
 class GuideBot {
     static GuideBot _instance;
 
@@ -29,7 +31,10 @@ class GuideBot {
         //find a button labeled hunt
         DivElement button = querySelector("#travelButton");
         button.click();
-        //need to pick a city to travel to
+        List<Element> travelOptions = querySelectorAll(".travelOption");
+        Random rand = new Random();
+        rand.pickFrom(travelOptions).click();
+        //need to periodically click away popups and shit
     }
 
     void clickTalkButton() {
