@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
@@ -33,15 +34,24 @@ class GuideBot {
         button.click();
         List<Element> travelOptions = querySelectorAll(".travelOption");
         Random rand = new Random();
-        rand.pickFrom(travelOptions).click();
+        new Timer(new Duration(milliseconds: 1000), () => {
+            rand.pickFrom(travelOptions).click()
+        });
         //need to periodically click away popups and shit
     }
 
-    void clickTalkButton() {
+    void clickTalkButton(){
         //find a button labeled hunt
         DivElement button = querySelector("#talkButton");
         button.click();
         //TODO once the talk screen is up, click through all the text options i guess?
+        List<Element> dialogueOptions = querySelectorAll(".dialogueSelectableItem");
+        Random rand = new Random();
+        //oh i see, react taught me about this
+        new Timer(new Duration(milliseconds: 1000), () => {
+            rand.pickFrom(dialogueOptions).click()
+        });
+
     }
 
 
