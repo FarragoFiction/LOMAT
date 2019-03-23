@@ -22,6 +22,21 @@ class GuideBot {
         //find a button labeled hunt
         DivElement button = querySelector("#huntingButton");
         button.click();
+        //actually play the hunting mini game
+    }
+
+    void clickTravelButton() {
+        //find a button labeled hunt
+        DivElement button = querySelector("#travelButton");
+        button.click();
+        //need to pick a city to travel to
+    }
+
+    void clickTalkButton() {
+        //find a button labeled hunt
+        DivElement button = querySelector("#talkButton");
+        button.click();
+        //TODO once the talk screen is up, click through all the text options i guess?
     }
 
 
