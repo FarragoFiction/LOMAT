@@ -65,6 +65,7 @@ class Tombstone {
         me.append(makeBuilder());
         ButtonElement button = new ButtonElement()..text ="Accept and Move On";
         button.classes.add("menuItem");
+        button.id = "acceptDeath";
         button.style.width = "500px";
         rememberRoad(road);
         button.onClick.listen((Event e) {
