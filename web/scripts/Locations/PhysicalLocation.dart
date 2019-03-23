@@ -1,3 +1,4 @@
+import '../Game.dart';
 import '../Hunting/Bullet.dart';
 import '../Hunting/Enemy.dart';
 import 'MenuItems/MenuHolder.dart';
@@ -38,6 +39,7 @@ abstract class PhysicalLocation {
         container.classes.add("parallaxParent");
         //sprint("class added, width is ${container.style.width}");
         parent.append(container);
+        Game.instance.currentLocation = this;
         init();
     }
 

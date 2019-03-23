@@ -28,7 +28,7 @@ class GuideBot {
     //if you go to long without doing anything, flip to bored
     void boredomTest() {
         ticksSinceLastAction ++;
-        print("bored: ${ticksSinceLastAction}");
+        //print("bored: ${ticksSinceLastAction}");
         if(ticksSinceLastAction > 100) {
             bored = true;
         }
@@ -69,7 +69,8 @@ class GuideBot {
     }
 
     void acceptDeath() {
-        DivElement button = querySelector("#acceptDeath");
+        Element button = querySelector("#acceptDeath");
+        print("can I accept death? ${button}");
         if(button == null) return;
         button.click();
     }
@@ -77,7 +78,7 @@ class GuideBot {
     void clickHuntButton() {
         ticksSinceLastAction = 0;
         //find a button labeled hunt
-        DivElement button = querySelector("#huntingButton");
+        Element button = querySelector("#huntingButton");
         if(button == null) return;
         button.click();
         //actually play the hunting mini game
@@ -86,13 +87,15 @@ class GuideBot {
     void clickTravelButton() {
         ticksSinceLastAction = 0;
         //find a button labeled hunt
-        DivElement button = querySelector("#travelButton");
+        Element button = querySelector("#travelButton");
         if(button == null) return;
         button.click();
         List<Element> travelOptions = querySelectorAll(".travelOption");
         Random rand = new Random();
+        //seriously my react learning at jorb made this syntax make WAY more sense
         new Timer(new Duration(milliseconds: frameRateInMillis), () => {
-            rand.pickFrom(travelOptions).click()
+            rand.pickFrom(travelOptions).click(),
+            acceptTravel()
         });
         //need to periodically click away popups and shit
     }
@@ -101,7 +104,7 @@ class GuideBot {
         acceptDeath();
         //if we aren't on the trail anymore, we arrived (technically we can hunt from here but i have no clue how i wanna handle that)
         //tbh i might disable that entirely
-        if(!(Game.instance.currentLocation is Trail)) {
+        if(Game.instance.currentLocation != null && !(Game.instance.currentLocation is Trail)) {
             bored = true;
             return;
         }

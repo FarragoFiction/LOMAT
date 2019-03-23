@@ -46,7 +46,7 @@ class LOMATNPC {
         }
     }
     void diseaseTick(Road road) {
-        diseases.forEach((Disease d) {
+        new List<Disease>.from(diseases).forEach((Disease d) {
             //TODO have modifiers based on road pace or something
             d.tick(this, road, 1.0, 1.0);
         });

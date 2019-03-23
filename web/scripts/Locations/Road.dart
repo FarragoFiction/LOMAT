@@ -141,7 +141,9 @@ class Road {
         //no more loop plz.
         if(plzStopKThnxBai) return;
         await window.animationFrame;
-        for(LOMATNPC npc in Game.instance.partyMembers) {
+        List<LOMATNPC> copyOfParty = new List<LOMATNPC>.from(Game.instance.partyMembers);
+        //no concurrent mod plz
+        for(LOMATNPC npc in copyOfParty) {
             npc.diseaseTick(this);
         }
         //every ten seconds
