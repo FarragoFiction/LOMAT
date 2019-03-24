@@ -113,12 +113,15 @@ class GuideBot {
     }
 
     void huntLoop(int bulletsFired) {
-        if(bulletsFired >=85) {
+        if(bulletsFired >=13) {
+            querySelector("#backButton").click();
+            bored = true;
             return;
         }
 
         //dispatch event to current locations container
-        Game.instance.currentLocation.container.dispatchEvent(new MouseEvent("click", screenX: 0, screenY: 0));
+        int x = Random().nextIntRange(0,Game.instance.currentLocation.container.offsetWidth);
+        Game.instance.currentLocation.container.dispatchEvent(new MouseEvent("click", clientX: x, screenX: x, screenY: 0));
 
         new Timer(new Duration(milliseconds: frameRateInMillis), () => {
             huntLoop(bulletsFired+1)
