@@ -68,7 +68,9 @@ class GuideBot {
         if(bored) {
             bored = false;
             //TODO once hunting can be tested/escaped we can add it to this loop
-            List<Action> actions = <Action>[clickTalkButton, clickTravelButton];
+            List<Action> actions = <Action>[clickHuntButton];
+            //List<Action> actions = <Action>[clickTalkButton, clickTravelButton,clickHuntButton];
+
             new Random().pickFrom(actions)();
         }
 
@@ -100,7 +102,31 @@ class GuideBot {
         Element button = querySelector("#huntingButton");
         if(button == null) return;
         button.click();
+        huntLoop(0);
         //actually play the hunting mini game
+        //pick a durationt o play for
+        //instantiate a random mouse event along the x axis duration number of times
+        //dispatchEvent(new MouseEvent('click', {shiftKey: true}))
+        //leave
+        //???
+        //profit
+    }
+
+    void huntLoop(int bulletsFired) {
+        if(bulletsFired >=85) {
+            return;
+        }
+
+        //dispatch event to current locations container
+        Game.instance.currentLocation.container.dispatchEvent(new MouseEvent("click", screenX: 0, screenY: 0));
+
+        new Timer(new Duration(milliseconds: frameRateInMillis), () => {
+            huntLoop(bulletsFired+1)
+        });
+    }
+
+    void leaveHuntLoop() {
+        //TODO click the back button
     }
 
     void clickTravelButton() {
@@ -120,6 +146,9 @@ class GuideBot {
     }
 
     void acceptTravel() {
+        if(!running) {
+            return;//break
+        }
         acceptDeath();
         //if we aren't on the trail anymore, we arrived (technically we can hunt from here but i have no clue how i wanna handle that)
         //tbh i might disable that entirely
@@ -149,6 +178,9 @@ class GuideBot {
     }
 
     void dialogueLoop(Random rand, int loop) {
+        if(!running) {
+            return;//break
+        }
         List<Element> dialogueOptions = querySelectorAll(".dialogueSelectableItem");
         if(dialogueOptions.isEmpty) {
             bored = true;
