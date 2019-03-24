@@ -9,6 +9,7 @@ import 'Locations/Trail.dart';
 
 class GuideBot {
     static GuideBot _instance;
+    Element button;
     bool bored = true;
     bool running = false;
     int frameRateInMillis = 1000;
@@ -34,10 +35,28 @@ class GuideBot {
         }
     }
 
+    void toggle() {
+        if(button == null) {
+            button = querySelector("#botBotton");
+        }
+        if(running) {
+            stop();
+            button.text = "Bot";
+        }else {
+            run();
+            button.text = "!Bot";
+        }
+    }
+
     void run() {
         running = true;
         bored = true;
         boredomLoop();
+    }
+
+    void stop() {
+        running = false;
+        bored = true;
     }
 
     void boredomLoop() {

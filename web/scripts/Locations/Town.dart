@@ -1,4 +1,6 @@
 import 'package:CommonLib/Collection.dart';
+import 'package:TextEngine/TextEngine.dart';
+import 'package:recase/recase.dart';
 
 import '../CipherEngine.dart';
 import '../Game.dart';
@@ -153,7 +155,7 @@ class Town extends PhysicalLocation {
           }
           List<LOMATNPC> npcs = await generateProceduralNPCs();
 
-          return new Town(generateProceduralName(), npcs,null,genome.breed(coparent,rand));
+          return new Town(await generateProceduralName(nextTownSeed), npcs,null,genome.breed(coparent,rand));
       }else {
           Town ret = rand.pickFrom(cachedTowns);
           ret.firstTime = false;
@@ -184,7 +186,7 @@ class Town extends PhysicalLocation {
 
   static Future<Town> generateProceduralTown(Random rand,Town town) async {
       List<LOMATNPC> npcs = await generateProceduralNPCs();
-      return new Town(generateProceduralName(), npcs,null,null);
+      return new Town(await generateProceduralName(nextTownSeed), npcs,null,null);
   }
 
   //should never spawn, technically
@@ -206,10 +208,13 @@ class Town extends PhysicalLocation {
     return "$name";
   }
 
-  static String generateProceduralName() {
-      List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["Pirate","Mining","Absolute","Utter","Total","Complete","Incredible","Viking","Seaside","Empty","Abandoned","Snake","Troll","Elf","Consort","Seagull","Ghost","Angry","Envious","Not-On-Main","Lazy","Greedy","Hungry","Prideful","Boasting"];
-      List<String> bullshitNamesPLZReplaceWithTextEngine2 = <String>["Bullshit","Shit","Dumbass","Dunkass","Crap","Village","Burg","Town","City","Vista","Placeholder","Island"];
-      return "${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine)} ${new Random(nextTownSeed).pickFrom(bullshitNamesPLZReplaceWithTextEngine2)}" ;
+  static Future<String> generateProceduralName(nextSeed ) async {
+      TextEngine textEngine = new TextEngine(nextSeed);
+      await textEngine.loadList("towns");
+      String name = textEngine.phrase("TownNames");
+      ReCase rc = new ReCase(name);
+      name = rc.titleCase;
+      return name;
   }
 
 

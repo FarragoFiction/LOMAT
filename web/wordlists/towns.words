@@ -1,0 +1,60 @@
+TextEngine Word List
+
+@nouns
+@verbs
+@adjectives
+
+TownNames
+    #noun##townEndings#
+    #townStarts# #noun##townEndings#: 0.5
+    #adjective##townEndings#
+    #townStarts# #adjective##townEndings#: 0.5
+    #townMiddles##townEndings#
+    #townStarts# #townMiddles##townEndings#: 0.5
+
+TownDescriptions
+    It is a town. Probably.
+
+townEndings
+     Town
+     City
+    burg
+    ton
+    borough
+    borg
+    gard: 3
+     Village
+     Villa: 0.2
+     Vista: 0.3
+     Island: 0.1
+
+townStarts
+    Fort
+    Saint
+    New
+    Old
+
+townMiddles
+    Pirate
+    Mining
+    Logging
+    Absolute: 0.1
+    Incredible
+    Viking
+    Seaside
+    Empty
+    Snake
+    Troll
+    Elf
+    Seagull
+    Ghost
+    Angry
+    Envious
+    Not-On-Main
+    Lazy
+    Greedy
+    Hungry
+    Prideful
+    Boasting
+
+

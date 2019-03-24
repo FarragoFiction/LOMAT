@@ -9,7 +9,7 @@ class GuideBotButton extends MenuItem {
 
   @override
   void onClick() {
-    bot.run();
+    bot.toggle();
   }
 
 

@@ -3,6 +3,7 @@ import 'package:CommonLib/Random.dart';
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../Locations/HuntingGrounds.dart';
+import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
@@ -11,6 +12,9 @@ DivElement div = querySelector('#output');
 void main()  async{
     for(int i = 0; i<10; i++) {
         await testDisease();
+    }
+    for(int i = 0; i<10; i++) {
+        await testTown();
     }
     testCiphers();
     testAnimation();
@@ -21,6 +25,14 @@ Future<Null> testDisease() async {
     Element otherTest = new DivElement()..text = "TODO: some disease shit";
     Disease disease = await Disease.generateProcedural(new Random().nextInt());
     otherTest.text = "${disease.name}. ${disease.description}";
+    div.append(otherTest);
+
+}
+
+Future<Null> testTown() async {
+    Element otherTest = new DivElement()..text = "TODO: some disease shit";
+    String name = await Town.generateProceduralName(new Random().nextInt());
+    otherTest.text = "${name}";
     div.append(otherTest);
 
 }
