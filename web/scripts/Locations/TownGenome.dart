@@ -1,3 +1,5 @@
+import 'package:TextEngine/TextEngine.dart';
+
 import 'Events/Effects/DelayEffect.dart';
 import 'Events/Effects/DiseaseEffect.dart';
 import 'Events/Effects/Effect.dart';
@@ -98,15 +100,19 @@ class TownGenome {
         if(simpleGenes == null) init();
     }
 
-    void init() {
+    Future<Null> init() async{
         simpleGenes = new Map<String, String>();
+        TextEngine textEngine = new TextEngine(rand.nextInt());
+        //TODO: have things like industry or whatever for towns to consistently reference
+        //that way i can have description words around said industry
+        await textEngine.loadList("townDescriptions");
         simpleGenes[BGIMAGEKEY] = randomBackground(rand);
         simpleGenes[GROUNDKEY] = randomGround(rand);
         simpleGenes[MIDGROUNDKEY] = randomMidground(rand);
         simpleGenes[FOREGROUNDKEY] = randomForeground(rand);
-        simpleGenes[STARTTEXT] = randomStartText(rand);
-        simpleGenes[MIDDLETEXT] = randomMiddleText(rand);
-        simpleGenes[ENDTEXT] = randomEndText(rand);
+        simpleGenes[STARTTEXT] = await randomStartText(textEngine);
+        simpleGenes[MIDDLETEXT] = await randomMiddleText(textEngine);
+        simpleGenes[ENDTEXT] = await randomEndText(textEngine);
         simpleGenes[STARTSONG1] = randomSong(rand);
         simpleGenes[STARTSONG2] = randomSong(rand);
         simpleGenes[MIDDLESONG1] = randomSong(rand);
@@ -159,24 +165,6 @@ class TownGenome {
         return ret;
     }
 
-    //for mutations except i just realized i wouldn't need it i just don't need to over ride the child
-    //oh well.
-    static keyToRandomValue(String key, Random rand) {
-        if(key == BGIMAGEKEY) return randomBackground(rand);
-        if(key == GROUNDKEY) return randomGround(rand);
-        if(key == MIDGROUNDKEY) return randomMidground(rand);
-        if(key == FOREGROUNDKEY) return randomForeground(rand);
-        if(key == STARTTEXT) return randomStartText(rand);
-        if(key == MIDDLETEXT) return randomMiddleText(rand);
-        if(key == ENDTEXT) return randomEndText(rand);
-        if(key == STARTSONG1) return randomSong(rand);
-        if(key == STARTSONG2) return randomSong(rand);
-        if(key == MIDDLESONG1) return randomSong(rand);
-        if(key == MIDDLESONG2) return randomSong(rand);
-        if(key == ENDSONG1) return randomSong(rand);
-        if(key == ENDSONG2) return randomSong(rand);
-        return "??? UNKNOWN KEY ???";
-    }
 
     //to draw: village, farm, train station, carnival, mine, port, logging station (with no trees), stonehenge???
     //premade towns: null town, consequenceville, glacier town
@@ -188,14 +176,12 @@ class TownGenome {
     }
 
     //TODO have this integrate with TEXTENGINE
-    static String randomStartText(Random rand) {
-        List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You arrive in INSERTNAMEHERE.","Exhausted, you arrive in INSERTNAMEHERE.","You stroll into INSERTNAMEHERE."];
-        return rand.pickFrom(bullshitNamesPLZReplaceWithTextEngine) ;
+    static Future<String> randomStartText(TextEngine textEngine)  async{
+        return textEngine.phrase("TownStart");
     }
 
-    static String randomMiddleText(Random rand) {
-        List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["It's a procedural placeholder and is kinda bullshit.","It's really kind of lame.","There's nothing to do here."];
-        return rand.pickFrom(bullshitNamesPLZReplaceWithTextEngine) ;
+    static Future<String> randomMiddleText(TextEngine textEngine) async {
+        return textEngine.phrase("TownMiddle");
     }
 
     static String randomSong(Random rand) {
@@ -206,9 +192,8 @@ class TownGenome {
         return ret;
     }
 
-    static String randomEndText(Random rand) {
-        List<String> bullshitNamesPLZReplaceWithTextEngine = <String>["You don't know why you are here.","Its so boring.","You are already ready to leave."];
-        return rand.pickFrom(bullshitNamesPLZReplaceWithTextEngine) ;
+    static Future<String> randomEndText(TextEngine textEngine) async {
+        return textEngine.phrase("TownEnd");
     }
 
     static String randomGround(Random rand) {

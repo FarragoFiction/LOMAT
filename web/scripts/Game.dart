@@ -132,7 +132,8 @@ class Game
             LOMATNPC npc1 = await LOMATNPC.generateRandomNPC(i);
             npcs.add(npc1);
         }
-        Town town = new Town("city2",npcs,null,startingGenome());
+        Town town = new Town.dontevercallthisblindly("city2",npcs,null,startingGenome());
+       await  town.initGenome();
         town.displayOnScreen(div);
     }
 

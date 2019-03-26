@@ -12,9 +12,6 @@ TownNames
     #townMiddles##townEndings#
     #townStarts# #townMiddles##townEndings#: 0.5
 
-TownDescriptions
-    It is a town. Probably.
-
 townEndings
      Town
      City

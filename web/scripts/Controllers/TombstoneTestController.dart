@@ -10,7 +10,7 @@ import 'dart:html';
 
 DivElement div = querySelector('#output');
 void main()  async{
-    for(int i = 0; i<10; i++) {
+    for(int i = 0; i<3; i++) {
         await testDisease();
     }
     for(int i = 0; i<10; i++) {
@@ -32,7 +32,8 @@ Future<Null> testDisease() async {
 Future<Null> testTown() async {
     Element otherTest = new DivElement()..text = "TODO: some disease shit";
     String name = await Town.generateProceduralName(new Random().nextInt());
-    otherTest.text = "${name}";
+    Town town = await Town.generateProceduralTown(new Random());
+    otherTest.text = "${name}<Br>or${town.name} with description ${town.introductionText}";
     div.append(otherTest);
 
 }

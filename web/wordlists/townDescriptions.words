@@ -1,0 +1,40 @@
+TextEngine Word List
+
+@nouns
+@verbs
+@adjectives
+
+TownStart
+    You arrive in INSERTNAMEHERE.
+    #arrive_emotion#, you arrive in INSERTNAMEHERE.
+    You #verb_travel# into INSERTNAMEHERE.
+
+
+TownMiddle
+    It's a procedural placeholder and is kinda bullshit.
+    It's really kind of lame.
+    There's nothing to do here.
+
+TownEnd
+    You don't know why you are here.
+    Its so boring.
+    You are already ready to leave.
+
+verb_travel
+    stroll: 13.0
+    walk: 13.0
+    wagon: 13.0
+    sprint: 4.0
+    run: 5.0
+
+arrive_emotion
+    Exhausted
+    Tired
+    Bored
+    Sleepily
+    Worn out
+    Weary
+    Bone weary
+    Dog tired
+
+

@@ -61,17 +61,24 @@ class Town extends PhysicalLocation {
     List<LOMATNPC> npcs = new List<LOMATNPC>();
     WeightedList<RoadEvent> get events => genome.events;
 
-  Town(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
+    //this should only be called by something async so it can initGenome correctly
+  Town.dontevercallthisblindly(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
       print("passed in genome is $genome");
       seed = nextTownSeed;
       nextTownSeed ++;
-      if(genome == null) {
-          genome = new TownGenome(new Random(seed), null);
-      }else {
-        print("genome wasn't null for $name");
-      }
-      introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
       cachedTowns.add(this);
+  }
+
+  Future<void> initGenome() async{
+    if(genome == null) {
+        //oh no the genome has async elements
+        genome = new TownGenome(new Random(seed), new Map<String, String>() );
+        await genome.init();
+    }else {
+      print("genome wasn't null for $name");
+    }
+    introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
+
   }
 
   @override
@@ -155,7 +162,8 @@ class Town extends PhysicalLocation {
           }
           List<LOMATNPC> npcs = await generateProceduralNPCs();
 
-          return new Town(await generateProceduralName(nextTownSeed), npcs,null,genome.breed(coparent,rand));
+          Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,genome.breed(coparent,rand));
+          await town.initGenome();
       }else {
           Town ret = rand.pickFrom(cachedTowns);
           ret.firstTime = false;
@@ -184,9 +192,11 @@ class Town extends PhysicalLocation {
       return ret;
   }
 
-  static Future<Town> generateProceduralTown(Random rand,Town town) async {
+  static Future<Town> generateProceduralTown(Random rand) async {
       List<LOMATNPC> npcs = await generateProceduralNPCs();
-      return new Town(await generateProceduralName(nextTownSeed), npcs,null,null);
+      Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,null);
+      await town.initGenome();
+      return town;
   }
 
   //should never spawn, technically
@@ -200,7 +210,9 @@ class Town extends PhysicalLocation {
       ret.midGround = "${TownGenome.midgroundBase}/0.png";
       ret.ground = "${TownGenome.groundBase}/0.png";
       ret.background = "${TownGenome.backgroundBase}/0.png";;
-      return new Town("The Void",[],null,ret)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of DENNIS.";
+      Town town =  new Town.dontevercallthisblindly("The Void",[],null,ret)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of DENNIS.";
+      town.initGenome(); //in theory this not being awaited means the void town might crash
+      return town;
   }
 
   @override
