@@ -133,14 +133,15 @@ class Game
             npcs.add(npc1);
         }
         Town town = new Town.dontevercallthisblindly("city2",npcs,null,startingGenome());
-       await  town.initGenome();
+        //don't overwrite genome
+       //await  town.initGenome();
         town.displayOnScreen(div);
     }
 
 
 //eventually load from JSON
     TownGenome  startingGenome() {
-        TownGenome ret = new TownGenome(new Random(13),null);
+        TownGenome ret = new TownGenome(new Random(13),new Map<String, String>());
         ret.startText = "You arrive in beautiful INSERTNAMEHERE, the jewel of LOMAT.";
         ret.middleText = "Or at least that's what you'd think if it were in its finished state.  Sadly, it appears to have been shittly drawn by a WASTE or something, and everything in it is in test mode and half finished.";
         ret.endText = " well, beats looking at a blank white screen, you suppose.";

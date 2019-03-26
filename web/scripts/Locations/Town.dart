@@ -77,9 +77,15 @@ class Town extends PhysicalLocation {
     }else {
       print("genome wasn't null for $name");
     }
-    introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
+    proceduralIntroInit();
 
   }
+
+  String proceduralIntroInit() {
+      introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
+  }
+
+
 
   @override
   void init() {
@@ -165,6 +171,7 @@ class Town extends PhysicalLocation {
 
           Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,await genome.breed(coparent,rand));
           //await town.initGenome();
+          proceduralIntroInit();
           return town;
       }else {
           Town ret = rand.pickFrom(cachedTowns);
