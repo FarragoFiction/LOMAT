@@ -41,8 +41,14 @@ class Road {
     Road({this.sourceTown,this.destinationTown, this.travelTimeInMS:13}) {
         //.......once i realized i needed error handing well....one thing lead to another
         //road to nowhere is go.
-        if(sourceTown == null) sourceTown = Town.getVoidTown();
-        if(destinationTown == null) destinationTown = Town.getVoidTown();
+        if(sourceTown == null) {
+            print("source town was null, but destination town is ${destinationTown}");
+            sourceTown = Town.getVoidTown();
+        }
+        if(destinationTown == null) {
+            print("destination town was null, but source town is ${sourceTown}");
+            destinationTown = Town.getVoidTown();
+        }
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
         timeRemaining = travelTimeInMS;

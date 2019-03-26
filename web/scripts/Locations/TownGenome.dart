@@ -126,9 +126,10 @@ class TownGenome {
         //TODO should there be any mist??? animated gif??? ask artists
     }
 
-    TownGenome breed(TownGenome coparent, Random rand) {
+    Future<TownGenome> breed(TownGenome coparent, Random rand) async{
          //child will have random values so to get mutations just don't over ride
          TownGenome child = new TownGenome(rand,null);
+         await child.init();
          //take each key and pick either parent or coparent or mutate (3% chance)
         for(String key in simpleGenes.keys) {
             if(rand.nextDouble() < genomeStability) {

@@ -116,7 +116,7 @@ class Town extends PhysicalLocation {
 
   @override
   Future displayOnScreen(Element div) async {
-
+      print("trying to display on screen, but has init been called yet? ${genome.simpleGenes.length}");
       roads = await Road.spawnRandomRoadsForTown(this);
       super.displayOnScreen(div);
       //auto play not allowed but we can try cuz this might not be first screen
@@ -136,6 +136,7 @@ class Town extends PhysicalLocation {
   //in theory an npc could accidentally be recruited befor they have a destination?
     //probably should have a thing where if town name is null, just let them off at next stop?
   Future<Null> setNPCGoals() async {
+      print("cachedTowns is ${cachedTowns}");
       npcs.forEach((LOMATNPC npc) async {
             Town town = rand.pickFrom(cachedTowns);
             if(town == this) {
@@ -162,8 +163,9 @@ class Town extends PhysicalLocation {
           }
           List<LOMATNPC> npcs = await generateProceduralNPCs();
 
-          Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,genome.breed(coparent,rand));
-          await town.initGenome();
+          Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,await genome.breed(coparent,rand));
+          //await town.initGenome();
+          return town;
       }else {
           Town ret = rand.pickFrom(cachedTowns);
           ret.firstTime = false;
@@ -183,6 +185,7 @@ class Town extends PhysicalLocation {
 
   static Future<List<Town>> makeAdjacentTowns(Random rand,Town town) async {
       //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
+      print("trying to make adjacent towns");
       int adjAmount = rand.nextInt(4)+1;
       List<Town> ret = new List<Town>();
       for(int i = 0; i<adjAmount; i++) {
@@ -201,6 +204,7 @@ class Town extends PhysicalLocation {
 
   //should never spawn, technically
   static Town getVoidTown() {
+      window.console.warn("getting a void town, this is probably a problem");
       TownGenome ret = new TownGenome(new Random(13),null);
       ret.startText = "";
       ret.middleText = "";

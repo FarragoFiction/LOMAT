@@ -68,8 +68,8 @@ class GuideBot {
         if(bored) {
             bored = false;
             //TODO once hunting can be tested/escaped we can add it to this loop
-            List<Action> actions = <Action>[clickHuntButton];
-            //List<Action> actions = <Action>[clickTalkButton, clickTravelButton,clickHuntButton];
+            //List<Action> actions = <Action>[clickHuntButton];
+            List<Action> actions = <Action>[clickTalkButton, clickTravelButton,clickHuntButton];
 
             new Random().pickFrom(actions)();
         }
