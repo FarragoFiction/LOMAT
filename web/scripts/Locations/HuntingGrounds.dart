@@ -81,3 +81,42 @@ class HuntingGrounds extends PhysicalLocation {
   @override
   String get bg => layers.first.imageLocation;
 }
+
+
+class EchidnaHuntingGrounds extends HuntingGrounds {
+  EchidnaHuntingGrounds(PhysicalLocation prev) : super(prev);
+
+  @override
+  void init() {
+      //TODO make trees/wind procedural
+      //TODO eventually which 0 bg is used is based on nearest location
+      SoundControl.instance.playMusic("Im_sorry_Hunters_mix");
+      container.onClick.listen((MouseEvent event){
+          // window.alert("clicked");
+          Bullet bullet = new Bullet("images/Bullets/85.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
+          bullets.add(bullet);
+      });
+      //layers.add(new StaticLayer("images/BGs/bg1.png", this, 5));
+      DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();
+      container.append(ground);
+      //StaticLayer.styleLikeStaticLayer(ground,5,800,300,0,300);
+      //TODO eventually how wooded an area will be will be determined by location
+      numTrees = rand.nextIntRange(1,13);
+      ground.classes.add("huntingGround");
+      for(int i = 0; i<numTrees; i++) {
+          ProceduralLayer.spawnTree(this,rand.nextInt());
+      }
+
+      echidnaLoop();
+      menu = new MenuHolder(parent,this);
+      createMenuItems();
+
+  }
+
+  Future<Null> echidnaLoop() async{
+      enemies.add(Enemy.spawnEchidnas(this, rand.nextInt()));
+      await window.animationFrame;
+      int duartion = new Random().nextIntRange(500,1000);
+      new Timer(new Duration(milliseconds: duartion), () => echidnaLoop());
+  }
+}

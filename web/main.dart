@@ -10,8 +10,9 @@ import 'scripts/NPCs/LOMATNPC.dart';
 
 Town town;
 DivElement div = querySelector('#output');
-void main() {
+Future<void> main() async{
   Game game = Game.instance;
+  await game.setStartingTown();
   game.display(div);
 }
 

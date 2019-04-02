@@ -95,7 +95,6 @@ class Game
         partyMembers.add(await LOMATNPC.generateRandomNPC(1)..hp =50..name = "Firsty");
         partyMembers.add(await LOMATNPC.generateRandomNPC(2)..hp =15..name = "Secondy");
         partyMembers.add(await LOMATNPC.generateRandomNPC(3)..hp = 0..name = "Thirdy");
-        partyMembers.add(await LOMATNPC.generateRandomNPC(4)..hp =88..name="Fourthy");
         if(!partySectionDisplayed) {
             displayPartySection();
         }
@@ -107,7 +106,7 @@ class Game
         moneyContainer = new DivElement()..classes.add("money");
         container.append(moneyContainer);
         syncMoney();
-        displayStartingTown(container);
+        currentLocation.displayOnScreen(container);
         //ONLY NEEDED FOR TEST NPCS or otherwise loading npcs
         if(partyMembers.length > 0) {
             displayPartySection();
@@ -126,7 +125,7 @@ class Game
         moneyContainer.text = "Funds: $funds";
     }
 
-    Future displayStartingTown(Element div) async {
+    Future setStartingTown() async {
         List<LOMATNPC> npcs = new List<LOMATNPC>();
         for(int i=0; i<3; i++) {
             LOMATNPC npc1 = await LOMATNPC.generateRandomNPC(i);
@@ -135,7 +134,7 @@ class Game
         Town town = new Town.dontevercallthisblindly("city2",npcs,null,startingGenome());
         //don't overwrite genome
        //await  town.initGenome();
-        town.displayOnScreen(div);
+        currentLocation = town;
     }
 
 

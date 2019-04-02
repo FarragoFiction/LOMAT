@@ -1,6 +1,8 @@
+import '../Game.dart';
 import '../Locations/Layers/ProceduralLayer.dart';
 import '../Locations/PhysicalLocation.dart';
 import '../SoundControl.dart';
+import 'Echidna.dart';
 import 'Imp.dart';
 import 'Butterfly.dart';
 import 'Ogre.dart';
@@ -77,6 +79,7 @@ abstract class Enemy {
     //farther away they are, more grist they should be worth, this is a game, not oregon trail
     void die() {
         removeMePlease = true;
+        Game.instance.addFunds(gristDropped);
         image.remove();
     }
 
@@ -112,6 +115,12 @@ abstract class Enemy {
         Random rand = new Random(seed);
         SpawnData spawn = randomSpawnData(rand,120);
         return new Imp(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Imp.enemyLocations)}",spawn.chosenDirection, parent);
+    }
+
+    static Enemy spawnEchidnas(PhysicalLocation parent, int seed) {
+        Random rand = new Random(seed);
+        SpawnData spawn = randomSpawnData(rand,120);
+        return new Echidna(spawn.x, spawn.y,spawn.height, "images/Enemies/${rand.pickFrom(Echidna.enemyLocations)}",spawn.chosenDirection, parent);
     }
 
     static Enemy spawnButterflies(PhysicalLocation parent, int seed) {
