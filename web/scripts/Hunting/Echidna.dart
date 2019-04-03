@@ -11,6 +11,14 @@ class Echidna extends Enemy {
     static DivElement killCount;
     static List<String> facts;
 
+    String get deathSound {
+        Random rand = new Random();
+        return 'bullshit/chunk${rand.nextIntRange(0,47)}';
+    }
+
+
+
+
     static List<String> enemyLocations = <String>["echidna1.png","echidna2.png","echidna3.png"];
     @override
     int speed = 13;

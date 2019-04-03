@@ -90,8 +90,11 @@ class EchidnaHuntingGrounds extends HuntingGrounds {
   void init() {
       //TODO make trees/wind procedural
       //TODO eventually which 0 bg is used is based on nearest location
-      SoundControl.instance.playMusic("Im_sorry_Hunters_mix");
+
       container.onClick.listen((MouseEvent event){
+          if(!SoundControl.instance.musicPlaying) {
+              SoundControl.instance.playMusic("Im_sorry_Hunters_mix");
+          }
           // window.alert("clicked");
           Bullet bullet = new Bullet("images/Bullets/85.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
           bullets.add(bullet);
