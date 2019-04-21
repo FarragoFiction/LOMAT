@@ -50,7 +50,6 @@ class Game
     Element moneyContainer;
 
     Game() {
-        testNPCs();
     }
 
     void dismissTalkySection() {
@@ -108,7 +107,7 @@ class Game
         syncMoney();
         currentLocation.displayOnScreen(container);
         //ONLY NEEDED FOR TEST NPCS or otherwise loading npcs
-        if(partyMembers.length > 0) {
+        if(!partySectionDisplayed) {
             displayPartySection();
         }
 
@@ -119,6 +118,20 @@ class Game
       //always display npcs at bottom.
       Element partyContainer = querySelector("body");
       partySection = new PartySection(partyContainer);
+    }
+
+    //check all party members and see if this is their stop
+    List<LOMATNPC> processArrivingParty(Town town) {
+        List<LOMATNPC> ret = new List<LOMATNPC>();
+        partyMembers.forEach((LOMATNPC npc)
+        {
+            if(town.name == npc.goalTownName) {
+                ret.add(npc);
+                eject(npc);
+            }
+        });
+
+        return ret;
     }
 
     void syncMoney() {

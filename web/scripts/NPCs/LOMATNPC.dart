@@ -26,6 +26,7 @@ class LOMATNPC {
     String get imageSrc => rawImage.src;
     ImageElement get imageCopy => new ImageElement(src: rawImage.src);
     String name;
+    String leavingMessage = " TODO make sure each NPC has a custom leaving message.";
     String imageModifier;
     String positiveEmotion;
     String neutralEmotion;

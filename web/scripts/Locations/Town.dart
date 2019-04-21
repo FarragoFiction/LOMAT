@@ -273,10 +273,17 @@ class Town extends PhysicalLocation {
         if(firstTime == false) {
             before = "<Br><br>You could swear you have been here before.";
         }
+
+        List<LOMATNPC> arrivingNPCs = Game.instance.processArrivingParty(this);
+        arrivingNPCs.forEach((LOMATNPC npc) {
+            before = "$before <br> ${npc.leavingMessage} ${npc.name} leaves the party with a dejected SQWAWK!!!!!";
+        });
         flavorTextElement.setInnerHtml("$introductionText$before");
         CipherEngine.applyRandom(flavorTextElement);
         container.append(flavorTextElement);
   }
+
+
 
   void dismissFlavorText() {
       flavorTextElement.remove();
