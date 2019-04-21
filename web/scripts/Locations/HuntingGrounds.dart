@@ -1,3 +1,4 @@
+import '../Game.dart';
 import '../Hunting/Bullet.dart';
 import '../Hunting/Enemy.dart';
 import '../SoundControl.dart';
@@ -28,8 +29,14 @@ class HuntingGrounds extends PhysicalLocation {
         SoundControl.instance.playMusic("Shooting_Gallery");
         container.onClick.listen((MouseEvent event){
            // window.alert("clicked");
-            Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
-            bullets.add(bullet);
+            if(Game.instance.funds >= Bullet.gristCost) {
+                Game.instance.removeFunds(Bullet.gristCost);
+                Bullet bullet = new Bullet("images/Bullets/bullet.png",this, event.page.x-container.offset.left, event.page.y-container.offset.top);
+                bullets.add(bullet);
+            }else {
+                SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+            }
+
         });
         //layers.add(new StaticLayer("images/BGs/bg1.png", this, 5));
         DivElement ground = new DivElement()..style.backgroundColor = groundColor.toStyleString();

@@ -1,3 +1,4 @@
+import '../Game.dart';
 import '../Locations/PhysicalLocation.dart';
 import '../SoundControl.dart';
 import 'Enemy.dart';
@@ -19,6 +20,7 @@ class Bullet {
     int goalY = 0;
     bool  removeMePlease = false;
     int frameRate = (1000/30).round();
+    static int gristCost = 1;
 
     double angle;
 

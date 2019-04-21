@@ -154,7 +154,11 @@ class Tombstone {
 
     //peperony and chease
     String get fullEpilogue {
-        String ret = "$epilogue";
+        String goal = "";
+        if(npc.goalTownName != null) {
+            goal = "Now they will never get to ${npc.goalTownName}.";
+        }
+        String ret = "$epilogue $goal";
         ret = ret.replaceAll(NAMETAG, npcName);
         ret = ret.replaceAll(CODTAG, npcCOD);
         return ret;

@@ -12,10 +12,11 @@ class InstaKillEffect extends Effect {
     @override
     int amount;
     String targetName;
+    String targetDestination;
     String causeOfDeath;
 
     @override
-    String get flavorText =>  "$targetName dies.";
+    String get flavorText =>  "$targetName dies. Now they will never get to ${targetDestination}";
 
     InstaKillEffect(String this.causeOfDeath);
 
@@ -27,6 +28,7 @@ class InstaKillEffect extends Effect {
     target = new Random().pickFrom(game.partyMembers);
 
     targetName = target.name;
+    targetDestination = target.goalTownName;
     target.die(causeOfDeath, road);
   }
 
