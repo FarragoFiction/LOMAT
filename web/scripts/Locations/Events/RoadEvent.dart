@@ -31,8 +31,12 @@ class RoadEvent {
 
     void replaceText(Element targetContainer) {
         if(effect.target != null) {
+            print("before ${targetContainer.text}");
             targetContainer.text.replaceAll(
                 "${PARTYMEMBER}", "${effect.target.name}");
+            targetContainer.text.replaceAll(
+                "PARTYMEMBER", "${effect.target.name}");
+            print("after ${targetContainer.text}");
         }
 
     }

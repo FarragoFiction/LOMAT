@@ -1,3 +1,5 @@
+import 'package:TextEngine/TextEngine.dart';
+
 import '../Game.dart';
 import '../Locations/Road.dart';
 import '../Locations/Town.dart';
@@ -186,9 +188,11 @@ class LOMATNPC {
 
     }
 
-    static Future<String> randomName() async {
-        //TextEngine textEngine = new TextEngine(13, "/WordSource");
-        return "TODO: TE";
+    static Future<String> randomName(int seed) async {
+        Random rand = new Random(seed);
+        TextEngine textEngine = new TextEngine(rand.nextInt());
+        await textEngine.loadList("names");
+        return textEngine.phrase("wigglername_all");
     }
 
     //TODO not gonna use this for the real game or anything, but good for testing
@@ -199,7 +203,7 @@ class LOMATNPC {
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         List<String> avatars = <String>["classic","red","blue","yellow"];
-        String name = await randomName();
+        String name = await randomName(seed);
         LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/oldshit/happy","images/Seagulls/oldshit/neutral","images/Seagulls/oldshit/sad", level);
 
 

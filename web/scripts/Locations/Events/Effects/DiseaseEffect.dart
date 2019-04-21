@@ -12,14 +12,14 @@ class DiseaseEffect extends Effect {
     String name = "DiseaseEffect";
     @override
     int amount;
-    String targetName;
+
 
     //so i can refer to them in flavor text.
     String diseaseName;
     String diseaseEffect;
 
     @override
-    String get flavorText =>  "$targetName gets $diseaseName. $diseaseEffect";
+    String get flavorText =>  "${RoadEvent.PARTYMEMBER} gets $diseaseName. $diseaseEffect";
 
     DiseaseEffect();
 
