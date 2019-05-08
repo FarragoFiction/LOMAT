@@ -84,7 +84,33 @@ class GullAnimation  extends AnimationObject{
 
     static  Palette get randomPalette {
         Random rand = new Random();
-        return rand.pickFrom(birdColors);
+        Palette ret= rand.pickFrom(birdColors);
+
+        Colour accent1 = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("accent1Light", accent1,true);
+        makeOtherColorsDarker(ret, "accent1Light", <String>["accent1Dark"]);
+
+        Colour accent2 = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("accent2Light", accent2,true);
+        makeOtherColorsDarker(ret, "accent2Light", <String>["accent2Dark"]);
+
+        Colour hair = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("hairLight", hair,true);
+        makeOtherColorsDarker(ret, "hairLight", <String>["hairMid","hairDark"]);
+
+        return ret;
+    }
+
+    static void makeOtherColorsDarker(Palette p, String sourceKey, List<String> otherColorKeys) {
+        String referenceKey = sourceKey;
+        //print("$name, is going to make other colors darker than $sourceKey, which is ${p[referenceKey]}");
+        for(String key in otherColorKeys) {
+            //print("$name is going to make $key darker than $sourceKey");
+            p.add(key, new Colour(p[referenceKey].red, p[referenceKey].green, p[referenceKey].blue)..setHSV(p[referenceKey].hue, p[referenceKey].saturation, 2*p[referenceKey].value / 3), true);
+            //print("$name made  $key darker than $referenceKey, its ${p[key]}");
+
+            referenceKey = key; //each one is progressively darker
+        }
     }
 
 
@@ -104,7 +130,16 @@ class GullAnimation  extends AnimationObject{
     //TODO also has a palette for body
     //f5ffff
     //002b48  edge
-    Palette paletteSource = new Palette()..add("edge",new Colour.fromStyleString("#002b48"))..add("sheet",new Colour.fromStyleString("#f5ffff"));
+    Palette paletteSource = new Palette()
+        ..add("edge",new Colour.fromStyleString("#002b48"))
+        ..add("accent1Light",new Colour.fromStyleString("#7dc9fb"))
+        ..add("accent1Dark",new Colour.fromStyleString("#4487b4"))
+        ..add("hairLight",new Colour.fromStyleString("#2f2f2f"))
+        ..add("hairMid",new Colour.fromStyleString("#303030"))
+        ..add("hairDark",new Colour.fromStyleString("#141414"))
+        ..add("accent2Light",new Colour.fromStyleString("#0082d9"))
+        ..add("accent2Dark",new Colour.fromStyleString("#004b7f"))
+        ..add("sheet",new Colour.fromStyleString("#f5ffff"));
     Palette palette;
 
     GullAnimation(int this.hatNumber, int this.bodyNumber):super(17, 20, 254, 288) {
@@ -115,7 +150,7 @@ class GullAnimation  extends AnimationObject{
     AnimationLayer bodyLayer() {
         List<String> ret = new List<String>();
         for(int i = 0; i<18; i++) {
-            ret.add("${baseLocationBody}/Frame${i}/${bodyNumber.toString().padLeft(2,'0')}.png");
+            ret.add("${baseLocationBody}/Frame${i.toString().padLeft(2,'0')}/${bodyNumber}.png");
         }
         return new AnimationLayer(ret, paletteSource, randomPalette);
     }
@@ -123,7 +158,7 @@ class GullAnimation  extends AnimationObject{
     AnimationLayer hatLayer() {
         List<String> ret = new List<String>();
         for(int i = 0; i<18; i++) {
-            ret.add("${baseLocationHat}/Frame${i}/${hatNumber.toString().padLeft(2,'0')}.png");
+            ret.add("${baseLocationHat}/Frame${i.toString().padLeft(2,'0')}/${hatNumber}.png");
         }
         return new AnimationLayer(ret, paletteSource, randomPalette);
     }
