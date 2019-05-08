@@ -9,7 +9,7 @@ class Ogre extends Enemy {
     @override
     int speed = 2;
     @override
-    int gristDropped = 130;
+    int gristDropped = 1; //you aren't supposed to kill these, dunkass
 
     Ogre(int x, int y, int height, String imageLocation, double direction, PhysicalLocation location) : super(x, y, height, imageLocation, direction, location);
 

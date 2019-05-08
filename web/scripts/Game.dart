@@ -41,7 +41,7 @@ class Game
         }
         return _instance;
     }
-    int _funds = 0;
+    int _funds = 113;
     int get funds => _funds;
     List<LOMATNPC> partyMembers = new List<LOMATNPC>();
 

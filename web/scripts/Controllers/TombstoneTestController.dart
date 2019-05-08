@@ -10,15 +10,16 @@ import 'dart:html';
 
 DivElement div = querySelector('#output');
 void main()  async{
+    /*
     for(int i = 0; i<3; i++) {
         await testDisease();
     }
     for(int i = 0; i<10; i++) {
         await testTown();
-    }
-    testCiphers();
+    }*/
+    //testCiphers();
     testAnimation();
-    testTombstone();
+    //testTombstone();
 }
 
 Future<Null> testDisease() async {

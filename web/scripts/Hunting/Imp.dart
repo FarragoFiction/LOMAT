@@ -7,7 +7,7 @@ class Imp extends Enemy {
     @override
     int speed = 13;
     @override
-    int gristDropped = 13;
+    int gristDropped = 2;
 
   Imp(int x, int y, int height, String imageLocation,double direction, PhysicalLocation location) : super(x, y, height, imageLocation, direction, location);
 

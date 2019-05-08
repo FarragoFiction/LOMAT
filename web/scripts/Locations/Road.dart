@@ -17,7 +17,7 @@ class Road {
     //maybe let progress in the game, or what consorts you have with you (should they have stats???)
     //effect this
     static int minTimeInS = 1;
-    static int maxTimeInS = 10;
+    static int maxTimeInS = 4;
     //manic says multiple of 3.43 seconds are best for music reasons
     static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 100;
 
