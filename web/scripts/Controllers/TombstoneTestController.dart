@@ -49,7 +49,7 @@ void testAnimation() {
     print("testing animation");
     List<int> options = <int> [1,2,3,4,5];
     Random rand = new Random();
-    for(int i = 0; i<2; i++) {
+    for(int i = 0; i<5; i++) {
         GullAnimation gull = new GullAnimation(rand.pickFrom(options),rand.pickFrom(options));
         gull.frameRateInMS = 20*i+20;
         div.append(gull.element);
