@@ -47,7 +47,7 @@ void testCiphers() {
 
 void testAnimation() {
     for(int i = 0; i<2; i++) {
-        GullAnimation gull = new GullAnimation("pimp");
+        GullAnimation gull = new GullAnimation(i,i);
         gull.frameRateInMS = 20*i+20;
         div.append(gull.element);
     }

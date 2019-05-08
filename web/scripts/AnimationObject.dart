@@ -99,14 +99,15 @@ class GullAnimation  extends AnimationObject{
     static Palette whiteBird = new Palette()..add("edge",new Colour.fromStyleString("#002b48"))..add("sheet",new Colour.fromStyleString("#f5ffff"));
 
     static List<Palette> birdColors = <Palette>[redBird,blueBird,yellowBird,greenBird,purpleBird,jadeBird,fuchsiaBird,bronzeBird,whiteBird];
-    String hatBase;
+    int hatNumber = 0;
+    int bodyNumber = 0;
     //TODO also has a palette for body
     //f5ffff
     //002b48  edge
     Palette paletteSource = new Palette()..add("edge",new Colour.fromStyleString("#002b48"))..add("sheet",new Colour.fromStyleString("#f5ffff"));
     Palette palette;
 
-    GullAnimation(String this.hatBase):super(17, 20, 254, 288) {
+    GullAnimation(int this.hatNumber, int this.bodyNumber):super(17, 20, 254, 288) {
         layers.add(bodyLayer());
         layers.add(hatLayer());
     }
@@ -114,7 +115,7 @@ class GullAnimation  extends AnimationObject{
     AnimationLayer bodyLayer() {
         List<String> ret = new List<String>();
         for(int i = 0; i<18; i++) {
-            ret.add("${baseLocationBody}${i}.png");
+            ret.add("${baseLocationBody}/Frame${i}/${bodyNumber.toString().padLeft(2,'0')}.png");
         }
         return new AnimationLayer(ret, paletteSource, randomPalette);
     }
@@ -122,13 +123,8 @@ class GullAnimation  extends AnimationObject{
     AnimationLayer hatLayer() {
         List<String> ret = new List<String>();
         for(int i = 0; i<18; i++) {
-            if(i%4!=0){
-                ret.add("${baseLocationHat}${hatBase}0.png");
-            }else{
-                ret.add("${baseLocationHat}${hatBase}1.png");
-
-            }
+            ret.add("${baseLocationHat}/Frame${i}/${hatNumber.toString().padLeft(2,'0')}.png");
         }
-        return new AnimationLayer(ret, null,null);
+        return new AnimationLayer(ret, paletteSource, randomPalette);
     }
 }
