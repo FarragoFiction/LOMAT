@@ -82,9 +82,19 @@ class GullAnimation  extends AnimationObject{
     static String baseLocationBody = "${baseLocation}BodyFrames/";
     static String baseLocationHat = "${baseLocation}HatFrames/";
 
+    static GullAnimation get randomAnimation {
+        Random rand = new Random();
+        return new GullAnimation(rand.nextIntRange(1,5),rand.nextIntRange(1,5));
+    }
+
+
     static  Palette get randomPalette {
         Random rand = new Random();
-        Palette ret= rand.pickFrom(birdColors);
+       Palette ret= rand.pickFrom(birdColors);
+
+        Colour sheet = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("sheet", sheet,true);
+        makeOtherColorsDarker(ret, "sheet", <String>["edge"]);
 
         Colour accent1 = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
         ret.add("accent1Light", accent1,true);

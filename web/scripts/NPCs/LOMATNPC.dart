@@ -1,5 +1,6 @@
 import 'package:TextEngine/TextEngine.dart';
 
+import '../AnimationObject.dart';
 import '../Game.dart';
 import '../Locations/Road.dart';
 import '../Locations/Town.dart';
@@ -31,6 +32,7 @@ class LOMATNPC {
     String leavingMessage = " TODO make sure each NPC has a custom leaving message.";
     String imageModifier;
     String positiveEmotion;
+    GullAnimation animation;
     String neutralEmotion;
     String negativeEmotion;
     SinglePartyMember myStatsView;
@@ -154,7 +156,7 @@ class LOMATNPC {
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
 
         div = new DivElement()..classes.add("dialogueContainer");
-        container.append(displayImage);
+        container.append(animation.element);
         container.append(div);
         talkyLevel.display(div);
     }
@@ -205,7 +207,7 @@ class LOMATNPC {
         List<String> avatars = <String>["classic","red","blue","yellow"];
         String name = await randomName(seed);
         LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/oldshit/happy","images/Seagulls/oldshit/neutral","images/Seagulls/oldshit/sad", level);
-
+        testNPC.animation = GullAnimation.randomAnimation;
 
         List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
         //so happy past jr made quirks automatic
