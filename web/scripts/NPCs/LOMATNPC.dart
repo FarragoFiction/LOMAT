@@ -76,7 +76,7 @@ class LOMATNPC {
     }
 
     //TODO maybe an unanimated one for 'dead'
-    String get emotionForCurrentHealth {
+    int get emotionForCurrentHealth {
         if(hp >= 66) {
             return TalkyItem.HAPPY;
         }else if (hp > 33) {
@@ -157,6 +157,7 @@ class LOMATNPC {
 
         div = new DivElement()..classes.add("dialogueContainer");
         container.append(animation.element);
+        animation.element.classes.add("npcImage");
         container.append(div);
         talkyLevel.display(div);
     }
@@ -172,8 +173,8 @@ class LOMATNPC {
     }
 
 
-    void emote(String emotion) {
-        rawImage.src = imgSrcForEmotion(emotion);
+    void emote(int emotion) {
+       animation.frameRateInMS = emotion;
     }
 
     static String seagullQuirk(String text) {
@@ -209,7 +210,7 @@ class LOMATNPC {
         LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/oldshit/happy","images/Seagulls/oldshit/neutral","images/Seagulls/oldshit/sad", level);
         testNPC.animation = GullAnimation.randomAnimation;
 
-        List<String> emotions = <String>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
+        List<int> emotions = <int>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
         //so happy past jr made quirks automatic
         List<String> gameQuips = <String>["This game is going to be based on the retro game 'Oregon Trail'.","This game will involve ferrying the 'souls of the dead' to their final resting place.","This game is the Land of Mists and Trails.", "The Titan is a real jerk."];
         List<String> townQuips = <String>["This town is a default test town scribbled by JR.","This town is snowy, and has some huge trees in it.","This town will probably be redrawn by an actual artist at some point.","Everyone in this town can't figure out how to leave it."];

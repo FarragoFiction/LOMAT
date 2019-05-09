@@ -9,12 +9,12 @@ class TalkyResponse extends TalkyItem {
     //for most it will just be the "go back" button, but
     //could have sub questions
     TalkyLevel talkyLevel;
-    String associatedEmotion;
+    int associatedEmotion;
     //needed to emote
     LOMATNPC npc;
     TalkyEnd talkyEnd;
 
-  TalkyResponse(LOMATNPC this.npc, List<TalkyItem> results,String displayText,String this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
+  TalkyResponse(LOMATNPC this.npc, List<TalkyItem> results,String displayText,int this.associatedEmotion, TalkyLevel level) : super(displayText,level) {
         talkyLevel = new TalkyLevel(results, owner);
 
       //talkyLevel.talkyItems.add(this);

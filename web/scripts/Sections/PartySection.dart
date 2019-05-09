@@ -59,7 +59,7 @@ class PartySection extends LOMATSection {
 class SinglePartyMember {
   LOMATNPC partyMember;
   Element container;
-  ImageElement npcPortrait;
+  CanvasElement npcPortrait;
   DivElement hpValue;
   DivElement diseaseValue;
   DivElement name;
@@ -86,7 +86,8 @@ class SinglePartyMember {
 
   void display() {
     //not in sync with bullshit
-    npcPortrait = partyMember.imageCopy;
+    npcPortrait = partyMember.animation.element;
+    npcPortrait.classes.clear();
     npcPortrait.classes.add("statPortrait");
     container.append(npcPortrait);
     name = new DivElement()..text = "${partyMember.name}"..classes.add("nameLabel");
@@ -99,7 +100,9 @@ class SinglePartyMember {
   }
 
   void sync() {
-    npcPortrait.src = partyMember.imgSrcForEmotion(partyMember.emotionForCurrentHealth);
+    //npcPortrait.src = partyMember.imgSrcForEmotion(partyMember.emotionForCurrentHealth);
+    print("JR NOTE: HEY SYNC THIS BACK UP TO HEALTH PLEASE");
+    partyMember.animation.frameRateInMS = partyMember.emotionForCurrentHealth;
     hpValue.text = "${partyMember.healthPhrase}";
     name.text = "${partyMember.name}";
     diseaseValue.text = "${partyMember.diseasePhrase}";

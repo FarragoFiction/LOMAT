@@ -11,6 +11,10 @@ class AnimationObject {
     int frameRateInMS;
     int width;
     int height;
+    static int FAST = 20*3+20;
+    static int MIDDLE = 20*4+20;
+    static int SLOW = 20*5+20;
+
     List<AnimationLayer> layers = new List<AnimationLayer>();
     CanvasElement _canvasElement;
     AnimationObject(int this.numberFrames, int this.frameRateInMS, int this.width, int this.height);

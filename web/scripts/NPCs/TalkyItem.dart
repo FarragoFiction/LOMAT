@@ -1,5 +1,6 @@
 //'dialogue' is too easy to typo, i am officially declaring 'talky' just as good.
 
+import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../SoundControl.dart';
 import 'TalkyLevel.dart';
@@ -10,9 +11,10 @@ abstract class TalkyItem {
     Element container;
 
     //todo have talky items have conditions (maybe only responses?)
-    static final String HAPPY = "_happy";
-    static final String SAD = "_sad";
-    static final String NEUTRAL = "_blank";
+
+    static final int HAPPY = AnimationObject.FAST;
+    static final int SAD = AnimationObject.MIDDLE;
+    static final int NEUTRAL = AnimationObject.SLOW;
     DivElement div;
 
     String displayText;
