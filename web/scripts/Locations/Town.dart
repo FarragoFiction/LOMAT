@@ -64,9 +64,16 @@ class Town extends PhysicalLocation {
     //this should only be called by something async so it can initGenome correctly
   Town.dontevercallthisblindly(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
       print("passed in genome is $genome");
+      npcs.forEach((LOMATNPC npc) => npc.currentTown = this);
       seed = nextTownSeed;
       nextTownSeed ++;
       cachedTowns.add(this);
+  }
+
+  //bye bye little butterfly
+  void npcLeaves(LOMATNPC npc) {
+        npcs.remove(npc);
+        npc.currentTown = null;
   }
 
   Future<void> initGenome() async{
@@ -116,6 +123,7 @@ class Town extends PhysicalLocation {
   @override
   void teardown() {
       super.teardown();
+      npcs.forEach((LOMATNPC npc) => npcLeaves(npc));
       SoundControl.instance.stopMusic();
       if(travelContainer != null) travelContainer.remove();
   }
@@ -203,7 +211,7 @@ class Town extends PhysicalLocation {
   }
 
   static Future<Town> generateProceduralTown(Random rand) async {
-      List<LOMATNPC> npcs = await generateProceduralNPCs();
+      List<LOMATNPC> npcs = await Game.instance.findWanderingNPCS();
       Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,null);
       await town.initGenome();
       return town;

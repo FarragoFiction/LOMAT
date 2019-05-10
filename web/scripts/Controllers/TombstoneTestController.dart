@@ -50,7 +50,7 @@ void testAnimation() {
     List<int> options = <int> [1,2,3,4,5];
     Random rand = new Random();
     for(int i = 0; i<5; i++) {
-        GullAnimation gull = new GullAnimation(rand.pickFrom(options),rand.pickFrom(options));
+        GullAnimation gull = new GullAnimation(rand.pickFrom(options),rand.pickFrom(options), GullAnimation.randomPalette);
         gull.frameRateInMS = 20*i+20;
         div.append(gull.element);
     }

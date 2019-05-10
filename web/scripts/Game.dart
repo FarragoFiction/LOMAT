@@ -1,5 +1,6 @@
 import 'package:CommonLib/Collection.dart';
 
+import 'AnimationObject.dart';
 import 'Locations/Events/Effects/DelayEffect.dart';
 import 'Locations/Events/Effects/DiseaseEffect.dart';
 import 'Locations/Events/Effects/InstaKillEffect.dart';
@@ -8,6 +9,10 @@ import 'Locations/PhysicalLocation.dart';
 import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
 import 'NPCs/LOMATNPC.dart';
+import 'NPCs/TalkyItem.dart';
+import 'NPCs/TalkyLevel.dart';
+import 'NPCs/TalkyQuestion.dart';
+import 'NPCs/TalkyResponse.dart';
 import 'NPCs/Tombstone.dart';
 import 'Sections/PartySection.dart';
 import 'Sections/TalkySection.dart';
@@ -44,12 +49,14 @@ class Game
     int _funds = 113;
     int get funds => _funds;
     List<LOMATNPC> partyMembers = new List<LOMATNPC>();
-
+    //these can be tapped to shove into a specific town
+    List<LOMATNPC> wanderingNPCs = new List<LOMATNPC>();
 
     Element container;
     Element moneyContainer;
 
     Game() {
+        initializeNPCS();
     }
 
     void dismissTalkySection() {
@@ -61,14 +68,40 @@ class Game
         talkySection = new TalkySection(npc, parent);
     }
 
+    //creates the initial npcs
+    void initializeNPCS() async {
+        //as a test, make 1 set npcs and 4 random ones.
+        await makeAmagalmates();
+
+
+    }
+
+    void makeAmagalmates() async {
+        Random rand = new Random();
+        for(int i = 0; i< 4; i++) {
+            wanderingNPCs.add(await LOMATNPC.generateRandomNPC(rand.nextInt()));
+        }
+    }
+
+    List<LOMATNPC> findWanderingNPCS() {
+        Random rand = new Random();
+        List<LOMATNPC> ret = <LOMATNPC>[];
+        int npcs = rand.nextIntRange(1,4);
+        for(int i = 0; i< npcs; i++) {
+            ret.add(rand.pickFrom(wanderingNPCs));
+        }
+
+        return ret;
+    }
+
     bool recruit(LOMATNPC npc) {
         if(partyMembers.length >= maxPartySize) {
             return false;
         }
         SoundControl.instance.playSoundEffect("Dead_Jingle");
-
         partyMembers.add(npc);
         partySection.update();
+        npc.currentTown.npcLeaves(npc);
         return true;
     }
 

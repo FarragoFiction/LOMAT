@@ -23,18 +23,12 @@ import 'package:CommonLib/Random.dart';
 class LOMATNPC {
     //TODO have town they want to go to, have their recruit text mention it. maybe can mention CURRENT_NEAREST_TOWN or GOAL_TOWN
     //TODO most kleptomaniac birds, have them swipe shit out of your inventory as an effect
-    ImageElement rawImage;
-    ImageElement displayImage;
 
-    String get imageSrc => rawImage.src;
-    ImageElement get imageCopy => new ImageElement(src: rawImage.src);
     String name;
+    Town currentTown; //so i can remove them from it when they get recruited. or the town is destroyed. ;)
     String leavingMessage = " TODO make sure each NPC has a custom leaving message.";
-    String imageModifier;
-    String positiveEmotion;
     GullAnimation animation;
-    String neutralEmotion;
-    String negativeEmotion;
+
     SinglePartyMember myStatsView;
     String causeOfDeath = "absolutely nothing";
     int _hp = 85;
@@ -93,13 +87,7 @@ class LOMATNPC {
     TalkyLevel talkyLevel;
     TalkyEnd talkyEnd;
 
-    LOMATNPC(String this.name, String this.imageModifier,String this.positiveEmotion, String this.neutralEmotion,String this.negativeEmotion, TalkyLevel this.talkyLevel ) {
-        rawImage = new ImageElement(src: "${neutralEmotion}_${imageModifier}.gif");
-        displayImage = new ImageElement(src: imageSrc)..classes.add("npcImage");
-    }
-
-    void syncImages() {
-        displayImage.src = imageSrc;
+    LOMATNPC(String this.name,TalkyLevel this.talkyLevel, GullAnimation this.animation ) {
     }
 
     void removeDisease(Disease disease) {
@@ -162,15 +150,7 @@ class LOMATNPC {
         talkyLevel.display(div);
     }
 
-    String imgSrcForEmotion(String emotion) {
-        if(emotion == TalkyItem.HAPPY) {
-            return "${positiveEmotion}_${imageModifier}.gif";
-        }else if(emotion == TalkyItem.NEUTRAL) {
-            return  "${neutralEmotion}_${imageModifier}.gif";;
-        }else if (emotion == TalkyItem.SAD) {
-            return "${negativeEmotion}_${imageModifier}.gif";;
-        }
-    }
+
 
 
     void emote(int emotion) {
@@ -205,10 +185,8 @@ class LOMATNPC {
 
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
-        List<String> avatars = <String>["classic","red","blue","yellow"];
         String name = await randomName(seed);
-        LOMATNPC testNPC = new LOMATNPC(name,rand.pickFrom(avatars),"images/Seagulls/oldshit/happy","images/Seagulls/oldshit/neutral","images/Seagulls/oldshit/sad", level);
-        testNPC.animation = GullAnimation.randomAnimation;
+        LOMATNPC testNPC = new LOMATNPC(name, level, GullAnimation.randomAnimation);
 
         List<int> emotions = <int>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
         //so happy past jr made quirks automatic
@@ -238,3 +216,17 @@ class LOMATNPC {
 
 }
 
+
+abstract class NPCFactory {
+
+    //TODO eventaully all this is serialized.
+    static LOMATNPC jrTest() {
+        List<TalkyItem> talkyItems = new List<TalkyItem>();
+        TalkyLevel level = new TalkyLevel(talkyItems,null);
+        LOMATNPC testNPC = new LOMATNPC("JR BUT A GULL",level, new GullAnimation(1,3, GullAnimation.voidPalette));
+
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a waste."), 3,null);
+        TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
+        return testNPC;
+    }
+}

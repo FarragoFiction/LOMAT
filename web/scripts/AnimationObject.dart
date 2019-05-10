@@ -88,7 +88,7 @@ class GullAnimation  extends AnimationObject{
 
     static GullAnimation get randomAnimation {
         Random rand = new Random();
-        return new GullAnimation(rand.nextIntRange(1,5),rand.nextIntRange(1,5));
+        return new GullAnimation(rand.nextIntRange(1,5),rand.nextIntRange(1,5), randomPalette);
     }
 
 
@@ -154,9 +154,20 @@ class GullAnimation  extends AnimationObject{
         ..add("accent2Light",new Colour.fromStyleString("#0082d9"))
         ..add("accent2Dark",new Colour.fromStyleString("#004b7f"))
         ..add("sheet",new Colour.fromStyleString("#f5ffff"));
+
+    static Palette voidPalette = new Palette()
+        ..add("edge",new Colour.fromStyleString("#000000"))
+        ..add("accent1Light",new Colour.fromStyleString("#000000"))
+        ..add("accent1Dark",new Colour.fromStyleString("#000000"))
+        ..add("hairLight",new Colour.fromStyleString("#000000"))
+        ..add("hairMid",new Colour.fromStyleString("#000000"))
+        ..add("hairDark",new Colour.fromStyleString("#000000"))
+        ..add("accent2Light",new Colour.fromStyleString("#000000"))
+        ..add("accent2Dark",new Colour.fromStyleString("#000000"))
+        ..add("sheet",new Colour.fromStyleString("#000000"));
     Palette palette;
 
-    GullAnimation(int this.hatNumber, int this.bodyNumber):super(17, 20, 254, 288) {
+    GullAnimation(int this.hatNumber, int this.bodyNumber, Palette this.palette):super(17, 20, 254, 288) {
         layers.add(bodyLayer());
         layers.add(hatLayer());
     }
@@ -166,7 +177,7 @@ class GullAnimation  extends AnimationObject{
         for(int i = 0; i<18; i++) {
             ret.add("${baseLocationBody}/Frame${i.toString().padLeft(2,'0')}/${bodyNumber}.png");
         }
-        return new AnimationLayer(ret, paletteSource, randomPalette);
+        return new AnimationLayer(ret, paletteSource, palette);
     }
 
     AnimationLayer hatLayer() {
@@ -174,6 +185,6 @@ class GullAnimation  extends AnimationObject{
         for(int i = 0; i<18; i++) {
             ret.add("${baseLocationHat}/Frame${i.toString().padLeft(2,'0')}/${hatNumber}.png");
         }
-        return new AnimationLayer(ret, paletteSource, randomPalette);
+        return new AnimationLayer(ret, paletteSource, palette);
     }
 }
