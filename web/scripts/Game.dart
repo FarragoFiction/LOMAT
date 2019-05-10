@@ -68,10 +68,29 @@ class Game
         talkySection = new TalkySection(npc, parent);
     }
 
+    void popup(String text) {
+        DivElement me = new DivElement()..classes.add("event");
+        me.text = "$text";
+        //animation or displaying a grave stone or whatever.
+        //don't append to the road cuz things like deaths will hide it and then you wont see this
+        container.append(me);
+
+
+        //SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+
+        me.onClick.listen((Event e)
+        {
+            me.remove();
+        });
+
+    }
+
     //creates the initial npcs
     void initializeNPCS() async {
         //as a test, make 1 set npcs and 4 random ones.
-        await makeAmagalmates();
+        //await makeAmagalmates();
+        wanderingNPCs.add(NPCFactory.jrTest());
+        wanderingNPCs = [];
 
 
     }
@@ -84,13 +103,13 @@ class Game
     }
 
     List<LOMATNPC> findWanderingNPCS() {
+        if(wanderingNPCs.isEmpty) return [];
         Random rand = new Random();
         List<LOMATNPC> ret = <LOMATNPC>[];
         int npcs = rand.nextIntRange(1,4);
         for(int i = 0; i< npcs; i++) {
             ret.add(rand.pickFrom(wanderingNPCs));
         }
-
         return ret;
     }
 
@@ -177,12 +196,7 @@ class Game
     }
 
     Future setStartingTown() async {
-        List<LOMATNPC> npcs = new List<LOMATNPC>();
-        for(int i=0; i<3; i++) {
-            LOMATNPC npc1 = await LOMATNPC.generateRandomNPC(i);
-            npcs.add(npc1);
-        }
-        Town town = new Town.dontevercallthisblindly("city2",npcs,null,startingGenome());
+        Town town = new Town.dontevercallthisblindly("city2",findWanderingNPCS(),null,startingGenome());
         //don't overwrite genome
        //await  town.initGenome();
         currentLocation = town;

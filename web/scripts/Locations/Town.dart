@@ -63,7 +63,7 @@ class Town extends PhysicalLocation {
 
     //this should only be called by something async so it can initGenome correctly
   Town.dontevercallthisblindly(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
-      print("passed in genome is $genome");
+      print("passed in genome is $genome, npcs is ${npcs}");
       npcs.forEach((LOMATNPC npc) => npc.currentTown = this);
       seed = nextTownSeed;
       nextTownSeed ++;
@@ -300,7 +300,12 @@ class Town extends PhysicalLocation {
 
     void doTalky() {
         //window.alert("gonna find an npc to talk to for town $name");
-        Game.instance.popupTalkySection(rand.pickFrom(npcs), container);
+        if(npcs.isNotEmpty) {
+            Game.instance.popupTalkySection(rand.pickFrom(npcs), container);
+        }else {
+            print("trying to do talk but no one came");
+            Game.instance.popup("But no one came...");
+        }
     }
 
     void doHunt() {
