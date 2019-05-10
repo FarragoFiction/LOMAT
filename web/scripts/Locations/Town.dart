@@ -123,7 +123,8 @@ class Town extends PhysicalLocation {
   @override
   void teardown() {
       super.teardown();
-      npcs.forEach((LOMATNPC npc) => npcLeaves(npc));
+      List<LOMATNPC> tmp = new List.from(npcs);
+      tmp.forEach((LOMATNPC npc) => npcLeaves(npc));
       SoundControl.instance.stopMusic();
       if(travelContainer != null) travelContainer.remove();
   }
