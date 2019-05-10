@@ -94,7 +94,7 @@ class Game
 
     void makeAmagalmates() async {
         Random rand = new Random();
-        for(int i = 0; i< 1; i++) {
+        for(int i = 0; i< 7; i++) {
             wanderingNPCs.add(await LOMATNPC.generateRandomNPC(rand.nextInt()));
         }
     }
