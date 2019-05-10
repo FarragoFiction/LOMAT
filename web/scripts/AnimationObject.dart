@@ -112,6 +112,16 @@ class GullAnimation  extends AnimationObject{
         ret.add("hairLight", hair,true);
         makeOtherColorsDarker(ret, "hairLight", <String>["hairMid","hairDark"]);
 
+        Colour misc1 = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("misc1", hair,true);
+        Colour misc2 = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("misc2", hair,true);
+        Colour misc3 = new Colour(rand.nextInt(255), rand.nextInt(255), rand.nextInt(255));
+        ret.add("misc3", hair,true);
+
+
+
+
         return ret;
     }
 
@@ -153,6 +163,9 @@ class GullAnimation  extends AnimationObject{
         ..add("hairDark",new Colour.fromStyleString("#141414"))
         ..add("accent2Light",new Colour.fromStyleString("#0082d9"))
         ..add("accent2Dark",new Colour.fromStyleString("#004b7f"))
+        ..add("misc1",new Colour.fromStyleString("#6bcbcb")) // skull body
+        ..add("misc2",new Colour.fromStyleString("#fff449"))  //yellow part of skull
+        ..add("misc3",new Colour.fromStyleString("#e90000")) //red part of skull
         ..add("sheet",new Colour.fromStyleString("#f5ffff"));
 
     static Palette voidPalette = new Palette()
@@ -164,6 +177,9 @@ class GullAnimation  extends AnimationObject{
         ..add("hairDark",new Colour.fromStyleString("#000000"))
         ..add("accent2Light",new Colour.fromStyleString("#000000"))
         ..add("accent2Dark",new Colour.fromStyleString("#000000"))
+        ..add("misc1",new Colour.fromStyleString("#222222"))
+        ..add("misc2",new Colour.fromStyleString("#888888"))
+        ..add("misc3",new Colour.fromStyleString("#444444"))
         ..add("sheet",new Colour.fromStyleString("#000000"));
     Palette palette;
 

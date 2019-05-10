@@ -225,7 +225,7 @@ abstract class NPCFactory {
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         LOMATNPC testNPC = new LOMATNPC("JR BUT A GULL",level, new GullAnimation(1,3, GullAnimation.voidPalette));
 
-        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a waste."), 3,null);
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a void glitch."), 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
         return testNPC;
     }
