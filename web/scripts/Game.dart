@@ -56,7 +56,6 @@ class Game
     Element moneyContainer;
 
     Game() {
-        initializeNPCS();
     }
 
     void dismissTalkySection() {
@@ -88,16 +87,14 @@ class Game
     //creates the initial npcs
     void initializeNPCS() async {
         //as a test, make 1 set npcs and 4 random ones.
-        //await makeAmagalmates();
+        await makeAmagalmates();
         wanderingNPCs.add(NPCFactory.jrTest());
-        wanderingNPCs = [];
-
-
+        print('after initialization, npcs are $wanderingNPCs');
     }
 
     void makeAmagalmates() async {
         Random rand = new Random();
-        for(int i = 0; i< 4; i++) {
+        for(int i = 0; i< 1; i++) {
             wanderingNPCs.add(await LOMATNPC.generateRandomNPC(rand.nextInt()));
         }
     }
@@ -106,9 +103,14 @@ class Game
         if(wanderingNPCs.isEmpty) return [];
         Random rand = new Random();
         List<LOMATNPC> ret = <LOMATNPC>[];
-        int npcs = rand.nextIntRange(1,4);
+        int npcs = rand.nextIntRange(1,3);
         for(int i = 0; i< npcs; i++) {
-            ret.add(rand.pickFrom(wanderingNPCs));
+            LOMATNPC choice = rand.pickFrom(wanderingNPCs);
+            if(choice != null) {
+                ret.add(choice);
+                wanderingNPCs.remove(choice);
+            }
+
         }
         return ret;
     }

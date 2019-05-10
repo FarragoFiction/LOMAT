@@ -74,6 +74,7 @@ class Town extends PhysicalLocation {
   void npcLeaves(LOMATNPC npc) {
         npcs.remove(npc);
         npc.currentTown = null;
+        Game.instance.wanderingNPCs.add(npc);
   }
 
   Future<void> initGenome() async{
@@ -321,6 +322,9 @@ class Town extends PhysicalLocation {
         travelContainer = new DivElement()..classes.add("travelPopup");
         travelContainer.appendHtml("<h2>Travel To Neighboring City:</h2>");
         parent.append(travelContainer);
+        travelContainer.onClick.listen((Event e) {
+            travelContainer.remove();
+        });
         //if  clicked, will handle loading trail
         roads.forEach((Road road) {
             road.displayOption(this,parent,travelContainer);

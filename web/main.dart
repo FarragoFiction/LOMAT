@@ -12,6 +12,7 @@ Town town;
 DivElement div = querySelector('#output');
 Future<void> main() async{
   Game game = Game.instance;
+  await game.initializeNPCS();
   await game.setStartingTown();
   game.display(div);
 }
