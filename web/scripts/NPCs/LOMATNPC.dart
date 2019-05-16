@@ -8,6 +8,7 @@ import '../Sections/LOMATSection.dart';
 import '../Sections/PartySection.dart';
 import '../SoundControl.dart';
 import 'Disease.dart';
+import 'NonGullLOMATNPC.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -223,10 +224,54 @@ abstract class NPCFactory {
     static LOMATNPC jrTest() {
         List<TalkyItem> talkyItems = new List<TalkyItem>();
         TalkyLevel level = new TalkyLevel(talkyItems,null);
-        LOMATNPC testNPC = new LOMATNPC("JR BUT A GULL",level, new GullAnimation(1,3, GullAnimation.voidPalette));
+        LOMATNPC testNPC = new LOMATNPC("VOID GULL",level, new GullAnimation(1,3, GullAnimation.voidPalette));
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a void glitch."), 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
+        return testNPC;
+    }
+
+    //TODO eventaully all this is serialized.
+    static LOMATNPC lilscumbag() {
+        List<TalkyItem> talkyItems = new List<TalkyItem>();
+        TalkyLevel level = new TalkyLevel(talkyItems,null);
+        NonGullLOMATNPC testNPC = new NonGullLOMATNPC("Lil Scumbag",level,new ImageElement(src: "images/Seagulls/Lil_Scumbag.png"));
+
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Takes gargbag. Eat. Bai.", 3,null);
+        TalkyQuestion question1 = new TalkyQuestion("Uh. Hello?",tr,level);
+        return testNPC;
+    }
+
+    //TODO eventaully all this is serialized.
+    static LOMATNPC loki() {
+        List<TalkyItem> talkyItems = new List<TalkyItem>();
+        TalkyLevel level = new TalkyLevel(talkyItems,null);
+        NonGullLOMATNPC testNPC = new NonGullLOMATNPC("Loki",level,new ImageElement(src: "images/Seagulls/loki2.png"));
+
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"A completely normal seagull, obviously!", 3,null);
+        TalkyQuestion question1 = new TalkyQuestion("Uh. What are you?",tr,level);
+        return testNPC;
+    }
+
+    //TODO eventaully all this is serialized.
+    static LOMATNPC yn() {
+        List<TalkyItem> talkyItems = new List<TalkyItem>();
+        TalkyLevel level = new TalkyLevel(talkyItems,null);
+        NonGullLOMATNPC testNPC = new NonGullLOMATNPC("YN",level,new ImageElement(src: "images/Seagulls/dainsleif.png"));
+
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"???", 3,null);
+        TalkyQuestion question1 = new TalkyQuestion("???",tr,level);
+        return testNPC;
+    }
+
+    //TODO eventaully all this is serialized.
+    static LOMATNPC grim() {
+        List<TalkyItem> talkyItems = new List<TalkyItem>();
+        TalkyLevel level = new TalkyLevel(talkyItems,null);
+        NonGullLOMATNPC testNPC = new NonGullLOMATNPC("Grim",level,new ImageElement(src: "images/Seagulls/grim_reaper.png"));
+
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Yeah, but don't tell that one gull. She's freaking obsessed with me.", 3,null);
+        TalkyQuestion question1 = new TalkyQuestion("Are you...the grim reaper?",tr,level);
         return testNPC;
     }
 }

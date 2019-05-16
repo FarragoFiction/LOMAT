@@ -89,6 +89,11 @@ class Game
         //as a test, make 1 set npcs and 4 random ones.
         await makeAmagalmates();
         wanderingNPCs.add(NPCFactory.jrTest());
+        wanderingNPCs.add(NPCFactory.lilscumbag());
+        wanderingNPCs.add(NPCFactory.loki());
+        wanderingNPCs.add(NPCFactory.grim());
+        wanderingNPCs.add(NPCFactory.yn());
+
         print('after initialization, npcs are $wanderingNPCs');
     }
 
