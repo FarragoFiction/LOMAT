@@ -91,6 +91,19 @@ class LOMATNPC {
     LOMATNPC(String this.name,TalkyLevel this.talkyLevel, GullAnimation this.animation ) {
     }
 
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        ret["name"] = name;
+        ret ["leavingMessage"] = leavingMessage;
+        ret["causeOfDeath"] = causeOfDeath;
+        ret["hp"] = hp;
+        //TODO serialize diseases
+        //TODO serialize talky shit
+        //TODO serialize animation
+        //TODO encode this to LZ or some shit.
+        return ret;
+    }
+
     void removeDisease(Disease disease) {
         diseases.remove(disease);
         myStatsView.sync();
@@ -228,6 +241,7 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a void glitch."), 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
+        print(testNPC.toJSON());
         return testNPC;
     }
 
@@ -239,6 +253,8 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Takes gargbag. Eat. Bai.", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. Hello?",tr,level);
+        print(testNPC.toJSON());
+
         return testNPC;
     }
 
@@ -250,6 +266,8 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"A completely normal seagull, obviously!", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. What are you?",tr,level);
+        print(testNPC.toJSON());
+
         return testNPC;
     }
 
@@ -261,6 +279,8 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"???", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("???",tr,level);
+        print(testNPC.toJSON());
+
         return testNPC;
     }
 
@@ -272,6 +292,8 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Yeah, but don't tell that one gull. She's freaking obsessed with me.", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Are you...the grim reaper?",tr,level);
+        print(testNPC.toJSON());
+
         return testNPC;
     }
 }
