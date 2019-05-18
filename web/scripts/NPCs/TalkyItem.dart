@@ -3,18 +3,18 @@
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../SoundControl.dart';
+import '../Triggers/Trigger.dart';
 import 'TalkyLevel.dart';
 import 'TalkyResponse.dart';
 import 'dart:html';
-//TODO have talky items have triggers so they only show up if met.
 abstract class TalkyItem {
     Element container;
-
-    //todo have talky items have conditions (maybe only responses?)
 
     static final int HAPPY = AnimationObject.FAST;
     static final int SAD = AnimationObject.MIDDLE;
     static final int NEUTRAL = AnimationObject.SLOW;
+    //either this is empty or all are true.
+    List<Trigger> triggers = new List<Trigger>();
     DivElement div;
 
     String displayText;
@@ -22,6 +22,10 @@ abstract class TalkyItem {
 
     TalkyItem(String this.displayText, TalkyLevel this.owner) {
         if(owner != null) owner.talkyItems.add(this);
+    }
+
+    bool triggered() {
+        return Trigger.allTriggered(triggers);
     }
 
     void display(Element parentContainer) {

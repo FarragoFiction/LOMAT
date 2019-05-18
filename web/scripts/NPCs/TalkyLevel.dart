@@ -14,7 +14,9 @@ class TalkyLevel {
 
     void display(Element container) {
         for(TalkyItem talkyItem in talkyItems) {
-            talkyItem.display(container);
+            if(talkyItem.triggered()) {
+                talkyItem.display(container);
+            }
         }
     }
 

@@ -18,7 +18,7 @@ abstract class Trigger {
     }
 
     static bool allTriggered(List<Trigger> triggers) {
-        return triggers.every((Trigger trigger) => trigger.isTriggered());
+        return triggers.isEmpty || triggers.every((Trigger trigger) => trigger.isTriggered());
     }
 
     bool isTriggered() {
