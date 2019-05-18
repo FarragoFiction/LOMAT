@@ -6,7 +6,7 @@ import '../SoundControl.dart';
 import 'TalkyLevel.dart';
 import 'TalkyResponse.dart';
 import 'dart:html';
-
+//TODO have talky items have triggers so they only show up if met.
 abstract class TalkyItem {
     Element container;
 

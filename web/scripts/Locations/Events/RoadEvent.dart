@@ -11,6 +11,9 @@ import 'package:CommonLib/Random.dart';
 class RoadEvent {
     //TODO integrate both title and flavor text to suppor text engine hooks.
     //TODO probably want the effect to have an icon of some sort for ease of understanding.
+    //TODO have a trigger system like (ebony is in party)
+    //have npcs have two sets of events. one for Is in party (gulls only)
+    //and one for "approaching/leaving town where npc is"
     //things like "Bitten by ANIMALNOUN" or whatever.
     //allowed to be true random or this shit would get boring.
     Random random = new Random();
