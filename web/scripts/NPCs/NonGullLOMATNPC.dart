@@ -19,6 +19,8 @@ class NonGullLOMATNPC extends LOMATNPC {
       if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
 
       div = new DivElement()..classes.add("dialogueContainer");
+      DivElement nameElement = new DivElement()..text = "$name"..classes.add("dialogueName");
+      container.append(nameElement);
       container.append(avatar);
       container.append(div);
       talkyLevel.display(div);

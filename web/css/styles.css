@@ -55,7 +55,8 @@ html, body {
 }
 
 .dialogueContainer{
-    padding: 30px;
+    padding-left: 30px;
+    padding-right: 30px;
     position: absolute;
     text-align: left;
     left: 250px;
@@ -110,6 +111,11 @@ html, body {
 }
 .tombstoneMagnetSuperSelected{
     background-color: #888888;
+}
+
+.dialogueName{
+    font-size: 28px;
+
 }
 
 .statValue{
