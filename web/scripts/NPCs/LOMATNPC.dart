@@ -7,6 +7,7 @@ import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
 import '../Sections/PartySection.dart';
 import '../SoundControl.dart';
+import '../Triggers/FundsTrigger.dart';
 import 'Disease.dart';
 import 'NonGullLOMATNPC.dart';
 import 'TalkyEnd.dart';
@@ -217,9 +218,12 @@ class LOMATNPC {
 
         TalkyResponse tr2 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(townQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question2 = new TalkyQuestion("What can you tell me about this town?",tr2,level);
+        question2.addTrigger(new FundsTrigger()..importantInt = 100); //means town should happen at first
+
 
         TalkyResponse trghost = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(youQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion questionghost = new TalkyQuestion("Why are you dressed like a ghost?",trghost,level);
+        questionghost.addTrigger(new FundsTrigger()..importantInt = 100..invert=true); //means ghost shouldn't happen at first
 
         TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(meQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question3 = new TalkyQuestion("What can you tell me about me?",tr3,level);

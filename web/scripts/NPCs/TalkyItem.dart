@@ -14,7 +14,7 @@ abstract class TalkyItem {
     static final int SAD = AnimationObject.MIDDLE;
     static final int NEUTRAL = AnimationObject.SLOW;
     //either this is empty or all are true.
-    List<Trigger> triggers = new List<Trigger>();
+    List<Trigger> _triggers = new List<Trigger>();
     DivElement div;
 
     String displayText;
@@ -24,8 +24,12 @@ abstract class TalkyItem {
         if(owner != null) owner.talkyItems.add(this);
     }
 
+    void addTrigger(Trigger trigger) {
+        _triggers.add(trigger);
+    }
+
     bool triggered() {
-        return Trigger.allTriggered(triggers);
+        return Trigger.allTriggered(_triggers);
     }
 
     void display(Element parentContainer) {
