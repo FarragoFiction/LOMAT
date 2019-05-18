@@ -80,9 +80,9 @@ class Road {
     Future<Null> startLoops(Trail trail) async {
         this.trail = trail;
         //wait at least one second before starting because its jarring if you start right off the bat with an event.
-        new Timer(new Duration(milliseconds: 1000), () => eventLoop());
-        new Timer(new Duration(milliseconds: 1000), () => diseaseLoop());
-        new Timer(new Duration(milliseconds: 1000), () => timerLoop());
+        new Timer(new Duration(milliseconds: Game.instance.eventAmount), () => eventLoop());
+        new Timer(new Duration(milliseconds: Game.instance.diseaseAmount), () => diseaseLoop());
+        new Timer(new Duration(milliseconds: Game.instance.travelAmount), () => timerLoop());
     }
 
     void stop() {
@@ -120,10 +120,11 @@ class Road {
         if(plzStopKThnxBai == true) {
             return;
         }
-      int amount = 1000;
+      int amount = Game.instance.travelAmount;
+
       timeRemaining += -1 * amount;
       elapsedTime += amount;
-      Game.instance.removeFunds((amount/1000).ceil());
+      Game.instance.travelTick();
       if (timeRemaining > 0) {
           new Timer(new Duration(milliseconds: amount), () => timerLoop());
       } else {
