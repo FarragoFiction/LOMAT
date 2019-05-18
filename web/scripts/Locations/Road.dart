@@ -123,6 +123,7 @@ class Road {
       int amount = 1000;
       timeRemaining += -1 * amount;
       elapsedTime += amount;
+      Game.instance.removeFunds((amount/1000).ceil());
       if (timeRemaining > 0) {
           new Timer(new Duration(milliseconds: amount), () => timerLoop());
       } else {
