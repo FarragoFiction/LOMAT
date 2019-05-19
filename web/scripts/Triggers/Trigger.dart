@@ -17,6 +17,15 @@ abstract class Trigger {
         game = Game.instance;
     }
 
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        //TODO don't serialize the owner or it loops, just set it on load
+        ret["label"] = label;
+        ret["importantWord"] = importantWord;
+        ret["importantInt"] = importantInt;
+        return ret;
+    }
+
     static bool allTriggered(List<Trigger> triggers) {
         return triggers.isEmpty || triggers.every((Trigger trigger) => trigger.isTriggered());
     }

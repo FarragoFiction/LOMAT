@@ -105,6 +105,7 @@ class LOMATNPC {
         ret["hp"] = hp;
         //TODO serialize diseases
         //TODO serialize talky shit
+        ret["talkyLevel"] = talkyLevel.toJSON();
         //TODO serialize animation
         //TODO encode this to LZ or some shit.
         return ret;

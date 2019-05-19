@@ -24,6 +24,17 @@ abstract class TalkyItem {
         if(owner != null) owner.talkyItems.add(this);
     }
 
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        //TODO don't serialize the owner or it loops, just set it on load
+        ret["displayText"] = displayText;
+        List<Map<dynamic, dynamic>> triggersJSON = new List<Map<dynamic,dynamic>>();
+        _triggers.forEach((Trigger trigger)=> trigger.toJSON);
+        ret ["triggers"] = triggersJSON;
+
+        return ret;
+    }
+
     void addTrigger(Trigger trigger) {
         _triggers.add(trigger);
     }

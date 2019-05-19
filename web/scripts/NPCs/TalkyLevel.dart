@@ -12,6 +12,18 @@ class TalkyLevel {
 
     TalkyLevel(List<TalkyItem> this.talkyItems, TalkyLevel this.parent);
 
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        List<Map<dynamic, dynamic>> talkyItemsJSON = new List<Map<dynamic,dynamic>>();
+        talkyItems.forEach((TalkyItem item)=> item.toJSON);
+        ret ["talkyItems"] = talkyItemsJSON;
+        if(parent != null) {
+            ret["parent"] = parent.toJSON();
+        }
+
+        return ret;
+    }
+
     void display(Element container) {
         for(TalkyItem talkyItem in talkyItems) {
             if(talkyItem.triggered()) {
