@@ -226,8 +226,13 @@ class LOMATNPC {
         TalkyQuestion question2 = new TalkyQuestion("What can you tell me about this town?",tr2,level);
         question2.addTrigger(new FundsTrigger()..importantInt = 100); //means town should happen at first
 
+        TalkyLevel level2 = new TalkyLevel(talkyItems,null);
+        TalkyResponse ghost2 = new TalkyResponse(testNPC,<TalkyItem>[new TalkyRecruit(testNPC,null)],seagullQuirk("Yes. Exactly like that. I'm dead."), rand.pickFrom(emotions),null);
+        TalkyQuestion questionGhost2 = new TalkyQuestion("Wait, like, you're dead?",ghost2,level2);
+        questionGhost2.addTrigger(new FundsTrigger()..importantInt = 110..invert=true); //means ghost shouldn't happen at first
 
-        TalkyResponse trghost = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(youQuips)), rand.pickFrom(emotions),null);
+
+        TalkyResponse trghost = new TalkyResponse(testNPC,<TalkyItem>[questionGhost2],seagullQuirk(rand.pickFrom(youQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion questionghost = new TalkyQuestion("Why are you dressed like a ghost?",trghost,level);
         questionghost.addTrigger(new FundsTrigger()..importantInt = 100..invert=true); //means ghost shouldn't happen at first
 
@@ -236,6 +241,10 @@ class LOMATNPC {
 
         TalkyResponse tr4 = new TalkyResponse(testNPC,<TalkyItem>[new TalkyRecruit(testNPC,null)],seagullQuirk(rand.pickFrom(recruitQuips)), rand.pickFrom(emotions),null);
         TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,level);
+
+        List<TalkyItem> talkyItems2 = new List<TalkyItem>();
+
+
 
         return testNPC;
     }
