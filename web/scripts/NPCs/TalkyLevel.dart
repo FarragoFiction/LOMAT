@@ -17,10 +17,7 @@ class TalkyLevel {
         List<Map<dynamic, dynamic>> talkyItemsJSON = new List<Map<dynamic,dynamic>>();
         talkyItems.forEach((TalkyItem item)=> talkyItemsJSON.add(item.toJSON()));
         ret ["talkyItems"] = talkyItemsJSON;
-        if(parent != null) {
-            ret["parent"] = parent.toJSON();
-        }
-
+        //don't serialize parent or loop
         return ret;
     }
 

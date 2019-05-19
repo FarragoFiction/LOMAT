@@ -227,7 +227,7 @@ class LOMATNPC {
         question2.addTrigger(new FundsTrigger()..importantInt = 100); //means town should happen at first
 
         TalkyLevel level2 = new TalkyLevel(talkyItems,null);
-        TalkyResponse ghost2 = new TalkyResponse(testNPC,<TalkyItem>[new TalkyRecruit(testNPC,null)],seagullQuirk("Yes. Exactly like that. I'm dead."), rand.pickFrom(emotions),null);
+        TalkyResponse ghost2 = new TalkyResponse(testNPC,<TalkyItem>[],seagullQuirk("Yes. Exactly like that. I'm dead."), rand.pickFrom(emotions),null);
         TalkyQuestion questionGhost2 = new TalkyQuestion("Wait, like, you're dead?",ghost2,level2);
         questionGhost2.addTrigger(new FundsTrigger()..importantInt = 110..invert=true); //means ghost shouldn't happen at first
 
@@ -245,6 +245,7 @@ class LOMATNPC {
         List<TalkyItem> talkyItems2 = new List<TalkyItem>();
 
 
+        //querySelector("#output").innerHtml = ("${testNPC.toJSON()}");
 
         return testNPC;
     }
@@ -262,7 +263,6 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a void glitch."), 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
-        querySelector("#output").appendText("${testNPC.toJSON()}");
         return testNPC;
     }
 
@@ -274,7 +274,6 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Takes gargbag. Eat. Bai.", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. Hello?",tr,level);
-        print(testNPC.toJSON());
 
         return testNPC;
     }
@@ -287,7 +286,6 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"A completely normal seagull, obviously!", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. What are you?",tr,level);
-        print(testNPC.toJSON());
 
         return testNPC;
     }
@@ -300,7 +298,6 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"???", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("???",tr,level);
-        print(testNPC.toJSON());
 
         return testNPC;
     }
@@ -313,7 +310,6 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Yeah, but don't tell that one gull. She's freaking obsessed with me.", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Are you...the grim reaper?",tr,level);
-        print(testNPC.toJSON());
 
         return testNPC;
     }
