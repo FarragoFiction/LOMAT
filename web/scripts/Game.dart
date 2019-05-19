@@ -131,6 +131,7 @@ class Game
     }
 
     bool recruit(LOMATNPC npc) {
+        print("before recruiting, party members length is ${partyMembers.length}");
         if(partyMembers.length >= maxPartySize) {
             return false;
         }
@@ -139,6 +140,7 @@ class Game
         partySection.update();
         npc.currentTown.npcLeaves(npc);
         addFunds(13);
+        print("after recruiting, party members length is ${partyMembers.length}");
         return true;
     }
 

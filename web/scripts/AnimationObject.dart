@@ -23,9 +23,13 @@ class AnimationObject {
     CanvasElement get element {
         if(_canvasElement == null) {
             _canvasElement = new CanvasElement(width: width, height: height);
+            renderLoop();
         }
-        renderLoop();
         return _canvasElement;
+    }
+
+    void addClassToCanvas(String className) {
+        _canvasElement.classes.add(className);
     }
 
     Future<Null> renderLoop() async {
@@ -42,6 +46,7 @@ class AnimationObject {
 }
 
 class AnimationLayer {
+    String name;
     List<String> frameLocations;
     //lazy load each frame as you need it, only add to elements when its there, same order as locations
     List<CanvasElement> elements = new List<CanvasElement>();
@@ -50,7 +55,7 @@ class AnimationLayer {
 
     int animationFrameIndex = 0;
 
-    AnimationLayer(List<String> this.frameLocations, Palette this.paletteSource, Palette this.palette);
+    AnimationLayer(String this.name, List<String> this.frameLocations, Palette this.paletteSource, Palette this.palette);
 
     void incrementIndex() {
         animationFrameIndex ++;
@@ -63,7 +68,8 @@ class AnimationLayer {
         CanvasElement buffer;
         if(animationFrameIndex > elements.length-1) {
             ImageElement img = await Loader.getResource(frameLocations[animationFrameIndex]);
-            CanvasElement buffer = new CanvasElement(width: canvas.width, height: canvas.height);
+            buffer = new CanvasElement(width: canvas.width, height: canvas.height);
+
             buffer.context2D.drawImage(img,0,0);
             //CanvasElement canvas, Palette source, Palette replacement
             if(palette != null) {
@@ -191,16 +197,16 @@ class GullAnimation  extends AnimationObject{
     AnimationLayer bodyLayer() {
         List<String> ret = new List<String>();
         for(int i = 0; i<18; i++) {
-            ret.add("${baseLocationBody}/Frame${i.toString().padLeft(2,'0')}/${bodyNumber}.png");
+            ret.add("${baseLocationBody}Frame${i.toString().padLeft(2,'0')}/${bodyNumber}.png");
         }
-        return new AnimationLayer(ret, paletteSource, palette);
+        return new AnimationLayer("body",ret, paletteSource, palette);
     }
 
     AnimationLayer hatLayer() {
         List<String> ret = new List<String>();
         for(int i = 0; i<18; i++) {
-            ret.add("${baseLocationHat}/Frame${i.toString().padLeft(2,'0')}/${hatNumber}.png");
+            ret.add("${baseLocationHat}Frame${i.toString().padLeft(2,'0')}/${hatNumber}.png");
         }
-        return new AnimationLayer(ret, paletteSource, palette);
+        return new AnimationLayer("hat",ret, paletteSource, palette);
     }
 }

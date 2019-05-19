@@ -162,7 +162,7 @@ class LOMATNPC {
         DivElement nameElement = new DivElement()..text = "$name"..classes.add("dialogueName");
         container.append(nameElement);
         container.append(animation.element);
-        animation.element.classes.add("npcImage");
+        animation.addClassToCanvas("npcImage");
         container.append(div);
         talkyLevel.display(div);
     }
