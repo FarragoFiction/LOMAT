@@ -253,7 +253,7 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a void glitch."), 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
-        print(testNPC.toJSON());
+        querySelector("#output").appendText("${testNPC.toJSON()}");
         return testNPC;
     }
 

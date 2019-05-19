@@ -6,6 +6,7 @@ import 'dart:html';
 
 class TalkyRecruit extends TalkyItem {
     LOMATNPC recruitTarget;
+    static String TYPE = "RECRUITITEM";
     //for most it will just be the "go back" button, but
     //could have sub questions
     TalkyRecruit(LOMATNPC this.recruitTarget,TalkyLevel level) : super("Recruit?",level);
@@ -16,6 +17,16 @@ class TalkyRecruit extends TalkyItem {
         super.display(cont);
         div.setInnerHtml(">$displayText");
 
+    }
+
+    @override
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = super.toJSON();
+        //TODO don't serialize the owner or it loops, just set it on load
+        ret["displayText"] = displayText;
+        ret["type"] = TYPE;
+        ret["recruitName"] = recruitTarget.name; //dont' loop plz
+        return ret;
     }
 
     void onClick() {

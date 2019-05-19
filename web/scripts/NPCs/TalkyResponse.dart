@@ -8,6 +8,7 @@ import 'dart:html';
 class TalkyResponse extends TalkyItem {
     //for most it will just be the "go back" button, but
     //could have sub questions
+    static String TYPE = "TalkyResponse";
     TalkyLevel talkyLevel;
     int associatedEmotion;
     //needed to emote
@@ -19,6 +20,16 @@ class TalkyResponse extends TalkyItem {
 
       //talkyLevel.talkyItems.add(this);
   }
+
+    @override
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = super.toJSON();
+        //TODO don't serialize the owner or it loops, just set it on load
+        ret["talkyLevel"] = talkyLevel.toJSON();
+        ret["type"] = TYPE;
+        ret["associatedEmotion"] = associatedEmotion;
+        return ret;
+    }
 
     @override
     void display(Element cont) {
