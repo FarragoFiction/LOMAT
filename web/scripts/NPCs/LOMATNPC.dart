@@ -1,3 +1,4 @@
+import 'package:CommonLib/Compression.dart';
 import 'package:TextEngine/TextEngine.dart';
 
 import '../AnimationObject.dart';
@@ -30,6 +31,8 @@ class LOMATNPC {
     Town currentTown; //so i can remove them from it when they get recruited. or the town is destroyed. ;)
     String leavingMessage = " TODO make sure each NPC has a custom leaving message.";
     GullAnimation animation;
+    static String labelPattern = ":___ ";
+
 
     SinglePartyMember myStatsView;
     String causeOfDeath = "absolutely nothing";
@@ -95,6 +98,11 @@ class LOMATNPC {
     TalkyEnd talkyEnd;
 
     LOMATNPC(String this.name,TalkyLevel this.talkyLevel, GullAnimation this.animation ) {
+    }
+
+    //not called for save data, just for form shit and loading
+    String toDataString() {
+        return  "$name$labelPattern${LZString.compressToEncodedURIComponent(toJSON().toString())}";
     }
 
     Map<dynamic, dynamic> toJSON(){
@@ -245,7 +253,7 @@ class LOMATNPC {
         List<TalkyItem> talkyItems2 = new List<TalkyItem>();
 
 
-        //querySelector("#output").innerHtml = ("${testNPC.toJSON()}");
+        querySelector("#output").innerHtml = ("${testNPC.toDataString()}");
 
         return testNPC;
     }
