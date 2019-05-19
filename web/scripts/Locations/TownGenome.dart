@@ -141,13 +141,11 @@ class TownGenome {
             }
         }
         child.events = breedEvents(coparent.events, child.events);
-        print("the childs events are ${child.events.length} after breeding");
         return child;
     }
 
     //for each event in list pick either mine, coparents or make a MUTATION.
     WeightedList<RoadEvent> breedEvents(WeightedList<RoadEvent> coParentEvents, WeightedList<RoadEvent> childMutations) {
-         print("attempting to breed events, my events are ${events.length} and your events are ${coParentEvents.length}");
          //it does mean that the number of events will be the "first" parents amount.
          WeightedList<RoadEvent> ret = new WeightedList<RoadEvent>();
         for(int i = 0; i<events.length; i++) {
@@ -172,7 +170,6 @@ class TownGenome {
     //later towns have sail decorations cuz they alchemized the hive
     static String randomBackground(Random rand) {
         int fileNumber = rand.nextIntRange(1,maxBGs);
-        print('bg number is $fileNumber');
         return "$backgroundBase$fileNumber.png";
     }
 

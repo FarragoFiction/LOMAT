@@ -219,7 +219,6 @@ class Game
     }
 
     void syncMoney() {
-        print("there are ${partyMembers.length} party members and cost per travel tick is $costPerTravelTick");
         moneyContainer.text = "Funds: $funds ($costPerTravelTick cost per ticke to travel)";
     }
 

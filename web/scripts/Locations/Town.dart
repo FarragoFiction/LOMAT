@@ -63,7 +63,6 @@ class Town extends PhysicalLocation {
 
     //this should only be called by something async so it can initGenome correctly
   Town.dontevercallthisblindly(String this.name, List<LOMATNPC> this.npcs, PhysicalLocation prev, TownGenome this.genome) : super(prev) {
-      print("passed in genome is $genome, npcs is ${npcs}");
       npcs.forEach((LOMATNPC npc) => npc.currentTown = this);
       seed = nextTownSeed;
       nextTownSeed ++;
@@ -85,7 +84,7 @@ class Town extends PhysicalLocation {
         genome = new TownGenome(new Random(seed), new Map<String, String>() );
         await genome.init();
     }else {
-      print("genome wasn't null for $name");
+      //print("genome wasn't null for $name");
     }
     proceduralIntroInit();
 
@@ -204,7 +203,6 @@ class Town extends PhysicalLocation {
 
   static Future<List<Town>> makeAdjacentTowns(Random rand,Town town) async {
       //TODO pull from pool of special towns, already generated towns and new towns (without going over 85)
-      print("trying to make adjacent towns");
       int adjAmount = rand.nextInt(4)+1;
       List<Town> ret = new List<Town>();
       for(int i = 0; i<adjAmount; i++) {

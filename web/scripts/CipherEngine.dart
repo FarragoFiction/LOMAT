@@ -36,7 +36,6 @@ abstract class CipherEngine {
         }
         List<CipherEngine> copyActions = new WeightedList.from(actions);
         copyActions.removeWhere((CipherEngine item) => item.canApply(target) == false);
-        print("after filtering, ${copyActions.length} remain, like ${copyActions}");
         Random rand = new Random();
         rand.pickFrom(copyActions).apply(target);
     }
@@ -47,7 +46,6 @@ class HiddenDivCipher extends CipherEngine {
 
   @override
   void apply(Element target) {
-      print("applying hidden");
     DivElement hidden = new DivElement()..text = pickSecret();
     hidden.style.display = "none";
     hidden.classes.add("OhGoshIHopeNoWasteFindsThis");
@@ -93,12 +91,10 @@ class MouseOverSpecificWordCipher extends CipherEngine {
 
     @override
     void apply(Element target) {
-        print("The chosen key is $chosenKey and the value is ${maps[chosenKey]}");
         String originalText = target.text;
         String newText = originalText.replaceAll(new RegExp("$chosenKey", caseSensitive: false),maps[chosenKey].toUpperCase());
         target.onMouseEnter.listen((Event e)
         {
-            print("enter $newText");
             target.text = newText;
         });
 
@@ -110,7 +106,6 @@ class MouseOverSpecificWordCipher extends CipherEngine {
 
     @override
     bool canApply(Element target) {
-        print('checking');
         String lowerTarget = target.text.toLowerCase();
         for(String key in maps.keys) {
             if(lowerTarget.contains(key)) {
@@ -118,7 +113,6 @@ class MouseOverSpecificWordCipher extends CipherEngine {
                 return true;
             }
         }
-        print("I never found anything useful in ${target.text}");
         return false;
     }
 }
