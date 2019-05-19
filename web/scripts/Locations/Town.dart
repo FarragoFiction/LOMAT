@@ -71,10 +71,12 @@ class Town extends PhysicalLocation {
   }
 
   //bye bye little butterfly
-  void npcLeaves(LOMATNPC npc) {
+  void npcLeaves(LOMATNPC npc, bool recruited) {
         npcs.remove(npc);
         npc.currentTown = null;
-        Game.instance.wanderingNPCs.add(npc);
+       if(!recruited) {
+           Game.instance.wanderingNPCs.add(npc);
+       }
   }
 
   Future<void> initGenome() async{
@@ -125,7 +127,7 @@ class Town extends PhysicalLocation {
   void teardown() {
       super.teardown();
       List<LOMATNPC> tmp = new List.from(npcs);
-      tmp.forEach((LOMATNPC npc) => npcLeaves(npc));
+      tmp.forEach((LOMATNPC npc) => npcLeaves(npc, false));
       SoundControl.instance.stopMusic();
       if(travelContainer != null) travelContainer.remove();
   }

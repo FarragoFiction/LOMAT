@@ -100,8 +100,8 @@ class Game
         await makeAmagalmates();
         wanderingNPCs.add(NPCFactory.jrTest());
         wanderingNPCs.add(NPCFactory.lilscumbag());
-        wanderingNPCs.add(NPCFactory.loki());
-        wanderingNPCs.add(NPCFactory.grim());
+        //wanderingNPCs.add(NPCFactory.loki());
+        //wanderingNPCs.add(NPCFactory.grim());
         wanderingNPCs.add(NPCFactory.yn());
 
         print('after initialization, npcs are $wanderingNPCs');
@@ -131,21 +131,28 @@ class Game
     }
 
     bool recruit(LOMATNPC npc) {
-        print("before recruiting, party members length is ${partyMembers.length}");
+        print("before recruiting $npc, party members length is ${partyMembers.length} and is $partyMembers");
         if(partyMembers.length >= maxPartySize) {
             return false;
         }
         SoundControl.instance.playSoundEffect("Dead_Jingle");
         partyMembers.add(npc);
+        print("after adding, party members length is ${partyMembers.length} and is ${partyMembers}");
+
         partySection.update();
-        npc.currentTown.npcLeaves(npc);
+        print("after updating, party members length is ${partyMembers.length} and is ${partyMembers}");
+
+        npc.currentTown.npcLeaves(npc,true);
+        print("after leaving old town, party members length is ${partyMembers.length} and is ${partyMembers}");
+
         addFunds(13);
-        print("after recruiting, party members length is ${partyMembers.length}");
+        print("after recruiting, party members length is ${partyMembers.length} and is ${partyMembers}");
         return true;
     }
 
     //i imagine they get shot out physics style tbh
     void eject(LOMATNPC npc) {
+        print("removing npc $npc");
         partyMembers.remove(npc);
         partySection.update();
     }

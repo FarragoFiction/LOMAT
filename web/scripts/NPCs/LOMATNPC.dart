@@ -53,6 +53,11 @@ class LOMATNPC {
         });
     }
 
+    @override
+    String toString() {
+        return name;
+    }
+
     String get diseasePhrase {
         if(diseases.isEmpty) return "None";
         return diseases.map((d) => d.name).toList().join(",");

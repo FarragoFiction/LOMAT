@@ -21,7 +21,7 @@ class PartySection extends LOMATSection {
   }
 
   void update(){
-    List<LOMATNPC> npcs = Game.instance.partyMembers;
+    List<LOMATNPC> npcs = new List<LOMATNPC>.from(Game.instance.partyMembers);
     List<SinglePartyMember> toRemove = new List<SinglePartyMember>();
 
     partyMembers.forEach((SinglePartyMember member) {
