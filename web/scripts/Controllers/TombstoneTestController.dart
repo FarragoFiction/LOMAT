@@ -5,6 +5,7 @@ import '../CipherEngine.dart';
 import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
+import '../NPCs/LOMATNPC.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
@@ -18,8 +19,14 @@ void main()  async{
         await testTown();
     }*/
     //testCiphers();
+    loadGull();
     testAnimation();
     //testTombstone();
+}
+
+void loadGull() {
+    LOMATNPC npc = NPCFactory.stimpyTigger();
+    div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
 }
 
 Future<Null> testDisease() async {

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:CommonLib/Compression.dart';
 import 'package:TextEngine/TextEngine.dart';
 
@@ -22,6 +24,7 @@ import 'dart:async';
 import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
+import 'package:CommonLib/Utility.dart';
 
 class LOMATNPC {
     //TODO have town they want to go to, have their recruit text mention it. maybe can mention CURRENT_NEAREST_TOWN or GOAL_TOWN
@@ -100,9 +103,35 @@ class LOMATNPC {
     LOMATNPC(String this.name,TalkyLevel this.talkyLevel, GullAnimation this.animation ) {
     }
 
+    static LOMATNPC loadFromDataString(String dataString) {
+        return loadFromJSON(LZString.decompressFromEncodedURIComponent(removeLabelFromString(dataString)));
+    }
+
+    static String removeLabelFromString(String ds) {
+        try {
+            ds = Uri.decodeQueryComponent(ds); //get rid of any url encoding that might exist
+        }catch(error, trace){
+            //print("couldn't decode query component, probably because doll name had a % in $ds . $error $trace");
+        }
+        List<String> parts = ds.split("$labelPattern");
+        if(parts.length == 1) {
+            return parts[0];
+        }else {
+            return parts[1];
+        }
+    }
+
+    static LOMATNPC loadFromJSON(String jsonString) {
+        print("the uncompressed string is ${jsonString}");
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        LOMATNPC ret = LOMATNPC(json.getValue("name"), null, null);
+
+        return ret;
+    }
+
     //not called for save data, just for form shit and loading
     String toDataString() {
-        return  "$name$labelPattern${LZString.compressToEncodedURIComponent(toJSON().toString())}";
+        return  "$name$labelPattern${LZString.compressToEncodedURIComponent(jsonEncode(toJSON()))}";
     }
 
     Map<dynamic, dynamic> toJSON(){
@@ -272,6 +301,11 @@ abstract class NPCFactory {
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),LOMATNPC.seagullQuirk("Hello, I am a set seagull and definitely not a void glitch."), 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Wait you seem different...",tr,level);
         return testNPC;
+    }
+
+    static stimpyTigger() {
+        String dataString = "Stimpy Tigger:___ N4IgdghgtgpiBcIDKAXAllADgTwAQBU0BzImAJxABoQAbGCANzTCIFkYBnDiUhEAgPIARAbigQA1jFwcArmWn0AxgAtcAOQAKAYVwqIHXBFxLZHFAHsouOo2ZExnbqQB0VEEohmYAgGZD6FBU+CAAjDgsaWRQYGjwwCyD7dxVMBAAOAFZqFAgaCWwAGRgGWIRQXPzsAEkYqA4EAG1QABM0DkwaCGx8GAAPFD4AdX0UEwgwXGwLWVwYmhpHI1CZsaTDImgYAH53FDJiUjIG+EaAXRzsTDhEfDyCgEVZTnQLMHcFDreOG9b2zu6vQGfCQDyGAEEhgBpACEcLhBAAEgBRAjVfDg9S4apIXDg3AAJWR4MKuAAUsiCVC3DkDiRyCdzjl7kUSmV4BUWbUYPUmmcAL6Xa58O5VAmcTDfODUAwRJRoCAxFrIqCJNBvBAARgADNr+YK-h0uj1+oNECNFeNJtNZvNFrBlqs5ip2nMLAB3MC7WmHBlNUBdULskDg1WyMAoABi4ZaDWoGElZFyEaGFjILQQYFkC3jWDTyZQ1QjWt1-IuIBQVxuIFFj2e5nV72on0lYB+5RAbSNgNNIsROMEQyxA6Q6gEQwAmpQ8eohLhEeDcUgBKxUYiAKoAcVR+CJyNx1WH+BpFbpR0Z5cqBWKpRoHavNTqF8FFarIpZ4q+belIFlFnliowMqqqvO88A6nqBqdv8xpAmaIBDBAaAoNONBoFI042gA5AouAtPQLTeqevrHP6tBhMGoYzBG0ZgLG7gJvmEwoKm6aZtmNC5omBZFmamo6mWQrVrW2BPC8jYfBKUodl2AImsCiATvuLi4MiAAa4LaPghQTrghTVFCO4Lse2JYawuBCMSQgnvsJEXsyVQ3uynJVNyvKnAKQnvmKUnfu4f4AUqKpqhq8DpJBlCGnJcHDCoeAQLhNp4Z8PwtDY6HSMYRAqBY5hEbZ9KkacAYUXeiBUeGUYxnGICMUmzGsRm8BZjmtV5vVEa8SWeqXm+twsmJDYas2vnthy0HdvJ8GghC0Lwgi1RmRoAj4BZRJIEgyJzvphl4rgm6IgISD4NO1R4uZ+IHUdx57GefoeQ515smVLkFG5jJRbBvbmkhKHpRhUwzDh0j4RAhG3XZZGBpRYY0dVDHtQWjXsa1dU8cW4ECb1wr9VUg2gZJX5jZ9PYKSASlICp6madpuk7UZ4ImYt5mWeC1kQ4V9kViyTkvdzrlPnyL6VjjNYfqNP4BQqQUgRJYWQZ5r6iyJn6tu2MpcP+0tAcFBPgaWUGyV9ZMWmMnjWjMcyxPamUrNEjj5XdRVMkrwkDfWBMjUTvwTdF33IGCkKwvNuATgI654kSSKopoBICJoKJINUW3zpSohDIduBDNUhSkpu67VJZ0d6dduDLuuhS4gIkZIgOhSYnO+CiPgKLVASuCRoeJKEvu+CHpuuCaPX2jIjZTtcw+vP3lygsecLfViz53v+ZrgU67LoWagATBFJNTXwQgWIDszusxbq4AAVhYzAOxz558l5uN1uJw0gC20njUbpPTYHc0h0M4dChzmqDCR2kMHr8yereaeAseQfV9sbeC4olBkFkMhMBnMH6uz4ESbQBIC593wMiVgkkUFoJQOoLYIJ0BYDwIQQqIAyzz2VuLZeGs5Ta2AiFMC4V9QCn5EAA";
+        return LOMATNPC.loadFromDataString(dataString);
     }
 
     //TODO eventaully all this is serialized.
