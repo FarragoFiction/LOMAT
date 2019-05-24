@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:CommonLib/Utility.dart';
+
 import '../Game.dart';
 import 'LOMATNPC.dart';
 import 'TalkyItem.dart';
@@ -25,9 +29,17 @@ class TalkyRecruit extends TalkyItem {
         //TODO don't serialize the owner or it loops, just set it on load
         ret["displayText"] = displayText;
         ret["type"] = TYPE;
-        ret["recruitName"] = recruitTarget.name; //dont' loop plz
+        //recruit is encoded as who owns me
         return ret;
     }
+
+    static TalkyItem loadFromJSON(LOMATNPC npc, String jsonString, TalkyLevel owner) {
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        //in theory i could check the name but whatever.
+        TalkyItem ret = TalkyRecruit(npc, owner);
+        return ret;
+    }
+
 
     void onClick() {
         //get back up to talky level, then to talky section, then to npc, then ask game to recruit them.

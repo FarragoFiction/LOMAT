@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:CommonLib/Utility.dart';
+
 import '../CipherEngine.dart';
 import 'LOMATNPC.dart';
 import 'TalkyEnd.dart';
@@ -30,6 +34,14 @@ class TalkyResponse extends TalkyItem {
         ret["associatedEmotion"] = associatedEmotion;
         return ret;
     }
+
+    static TalkyItem loadFromJSON(LOMATNPC npc, String jsonString, TalkyLevel owner) {
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        TalkyLevel level = TalkyLevel.loadFromJSON(npc, json.getValue("talkyLevel"));
+        TalkyItem ret = TalkyResponse(npc, level.talkyItems,json.getValue("displayText"),json.getValue("associatedEmotion"), owner);
+        return ret;
+    }
+
 
     @override
     void display(Element cont) {

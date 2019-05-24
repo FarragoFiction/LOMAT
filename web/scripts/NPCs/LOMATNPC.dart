@@ -107,6 +107,22 @@ class LOMATNPC {
         return loadFromJSON(LZString.decompressFromEncodedURIComponent(removeLabelFromString(dataString)));
     }
 
+    static LOMATNPC loadFromJSON(String jsonString) {
+        print("the uncompressed string is ${jsonString}");
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        LOMATNPC ret = LOMATNPC(json.getValue("name"), null, null);
+        ret.leavingMessage = json.getValue("leavingMessage");
+        ret.causeOfDeath = json.getValue("causeOfDeath");
+        ret.hp = json.getValue("hp");
+        //TODO serialize diseases
+        //TODO serialize talky shit
+        ret.talkyLevel = TalkyLevel.loadFromJSON(ret,json.getValue("talkyLevel"));
+        //TODO serialize animation
+        //TODO encode this to LZ or some shit.
+
+        return ret;
+    }
+
     static String removeLabelFromString(String ds) {
         try {
             ds = Uri.decodeQueryComponent(ds); //get rid of any url encoding that might exist
@@ -121,13 +137,7 @@ class LOMATNPC {
         }
     }
 
-    static LOMATNPC loadFromJSON(String jsonString) {
-        print("the uncompressed string is ${jsonString}");
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
-        LOMATNPC ret = LOMATNPC(json.getValue("name"), null, null);
 
-        return ret;
-    }
 
     //not called for save data, just for form shit and loading
     String toDataString() {

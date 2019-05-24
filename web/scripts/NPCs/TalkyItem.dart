@@ -1,10 +1,17 @@
 //'dialogue' is too easy to typo, i am officially declaring 'talky' just as good.
 
+import 'dart:convert';
+
+import 'package:CommonLib/Utility.dart';
+
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../SoundControl.dart';
 import '../Triggers/Trigger.dart';
+import 'LOMATNPC.dart';
 import 'TalkyLevel.dart';
+import 'TalkyQuestion.dart';
+import 'TalkyRecruit.dart';
 import 'TalkyResponse.dart';
 import 'dart:html';
 abstract class TalkyItem {
@@ -33,6 +40,20 @@ abstract class TalkyItem {
         ret ["triggers"] = triggersJSON;
 
         return ret;
+    }
+
+    static TalkyItem loadFromJSON(LOMATNPC npc,String jsonString, TalkyLevel owner) {
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        String type = json.getValue("type");
+        if(type == TalkyQuestion.TYPE) {
+            return TalkyQuestion.loadFromJSON(jsonString, owner);
+        }else if(type == TalkyResponse.TYPE) {
+            return TalkyResponse.loadFromJSON(npc,jsonString, owner);
+        }else if(type == TalkyRecruit.TYPE) {
+            return TalkyRecruit.loadFromJSON(npc,jsonString, owner);
+        }else {
+            throw("I don't know how to parse type $type");
+        }
     }
 
     void addTrigger(Trigger trigger) {

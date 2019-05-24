@@ -1,5 +1,10 @@
+import 'dart:convert';
+
+import 'package:CommonLib/Utility.dart';
+
 import '../Sections/LOMATSection.dart';
 import '../Sections/TalkySection.dart';
+import 'LOMATNPC.dart';
 import 'TalkyItem.dart';
 import 'dart:html';
 
@@ -18,6 +23,17 @@ class TalkyLevel {
         talkyItems.forEach((TalkyItem item)=> talkyItemsJSON.add(item.toJSON()));
         ret ["talkyItems"] = talkyItemsJSON;
         //don't serialize parent or loop
+        return ret;
+    }
+
+    static TalkyLevel loadFromJSON(LOMATNPC npc, String jsonString) {
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        TalkyLevel ret = TalkyLevel(new List<TalkyItem>(),null);
+        List<dynamic> aThing = json.getArray("talkyItems");
+
+        for(String thing in aThing) {
+            ret.talkyItems.add(TalkyItem.loadFromJSON(npc,thing,ret));
+        }
         return ret;
     }
 
