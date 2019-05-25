@@ -47,8 +47,11 @@ abstract class TalkyItem {
     }
 
      void loadTriggersFromJSON(JsonHandler json) {
-        //TODO load into _triggers.
-        throw("not yet plz");
+         List<dynamic> aThing = json.getArray("triggers");
+
+         for(dynamic thing in aThing) {
+             _triggers.add(Trigger.loadFromJSON(new JsonHandler(thing)));
+         }
     }
 
     static TalkyItem loadFromJSON(LOMATNPC npc,JsonHandler json, TalkyLevel owner) {
