@@ -116,7 +116,7 @@ class LOMATNPC {
         ret.hp = json.getValue("hp");
         //TODO serialize diseases
         //TODO serialize talky shit
-        ret.talkyLevel = TalkyLevel.loadFromJSON(ret,json.getValue("talkyLevel"));
+        ret.talkyLevel = TalkyLevel.loadFromJSON(ret,new JsonHandler(json.getValue("talkyLevel")));
         //TODO serialize animation
         //TODO encode this to LZ or some shit.
 

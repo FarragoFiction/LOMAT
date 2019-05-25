@@ -33,10 +33,12 @@ class TalkyRecruit extends TalkyItem {
         return ret;
     }
 
-    static TalkyItem loadFromJSON(LOMATNPC npc, String jsonString, TalkyLevel owner) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+    static TalkyItem loadFromJSON(LOMATNPC npc, JsonHandler json, TalkyLevel owner) {
         //in theory i could check the name but whatever.
         TalkyItem ret = TalkyRecruit(npc, owner);
+        ret.displayText = TalkyItem.loadDisplayTextFromJSON(json);
+        ret.loadTriggersFromJSON( json);
+
         return ret;
     }
 

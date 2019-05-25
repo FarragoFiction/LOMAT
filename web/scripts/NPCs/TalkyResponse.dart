@@ -35,10 +35,10 @@ class TalkyResponse extends TalkyItem {
         return ret;
     }
 
-    static TalkyItem loadFromJSON(LOMATNPC npc, String jsonString, TalkyLevel owner) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
-        TalkyLevel level = TalkyLevel.loadFromJSON(npc, json.getValue("talkyLevel"));
-        TalkyItem ret = TalkyResponse(npc, level.talkyItems,json.getValue("displayText"),json.getValue("associatedEmotion"), owner);
+    static TalkyItem loadFromJSON(LOMATNPC npc, JsonHandler json, TalkyLevel owner) {
+        TalkyLevel level = TalkyLevel.loadFromJSON(npc, new JsonHandler(json.getValue("talkyLevel")));
+        TalkyItem ret = TalkyResponse(npc, level.talkyItems,TalkyItem.loadDisplayTextFromJSON(json),json.getValue("associatedEmotion"), owner);
+        ret.loadTriggersFromJSON( json);
         return ret;
     }
 

@@ -26,13 +26,12 @@ class TalkyLevel {
         return ret;
     }
 
-    static TalkyLevel loadFromJSON(LOMATNPC npc, String jsonString) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+    static TalkyLevel loadFromJSON(LOMATNPC npc, JsonHandler json) {
         TalkyLevel ret = TalkyLevel(new List<TalkyItem>(),null);
         List<dynamic> aThing = json.getArray("talkyItems");
 
-        for(String thing in aThing) {
-            ret.talkyItems.add(TalkyItem.loadFromJSON(npc,thing,ret));
+        for(dynamic thing in aThing) {
+            ret.talkyItems.add(TalkyItem.loadFromJSON(npc,new JsonHandler(thing),ret));
         }
         return ret;
     }

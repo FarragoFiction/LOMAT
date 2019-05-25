@@ -42,15 +42,23 @@ abstract class TalkyItem {
         return ret;
     }
 
-    static TalkyItem loadFromJSON(LOMATNPC npc,String jsonString, TalkyLevel owner) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+    static String loadDisplayTextFromJSON(JsonHandler json) {
+        return json.getValue("displayText");
+    }
+
+     void loadTriggersFromJSON(JsonHandler json) {
+        //TODO load into _triggers.
+        throw("not yet plz");
+    }
+
+    static TalkyItem loadFromJSON(LOMATNPC npc,JsonHandler json, TalkyLevel owner) {
         String type = json.getValue("type");
         if(type == TalkyQuestion.TYPE) {
-            return TalkyQuestion.loadFromJSON(jsonString, owner);
+            return TalkyQuestion.loadFromJSON(npc,json, owner);
         }else if(type == TalkyResponse.TYPE) {
-            return TalkyResponse.loadFromJSON(npc,jsonString, owner);
+            return TalkyResponse.loadFromJSON(npc,json, owner);
         }else if(type == TalkyRecruit.TYPE) {
-            return TalkyRecruit.loadFromJSON(npc,jsonString, owner);
+            return TalkyRecruit.loadFromJSON(npc,json, owner);
         }else {
             throw("I don't know how to parse type $type");
         }

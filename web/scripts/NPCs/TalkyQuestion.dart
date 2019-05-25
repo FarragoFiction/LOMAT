@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:CommonLib/Utility.dart';
 
+import 'LOMATNPC.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
 import 'TalkyResponse.dart';
@@ -29,9 +30,10 @@ class TalkyQuestion extends TalkyItem {
         return ret;
     }
 
-    static TalkyItem loadFromJSON(String jsonString, TalkyLevel owner) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
-        TalkyItem ret = TalkyQuestion(json.getValue("displayText"),json.getValue("response"), owner);
+    static TalkyItem loadFromJSON(LOMATNPC npc, JsonHandler json, TalkyLevel owner) {
+        TalkyResponse response = TalkyResponse.loadFromJSON(npc, new JsonHandler(json.getValue("response")),owner);
+        TalkyItem ret = new TalkyQuestion(TalkyItem.loadDisplayTextFromJSON(json),response, owner);
+        ret.loadTriggersFromJSON( json);
         return ret;
     }
 
