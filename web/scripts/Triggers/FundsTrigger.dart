@@ -12,4 +12,6 @@ class FundsTrigger extends Trigger {
     return game.funds > importantInt;
   }
 
+
+
 }

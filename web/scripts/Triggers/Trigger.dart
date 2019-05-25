@@ -6,6 +6,7 @@ import '../Game.dart';
 import 'FundsTrigger.dart';
 import 'GravesNumberTrigger.dart';
 import 'PartyMemberWithName.dart';
+import 'PartyNumberTrigger.dart';
 
 abstract class Trigger {
     //for auto form shit
@@ -31,18 +32,24 @@ abstract class Trigger {
         return ret;
     }
 
+    //super simple
+    void loadJSON(JsonHandler json) {
+        importantWord = json.getValue("importantWord");
+        importantWord = json.getValue("importantInt");
+    }
+
 
     static Trigger loadFromJSON(JsonHandler json) {
         //need to figure out what kind of trigger this is, via label
         String type = json.getValue("label");
         if(type == new FundsTrigger().label) {
-            return FundsTrigger.loadFromJSON(json);
+            return new FundsTrigger()..loadJSON(json);
         }else if(type == new GravesNumberTrigger().label) {
-            return GravesNumberTrigger.loadFromJSON(json);
+            return new GravesNumberTrigger()..loadJSON(json);
         }else if(type == new PartyMemberWithName().label) {
-            return PartyMemberWithName.loadFromJSON(json);
+            return new PartyMemberWithName()..loadJSON(json);
         }else if(type == new PartyNumberTrigger().label) {
-            return PartyNumberTrigger.loadFromJSON(json);
+            return new PartyNumberTrigger()..loadJSON(json);
         }else {
             throw("I don't know how to parse trigger label $type");
         }
