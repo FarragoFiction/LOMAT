@@ -35,7 +35,7 @@ abstract class Trigger {
     //super simple
     void loadJSON(JsonHandler json) {
         importantWord = json.getValue("importantWord");
-        importantWord = json.getValue("importantInt");
+        importantInt = json.getValue("importantInt");
     }
 
 
