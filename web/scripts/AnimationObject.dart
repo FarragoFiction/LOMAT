@@ -1,8 +1,11 @@
 import 'dart:async';
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:CommonLib/Colours.dart';
+import 'package:CommonLib/Compression.dart';
 import 'package:CommonLib/Random.dart';
+import 'package:CommonLib/Utility.dart';
 import 'package:LoaderLib/Loader.dart';
 import 'package:RenderingLib/RendereringLib.dart';
 
@@ -92,9 +95,70 @@ class GullAnimation  extends AnimationObject{
     static String baseLocationBody = "${baseLocation}BodyFrames/";
     static String baseLocationHat = "${baseLocation}HatFrames/";
 
+    GullAnimation(int this.hatNumber, int this.bodyNumber, Palette this.palette):super(17, 20, 254, 288) {
+        init();
+    }
+
+    void init() {
+      layers.add(bodyLayer());
+      layers.add(hatLayer());
+    }
+
+    GullAnimation.withoutPalette(int this.hatNumber, int this.bodyNumber):super(17, 20, 254, 288) {
+        palette = whiteBird; //default
+    }
+
     static GullAnimation get randomAnimation {
         Random rand = new Random();
         return new GullAnimation(rand.nextIntRange(1,5),rand.nextIntRange(1,5), randomPalette);
+    }
+
+
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        ret["hatNumber"] = hatNumber;
+        ret ["bodyNumber"] = bodyNumber;
+        ByteBuilder builder = new ByteBuilder();
+        writePaletteToBuilder(builder);
+        ret["palette"]=base64Url.encode(builder.toBuffer().asUint8List());
+        return ret;
+    }
+
+    void writePaletteToBuilder(ByteBuilder builder) {
+        List<String> names = new List<String>.from(palette.names);
+        names.sort();
+        builder.appendExpGolomb(names.length); //for length of palette
+        //print("saved color length");
+        for(String name2 in names) {
+            Colour color = palette[name2];
+            //print("saving color $name2 with value red ${color.red}, green${color.green} blue${color.blue}");
+            builder.appendByte(color.red);
+            builder.appendByte(color.green);
+            builder.appendByte(color.blue);
+        }
+    }
+
+    void readPaletteFromByteBuilder(ImprovedByteReader reader) {
+        int numColors = reader.readExpGolomb();
+        //print("Number of colors is $numColors");
+        List<String> names = new List<String>.from(palette.names);
+        names.sort();
+        for(int i = 0; i< numColors; i++) {
+            //print("reading color ${names[i]}");
+            Colour newColor = new Colour(reader.readByte(),reader.readByte(),reader.readByte());
+            palette.add(names[i], newColor, true);
+        }
+    }
+
+
+
+    static GullAnimation loadFromJSON(JsonHandler json) {
+        ImprovedByteReader reader = new ImprovedByteReader(base64Url.decode(json.getValue("palette")).buffer, 0);
+
+        GullAnimation ret =new GullAnimation.withoutPalette(json.getValue("hatNumber"), json.getValue("bodyNumber"));
+        ret.readPaletteFromByteBuilder(reader);
+        ret.init();//wait till after palette is final
+        return ret;
     }
 
 
@@ -189,10 +253,7 @@ class GullAnimation  extends AnimationObject{
         ..add("sheet",new Colour.fromStyleString("#000000"));
     Palette palette;
 
-    GullAnimation(int this.hatNumber, int this.bodyNumber, Palette this.palette):super(17, 20, 254, 288) {
-        layers.add(bodyLayer());
-        layers.add(hatLayer());
-    }
+
 
     AnimationLayer bodyLayer() {
         List<String> ret = new List<String>();
