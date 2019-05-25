@@ -10,6 +10,8 @@ import '../NPCs/NonGullLOMATNPC.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
+import '../Sections/TalkySection.dart';
+
 DivElement div = querySelector('#output');
 void main()  async{
     /*
@@ -21,13 +23,14 @@ void main()  async{
     }*/
     //testCiphers();
     loadGull();
-    testAnimation();
+    //testAnimation();
     //testTombstone();
 }
 
 void loadGull() {
     LOMATNPC npc = NPCFactory.stimpyTigger();
     div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
+    TalkySection ts = new TalkySection(npc, div);
 
     NonGullLOMATNPC nonGull = NPCFactory.lilscumbag();
     div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
