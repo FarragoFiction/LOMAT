@@ -1,6 +1,11 @@
 //borrow concepts from the AiEngine.
 // events, talky items and cities can all be triggered
+import 'package:CommonLib/Utility.dart';
+
 import '../Game.dart';
+import 'FundsTrigger.dart';
+import 'GravesNumberTrigger.dart';
+import 'PartyMemberWithName.dart';
 
 abstract class Trigger {
     //for auto form shit
@@ -24,6 +29,23 @@ abstract class Trigger {
         ret["importantWord"] = importantWord;
         ret["importantInt"] = importantInt;
         return ret;
+    }
+
+
+    static Trigger loadFromJSON(JsonHandler json) {
+        //need to figure out what kind of trigger this is, via label
+        String type = json.getValue("label");
+        if(type == new FundsTrigger().label) {
+            return FundsTrigger.loadFromJSON(json);
+        }else if(type == new GravesNumberTrigger().label) {
+            return GravesNumberTrigger.loadFromJSON(json);
+        }else if(type == new PartyMemberWithName().label) {
+            return PartyMemberWithName.loadFromJSON(json);
+        }else if(type == new PartyNumberTrigger().label) {
+            return PartyNumberTrigger.loadFromJSON(json);
+        }else {
+            throw("I don't know how to parse trigger label $type");
+        }
     }
 
     static bool allTriggered(List<Trigger> triggers) {
