@@ -6,6 +6,7 @@ import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
 import '../NPCs/LOMATNPC.dart';
+import '../NPCs/NonGullLOMATNPC.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
@@ -27,6 +28,11 @@ void main()  async{
 void loadGull() {
     LOMATNPC npc = NPCFactory.stimpyTigger();
     div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
+
+    NonGullLOMATNPC nonGull = NPCFactory.lilscumbag();
+    div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
+    div.append(nonGull.avatar);
+
 }
 
 Future<Null> testDisease() async {

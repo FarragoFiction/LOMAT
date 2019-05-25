@@ -107,17 +107,28 @@ class LOMATNPC {
         return loadFromJSON(LZString.decompressFromEncodedURIComponent(removeLabelFromString(dataString)));
     }
 
+    void loadJSON(JsonHandler json) {
+        leavingMessage = json.getValue("leavingMessage");
+        causeOfDeath = json.getValue("causeOfDeath");
+        hp = json.getValue("hp");
+        //TODO serialize diseases
+        talkyLevel = TalkyLevel.loadFromJSON(this,new JsonHandler(json.getValue("talkyLevel")));
+        //TODO serialize animation
+        //TODO encode this to LZ or some shit.
+    }
+
     static LOMATNPC loadFromJSON(String jsonString) {
         print("the uncompressed string is ${jsonString}");
         JsonHandler json = new JsonHandler(jsonDecode(jsonString));
-        LOMATNPC ret = LOMATNPC(json.getValue("name"), null, null);
-        ret.leavingMessage = json.getValue("leavingMessage");
-        ret.causeOfDeath = json.getValue("causeOfDeath");
-        ret.hp = json.getValue("hp");
-        //TODO serialize diseases
-        ret.talkyLevel = TalkyLevel.loadFromJSON(ret,new JsonHandler(json.getValue("talkyLevel")));
-        //TODO serialize animation
-        //TODO encode this to LZ or some shit.
+        String type = json.getValue("type");
+        LOMATNPC ret;
+        if(type == "Gull") {
+            ret = LOMATNPC(json.getValue("name"), null, null);
+        }else {
+            ret = NonGullLOMATNPC(json.getValue("name"), null, null);
+        }
+        ret.loadJSON(json);
+
 
         return ret;
     }
@@ -149,6 +160,7 @@ class LOMATNPC {
         ret ["leavingMessage"] = leavingMessage;
         ret["causeOfDeath"] = causeOfDeath;
         ret["hp"] = hp;
+        ret["type"] = "Gull";
         //TODO serialize diseases
         //TODO serialize talky shit
         ret["talkyLevel"] = talkyLevel.toJSON();
@@ -313,20 +325,22 @@ abstract class NPCFactory {
     }
 
     static stimpyTigger() {
-        String dataString = "Stimpy Tigger:___ N4IgdghgtgpiBcIDKAXAllADgTwAQBU0BzImAJxABoQAbGCANzTCIFkYBnDiUhEAgPIARAbigQA1jFwcArmWn0AxgAtcAOQAKAYVwqIHXBFxLZHFAHsouOo2ZExnbqQB0VEEohmYAgGZD6FBU+CAAjDgsaWRQYGjwwCyD7dxVMBAAOAFZqFAgaCWwAGRgGWIRQXPzsAEkYqA4EAG1QABM0DkwaCGx8GAAPFD4AdX0UEwgwXGwLWVwYmhpHI1CZsaTDImgYAH53FDJiUjIG+EaAXRzsTDhEfDyCgEVZTnQLMHcFDreOG9b2zu6vQGfCQDyGAEEhgBpACEcLhBAAEgBRAjVfDg9S4apIXDg3AAJWR4MKuAAUsiCVC3DkDiRyCdzjl7kUSmV4BUWbUYPUmmcAL6Xa58O5VAmcTDfODUAwRJRoCAxFrIqCJNBvBAARgADNr+YK-h0uj1+oNECNFeNJtNZvNFrBlqs5ip2nMLAB3MC7WmHBlNUBdULskDg1WyMAoABi4ZaDWoGElZFyEaGFjILQQYFkC3jWDTyZQ1QjWt1-IuIBQVxuIFFj2e5nV72on0lYB+5RAbSNgNNIsROMEQyxA6Q6gEQwAmpQ8eohLhEeDcUgBKxUYiAKoAcVR+CJyNx1WH+BpFbpR0Z5cqBWKpRoHavNTqF8FFarIpZ4q+belIFlFnliowMqqqvO88A6nqBqdv8xpAmaIBDBAaAoNONBoFI042gA5AouAtPQLTeqevrHP6tBhMGoYzBG0ZgLG7gJvmEwoKm6aZtmNC5omBZFmamo6mWQrVrW2BPC8jYfBKUodl2AImsCiATvuLi4MiAAa4LaPghQTrghTVFCO4Lse2JYawuBCMSQgnvsJEXsyVQ3uynJVNyvKnAKQnvmKUnfu4f4AUqKpqhq8DpJBlCGnJcHDCoeAQLhNp4Z8PwtDY6HSMYRAqBY5hEbZ9KkacAYUXeiBUeGUYxnGICMUmzGsRm8BZjmtV5vVEa8SWeqXm+twsmJDYas2vnthy0HdvJ8GghC0Lwgi1RmRoAj4BZRJIEgyJzvphl4rgm6IgISD4NO1R4uZ+IHUdx57GefoeQ515smVLkFG5jJRbBvbmkhKHpRhUwzDh0j4RAhG3XZZGBpRYY0dVDHtQWjXsa1dU8cW4ECb1wr9VUg2gZJX5jZ9PYKSASlICp6madpuk7UZ4ImYt5mWeC1kQ4V9kViyTkvdzrlPnyL6VjjNYfqNP4BQqQUgRJYWQZ5r6iyJn6tu2MpcP+0tAcFBPgaWUGyV9ZMWmMnjWjMcyxPamUrNEjj5XdRVMkrwkDfWBMjUTvwTdF33IGCkKwvNuATgI654kSSKopoBICJoKJINUW3zpSohDIduBDNUhSkpu67VJZ0d6dduDLuuhS4gIkZIgOhSYnO+CiPgKLVASuCRoeJKEvu+CHpuuCaPX2jIjZTtcw+vP3lygsecLfViz53v+ZrgU67LoWagATBFJNTXwQgWIDszusxbq4AAVhYzAOxz558l5uN1uJw0gC20njUbpPTYHc0h0M4dChzmqDCR2kMHr8yereaeAseQfV9sbeC4olBkFkMhMBnMH6uz4ESbQBIC593wMiVgkkUFoJQOoLYIJ0BYDwIQQqIAyzz2VuLZeGs5Ta2AiFMC4V9QCn5EAA";
+        String dataString = "Vice President Wario:___ N4IgdghgtgpiBcIBqBLAxjABABQE4wGcUATGMAF0wHUJcUB7EAGhABsYIA3FMAcwFlCBCLziJMAFQDyAESmYoEANZYCAV3yYOaABaYActgDCmHRAKYImNGoLl6UTOy49eCoSJgA6ZiDQRbGCkAMxkOch0EEAgAIwJ6VjVyGFYAT0wwegjXXx0ABwQADgBWFnJUvLEQAHE1VlZfcghWJVSAGRhOFIRQJpbUgElkqAIEAG1QYhQCPNYIVIkYAA9yKKozSn8wTFT6NUxk+vdLGL3KbIteaBgAfka6XlFcUfgxgF0yiqqJZtaARTUhHIDDAvnwM3oYAIYkm01m80WKyiEgAEgMAMqYaoAQX4AFFqAM2m1MAN9EgpG0kASAGJ4gBK9IAmmTqpIUQSAOToqQAVTamKkNPZBJkeOxMk5knkqLxA3pmBpZOxJPpePRElZODa2KMeJ8ZQeTxe7zKv3anW68F65qGMBG4zeAF9PpVkeb6YQ8pDob5zPE0CgIMliHioFkQQgAIwAJgADE6XbCZnMFstVoh1sHrBBtrt9odWMdYmcDjppgd6AB3MB3Q0oR4wZ7jUBzGJWkDY8NqCg0nvEUYsFBQb24JoUKj0XDEBBgOqsIcjqfj8gDCjRuMJj4gcpuxA-foAoGRljg71QmEgKYphHpqJ46nMqT6Alk9kY6VUfSYIzY-SciRFQGapeTVTA+UAlEpCoaVMDacVqVJCQvEwdE-iobEqAAaQAQjwvD7gbY1HTNfoOi6BprR3W1hhNZ1XW+D0vR9OAWH9ehA2DGBQ3DYFISKBMkyvOFU0RDMQBoFByCYJwUBUGT805TRSAgYg6x3I0mxNVtYg7Ls9l7ftBxAYdRxXSdp1nedFzM3NV3XeAoyjLcGPdQ9ATsE8QDPFiemEm80yRRA0Iw7D8LwzAmXVFC8QADV1CQ2iZOCBiwglUWxZDSU5fhMDFCUDQ0oitJI6iyMtSibX6O0HVeeidy+NzWk9CELz9AgAyDEMwwjfj4EKQSmGTeFAvE9Z0loLB80wYhwWhYhZJUSxMF4HR6DsdTyE05tXh09tKM7btDLAAdfFM5c7Ismd4DneobIuig1wzZyXIavcQAPf4PL40FT2YtqqOvEaxKiAAhPEoLaGRMH4ZL6SkcHMSZAB6fQblQ9DMNw8LCMbHbTTK1pyKtKrWhq7T-OBu9MwgKSZNYOSYAUvYlKwFS1Nx4jdrYXSDv0ntyD7E7jPOsdLqna7boXEylzFx6HKc17d0Y9zj34v7Wt9QGRNvIKQBCrHwpwyLoswOKEqSlK0vZTKUIGHK8vFGRCq24r8e3PoiYqvzPcGWjHRdN6Vea-7fTYjqOK67iep+gTE3q5WmtSFrzzD6II847reMjRz40TIbKdE6mJI2HM8z2A4UiLWATlLWBNu2ujXP3c0j089XvNDy8gaLvWmT5TBsTA2UsV5AYxXA4UKXHlCpAVDDMQGQCZCHrCbnX9eMdC7H8M5kq6tIr2KJ9mj7TowPE5b-oU988POq4njetBRzN3z4be-EmR6B2CuqzsytMAACt6A8HcA3N2Tcg5JzbrHDWqdu461GlEA2YVwqYA5MSE26IcJ73dofC0x8qK+3Ji2QuutxKejQLgNQUlwF40gZfEAaojD0jHpqCQeJ+AgCdAnRqV8Q6a1Yune+Wcn7RjzjwxMQA";
         return LOMATNPC.loadFromDataString(dataString);
     }
 
     //TODO eventaully all this is serialized.
     static LOMATNPC lilscumbag() {
+        /*
         List<TalkyItem> talkyItems = new List<TalkyItem>();
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         NonGullLOMATNPC testNPC = new NonGullLOMATNPC("Lil Scumbag",level,new ImageElement(src: "images/Seagulls/Lil_Scumbag.png"));
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Takes gargbag. Eat. Bai.", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. Hello?",tr,level);
-
-        return testNPC;
+        return testNPC;*/
+        String data = "Lil Scumbag:___ N4IgdghgtgpiBcIAyBLANgAgMoGMCuUARhAOYgA0IaMEAbimCQLIwDOrpciGAKgPIARPhigQA1jAys8AJ0k0cACwwA5AAoBhDIoisMEDPlYAXAPZQM1OgxIi2HEjAB0FEDgh5WMPgDMBNY0UEEAhCVlM0PGMYNABPDDBTQJtXRQAHBAAOAFZKY1i0rhAAflLXYwg0MVikGFoYhFAKqtiASWioVgQAbVAAExRWNLQIWJ4YAA9jYIBVRScMAAkYtFNi8pkUEkcZLvhugF08gqKeSuqARTw2YxRTMFc5IfuvRpABoZGxyenEM4k9CQIDISMQSAsAKIQYwLABCEBQLjym22MF2PSOIGa1Vq9TQb2xbQ6e0OAF9joVgmcWgAlNhpF5wSi6cI4FDQmB9CFQJJ3B7wADMpNJB3JIBQUBIWBkOGCimMxjS8AA9MrVu40IpTCZ4NkBQKAEwG5USzisZVYGgkPBoNDm1BoAD6uAIYKcaUYIFJQA";
+        return LOMATNPC.loadFromDataString(data);
     }
 
     //TODO eventaully all this is serialized.
