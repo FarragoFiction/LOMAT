@@ -1,6 +1,7 @@
 import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
+import 'package:CommonLib/Utility.dart';
 import 'package:TextEngine/TextEngine.dart';
 import 'package:recase/recase.dart';
 import '../Locations/Road.dart';
@@ -28,6 +29,21 @@ class Disease {
         name = rc.titleCase;
 
         return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, desc,rand.nextInt(10),rand.nextInt(10)));
+    }
+
+
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        ret["name"] = name;
+        ret ["power"] = power;
+        ret["description"]=description;
+        ret["remainingDuration"] = remainingDuration;
+        return ret;
+    }
+
+    static Disease loadFromJSON(JsonHandler json) {
+        Disease ret = new Disease(json.getValue("name"),json.getValue("description"),json.getValue("power"),json.getValue("remainingDuration"));
+        return ret;
     }
 
     //this should be called for each npc while traveling and traveling only

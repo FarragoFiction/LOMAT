@@ -113,8 +113,8 @@ class LOMATNPC {
         hp = json.getValue("hp");
         //TODO serialize diseases
         talkyLevel = TalkyLevel.loadFromJSON(this,new JsonHandler(json.getValue("talkyLevel")));
-        //TODO serialize animation
-        //TODO encode this to LZ or some shit.
+        //TODO
+        //animation = GullAnimation.loadFromJSON();
     }
 
     static LOMATNPC loadFromJSON(String jsonString) {
@@ -161,11 +161,12 @@ class LOMATNPC {
         ret["causeOfDeath"] = causeOfDeath;
         ret["hp"] = hp;
         ret["type"] = "Gull";
-        //TODO serialize diseases
-        //TODO serialize talky shit
+        List<Map<dynamic, dynamic>> diseasesJson = new List<Map<dynamic,dynamic>>();
+        diseases.forEach((Disease disease)=> diseasesJson.add(disease.toJSON()));
+        ret ["diseases"] = diseasesJson;
         ret["talkyLevel"] = talkyLevel.toJSON();
         //TODO serialize animation
-        //TODO encode this to LZ or some shit.
+        ret["animation"] = animation.toJSON();
         return ret;
     }
 

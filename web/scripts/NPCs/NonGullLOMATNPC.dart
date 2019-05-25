@@ -32,7 +32,11 @@ class NonGullLOMATNPC extends LOMATNPC {
 
   @override
   Map<dynamic, dynamic> toJSON(){
-      Map<dynamic, dynamic> ret = super.toJSON();
+      Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+      ret["name"] = name;
+      ret ["leavingMessage"] = leavingMessage;
+      ret["causeOfDeath"] = causeOfDeath;
+      ret["hp"] = hp;
       ret["type"] = "???";
       ret["imgSrc"] = avatar.src;
       return ret;
