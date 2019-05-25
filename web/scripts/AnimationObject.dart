@@ -139,12 +139,11 @@ class GullAnimation  extends AnimationObject{
     }
 
     void readPaletteFromByteBuilder(ImprovedByteReader reader) {
-        int numColors = reader.readExpGolomb();
         //print("Number of colors is $numColors");
         List<String> names = new List<String>.from(palette.names);
         names.sort();
-        for(int i = 0; i< numColors; i++) {
-            //print("reading color ${names[i]}");
+        for(int i = 0; i< palette.length; i++) {
+            print("reading color ${names[i]}");
             Colour newColor = new Colour(reader.readByte(),reader.readByte(),reader.readByte());
             palette.add(names[i], newColor, true);
         }
