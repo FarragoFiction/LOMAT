@@ -32,7 +32,10 @@ class TalkyLevel {
         List<dynamic> aThing = json.getArray("talkyItems");
 
         for(dynamic thing in aThing) {
-            ret.talkyItems.add(TalkyItem.loadFromJSON(npc,new JsonHandler(thing),ret));
+            print("thing is $thing");
+            //ret.talkyItems.add(TalkyItem.loadFromJSON(npc,new JsonHandler(thing),ret)); don't need to add directly, because creating them does that
+            (TalkyItem.loadFromJSON(npc,new JsonHandler(thing),ret));
+
         }
         return ret;
     }
