@@ -27,6 +27,7 @@ class TalkyLevel {
     }
 
     static TalkyLevel loadFromJSON(LOMATNPC npc, JsonHandler json) {
+        print("i am trying to load a talky level from json, its ${json}");
         TalkyLevel ret = TalkyLevel(new List<TalkyItem>(),null);
         List<dynamic> aThing = json.getArray("talkyItems");
 

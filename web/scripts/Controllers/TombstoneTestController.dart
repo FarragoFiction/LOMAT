@@ -1,3 +1,4 @@
+import 'package:CommonLib/Compression.dart';
 import 'package:CommonLib/Random.dart';
 
 import '../AnimationObject.dart';
@@ -28,13 +29,18 @@ void main()  async{
 }
 
 void loadGull() {
+    String dataString = "Stimpy Tigger:___ N4IgdghgtgpiBcIDKAXAllADgTwAQBU0BzImAJxABoQAbGCANzTCIFkYBnDiUhEAgPIARAbigQA1jFwcArmWn0AxgAtcAOQAKAYVwqIHXBFxLZHFAHsouOo2ZExnbqQB0VEEohmYAgGZD6FBU+CAAjDgsaWRQYGjwwCyD7dxVMBAAOAFZqFGxMOEQAcVkaGncAEzQOemqOBABtAF0ciBoJbAAZGAZYhFAUVvaASRioOvh60EqOTBoIbHwYAA8UPgB1fRQTCDBcbAtZXBjSxyNQg62kwyJoGAB+dxQyYlIycaacvIKQfEHsAEVZJx0BYwO4FDNQdU+iBprN5osVnx8AAJACiBCG+AAgupcEMkLhsbgAEpo7EdXAAKTRJIA0i5cEh-mtsWs6QBCLlcx7PEjkd7NEADNqdbq9eD9P4jGBjBqNAC+n3yyL+JM4mChcGoBgiSjQEBi5TRUESaFBCAAjAAGa0KpVTKrwhbLVaIDaG7a7faHY40U5hC5HFRVI4WADuYAeOT5r3eoDmoQlIGxptkYBQADF0+U6tQMJqyAMM2sLGRyggwCUaPmsGXiyghhmrbaFULcirEL9RYDgeawdQIZqwNDJbCnXMXUjEMzWezuVyCCiCYI1niV0h1AI1gBNShE9RCXAo7GEpACVgYlEAVUKGPwZLRhKG6-wbhjLwF8paoq6PTKY4isMoyCkqwpfKqorqpCI7aiAuoWPqhowMapogmC8A2naDrjjMk6Im6IBrBAaAoPuNBoFI+4+gA5AouDlPQ5TRsKsZfhMCZhMmqYHBm2ZgLm7gFvWOwoKW5aVtWtaFg2TZupaNptsq3zdu0vbmP24IalqMJwvhrp8LObKcguuA7k+jJogAGti2j4B0O64B0Qx0veJ5vviNGsLgQjkkI76sZ+bzfsKfx-hKUqijKcoTIqymQe00HDtCOpcIhBpGiaZoWvA6TYZQjp4QiBnuioeAQPRPoMRC1TlDYlHSMYRAqBY5gsU8QXxrQXEASmaZ8TmeYgMJRaieJFbwFWpTSSJGZyS2drthBXZ-Op6FaTBo6Fc6BGGSyxkLhynneVu+A+WSSBIGiR7Oa5RK4IUKICEg+D7kMRLecSj3PW+vKdSFQFiv+MKA9FXV6cV05ESRZH1VRewHHR0iMRAzF-fywUcd1Sa9Tx6ZZoNQl1qNJZlhNU01sNxOyc2mGKUtnY-KtQIaRag7abBukTpDhFGfOpnmUglk2XZDlOS5bnYh5QxeT5fkBR1GOCj+7ThQBkXAbKoHxStUEcyl8FpUhmVoZpuXYXF4GM6p2BJTpqV6hlKFZetmGtjhENToRHpbJ43oHEcsT+rAZxBrA7VsZjHxWypzN9mzIBDjpY6e7tiA7gI15EmSS4YpoJICJo6JIEM13HrSohrE9uBrEMHSUoU15DL5udOT9TKZx0hICJmS4rh0uJHvgoiomiQwkrgmYvhSpJPvgL6FLgmgD9oaIK5Hyuhb+4rq1vmsxU0YEdrHeubXBCHG87ps5ZaABM+XbfpUNCBYCOHOGolhrgABWFjMI4Ed-qxR1kzHsLN1rszPlzIqXt1idyPEMDkdwmT7X5tydGcYAZhR3iDaUIEGiPx5nwdUSgyCyFIoApWANlogDJNoEkTd574DRKwEAbYj40JtnbTmDt0rIVQtlDCeV7SWx2BgQ0ZtQCbHULIKASYKDwGyCAc45RsAyLkeQBAAAWagmBWgwBQDEPghRMAcEzgIKAawYAfw6PgHcZASTpAYOkNY4YiAAC8kAkRRBAdIKhrzpAsNoHx6Q0AhLCb4gAzAAWm-lSIgABeBJbCFRAA";
+    DivElement dataDebug = new DivElement()..text = LZString.decompressFromEncodedURIComponent(LOMATNPC.removeLabelFromString(dataString));
+    div.append(dataDebug);
     LOMATNPC npc = NPCFactory.stimpyTigger();
     div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
+    dataDebug.appendText("the loaded npc's talky level is ${npc.talkyLevel.talkyItems.length} long.");
+
     TalkySection ts = new TalkySection(npc, div);
 
-    NonGullLOMATNPC nonGull = NPCFactory.lilscumbag();
-    div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
-    div.append(nonGull.avatar);
+    //NonGullLOMATNPC nonGull = NPCFactory.lilscumbag();
+    //div.appendText("the loaded npc's name is ${npc.name} and i expected it to be stimpy tigger");
+    //div.append(nonGull.avatar);
 
 }
 

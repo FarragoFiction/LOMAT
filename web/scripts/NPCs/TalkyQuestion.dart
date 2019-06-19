@@ -31,7 +31,8 @@ class TalkyQuestion extends TalkyItem {
     }
 
     static TalkyItem loadFromJSON(LOMATNPC npc, JsonHandler json, TalkyLevel owner) {
-        TalkyResponse response = TalkyResponse.loadFromJSON(npc, new JsonHandler(json.getValue("response")),owner);
+      //don't pass the owner here, respones aren't on screen at first.
+        TalkyResponse response = TalkyResponse.loadFromJSON(npc, new JsonHandler(json.getValue("response")),null);
         TalkyItem ret = new TalkyQuestion(TalkyItem.loadDisplayTextFromJSON(json),response, owner);
         ret.loadTriggersFromJSON( json);
         return ret;

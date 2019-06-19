@@ -10,7 +10,7 @@ import 'dart:html';
 import 'package:CommonLib/Random.dart';
 import 'package:CommonLib/src/collection/weighted_lists.dart';
 import 'package:CommonLib/src/utility/predicates.dart';
-
+//if puzzles get too hard have text and podcast yn try to figure them out
 abstract class CipherEngine {
     Random rand = new Random();
     //don't hide these behind too hard a cipher
