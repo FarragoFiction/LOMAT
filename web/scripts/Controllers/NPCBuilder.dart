@@ -29,7 +29,7 @@ class NPCBuilder {
     DivElement container = new DivElement()..id = "containerBuilder";
 
     NPCBuilder() {
-        npc = NPCFactory.lilscumbag();
+        npc = NPCFactory.stimpyTigger();
         initDataElement();
         initNameElement();
         syncFormToNPC();
@@ -42,6 +42,7 @@ class NPCBuilder {
 
     void loadNPC() {
         npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
+        syncFormToNPC();
     }
 
     void syncNPCToForm() {
