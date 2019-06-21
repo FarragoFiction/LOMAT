@@ -57,9 +57,11 @@ class NPCBuilder {
 
     void syncAnimation() async  {
         npc.animation.keepLooping = false; //makes sure it only goes once
-        npcView.context2D.clearRect(0,0, npcView.width, npcView.height);
+        npc.animation.layers.clear();
+        npc.animation.init();
         await npc.animation.renderLoop();
         CanvasElement canvas = npc.animation.element;
+        npcView.context2D.clearRect(0,0, npcView.width, npcView.height);
         npcView.context2D.drawImage(canvas,0,0);
     }
 
