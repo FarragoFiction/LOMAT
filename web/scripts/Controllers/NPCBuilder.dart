@@ -117,7 +117,7 @@ class NPCBuilder {
         LabelElement dataLabel = new LabelElement()..text = "Hat Number:";
         div.append(dataLabel);
         div.append(hatElement);
-        hatElement.onInput.listen((Event e) => syncNPCToForm());
+        hatElement.onChange.listen((Event e) => syncNPCToForm());
 
         container.append(div);
     }
@@ -127,7 +127,7 @@ class NPCBuilder {
         LabelElement dataLabel = new LabelElement()..text = "Body Number:";
         div.append(dataLabel);
         div.append(bodyElement);
-        bodyElement.onInput.listen((Event e) => syncNPCToForm());
+        bodyElement.onChange.listen((Event e) => syncNPCToForm());
 
         container.append(div);
     }
