@@ -13,6 +13,7 @@ class AnimationObject {
     int numberFrames;
     int frameRateInMS;
     int width;
+    bool keepLooping = true;
     int height;
     static int FAST = 20*3+20;
     static int MIDDLE = 20*4+20;
@@ -42,7 +43,10 @@ class AnimationObject {
         layers.forEach((AnimationLayer layer) async {
             await layer.render(_canvasElement);
         });
-        new Timer(new Duration(milliseconds: frameRateInMS), () => renderLoop());
+        if(keepLooping) {
+            new Timer(
+                new Duration(milliseconds: frameRateInMS), () => renderLoop());
+        }
 
     }
 

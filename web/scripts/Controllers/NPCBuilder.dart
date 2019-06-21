@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:CommonLib/Compression.dart';
 import 'package:CommonLib/Random.dart';
 
@@ -24,20 +26,41 @@ void main()  async{
 //later extend this to make a gull builder, which also has palette etc.
 class NPCBuilder {
     LOMATNPC npc;
+    CanvasElement npcView =new CanvasElement();
     InputElement nameElement = new InputElement();
+    InputElement hatElement = new InputElement();
+    InputElement bodyElement = new InputElement();
+
     TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
     DivElement container = new DivElement()..id = "containerBuilder";
 
     NPCBuilder() {
         npc = NPCFactory.stimpyTigger();
+        initNPCView();
         initDataElement();
         initNameElement();
+        initHatElement();
+        initBodyElement();
+
         syncFormToNPC();
     }
 
-    void syncFormToNPC() {
+    Future<void> syncFormToNPC(){
         nameElement.value = npc.name;
+        hatElement.value = "${npc.animation.hatNumber}";
+        bodyElement.value = "${npc.animation.bodyNumber}";
+
         dataStringElement.value = npc.toDataString();
+        syncAnimation();
+
+    }
+
+    void syncAnimation() async  {
+        npc.animation.keepLooping = false; //makes sure it only goes once
+        npcView.context2D.clearRect(0,0, npcView.width, npcView.height);
+        await npc.animation.renderLoop();
+        CanvasElement canvas = npc.animation.element;
+        npcView.context2D.drawImage(canvas,0,0);
     }
 
     void loadNPC() {
@@ -47,8 +70,27 @@ class NPCBuilder {
 
     void syncNPCToForm() {
         npc.name = nameElement.value;
+        syncNPCAnimationToForm();
         print("I'm syncing the npc to the form, and its name should be ${npc.name}");
         dataStringElement.value = npc.toDataString();
+    }
+
+    void syncNPCAnimationToForm() async{
+        try {
+            npc.animation.bodyNumber = int.parse(bodyElement.value);
+            npc.animation.hatNumber = int.parse(hatElement.value);
+            syncAnimation();
+
+        } on Exception {
+            window.alert("Thats not a valid body or hat Number");
+        }
+    }
+
+    void initNPCView() {
+        CanvasElement canvas = npc.animation.element;
+        npcView.width = canvas.width;
+        npcView.height = canvas.height;
+        container.append(canvas);
     }
 
     void initDataElement() {
@@ -66,6 +108,26 @@ class NPCBuilder {
         div.append(dataLabel);
         div.append(nameElement);
         nameElement.onInput.listen((Event e) => syncNPCToForm());
+
+        container.append(div);
+    }
+
+    void initHatElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "Hat Number:";
+        div.append(dataLabel);
+        div.append(hatElement);
+        hatElement.onInput.listen((Event e) => syncNPCToForm());
+
+        container.append(div);
+    }
+
+    void initBodyElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "Body Number:";
+        div.append(dataLabel);
+        div.append(bodyElement);
+        bodyElement.onInput.listen((Event e) => syncNPCToForm());
 
         container.append(div);
     }

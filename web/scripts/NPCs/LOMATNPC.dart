@@ -200,6 +200,7 @@ class LOMATNPC {
 
     //takes in a road becaue tombstones go on roads
     void die(String cod, Road road) {
+        animation.keepLooping = false; //tear down
         causeOfDeath = cod;
         hp = -1;
         //okay what needs to happen here is the road needs to plzStopKThanxBai and then
