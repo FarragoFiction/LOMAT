@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:CommonLib/Colours.dart';
 import 'package:CommonLib/Compression.dart';
 import 'package:CommonLib/Random.dart';
 
@@ -30,6 +31,7 @@ class NPCBuilder {
     InputElement nameElement = new InputElement();
     InputElement hatElement = new InputElement();
     InputElement bodyElement = new InputElement();
+    Map<String,InputElement> colorList = new Map<String,InputElement>();
 
     TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
     DivElement container = new DivElement()..id = "containerBuilder";
@@ -41,7 +43,7 @@ class NPCBuilder {
         initNameElement();
         initHatElement();
         initBodyElement();
-
+        initPaletteElement();
         syncFormToNPC();
     }
 
@@ -56,11 +58,14 @@ class NPCBuilder {
     }
 
     void syncAnimation() async  {
+        print("syncing animation for ${npc.name}");
         npc.animation.keepLooping = false; //makes sure it only goes once
         npc.animation.layers.clear();
         npc.animation.init();
+        CanvasElement canvas = npc.animation.element; //create it if necessary
         await npc.animation.renderLoop();
-        CanvasElement canvas = npc.animation.element;
+        print("I'm about to render npc ${npc.name}");
+        canvas = npc.animation.element;
         npcView.context2D.clearRect(0,0, npcView.width, npcView.height);
         npcView.context2D.drawImage(canvas,0,0);
     }
@@ -112,6 +117,27 @@ class NPCBuilder {
         nameElement.onInput.listen((Event e) => syncNPCToForm());
 
         container.append(div);
+    }
+
+    void initPaletteElement() {
+        for(String s in npc.animation.palette.names) {
+            InputElement e = new InputElement()..type = "color";
+            e.value = npc.animation.palette[s].toStyleString();
+            colorList[s]  = e;
+            container.append(e);
+        }
+    }
+
+    void syncColorsToGull() {
+        for(String s in npc.animation.palette.names) {
+            colorList[s].value = npc.animation.palette[s].toStyleString();
+        }
+    }
+
+    void syncGullToColors() {
+        for(String s in npc.animation.palette.names) {
+            npc.animation.palette.add(s, new Colour.fromStyleString(colorList[s].value), true);
+        }
     }
 
     void initHatElement() {
