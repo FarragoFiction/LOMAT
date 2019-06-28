@@ -76,6 +76,7 @@ class NPCBuilder {
 
     void loadNPC() {
         npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
+        //npcView.remove();
         syncFormToNPC();
     }
 
@@ -102,7 +103,8 @@ class NPCBuilder {
         CanvasElement canvas = npc.animation.element;
         npcView.width = canvas.width;
         npcView.height = canvas.height;
-        container.append(canvas);
+        container.append(npcView);
+        //container.append(canvas);
     }
 
     void initDataElement() {
