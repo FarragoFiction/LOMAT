@@ -30,7 +30,7 @@ void main()  async{
 //later extend this to make a gull builder, which also has palette etc.
 class NPCBuilder {
     LOMATNPC npc;
-    CanvasElement npcView =new CanvasElement();
+    Element npcView =new DivElement();
     InputElement nameElement = new InputElement();
     InputElement hatElement = new InputElement();
     InputElement bodyElement = new InputElement();
@@ -70,8 +70,10 @@ class NPCBuilder {
         await npc.animation.renderLoop();
         print("I'm about to render npc ${npc.name}");
         canvas = npc.animation.element;
-        npcView.context2D.clearRect(0,0, npcView.width, npcView.height);
-        npcView.context2D.drawImage(canvas,0,0);
+        for(Element child in npcView.children) {
+            child.remove();
+        }
+        npcView.append(npc.animation.element);
     }
 
     void loadNPC() {
@@ -100,11 +102,7 @@ class NPCBuilder {
     }
 
     void initNPCView() {
-        CanvasElement canvas = npc.animation.element;
-        npcView.width = canvas.width;
-        npcView.height = canvas.height;
         container.append(npcView);
-        //container.append(canvas);
     }
 
     void initDataElement() {
