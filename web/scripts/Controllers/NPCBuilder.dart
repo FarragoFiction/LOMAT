@@ -57,6 +57,7 @@ class NPCBuilder {
 
         dataStringElement.value = npc.toDataString();
         syncAnimation();
+        syncInputToGull();
 
     }
 
