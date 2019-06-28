@@ -109,7 +109,7 @@ class GullAnimation  extends AnimationObject{
     }
 
     GullAnimation.withoutPalette(int this.hatNumber, int this.bodyNumber):super(17, 20, 254, 288) {
-        palette = whiteBird; //default
+        palette = voidPalette; //default
     }
 
     static GullAnimation get randomAnimation {
@@ -130,6 +130,7 @@ class GullAnimation  extends AnimationObject{
 
     void writePaletteToBuilder(ByteBuilder builder) {
         List<String> names = new List<String>.from(palette.names);
+        print("writing palettes $names");
         names.sort();
         builder.appendExpGolomb(names.length); //for length of palette
         //print("saved color length");

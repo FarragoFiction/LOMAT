@@ -22,6 +22,9 @@ void main()  async{
     print("hello world");
     NPCBuilder builder = new NPCBuilder();
     builder.display(div);
+
+    //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
+    //div.appendHtml(npc.toDataString());
 }
 
 //later extend this to make a gull builder, which also has palette etc.
@@ -80,6 +83,7 @@ class NPCBuilder {
         syncNPCAnimationToForm();
         print("I'm syncing the npc to the form, and its name should be ${npc.name}");
         dataStringElement.value = npc.toDataString();
+        syncGullToColors();
     }
 
     void syncNPCAnimationToForm() async{
@@ -121,21 +125,26 @@ class NPCBuilder {
 
     void initPaletteElement() {
         for(String s in npc.animation.palette.names) {
+            LabelElement label = new LabelElement()..text = s;
             InputElement e = new InputElement()..type = "color";
             e.value = npc.animation.palette[s].toStyleString();
             colorList[s]  = e;
+            container.append(label);
             container.append(e);
+            e.onChange.listen((Event e) => syncNPCToForm());
+
         }
     }
 
-    void syncColorsToGull() {
+    void syncInputToGull() {
         for(String s in npc.animation.palette.names) {
             colorList[s].value = npc.animation.palette[s].toStyleString();
         }
     }
 
     void syncGullToColors() {
-        for(String s in npc.animation.palette.names) {
+        List<String> doop = new List.from(npc.animation.palette.names);
+        for(String s in doop) {
             npc.animation.palette.add(s, new Colour.fromStyleString(colorList[s].value), true);
         }
     }
