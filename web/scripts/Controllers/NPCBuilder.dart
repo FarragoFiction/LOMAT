@@ -25,6 +25,7 @@ void main()  async{
 
     //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
     //div.appendHtml(npc.toDataString());
+    //div.append(npc.animation.element);
 }
 
 //later extend this to make a gull builder, which also has palette etc.
@@ -40,7 +41,7 @@ class NPCBuilder {
     DivElement container = new DivElement()..id = "containerBuilder";
 
     NPCBuilder() {
-        npc = NPCFactory.stimpyTigger();
+        npc = NPCFactory.test();
         initNPCView();
         initDataElement();
         initNameElement();

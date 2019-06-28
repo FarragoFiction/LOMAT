@@ -137,6 +137,7 @@ class GullAnimation  extends AnimationObject{
         for(String name2 in names) {
             Colour color = palette[name2];
             //print("saving color $name2 with value red ${color.red}, green${color.green} blue${color.blue}");
+            print("writing colors color $name2 ${color.toStyleString()}");
             builder.appendByte(color.red);
             builder.appendByte(color.green);
             builder.appendByte(color.blue);
@@ -147,9 +148,10 @@ class GullAnimation  extends AnimationObject{
         //print("Number of colors is $numColors");
         List<String> names = new List<String>.from(palette.names);
         names.sort();
+        reader.readExpGolomb(); //destroy this.
         for(int i = 0; i< palette.length; i++) {
-            print("reading color ${names[i]}");
             Colour newColor = new Colour(reader.readByte(),reader.readByte(),reader.readByte());
+            print("reading color ${names[i]} ${newColor.toStyleString()}");
             palette.add(names[i], newColor, true);
         }
     }
