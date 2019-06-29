@@ -16,7 +16,7 @@ abstract class PassPhraseHandler {
                 final List<String> parts = existing.split(",");
                 if (!parts.contains(tapeName)) {
                     window.localStorage[key] = "$existing,$tapeName";
-                    popup(querySelector("#output"), null, "Passphrase '$tapeName' Unlocked!",0);
+                    popup(querySelector("#output"), null, "Passphrase '$tapeName' Unlocked! (todo list page)",0);
                 }
             } else {
                 window.localStorage[key] = tapeName;
