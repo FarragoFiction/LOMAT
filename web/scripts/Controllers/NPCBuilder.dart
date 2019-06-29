@@ -11,6 +11,7 @@ import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
 import '../NPCs/LOMATNPC.dart';
 import '../NPCs/NonGullLOMATNPC.dart';
+import '../NPCs/PassPhraseHandler.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
@@ -22,7 +23,7 @@ void main()  async{
     print("hello world");
     NPCBuilder builder = new NPCBuilder();
     builder.display(div);
-
+    //PassPhraseHandler.storeTape("fakeafd");
     //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
     //div.appendHtml(npc.toDataString());
     //div.append(npc.animation.element);

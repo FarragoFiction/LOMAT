@@ -235,7 +235,6 @@ class LOMATNPC {
 
 
 
-
     void emote(int emotion) {
        animation.frameRateInMS = emotion;
     }
