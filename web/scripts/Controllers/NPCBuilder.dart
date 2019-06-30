@@ -34,7 +34,7 @@ void main()  async{
 
 class NonGullBuilder extends NPCBuilder {
     ImageElement image = new ImageElement();
-    InputElement imageInput = new InputElement();
+    TextAreaElement imageInput = new TextAreaElement();
 
     @override
     void init() {
@@ -60,10 +60,22 @@ class NonGullBuilder extends NPCBuilder {
 
     @override
     Future<void> syncFormToNPC(){
-        super.syncFormToNPC();
-        print("npc is $npc and this is $this");
+        print("npc is ${npc.toJSON()} and this is $this");
         imageInput.value = (npc as NonGullLOMATNPC).avatar.src;
         image.src = (npc as NonGullLOMATNPC).avatar.src;
+        //do it last so you get the changes made
+        super.syncFormToNPC();
+    }
+
+
+    @override
+    void syncNPCToForm() {
+        (npc as NonGullLOMATNPC).avatar.src = imageInput.value;
+        image.src = imageInput.value;
+        print("new json is ${npc.toJSON()}");
+        //do it last so things happen first.
+        super.syncNPCToForm();
+
     }
 
 }
@@ -214,6 +226,7 @@ abstract class NPCBuilder {
             window.alert(" WARNING: this is a nongull and you're trying to use the gull builder. $this");
 
         };
+        print("loaded ${npc.toJSON()}");
         //npcView.remove();
         syncFormToNPC();
     }
