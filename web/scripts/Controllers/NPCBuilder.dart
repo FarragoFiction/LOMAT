@@ -22,10 +22,19 @@ NPCBuilder builder;
 void main()  async{
     print("hello world");
     //TODO have button to switch between them
-    NonGullBuilder builder = new NonGullBuilder();
-    //GullBuilder builder = new GullBuilder();
-
-    builder.display(div);
+    String formType= Uri.base.queryParameters['formType'];
+    if(formType == "gull") {
+        GullBuilder builder = new GullBuilder();
+        builder.display(div);
+    }else if(formType == "nongull") {
+        NonGullBuilder builder = new NonGullBuilder();
+        builder.display(div);
+    }else if(formType == "talkyItems") {
+        window.alert("TODO");
+    }else {
+        GullBuilder builder = new GullBuilder();
+        builder.display(div);
+    }
     //PassPhraseHandler.storeTape("fakeafd");
     //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
     //div.appendHtml(npc.toDataString());
