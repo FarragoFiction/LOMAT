@@ -31,7 +31,8 @@ void main()  async{
 
 class GullBuilder extends NPCBuilder {
     Map<String,InputElement> colorList = new Map<String,InputElement>();
-
+    InputElement hatElement = new InputElement();
+    InputElement bodyElement = new InputElement();
     @override
     void init() {
         npc = NPCFactory.test();
@@ -71,6 +72,8 @@ class GullBuilder extends NPCBuilder {
     @override
     Future<void> syncFormToNPC(){
         super.syncFormToNPC();
+        hatElement.value = "${npc.animation.hatNumber}";
+        bodyElement.value = "${npc.animation.bodyNumber}";
         syncAnimation();
         syncInputToGull();
 
@@ -140,8 +143,7 @@ class NPCBuilder {
     LOMATNPC npc;
     Element npcView =new DivElement();
     InputElement nameElement = new InputElement();
-    InputElement hatElement = new InputElement();
-    InputElement bodyElement = new InputElement();
+
 
     TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
     DivElement container = new DivElement()..id = "containerBuilder";
@@ -160,17 +162,14 @@ class NPCBuilder {
 
     Future<void> syncFormToNPC(){
         nameElement.value = npc.name;
-        hatElement.value = "${npc.animation.hatNumber}";
-        bodyElement.value = "${npc.animation.bodyNumber}";
-
         dataStringElement.value = npc.toDataString();
     }
 
 
     void loadNPC() {
         npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
-        if(!(npc is NonGullLOMATNPC)){
-            window.alert(" WARNING: this is a gull and you're trying to use the non gull builder.");
+        if(!(npc is NonGullLOMATNPC) && !(this is GullBuilder)){
+            window.alert(" WARNING: this is a gull and you're trying to use the non gull builder. $this");
         };
         //npcView.remove();
         syncFormToNPC();
