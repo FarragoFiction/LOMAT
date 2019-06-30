@@ -21,7 +21,7 @@ DivElement div = querySelector('#output');
 NPCBuilder builder;
 void main()  async{
     print("hello world");
-    NPCBuilder builder = new NPCBuilder();
+    GullBuilder builder = new GullBuilder();
     builder.display(div);
     //PassPhraseHandler.storeTape("fakeafd");
     //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
@@ -29,19 +29,11 @@ void main()  async{
     //div.append(npc.animation.element);
 }
 
-//later extend this to make a gull builder, which also has palette etc.
-class NPCBuilder {
-    LOMATNPC npc;
-    Element npcView =new DivElement();
-    InputElement nameElement = new InputElement();
-    InputElement hatElement = new InputElement();
-    InputElement bodyElement = new InputElement();
+class GullBuilder extends NPCBuilder {
     Map<String,InputElement> colorList = new Map<String,InputElement>();
 
-    TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
-    DivElement container = new DivElement()..id = "containerBuilder";
-
-    NPCBuilder() {
+    @override
+    void init() {
         npc = NPCFactory.test();
         initNPCView();
         initDataElement();
@@ -52,16 +44,14 @@ class NPCBuilder {
         syncFormToNPC();
     }
 
-    Future<void> syncFormToNPC(){
-        nameElement.value = npc.name;
-        hatElement.value = "${npc.animation.hatNumber}";
-        bodyElement.value = "${npc.animation.bodyNumber}";
-
-        dataStringElement.value = npc.toDataString();
-        syncAnimation();
-        syncInputToGull();
-
+    @override
+    void syncNPCToForm() {
+        super.syncNPCToForm();
+        syncNPCAnimationToForm();
+        print("I'm syncing the npc to the form, and its name should be ${npc.name}");
+        syncGullToColors();
     }
+
 
     void syncAnimation() async  {
         print("syncing animation for ${npc.name}");
@@ -78,18 +68,12 @@ class NPCBuilder {
         npcView.append(npc.animation.element);
     }
 
-    void loadNPC() {
-        npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
-        //npcView.remove();
-        syncFormToNPC();
-    }
+    @override
+    Future<void> syncFormToNPC(){
+        super.syncFormToNPC();
+        syncAnimation();
+        syncInputToGull();
 
-    void syncNPCToForm() {
-        npc.name = nameElement.value;
-        syncNPCAnimationToForm();
-        print("I'm syncing the npc to the form, and its name should be ${npc.name}");
-        dataStringElement.value = npc.toDataString();
-        syncGullToColors();
     }
 
     void syncNPCAnimationToForm() async{
@@ -101,29 +85,6 @@ class NPCBuilder {
         } on Exception {
             window.alert("Thats not a valid body or hat Number");
         }
-    }
-
-    void initNPCView() {
-        container.append(npcView);
-    }
-
-    void initDataElement() {
-        DivElement div = new DivElement()..classes.add("formSection");
-        LabelElement dataLabel = new LabelElement()..text = "DataString";
-        div.append(dataLabel);
-        div.append(dataStringElement);
-        dataStringElement.onChange.listen((Event e) => loadNPC());
-        container.append(div);
-    }
-
-    void initNameElement() {
-        DivElement div = new DivElement()..classes.add("formSection");;
-        LabelElement dataLabel = new LabelElement()..text = "Name:";
-        div.append(dataLabel);
-        div.append(nameElement);
-        nameElement.onInput.listen((Event e) => syncNPCToForm());
-
-        container.append(div);
     }
 
     void initPaletteElement() {
@@ -172,6 +133,77 @@ class NPCBuilder {
         container.append(div);
     }
 
+}
+
+//later extend this to make a gull builder, which also has palette etc.
+class NPCBuilder {
+    LOMATNPC npc;
+    Element npcView =new DivElement();
+    InputElement nameElement = new InputElement();
+    InputElement hatElement = new InputElement();
+    InputElement bodyElement = new InputElement();
+
+    TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
+    DivElement container = new DivElement()..id = "containerBuilder";
+
+    NPCBuilder() {
+        init();
+    }
+
+    void init() {
+      npc = NPCFactory.lilscumbag();
+      initNPCView();
+      initDataElement();
+      initNameElement();
+      syncFormToNPC();
+    }
+
+    Future<void> syncFormToNPC(){
+        nameElement.value = npc.name;
+        hatElement.value = "${npc.animation.hatNumber}";
+        bodyElement.value = "${npc.animation.bodyNumber}";
+
+        dataStringElement.value = npc.toDataString();
+    }
+
+
+    void loadNPC() {
+        npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
+        if(!(npc is NonGullLOMATNPC)){
+            window.alert(" WARNING: this is a gull and you're trying to use the non gull builder.");
+        };
+        //npcView.remove();
+        syncFormToNPC();
+    }
+
+    void syncNPCToForm() {
+        npc.name = nameElement.value;
+        print("I'm syncing the npc to the form, and its name should be ${npc.name}");
+        dataStringElement.value = npc.toDataString();
+    }
+
+    void initNPCView() {
+        container.append(npcView);
+    }
+
+    void initDataElement() {
+        DivElement div = new DivElement()..classes.add("formSection");
+        LabelElement dataLabel = new LabelElement()..text = "DataString";
+        div.append(dataLabel);
+        div.append(dataStringElement);
+        dataStringElement.onChange.listen((Event e) => loadNPC());
+        container.append(div);
+    }
+
+    void initNameElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "Name:";
+        div.append(dataLabel);
+        div.append(nameElement);
+        nameElement.onInput.listen((Event e) => syncNPCToForm());
+
+        container.append(div);
+    }
 
     void display(Element parent) {
         print("i'm trying to display, but what is happening?");
