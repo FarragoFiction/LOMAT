@@ -21,7 +21,10 @@ DivElement div = querySelector('#output');
 NPCBuilder builder;
 void main()  async{
     print("hello world");
-    GullBuilder builder = new GullBuilder();
+    //TODO have button to switch between them
+    NonGullBuilder builder = new NonGullBuilder();
+    //GullBuilder builder = new GullBuilder();
+
     builder.display(div);
     //PassPhraseHandler.storeTape("fakeafd");
     //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
@@ -29,10 +32,47 @@ void main()  async{
     //div.append(npc.animation.element);
 }
 
+class NonGullBuilder extends NPCBuilder {
+    ImageElement image = new ImageElement();
+    InputElement imageInput = new InputElement();
+
+    @override
+    void init() {
+        npc = NPCFactory.lilscumbag();
+        print("immediate serialize is ${npc.toJSON()}");
+
+        initNPCView();
+        initDataElement();
+        initNameElement();
+        initImageElement();
+        syncFormToNPC();
+    }
+
+    void initImageElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "Image:";
+        div.append(dataLabel);
+        div.append(image);
+        div.append(imageInput);
+        imageInput.onChange.listen((Event e) => syncNPCToForm());
+        container.append(div);
+    }
+
+    @override
+    Future<void> syncFormToNPC(){
+        super.syncFormToNPC();
+        print("npc is $npc and this is $this");
+        imageInput.value = (npc as NonGullLOMATNPC).avatar.src;
+        image.src = (npc as NonGullLOMATNPC).avatar.src;
+    }
+
+}
+
 class GullBuilder extends NPCBuilder {
     Map<String,InputElement> colorList = new Map<String,InputElement>();
     InputElement hatElement = new InputElement();
     InputElement bodyElement = new InputElement();
+
     @override
     void init() {
         npc = NPCFactory.test();
@@ -139,7 +179,7 @@ class GullBuilder extends NPCBuilder {
 }
 
 //later extend this to make a gull builder, which also has palette etc.
-class NPCBuilder {
+abstract class NPCBuilder {
     LOMATNPC npc;
     Element npcView =new DivElement();
     InputElement nameElement = new InputElement();
@@ -170,6 +210,9 @@ class NPCBuilder {
         npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
         if(!(npc is NonGullLOMATNPC) && !(this is GullBuilder)){
             window.alert(" WARNING: this is a gull and you're trying to use the non gull builder. $this");
+        }else if(npc is NonGullLOMATNPC && this is GullBuilder) {
+            window.alert(" WARNING: this is a nongull and you're trying to use the gull builder. $this");
+
         };
         //npcView.remove();
         syncFormToNPC();

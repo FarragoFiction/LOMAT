@@ -165,7 +165,6 @@ class LOMATNPC {
         diseases.forEach((Disease disease)=> diseasesJson.add(disease.toJSON()));
         ret ["diseases"] = diseasesJson;
         ret["talkyLevel"] = talkyLevel.toJSON();
-        //TODO serialize animation
         ret["animation"] = animation.toJSON();
         return ret;
     }

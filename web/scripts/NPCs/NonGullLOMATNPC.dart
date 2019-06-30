@@ -39,6 +39,7 @@ class NonGullLOMATNPC extends LOMATNPC {
       ret["hp"] = hp;
       ret["type"] = "???";
       ret["imgSrc"] = avatar.src;
+      ret["talkyLevel"] = talkyLevel.toJSON();
       return ret;
   }
 
