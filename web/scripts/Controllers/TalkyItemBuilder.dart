@@ -72,22 +72,53 @@ abstract class TalkyItemBuilder {
 }
 
 class TalkyQuestionBuilder extends TalkyItemBuilder {
-
-    TalkyQuestionBuilder():super() {
-        //item = new TalkyQuestion("Question Text");
+    TextAreaElement responseElement = new TextAreaElement()..cols = 100;
+    TalkyQuestion get question => item as TalkyQuestion;
+    TalkyQuestionBuilder() {
+        TalkyResponse tmp = new TalkyResponse(null,[],"Response Text",0, null);
+        item = new TalkyQuestion("Question Text", tmp,null);
+        init();
     }
   @override
   void init() {
     container.text = "TODO: tALKY QUESTIONS";
     initDataElement();
     initDisplayTextElement();
+    initResponseElement();
+
     syncFormToItem();
   }
+
+    void initResponseElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "Response JSON:";
+        div.append(dataLabel);
+        div.append(responseElement);
+        responseElement.onInput.listen((Event e) => syncItemToForm());
+
+        container.append(div);
+    }
+
+
+    void syncItemToForm() {
+        item.displayText = textElement.value;
+        question.response = TalkyResponse.loadFromJSON(null,jsonDecode(responseElement.value), null);
+        dataStringElement.value = jsonEncode(item.toJSON());
+    }
+
+
+    @override
+    void syncFormToItem(){
+        responseElement.value = jsonEncode(question.response.toJSON());
+        super.syncFormToItem();
+    }
 
 }
 
 class TalkyResponseBuilder extends TalkyItemBuilder {
     //todo array (list 5) of responses, associated emotion
+    TalkyResponse get response => item as TalkyResponse;
+
     TalkyResponseBuilder() {
         item = new TalkyResponse(null,[],"Response Text",0, null);
         init();
@@ -100,10 +131,13 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
         initDisplayTextElement();
         syncFormToItem();
     }
+
 }
 
 class TalkyRecruitBuilder extends TalkyItemBuilder {
     @override
+    TalkyRecruit get recruit => item as TalkyRecruit;
+
     void init() {
         container.text = "TODO: tALKY recruit whatevers";
         initDataElement();

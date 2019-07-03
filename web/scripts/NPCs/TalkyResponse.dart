@@ -8,7 +8,7 @@ import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
 import 'dart:html';
-//TODO have certain words redacted or voided or ciphered, especially [REDACTED] after [REDACTED]
+//TODO think about having full on alt text for responses possible after [REDACTED]
 class TalkyResponse extends TalkyItem {
     //for most it will just be the "go back" button, but
     //could have sub questions
@@ -24,7 +24,7 @@ class TalkyResponse extends TalkyItem {
 
       //talkyLevel.talkyItems.add(this);
   }
-  
+
   TalkyResponse.withLevel(LOMATNPC this.npc,String displayText,int this.associatedEmotion, TalkyLevel this.talkyLevel, TalkyLevel ownerLevel) : super(displayText,ownerLevel){
 
   }

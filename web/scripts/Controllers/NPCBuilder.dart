@@ -30,6 +30,8 @@ void main()  async{
     }else if(formType == "nongull") {
         NonGullBuilder builder = new NonGullBuilder();
         builder.display(div);
+    }else if(formType == "talkyLevel") {
+       window.alert("todo");
     }else if(formType == "talkyQuestion") {
         TalkyItemBuilder builder = new TalkyQuestionBuilder();
         builder.display(div);
