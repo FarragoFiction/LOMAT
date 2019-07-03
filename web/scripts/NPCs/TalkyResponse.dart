@@ -24,6 +24,10 @@ class TalkyResponse extends TalkyItem {
 
       //talkyLevel.talkyItems.add(this);
   }
+  
+  TalkyResponse.withLevel(LOMATNPC this.npc,String displayText,int this.associatedEmotion, TalkyLevel this.talkyLevel, TalkyLevel ownerLevel) : super(displayText,ownerLevel){
+
+  }
 
     @override
     Map<dynamic, dynamic> toJSON(){
