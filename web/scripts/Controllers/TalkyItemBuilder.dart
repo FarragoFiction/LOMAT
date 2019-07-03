@@ -1,6 +1,8 @@
 import 'dart:convert';
 import 'dart:html';
 
+import 'package:CommonLib/Utility.dart';
+
 import '../NPCs/TalkyItem.dart';
 import '../NPCs/TalkyQuestion.dart';
 import '../NPCs/TalkyRecruit.dart';
@@ -9,7 +11,7 @@ import '../NPCs/TalkyResponse.dart';
 abstract class TalkyItemBuilder {
     DivElement container = new DivElement()..id = "containerBuilder";
     TalkyItem item;
-    InputElement textElement = new InputElement();
+    TextAreaElement textElement = new TextAreaElement()..cols = 50..rows = 13;
 
 
     TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
@@ -31,7 +33,7 @@ abstract class TalkyItemBuilder {
 
     void loadItem() {
         //here's hoping a null gull is fine
-        item  = TalkyItem.loadFromJSON(null,jsonDecode(dataStringElement.value),null);
+        item  = TalkyItem.loadFromJSON(null,new JsonHandler(jsonDecode(dataStringElement.value)),null);
         if(!(item is TalkyQuestion) && !(this is TalkyQuestionBuilder)){
             window.alert(" WARNING: you are using the wrong builder, this is a question, and this builder is $this");
         }else if(!(item is TalkyResponse) && !(this is TalkyResponseBuilder)) {
@@ -102,7 +104,7 @@ class TalkyQuestionBuilder extends TalkyItemBuilder {
 
     void syncItemToForm() {
         item.displayText = textElement.value;
-        question.response = TalkyResponse.loadFromJSON(null,jsonDecode(responseElement.value), null);
+        question.response = TalkyResponse.loadFromJSON(null,new JsonHandler(jsonDecode(responseElement.value)), null);
         dataStringElement.value = jsonEncode(item.toJSON());
     }
 
