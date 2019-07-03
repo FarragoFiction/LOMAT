@@ -15,8 +15,8 @@ abstract class TalkyItemBuilder {
     TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
 
     TalkyItemBuilder() {
-        init();
     }
+
     void display(Element parent) {
         print("i'm trying to display $this, but what is happening?");
         parent.append(container);
@@ -44,6 +44,7 @@ abstract class TalkyItemBuilder {
     }
 
     void syncFormToItem(){
+        print("item is $item");
         textElement.value = item.displayText;
         dataStringElement.value = jsonEncode(item.toJSON());
     }
@@ -71,21 +72,33 @@ abstract class TalkyItemBuilder {
 }
 
 class TalkyQuestionBuilder extends TalkyItemBuilder {
+
+    TalkyQuestionBuilder():super() {
+        //item = new TalkyQuestion("Question Text");
+    }
   @override
   void init() {
     container.text = "TODO: tALKY QUESTIONS";
     initDataElement();
     initDisplayTextElement();
+    syncFormToItem();
   }
 
 }
 
 class TalkyResponseBuilder extends TalkyItemBuilder {
+    //todo array (list 5) of responses, associated emotion
+    TalkyResponseBuilder() {
+        item = new TalkyResponse(null,[],"Response Text",0, null);
+        init();
+    }
+
     @override
     void init() {
         container.text = "TODO: tALKY responses";
         initDataElement();
         initDisplayTextElement();
+        syncFormToItem();
     }
 }
 
@@ -95,5 +108,6 @@ class TalkyRecruitBuilder extends TalkyItemBuilder {
         container.text = "TODO: tALKY recruit whatevers";
         initDataElement();
         initDisplayTextElement();
+        syncFormToItem();
     }
 }
