@@ -34,11 +34,11 @@ abstract class TalkyItemBuilder {
     void loadItem() {
         //here's hoping a null gull is fine
         item  = TalkyItem.loadFromJSON(null,new JsonHandler(jsonDecode(dataStringElement.value)),null);
-        if(!(item is TalkyQuestion) && !(this is TalkyQuestionBuilder)){
+        if((item is TalkyQuestion) && !(this is TalkyQuestionBuilder)){
             window.alert(" WARNING: you are using the wrong builder, this is a question, and this builder is $this");
-        }else if(!(item is TalkyResponse) && !(this is TalkyResponseBuilder)) {
+        }else if((item is TalkyResponse) && !(this is TalkyResponseBuilder)) {
             window.alert(" WARNING: you are using the wrong builder, this is a question, and this builder is $this");
-        }else if(!(item is TalkyRecruit) && !(this is TalkyRecruitBuilder)) {
+        }else if((item is TalkyRecruit) && !(this is TalkyRecruitBuilder)) {
             window.alert(" WARNING: you are using the wrong builder, this is a question, and this builder is $this");
         };
         print("loaded ${item.toJSON()}");
