@@ -118,7 +118,6 @@ class LOMATNPC {
     }
 
     static LOMATNPC loadFromJSON(String jsonString) {
-        print("the uncompressed string is ${jsonString}");
         JsonHandler json = new JsonHandler(jsonDecode(jsonString));
         String type = json.getValue("type");
         LOMATNPC ret;

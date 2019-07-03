@@ -16,6 +16,7 @@ import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
 import '../Sections/TalkySection.dart';
+import 'TalkyItemBuilder.dart';
 
 DivElement div = querySelector('#output');
 NPCBuilder builder;
@@ -29,8 +30,15 @@ void main()  async{
     }else if(formType == "nongull") {
         NonGullBuilder builder = new NonGullBuilder();
         builder.display(div);
-    }else if(formType == "talkyItems") {
-        window.alert("TODO");
+    }else if(formType == "talkyQuestion") {
+        TalkyItemBuilder builder = new TalkyItemBuilder();
+        builder.display(div);
+    }else if(formType == "talkyResponse") {
+        TalkyItemBuilder builder = new TalkyItemBuilder();
+        builder.display(div);
+    }else if(formType == "talkyRecruit") {
+        TalkyItemBuilder builder = new TalkyItemBuilder();
+        builder.display(div);
     }else {
         GullBuilder builder = new GullBuilder();
         builder.display(div);
