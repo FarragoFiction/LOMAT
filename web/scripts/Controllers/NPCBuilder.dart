@@ -31,13 +31,13 @@ void main()  async{
         NonGullBuilder builder = new NonGullBuilder();
         builder.display(div);
     }else if(formType == "talkyQuestion") {
-        TalkyItemBuilder builder = new TalkyItemBuilder();
+        TalkyItemBuilder builder = new TalkyQuestionBuilder();
         builder.display(div);
     }else if(formType == "talkyResponse") {
-        TalkyItemBuilder builder = new TalkyItemBuilder();
+        TalkyItemBuilder builder = new TalkyResponseBuilder();
         builder.display(div);
     }else if(formType == "talkyRecruit") {
-        TalkyItemBuilder builder = new TalkyItemBuilder();
+        TalkyItemBuilder builder = new TalkyRecruitBuilder();
         builder.display(div);
     }else {
         GullBuilder builder = new GullBuilder();
