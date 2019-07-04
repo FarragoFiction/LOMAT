@@ -305,7 +305,6 @@ class LOMATNPC {
         List<TalkyItem> talkyItems2 = new List<TalkyItem>();
 
 
-        querySelector("#output").innerHtml = ("${testNPC.toDataString()}");
 
         return testNPC;
     }

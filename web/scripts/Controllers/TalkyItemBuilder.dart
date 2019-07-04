@@ -128,7 +128,7 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
 
     @override
     void init() {
-        container.text = "TODO: tALKY responses";
+        container.text = "TODO: tALKY responses (item, sub questions)";
         initDataElement();
         initDisplayTextElement();
         syncFormToItem();
