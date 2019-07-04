@@ -3,10 +3,11 @@ import 'dart:html';
 
 import 'package:CommonLib/Utility.dart';
 
-import '../NPCs/TalkyItem.dart';
-import '../NPCs/TalkyQuestion.dart';
-import '../NPCs/TalkyRecruit.dart';
-import '../NPCs/TalkyResponse.dart';
+import '../../NPCs/TalkyItem.dart';
+import '../../NPCs/TalkyQuestion.dart';
+import '../../NPCs/TalkyRecruit.dart';
+import '../../NPCs/TalkyResponse.dart';
+
 
 abstract class TalkyItemBuilder {
     DivElement container = new DivElement()..id = "containerBuilder";
