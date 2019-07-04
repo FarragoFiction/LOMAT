@@ -29,21 +29,29 @@ class TalkyLevelBuilder extends GenericBuilder {
   void spawnItem(TalkyItem item) {
       DivElement div = new DivElement()..classes.add("formSection");
       TextAreaElement inputElement = new TextAreaElement()..cols = 100;
+      if(item != null) inputElement.value = jsonEncode(item.toJSON());
       LabelElement dataLabel = new LabelElement()..text = "Talky Item JSON:";
       div.append(dataLabel);
       div.append(inputElement);
       inputElement.onInput.listen((Event e){
+          print("noticed input");
          if(inputElement.value.isEmpty && item != null) {
+             print("removed item");
              //remove existing (and self)
              level.talkyItems.remove(item);
              inputElement.remove();
+             syncFormToLevel();
          }else if(inputElement.value.isNotEmpty && item != null) {
              //overwrite my value to new value
+             print("changing item");
+             syncFormToLevel();
 
          }else if(inputElement.value.isNotEmpty && item == null) {
+             print("added item");
              //spawn a new talky item and add it to the level and make sure you set it here so i can get it next time
              item = TalkyItem.loadFromJSON(null, new JsonHandler(jsonDecode(inputElement.value)), null);
              level.talkyItems.add(item);
+             syncFormToLevel();
          }
 
 
