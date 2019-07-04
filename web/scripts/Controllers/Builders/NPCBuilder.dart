@@ -5,6 +5,7 @@ import 'package:CommonLib/Colours.dart';
 
 import '../../NPCs/LOMATNPC.dart';
 import '../../NPCs/NonGullLOMATNPC.dart';
+import 'GenericBuilder.dart';
 
 class NonGullBuilder extends NPCBuilder {
     ImageElement image = new ImageElement();
@@ -165,14 +166,10 @@ class GullBuilder extends NPCBuilder {
 }
 
 //later extend this to make a gull builder, which also has palette etc.
-abstract class NPCBuilder {
+abstract class NPCBuilder  extends GenericBuilder{
     LOMATNPC npc;
     Element npcView =new DivElement();
     InputElement nameElement = new InputElement();
-
-
-    TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
-    DivElement container = new DivElement()..id = "containerBuilder";
 
     NPCBuilder() {
         init();
@@ -192,7 +189,7 @@ abstract class NPCBuilder {
     }
 
 
-    void loadNPC() {
+    void load() {
         npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
         if(!(npc is NonGullLOMATNPC) && !(this is GullBuilder)){
             window.alert(" WARNING: this is a gull and you're trying to use the non gull builder. $this");
@@ -213,15 +210,6 @@ abstract class NPCBuilder {
 
     void initNPCView() {
         container.append(npcView);
-    }
-
-    void initDataElement() {
-        DivElement div = new DivElement()..classes.add("formSection");
-        LabelElement dataLabel = new LabelElement()..text = "DataString";
-        div.append(dataLabel);
-        div.append(dataStringElement);
-        dataStringElement.onChange.listen((Event e) => loadNPC());
-        container.append(div);
     }
 
     void initNameElement() {

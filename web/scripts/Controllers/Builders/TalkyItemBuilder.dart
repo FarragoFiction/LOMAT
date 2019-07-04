@@ -7,32 +7,23 @@ import '../../NPCs/TalkyItem.dart';
 import '../../NPCs/TalkyQuestion.dart';
 import '../../NPCs/TalkyRecruit.dart';
 import '../../NPCs/TalkyResponse.dart';
+import 'GenericBuilder.dart';
 
 
-abstract class TalkyItemBuilder {
-    DivElement container = new DivElement()..id = "containerBuilder";
+abstract class TalkyItemBuilder extends GenericBuilder {
     TalkyItem item;
     TextAreaElement textElement = new TextAreaElement()..cols = 50..rows = 13;
-
-
-    TextAreaElement dataStringElement = new TextAreaElement()..cols = 100;
 
     TalkyItemBuilder() {
     }
 
-    void display(Element parent) {
-        print("i'm trying to display $this, but what is happening?");
-        parent.append(container);
-    }
-
-    void init();
 
     void syncItemToForm() {
         item.displayText = textElement.value;
         dataStringElement.value = jsonEncode(item.toJSON());
     }
 
-    void loadItem() {
+    void load() {
         //here's hoping a null gull is fine
         item  = TalkyItem.loadFromJSON(null,new JsonHandler(jsonDecode(dataStringElement.value)),null);
         if((item is TalkyQuestion) && !(this is TalkyQuestionBuilder)){
@@ -53,14 +44,6 @@ abstract class TalkyItemBuilder {
     }
 
 
-    void initDataElement() {
-        DivElement div = new DivElement()..classes.add("formSection");
-        LabelElement dataLabel = new LabelElement()..text = "DataString";
-        div.append(dataLabel);
-        div.append(dataStringElement);
-        dataStringElement.onChange.listen((Event e) => loadItem());
-        container.append(div);
-    }
 
     void initDisplayTextElement() {
         DivElement div = new DivElement()..classes.add("formSection");;
