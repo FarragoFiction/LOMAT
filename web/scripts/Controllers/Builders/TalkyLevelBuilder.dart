@@ -12,12 +12,18 @@ class TalkyLevelBuilder extends GenericBuilder {
   TalkyLevel level;
   Element itemContainer = new DivElement();
 
+  TalkyLevelBuilder() {
+      level = new TalkyLevel(<TalkyItem>[],null);
+      init();
+  }
+
   @override
   void init() {
-      container.text = "TODO: tALKY QUESTIONS";
+      container.text = "TODO: tALKY Level";
       initDataElement();
       container.append(itemContainer);
       spawnItem(null);
+      syncFormToLevel();
   }
 
   void spawnItem(TalkyItem item) {
@@ -36,6 +42,8 @@ class TalkyLevelBuilder extends GenericBuilder {
 
          }else if(inputElement.value.isNotEmpty && item == null) {
              //spawn a new talky item and add it to the level and make sure you set it here so i can get it next time
+             item = TalkyItem.loadFromJSON(null, new JsonHandler(jsonDecode(inputElement.value)), null);
+             level.talkyItems.add(item);
          }
 
 
@@ -47,6 +55,10 @@ class TalkyLevelBuilder extends GenericBuilder {
 
   @override
   void syncFormToLevel(){
+      dataStringElement.value = jsonEncode(level.toJSON());
+      for(Element child in itemContainer.children) {
+          child.remove();
+      }
       for(TalkyItem ti in level.talkyItems) {
         spawnItem(ti);
       }

@@ -18,6 +18,7 @@ import 'dart:html';
 import '../Sections/TalkySection.dart';
 import 'Builders/NPCBuilder.dart';
 import 'Builders/TalkyItemBuilder.dart';
+import 'Builders/TalkyLevelBuilder.dart';
 
 DivElement div = querySelector('#output');
 void main()  async{
@@ -31,7 +32,8 @@ void main()  async{
         NonGullBuilder builder = new NonGullBuilder();
         builder.display(div);
     }else if(formType == "talkyLevel") {
-       window.alert("todo");
+       TalkyLevelBuilder builder  = new TalkyLevelBuilder();
+       builder.display(div);
     }else if(formType == "talkyQuestion") {
         TalkyItemBuilder builder = new TalkyQuestionBuilder();
         builder.display(div);
