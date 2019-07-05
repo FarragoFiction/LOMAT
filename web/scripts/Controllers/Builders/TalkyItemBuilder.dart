@@ -86,6 +86,7 @@ class TalkyQuestionBuilder extends TalkyItemBuilder {
     }
 
 
+    @override
     void syncItemToForm() {
         item.displayText = textElement.value;
         question.response = TalkyResponse.loadFromJSON(null,new JsonHandler(jsonDecode(responseElement.value)), null);
@@ -104,9 +105,11 @@ class TalkyQuestionBuilder extends TalkyItemBuilder {
 class TalkyResponseBuilder extends TalkyItemBuilder {
     //todo array (list 5) of responses, associated emotion
     TalkyResponse get response => item as TalkyResponse;
+    SelectElement emotionElement = new SelectElement();
 
     TalkyResponseBuilder() {
         item = new TalkyResponse(null,[],"Response Text",0, null);
+        response.associatedEmotion = TalkyItem.NEUTRAL;
         init();
     }
 
@@ -115,7 +118,45 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
         container.text = "TODO: tALKY responses (item, sub questions)";
         initDataElement();
         initDisplayTextElement();
+        initEmotionElement();
         syncFormToItem();
+    }
+
+    @override
+    void syncItemToForm() {
+        response.associatedEmotion = int.parse(emotionElement.options[emotionElement.selectedIndex].value);
+        super.syncItemToForm();
+    }
+
+    @override
+    void syncFormToItem() {
+        for(OptionElement option in emotionElement.options) {
+            if(int.parse(option.value) == response.associatedEmotion) {
+                option.selected = true;
+            }
+        }
+        super.syncItemToForm();
+    }
+
+    void initEmotionElement() {
+        Map<String, int> emotions = new Map<String, int>();
+        emotions["HAPPY"] = TalkyItem.HAPPY;
+        emotions["NEUTRAL"] = TalkyItem.NEUTRAL;
+        emotions["SAD"] = TalkyItem.SAD;
+        for(String emotion in emotions.keys) {
+            OptionElement option = new OptionElement();
+            option.value = "${emotions[emotion]}";
+            option.label = emotion;
+            if(emotions[emotion] == response.associatedEmotion) {
+                option.selected = true;
+            }
+            emotionElement.append(option);
+        }
+        LabelElement dataLabel = new LabelElement()..text = "Associated Emotion:";
+        container.append(dataLabel);
+        container.append(emotionElement);
+        emotionElement.onInput.listen((Event e) => syncItemToForm());
+
     }
 
 }

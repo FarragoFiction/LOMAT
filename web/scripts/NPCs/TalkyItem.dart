@@ -18,8 +18,8 @@ abstract class TalkyItem {
     Element container;
 
     static final int HAPPY = AnimationObject.FAST;
-    static final int SAD = AnimationObject.MIDDLE;
-    static final int NEUTRAL = AnimationObject.SLOW;
+    static final int SAD = AnimationObject.SLOW;
+    static final int NEUTRAL = AnimationObject.MIDDLE;
     //either this is empty or all are true.
     List<Trigger> _triggers = new List<Trigger>();
     DivElement div;
