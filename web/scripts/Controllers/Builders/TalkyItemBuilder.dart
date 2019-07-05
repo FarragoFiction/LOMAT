@@ -33,7 +33,7 @@ abstract class TalkyItemBuilder extends GenericBuilder {
         }else if((item is TalkyRecruit) && !(this is TalkyRecruitBuilder)) {
             window.alert(" WARNING: you are using the wrong builder, this is a question, and this builder is $this");
         };
-        print("loaded ${item.toJSON()}");
+        print("loaded ${item.toJSON()} and text is ${item.displayText}");
         syncFormToItem();
     }
 
@@ -103,7 +103,7 @@ class TalkyQuestionBuilder extends TalkyItemBuilder {
 }
 
 class TalkyResponseBuilder extends TalkyItemBuilder {
-    //todo array (list 5) of responses, associated emotion
+    //TODO ability to take in a single talky level
     TalkyResponse get response => item as TalkyResponse;
     SelectElement emotionElement = new SelectElement();
 
@@ -135,7 +135,7 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
                 option.selected = true;
             }
         }
-        super.syncItemToForm();
+        super.syncFormToItem();
     }
 
     void initEmotionElement() {
