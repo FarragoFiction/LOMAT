@@ -1,10 +1,13 @@
 
+import 'dart:convert';
 import 'dart:html';
 
 import 'package:CommonLib/Colours.dart';
+import 'package:CommonLib/Utility.dart';
 
 import '../../NPCs/LOMATNPC.dart';
 import '../../NPCs/NonGullLOMATNPC.dart';
+import '../../NPCs/TalkyLevel.dart';
 import 'GenericBuilder.dart';
 
 class NonGullBuilder extends NPCBuilder {
@@ -170,6 +173,7 @@ abstract class NPCBuilder  extends GenericBuilder{
     LOMATNPC npc;
     Element npcView =new DivElement();
     InputElement nameElement = new InputElement();
+    TextAreaElement talkyLevelElement = new TextAreaElement()..cols = 100;
 
     NPCBuilder() {
         init();
@@ -180,14 +184,27 @@ abstract class NPCBuilder  extends GenericBuilder{
         initNPCView();
         initDataElement();
         initNameElement();
+        initLevelElement();
         syncFormToNPC();
     }
 
     Future<void> syncFormToNPC(){
         nameElement.value = npc.name;
         dataStringElement.value = npc.toDataString();
+        talkyLevelElement.value = jsonEncode(npc.talkyLevel.toJSON());
+
     }
 
+
+    void initLevelElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "SubQuestions (level) JSON:";
+        div.append(dataLabel);
+        div.append(talkyLevelElement);
+        talkyLevelElement.onInput.listen((Event e) => syncNPCToForm());
+
+        container.append(div);
+    }
 
     void load() {
         npc  = LOMATNPC.loadFromDataString(dataStringElement.value);
@@ -204,6 +221,7 @@ abstract class NPCBuilder  extends GenericBuilder{
 
     void syncNPCToForm() {
         npc.name = nameElement.value;
+        npc.talkyLevel = TalkyLevel.loadFromJSON(null,new JsonHandler(jsonDecode(talkyLevelElement.value)));
         print("I'm syncing the npc to the form, and its name should be ${npc.name}");
         dataStringElement.value = npc.toDataString();
     }
