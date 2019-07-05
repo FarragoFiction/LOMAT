@@ -17,3 +17,8 @@
 .navbar{
     margin: 50px;
 }
+
+#instructions{
+    font-size: 18px;
+        color: #ccc4b5;
+}

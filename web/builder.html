@@ -22,10 +22,13 @@ TODO:
 
   <div id="output" style = "text-align:left;">
       <ul>
-          <li> ability to create up to 5 talky items (which themselves can be nested and need their own builder)
           <li>ability to test talking to a loaded npc</li>
           <li>gull events (i.e. ebony will have diff reasons to delay the party than skol) </li>
       </ul>
+
+      <div id = 'instructions'>
+          An NPC has a TALKY LEVEL which contains one or more QUESTIONS. Each question has a single RESPONSE, which itself can have one or more SUBQUESTIONS (which are part of a TALKY LEVEL). You'll want to make sure that  you build dialoge from the bottom up, starting with responses, giving them to questions, then giving those questions to a talky level and that talky level to an NPC.
+      </div>
 
 
   </div>

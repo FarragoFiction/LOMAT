@@ -4,6 +4,7 @@ import 'dart:html';
 import 'package:CommonLib/Utility.dart';
 
 import '../../NPCs/TalkyItem.dart';
+import '../../NPCs/TalkyLevel.dart';
 import '../../NPCs/TalkyQuestion.dart';
 import '../../NPCs/TalkyRecruit.dart';
 import '../../NPCs/TalkyResponse.dart';
@@ -106,6 +107,7 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
     //TODO ability to take in a single talky level
     TalkyResponse get response => item as TalkyResponse;
     SelectElement emotionElement = new SelectElement();
+    TextAreaElement talkyLevelElement = new TextAreaElement()..cols = 100;
 
     TalkyResponseBuilder() {
         item = new TalkyResponse(null,[],"Response Text",0, null);
@@ -119,12 +121,14 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
         initDataElement();
         initDisplayTextElement();
         initEmotionElement();
+        initLevelElement();
         syncFormToItem();
     }
 
     @override
     void syncItemToForm() {
         response.associatedEmotion = int.parse(emotionElement.options[emotionElement.selectedIndex].value);
+        response.talkyLevel = TalkyLevel.loadFromJSON(null,new JsonHandler(jsonDecode(talkyLevelElement.value)));
         super.syncItemToForm();
     }
 
@@ -135,7 +139,18 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
                 option.selected = true;
             }
         }
+        talkyLevelElement.value = jsonEncode(response.talkyLevel.toJSON());
         super.syncFormToItem();
+    }
+
+    void initLevelElement() {
+        DivElement div = new DivElement()..classes.add("formSection");;
+        LabelElement dataLabel = new LabelElement()..text = "SubQuestions (level) JSON:";
+        div.append(dataLabel);
+        div.append(talkyLevelElement);
+        talkyLevelElement.onInput.listen((Event e) => syncItemToForm());
+
+        container.append(div);
     }
 
     void initEmotionElement() {
