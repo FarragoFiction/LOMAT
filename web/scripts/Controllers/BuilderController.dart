@@ -20,6 +20,7 @@ import 'Builders/GenericBuilder.dart';
 import 'Builders/NPCBuilder.dart';
 import 'Builders/TalkyItemBuilder.dart';
 import 'Builders/TalkyLevelBuilder.dart';
+import 'Builders/TalkyViewerBuilder.dart';
 
 DivElement div = querySelector('#output');
 Map<String, GenericBuilder> navigation = new Map<String, GenericBuilder>();
@@ -31,6 +32,8 @@ void main()  async{
     navigation["talkyQuestion"] = new TalkyQuestionBuilder();
     navigation["talkyResponse"] = new TalkyResponseBuilder();
     navigation["talkyRecruit"] = new TalkyRecruitBuilder();
+    navigation["talkyViewer"] = new TalkyViewerBuilder(); //todo
+
     handleNavigation();
 
     print("hello world");

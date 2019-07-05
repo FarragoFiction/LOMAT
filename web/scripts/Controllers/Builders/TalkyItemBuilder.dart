@@ -68,7 +68,7 @@ class TalkyQuestionBuilder extends TalkyItemBuilder {
     }
   @override
   void init() {
-    container.text = "TODO: tALKY QUESTIONS";
+      container.setInnerHtml("<h1>Talky Question Builder</h1>");
     initDataElement();
     initDisplayTextElement();
     initResponseElement();
@@ -117,7 +117,7 @@ class TalkyResponseBuilder extends TalkyItemBuilder {
 
     @override
     void init() {
-        container.text = "TODO: tALKY responses (item, sub questions)";
+        container.setInnerHtml("<h1>Talky Response Builder</h1>");
         initDataElement();
         initDisplayTextElement();
         initEmotionElement();
@@ -181,7 +181,7 @@ class TalkyRecruitBuilder extends TalkyItemBuilder {
     TalkyRecruit get recruit => item as TalkyRecruit;
 
     void init() {
-        container.text = "TODO: tALKY recruit whatevers";
+        container.setInnerHtml("<h1>Talky Recruit Builder</h1>");
         initDataElement();
         initDisplayTextElement();
         syncFormToItem();

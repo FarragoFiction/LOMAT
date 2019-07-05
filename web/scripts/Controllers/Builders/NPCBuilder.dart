@@ -18,11 +18,13 @@ class NonGullBuilder extends NPCBuilder {
     void init() {
         npc = NPCFactory.lilscumbag();
         print("immediate serialize is ${npc.toJSON()}");
+        container.setInnerHtml("<h1>Talky NonGull Builder</h1>");
 
         initNPCView();
         initDataElement();
         initNameElement();
         initImageElement();
+        initLevelElement();
         syncFormToNPC();
     }
 
@@ -66,12 +68,15 @@ class GullBuilder extends NPCBuilder {
     @override
     void init() {
         npc = NPCFactory.test();
+        container.setInnerHtml("<h1>Talky Gull Builder</h1>");
+
         initNPCView();
         initDataElement();
         initNameElement();
         initHatElement();
         initBodyElement();
         initPaletteElement();
+        initLevelElement();
         syncFormToNPC();
     }
 

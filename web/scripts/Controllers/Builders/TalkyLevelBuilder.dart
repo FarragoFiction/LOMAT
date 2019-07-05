@@ -19,7 +19,7 @@ class TalkyLevelBuilder extends GenericBuilder {
 
   @override
   void init() {
-      container.text = "TODO: tALKY Level";
+      container.setInnerHtml("<h1>Talky Level Builder</h1>");
       initDataElement();
       container.append(itemContainer);
       spawnItem(null);
