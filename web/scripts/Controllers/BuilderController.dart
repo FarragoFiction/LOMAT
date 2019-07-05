@@ -16,39 +16,40 @@ import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
 import '../Sections/TalkySection.dart';
+import 'Builders/GenericBuilder.dart';
 import 'Builders/NPCBuilder.dart';
 import 'Builders/TalkyItemBuilder.dart';
 import 'Builders/TalkyLevelBuilder.dart';
 
 DivElement div = querySelector('#output');
+Map<String, GenericBuilder> navigation = new Map<String, GenericBuilder>();
 void main()  async{
+
+    navigation["gull"] = new GullBuilder();
+    navigation["nongull"] = new NonGullBuilder();
+    navigation["talkyLevel"] = new TalkyLevelBuilder();
+    navigation["talkyQuestion"] = new TalkyQuestionBuilder();
+    navigation["talkyResponse"] = new TalkyResponseBuilder();
+    navigation["talkyRecruit"] = new TalkyRecruitBuilder();
+    handleNavigation();
+
     print("hello world");
     //TODO have button to switch between them
     String formType= Uri.base.queryParameters['formType'];
-    if(formType == "gull") {
-        GullBuilder builder = new GullBuilder();
-        builder.display(div);
-    }else if(formType == "nongull") {
-        NonGullBuilder builder = new NonGullBuilder();
-        builder.display(div);
-    }else if(formType == "talkyLevel") {
-       TalkyLevelBuilder builder  = new TalkyLevelBuilder();
-       builder.display(div);
-    }else if(formType == "talkyQuestion") {
-        TalkyItemBuilder builder = new TalkyQuestionBuilder();
-        builder.display(div);
-    }else if(formType == "talkyResponse") {
-        TalkyItemBuilder builder = new TalkyResponseBuilder();
-        builder.display(div);
-    }else if(formType == "talkyRecruit") {
-        TalkyItemBuilder builder = new TalkyRecruitBuilder();
-        builder.display(div);
-    }else {
-        GullBuilder builder = new GullBuilder();
-        builder.display(div);
-    }
+    GenericBuilder builder = navigation[formType];
+    if(builder == null) builder = navigation["gull"];
+    builder.display(div);
     //PassPhraseHandler.storeTape("fakeafd");
     //LOMATNPC npc = await LOMATNPC.generateRandomNPC(13);
     //div.appendHtml(npc.toDataString());
     //div.append(npc.animation.element);
+}
+
+void handleNavigation() {
+    DivElement nav = new DivElement()..classes.add("navbar");
+    div.append(nav);
+    for(String linkText in navigation.keys) {
+        AnchorElement a = new AnchorElement(href: "builder.html?formType=$linkText")..text = "$linkText"..classes.add("navitem");
+        nav.append(a);
+    }
 }
