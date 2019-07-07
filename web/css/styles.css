@@ -271,8 +271,7 @@ html, body {
     background-color: #001111;
     padding: 5px;
     margin: 10px;
-    margin-left: auto;
-    margin-right: auto;
+    display: inline-block;
     text-align: center;
     vertical-align: middle;
     font-family: 'cabin', sans-serif;

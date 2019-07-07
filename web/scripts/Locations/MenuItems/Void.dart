@@ -49,9 +49,22 @@ class VoidTravel extends MenuItem {
     });
   }
 
+  void scrambleVoid(DivElement me) async {
+    me.text = "As you wish, Guide.";
+    SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+    await ( holder.location as Town).scrambleRoads(); //if i do this EVERY time i end up with more towns than i have
+    await Future.delayed(Duration(seconds: 3));
+    me.remove();
+    doVoidTravel(); //pop back up
+  }
+
+
   void voidTown(DivElement me, Town town) async {
+    me.text = "As you wish, Guide.";
+    SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
     Town.cachedTowns.remove(town);
-    await ( holder.location as Town).scrambleRoads();
+    //await ( holder.location as Town).scrambleRoads(); //if i do this EVERY time i end up with more towns than i have
+    await Future.delayed(Duration(seconds: 3));
     me.remove();
     doVoidTravel(); //pop back up
   }
@@ -70,28 +83,52 @@ class VoidTravel extends MenuItem {
     UListElement list = new UListElement()..classes.add("voidList");
     instructions.append(list);
     for(Town town in Town.cachedTowns) {
-      if(town != holder.location) {
-        String neighbor = "";
-        if ((holder.location as Town).neighbors.contains(town)) {
-          neighbor = " (nearby)";
-        }
-        LIElement li = new LIElement()
-          ..text = "${town.name}${neighbor}";
-        list.append(li);
-        
-        Element button = new DivElement();
-        li.append(button);
-        //print("I appended it to the menu holder with children ${holder.container.children.length}");
-        button.classes.add("goDark");
-        button.text = "Go Dark";
-        button.onClick.listen((Event e){
-          SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
-          voidTown(me,town);
-        });
-      }
+      townItem(town, list, me);
     }
+
+
     me.append(instructions);
     return instructions;
+  }
+
+  void scrambleItem(UListElement list, DivElement me) {
+      LIElement li = new LIElement();
+      list.append(li);
+
+      Element button = new DivElement();
+      li.append(button);
+      //print("I appended it to the menu holder with children ${holder.container.children.length}");
+      button.classes.add("goDark");
+      button.text = "Scramble Neighbors";
+      button.onClick.listen((Event e){
+        scrambleVoid(me);
+      });
+
+
+  }
+
+  void townItem(Town town, UListElement list, DivElement me) {
+    if(town != holder.location) {
+      String neighbor = "";
+      if ((holder.location as Town).neighbors.contains(town)) {
+        neighbor = " (nearby)";
+      }
+      LIElement li = new LIElement();
+      list.append(li);
+
+      Element button = new DivElement();
+      li.append(button);
+      //print("I appended it to the menu holder with children ${holder.container.children.length}");
+      button.classes.add("goDark");
+      button.text = "Go Dark";
+      button.onClick.listen((Event e){
+        voidTown(me,town);
+      });
+
+      SpanElement span = new SpanElement()..text = "${town.name}${neighbor}";
+      li.append(span);
+
+    }
   }
 
 
