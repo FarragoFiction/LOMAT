@@ -256,6 +256,40 @@ html, body {
     z-index: 10;
 }
 
+.voidList{
+    text-align: left;
+    border-radius: 13px;
+    border: 3px solid #00071af;
+    box-shadow: 0px 3px 13px #333333;
+    padding-top: 10px;
+    padding-bottom: 10px;
+
+}
+
+
+
+.voidButton{
+    border: 3px solid #00071af;
+    background-color: #001111;
+    padding: 5px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'cabin', sans-serif;
+    box-shadow: 0px 3px 13px #333333;
+    font-size: 28px;
+    color: #ccc4b5;
+    border-radius: 13px;
+    z-index: 13;
+}
+
+.voidButton:hover{
+    box-shadow: 0px 3px 13px #888888;
+
+}
+
 .menuItem{
     border: 3px solid #00071af;
     background-color: #00164f;

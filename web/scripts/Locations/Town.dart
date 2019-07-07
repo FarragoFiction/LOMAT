@@ -69,6 +69,16 @@ class Town extends PhysicalLocation {
       cachedTowns.add(this);
   }
 
+  List<Town> get neighbors {
+    final List<Town> ret = new List<Town>();
+    //couldn't get map to work how i wanted, this is easier fo rnow
+      for(Road r in roads) {
+        ret.add(r.destinationTown);
+      }
+      return ret;
+
+  }
+
   //bye bye little butterfly
   void npcLeaves(LOMATNPC npc, bool recruited) {
         npcs.remove(npc);
@@ -129,6 +139,12 @@ class Town extends PhysicalLocation {
       tmp.forEach((LOMATNPC npc) => npcLeaves(npc, false));
       SoundControl.instance.stopMusic();
       if(travelContainer != null) travelContainer.remove();
+  }
+
+  Future<Null> scrambleRoads() async {
+        roads.clear();
+        roads = await Road.spawnRandomRoadsForTown(this);
+
   }
 
   @override

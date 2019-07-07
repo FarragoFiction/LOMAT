@@ -1,3 +1,4 @@
+import '../../SoundControl.dart';
 import '../Town.dart';
 import 'MenuHolder.dart';
 import 'MenuItem.dart';
@@ -20,7 +21,8 @@ class VoidTravel extends MenuItem {
   }
 
   void doVoidTravel() {
-    window.alert("Hello? Yes. Well there's ${Town.cachedTowns.length} towns here. We need to consign some of them to the void. ${Town.cachedTowns.join(",")}");
+    print("TODO: when i integrate with pl's audio lib, instead of NO music, have it go super slow instead to be creepy");
+    SoundControl.instance.stopMusic();
     DivElement me = new DivElement()..classes.add("voidPopup");
     querySelector("body").append(me);
     ImageElement image = new ImageElement(src: "images/yeflask.png")..style.opacity="0.3";
@@ -28,8 +30,47 @@ class VoidTravel extends MenuItem {
     image.onClick.listen((Event e) {
       window.alert("You cannot get ye flask!");
     });
-    DivElement instructions = new DivElement()..text = "You find yourself in the void. Obvious exits are none. You realize that you can unhook the tenusous connections between yourself and various locations here."..id='instructions';
+    DivElement instructions = townList(me);
+
+
+    goDennis(instructions, me);
+  }
+
+  void goDennis(DivElement instructions, DivElement me) {
+    Element button = new DivElement();
+    instructions.append(button);
+    //print("I appended it to the menu holder with children ${holder.container.children.length}");
+    button.classes.add("voidButton");
+    button.text = "Shit, Go Back";
+    button.onClick.listen((Event e){
+      SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+      me.remove();
+    });
+  }
+
+  /*
+  TODO:
+  display current funds on screen. Display cost to void a town.  (seed from name)
+  any town you can afford to void has a button. click button to remove it from cache. (re-rolls neighbors)
+  rerenders town list when you do it.
+  */
+  DivElement townList(DivElement me) {
+    DivElement instructions = new DivElement()..text = "You find yourself in the Void. Obvious exits are none. You realize that you can unhook the tenuous connections between yourself and various locations here."..id='instructions';
+    UListElement list = new UListElement()..classes.add("voidList");
+    instructions.append(list);
+    for(Town town in Town.cachedTowns) {
+      if(town != holder.location) {
+        String neighbor = "";
+        if ((holder.location as Town).neighbors.contains(town)) {
+          neighbor = " (nearby)";
+        }
+        LIElement li = new LIElement()
+          ..text = "${town.name}${neighbor}";
+        list.append(li);
+      }
+    }
     me.append(instructions);
+    return instructions;
   }
 
 
