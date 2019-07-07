@@ -170,7 +170,7 @@ class Road {
         container.append(div);
         String before = "";
         if(destinationTown.firstTime == true) before = "[NEW!!!]";
-        div.setInnerHtml("> $destinationTown (Estimated Cost: ${travelTimeInMS} ms,  ${Game.instance.travelAmount} ticks, ${Game.instance.costPerTravelTick} per tick,  ${((travelTimeInMS/Game.instance.travelAmount)* Game.instance.costPerTravelTick).round()} funds) $before");
+        div.setInnerHtml("> $destinationTown (Estimated Cost: ${((travelTimeInMS/Game.instance.travelAmount)* Game.instance.costPerTravelTick).round()} funds for ${Game.instance.partyMembers.length} gulls) $before");
 
         div.onClick.listen((Event t) {
             container.remove();
