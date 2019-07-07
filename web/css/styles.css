@@ -219,6 +219,27 @@ html, body {
     z-index: 10;
 }
 
+#instructions{
+    width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.voidPopup{
+    background-color: #000000;
+    padding: 25px;
+    text-align: center;
+    font-size: 18px;
+    font-family: 'cabin', sans-serif;
+    position: absolute;
+    top: 0%;
+    width:100%;
+    height:100%;
+    color: #ccc4b5;
+    left: 0%;
+    z-index: 10;
+}
+
 .talkyScreen{
     border: 3px solid #00164f;
     background-color: #033476;

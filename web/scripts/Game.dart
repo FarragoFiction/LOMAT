@@ -23,11 +23,7 @@ import 'dart:html';
 import 'package:CommonLib/Random.dart';
 /*
 TODO: have a screen to view current party members and talk to them.
-TODO: have new talky item that is "recruit" (only if not currently in party)
-TODO: have pool of npcs
-TODO: if party member is currently in target town, get funds, they leave party and rejoin pool
 TODO: npcs bring events with them
-TODO: npc builder
  */
 
 class Game

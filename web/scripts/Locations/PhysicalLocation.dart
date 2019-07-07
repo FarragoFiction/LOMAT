@@ -62,7 +62,4 @@ abstract class PhysicalLocation {
         window.alert("ERROR: This Screen Does Not Support Travel");
     }
 
-    void doVoidTravel() {
-        window.alert("ERROR: This Screen Does Not Support Void Travel");
-    }
 }
