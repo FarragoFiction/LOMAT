@@ -64,8 +64,7 @@ class VoidTravel extends MenuItem {
     SoundControl.instance.playSoundEffect("Dead_Jingle_light");
     await Future.delayed(Duration(seconds: 1));
     me.remove();
-    await Game.instance.startOver(); //if i do this EVERY time i end up with more towns than i have
-    doVoidTravel(); //pop back up
+    await Game.instance.startOver(holder.location); //if i do this EVERY time i end up with more towns than i have
   }
 
 

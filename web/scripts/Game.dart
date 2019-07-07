@@ -62,13 +62,14 @@ class Game
     }
 
 
-    Future startOver() async {
+    Future startOver(PhysicalLocation doop) async {
         Game.instance.removeFunds(Game.instance.funds);
+        Game.instance.ejectAll();
         Town.cachedTowns.clear();
         Game.instance.addFunds(113); //start over.
         await Game.instance.setStartingTown();
         await Game.instance.initializeTowns();
-        currentLocation.teardown();
+        doop.teardown();
         Town town = new Random().pickFrom(Town.cachedTowns);
         town.displayOnScreen(container);
     }
@@ -171,6 +172,13 @@ class Game
     void eject(LOMATNPC npc) {
         print("removing npc $npc");
         partyMembers.remove(npc);
+        partySection.update();
+    }
+
+    void ejectAll() {
+        for(LOMATNPC npc in partyMembers) {
+            partyMembers.remove(npc);
+        }
         partySection.update();
     }
 
