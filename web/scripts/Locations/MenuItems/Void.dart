@@ -50,7 +50,7 @@ class VoidTravel extends MenuItem {
   }
 
   void scrambleVoid(DivElement me, int cost) async {
-    me.text = "As you wish, Guide.";
+    me.text = "As you wish, Guide. The towns at the edge of your current locations light will be altered.";
     SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
     Game.instance.removeFunds(cost);
     await ( holder.location as Town).scrambleRoads(); //if i do this EVERY time i end up with more towns than i have
@@ -60,7 +60,7 @@ class VoidTravel extends MenuItem {
   }
 
   void voidSelf(me) async {
-    me.text = "As you wish, Guide.";
+    me.text = "As you wish, Guide. You will be starting over from now, at your current location.";
     SoundControl.instance.playSoundEffect("Dead_Jingle_light");
     Game.instance.removeFunds(Game.instance.funds);
     Town.cachedTowns.clear();
@@ -68,11 +68,13 @@ class VoidTravel extends MenuItem {
     await Game.instance.initializeTowns();
     await Future.delayed(Duration(seconds: 2));
     me.remove();
+    Game.instance.addFunds(113); //start over.
+
     doVoidTravel(); //pop back up
   }
 
   void voidTown(DivElement me, Town town, int cost) async {
-    me.text = "As you wish, Guide.";
+    me.text = "As you wish, Guide. ${town.name} will be in the spotlight no more.";
     SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
     Game.instance.removeFunds(cost);
     Town.cachedTowns.remove(town);
