@@ -8,6 +8,8 @@ import 'Travel.dart';
 import 'GuideBotButton.dart';
 import 'dart:html';
 
+import 'Void.dart';
+
 class MenuHolder {
     List<MenuItem> _items = new List<MenuItem>();
     Element container;
@@ -41,6 +43,10 @@ class MenuHolder {
 
     void addHunt() {
         _items.add(new Hunt(this));
+    }
+
+    void addVoidTravel() {
+        _items.add(new VoidTravel(this));
     }
 
     void addBack() {

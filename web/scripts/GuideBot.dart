@@ -41,10 +41,12 @@ class GuideBot {
         }
         if(running) {
             stop();
-            button.text = "Bot";
+            button.text = "!Bot";
+            button.style.boxShadow =  "0px 3px 13px #888888";
         }else {
             run();
-            button.text = "!Bot";
+            button.text = "Bot";
+            button.style.boxShadow =  null;
         }
     }
 

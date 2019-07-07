@@ -98,15 +98,6 @@ class Trail extends PhysicalLocation {
       super.teardown();
       road.tearDown();
   }
-    void doHunt() {
-        teardown();
-        //new screen
-        //TODO save how much travel progress we've made
-        //Or....don't? void is weird man.
-        new HuntingGrounds(this)..displayOnScreen(parent);
-
-
-    }
 
     @override
     void displayOnScreen(Element div) {
@@ -118,9 +109,7 @@ class Trail extends PhysicalLocation {
 
 
     void createMenuItems() {
-        if(prevLocation != null) {
-            menu.addHunt();
-        }
+        //no more hunting while traveling
     }
   @override
   String get bg => road.bg;

@@ -126,13 +126,21 @@ class GullBuilder extends NPCBuilder {
     }
 
     void initPaletteElement() {
+        TableElement me = new TableElement()..classes.add("colorBox");
+        container.append(me);
         for(String s in npc.animation.palette.names) {
+            TableRowElement tr = new TableRowElement();
+            me.append(tr);
+            TableCellElement td = new TableCellElement();
             LabelElement label = new LabelElement()..text = s;
+            td.append(label);
+            TableCellElement td2 = new TableCellElement();
+            tr.append(td2);
+            tr.append(td);
             InputElement e = new InputElement()..type = "color";
+            td2.append(e);
             e.value = npc.animation.palette[s].toStyleString();
             colorList[s]  = e;
-            container.append(label);
-            container.append(e);
             e.onChange.listen((Event e) => syncNPCToForm());
 
         }

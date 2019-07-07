@@ -9,11 +9,15 @@ class TalkyViewerBuilder extends GenericBuilder {
     DivElement talkyView = new DivElement();
     TalkySection talkySection;
 
+    TalkyViewerBuilder() {
+        init();
+    }
+
   @override
   void init() {
       container.setInnerHtml("<h1>Talky Level Builder</h1>");
       container.append(talkyView);
-
+      initDataElement();
   }
 
   @override

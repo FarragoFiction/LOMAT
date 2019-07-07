@@ -267,6 +267,7 @@ class Town extends PhysicalLocation {
       menu.addTalk();
      // menu.addTrade();
       menu.addTravel();
+      menu.addVoidTravel();
       menu.addBotButton();
       menu.addHunt();
   }
