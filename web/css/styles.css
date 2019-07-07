@@ -299,6 +299,16 @@ html, body {
     z-index: 13;
 }
 
+.disabledVoid{
+    box-shadow: 0px 3px 13px #111111;
+    color: #333333;
+}
+
+.disabledVoid:hover{
+    box-shadow: 0px 3px 13px #000000;
+    color: #333333;
+}
+
 .voidButton:hover{
     box-shadow: 0px 3px 13px #888888;
 

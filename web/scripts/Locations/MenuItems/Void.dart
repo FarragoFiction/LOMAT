@@ -49,19 +49,32 @@ class VoidTravel extends MenuItem {
     });
   }
 
-  void scrambleVoid(DivElement me) async {
+  void scrambleVoid(DivElement me, int cost) async {
     me.text = "As you wish, Guide.";
-    SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+    SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
+    Game.instance.removeFunds(cost);
     await ( holder.location as Town).scrambleRoads(); //if i do this EVERY time i end up with more towns than i have
     await Future.delayed(Duration(seconds: 2));
     me.remove();
     doVoidTravel(); //pop back up
   }
 
-
-  void voidTown(DivElement me, Town town) async {
+  void voidSelf(me) async {
     me.text = "As you wish, Guide.";
-    SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+    SoundControl.instance.playSoundEffect("Dead_Jingle_light");
+    Game.instance.removeFunds(Game.instance.funds);
+    Town.cachedTowns.clear();
+    await Game.instance.setStartingTown();
+    await Game.instance.initializeTowns();
+    await Future.delayed(Duration(seconds: 2));
+    me.remove();
+    doVoidTravel(); //pop back up
+  }
+
+  void voidTown(DivElement me, Town town, int cost) async {
+    me.text = "As you wish, Guide.";
+    SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
+    Game.instance.removeFunds(cost);
     Town.cachedTowns.remove(town);
     await Future.delayed(Duration(seconds: 2));
     me.remove();
@@ -81,6 +94,7 @@ class VoidTravel extends MenuItem {
     instructions.append(money);
     UListElement list = new UListElement()..classes.add("voidList");
     instructions.append(list);
+    voidSelfItem(list,me);
     scrambleItem(list,me);
     for(Town town in Town.cachedTowns) {
       townItem(town, list, me);
@@ -100,11 +114,31 @@ class VoidTravel extends MenuItem {
       li.append(button);
       //print("I appended it to the menu holder with children ${holder.container.children.length}");
       button.classes.add("goDark");
-      button.text = "Scramble Neighbors";
-      button.onClick.listen((Event e){
-        scrambleVoid(me);
-      });
+      int cost = 13;
+      if(cost < Game.instance.funds) {
+        button.text = "Scromble Neighbors (13 funds)";
+        button.onClick.listen((Event e){
+          scrambleVoid(me,cost);
+        });
+      }else {
+        button.text = "Insufficent Funds to Scromble";
+        button.classes.add("disabledVoid");
+      }
 
+  }
+
+  void voidSelfItem(UListElement list, DivElement me) {
+    LIElement li = new LIElement();
+    list.append(li);
+
+    Element button = new DivElement();
+    li.append(button);
+    //print("I appended it to the menu holder with children ${holder.container.children.length}");
+    button.classes.add("goDark");
+      button.text = "Void Self (All ${Game.instance.funds} funds)";
+      button.onClick.listen((Event e){
+        voidSelf(me);
+      });
 
   }
 
@@ -121,10 +155,16 @@ class VoidTravel extends MenuItem {
       li.append(button);
       //print("I appended it to the menu holder with children ${holder.container.children.length}");
       button.classes.add("goDark");
-      button.text = "Go Dark";
-      button.onClick.listen((Event e){
-        voidTown(me,town);
-      });
+      int cost = 13*town.rand.nextIntRange(1,3);
+      if(cost < Game.instance.funds) {
+        button.text = "Go Dark ($cost funds)";
+        button.onClick.listen((Event e) {
+          voidTown(me, town, cost);
+        });
+      }else {
+        button.text = "Insufficent Funds";
+        button.classes.add("disabledVoid");
+      }
 
       SpanElement span = new SpanElement()..text = "${town.name}${neighbor}";
       li.append(span);
