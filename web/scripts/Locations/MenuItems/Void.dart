@@ -1,3 +1,4 @@
+import '../../Game.dart';
 import '../../SoundControl.dart';
 import '../Town.dart';
 import 'MenuHolder.dart';
@@ -48,6 +49,13 @@ class VoidTravel extends MenuItem {
     });
   }
 
+  void voidTown(DivElement me, Town town) async {
+    Town.cachedTowns.remove(town);
+    await ( holder.location as Town).scrambleRoads();
+    me.remove();
+    doVoidTravel(); //pop back up
+  }
+
   /*
   TODO:
   display current funds on screen. Display cost to void a town.  (seed from name)
@@ -56,6 +64,9 @@ class VoidTravel extends MenuItem {
   */
   DivElement townList(DivElement me) {
     DivElement instructions = new DivElement()..text = "You find yourself in the Void. Obvious exits are none. You realize that you can unhook the tenuous connections between yourself and various locations here."..id='instructions';
+
+    DivElement money = new DivElement()..text = "You have ${Game.instance.funds} funds to spend here.";
+    instructions.append(money);
     UListElement list = new UListElement()..classes.add("voidList");
     instructions.append(list);
     for(Town town in Town.cachedTowns) {
@@ -67,6 +78,16 @@ class VoidTravel extends MenuItem {
         LIElement li = new LIElement()
           ..text = "${town.name}${neighbor}";
         list.append(li);
+        
+        Element button = new DivElement();
+        li.append(button);
+        //print("I appended it to the menu holder with children ${holder.container.children.length}");
+        button.classes.add("goDark");
+        button.text = "Go Dark";
+        button.onClick.listen((Event e){
+          SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+          voidTown(me,town);
+        });
       }
     }
     me.append(instructions);

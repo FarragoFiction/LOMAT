@@ -266,7 +266,22 @@ html, body {
 
 }
 
-
+.goDark{
+    border: 3px solid #00071af;
+    background-color: #001111;
+    padding: 5px;
+    margin: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    vertical-align: middle;
+    font-family: 'cabin', sans-serif;
+    box-shadow: 0px 3px 13px #333333;
+    font-size: 18px;
+    color: #ccc4b5;
+    border-radius: 13px;
+    z-index: 13;
+}
 
 .voidButton{
     border: 3px solid #00071af;
