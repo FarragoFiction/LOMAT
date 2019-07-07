@@ -75,7 +75,7 @@ class VoidTravel extends MenuItem {
   rerenders town list when you do it.
   */
   DivElement townList(DivElement me) {
-    DivElement instructions = new DivElement()..text = "You find yourself in the Void. Obvious exits are none. You realize that you can unhook the tenuous connections between yourself and various locations here."..id='instructions';
+    DivElement instructions = new DivElement()..text = "You find yourself in the Void. Obvious exits are none. You realize that you can unhook the tenuous connections between yourself and the ${Town.cachedTowns.length} locations that exist in the spotlight. Besides your current location, of course. Wouldn't want to lose yourself, now would you?"..id='instructions';
 
     DivElement money = new DivElement()..text = "You have ${Game.instance.funds} funds to spend here.";
     instructions.append(money);

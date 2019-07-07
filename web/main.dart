@@ -14,6 +14,8 @@ Future<void> main() async{
   Game game = Game.instance;
   await game.initializeNPCS();
   await game.setStartingTown();
+  await game.initializeTowns();
+
   game.display(div);
 }
 

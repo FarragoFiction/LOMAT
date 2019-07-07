@@ -36,6 +36,7 @@ class Game
     //TODO when spawning a new road need to see if it has an assocaited tombstone.
     List<Tombstone> graves = new List<Tombstone>();
     int maxPartySize = 5;
+    //TODO probably deprecating this, void travel makes it unneeded
     int travelAmount = 1000; //default, if you go slower or faster it changes.
     int diseaseAmount = 1000; //default, if you go slower or faster it changes.
     int eventAmount = 1000; //default, if you go slower or faster it changes.
@@ -88,6 +89,14 @@ class Game
 
     void travelTick() {
         removeFunds(costPerTravelTick);
+    }
+
+    //creates the initial npcs
+    void initializeTowns() async {
+        //as a test, make 1 set npcs and 4 random ones.
+        for(int i = 0; i<4; i++) {
+            await Town.cachedTowns.first.spawnNewBaby();
+        }
     }
 
     //creates the initial npcs
@@ -215,7 +224,7 @@ class Game
     }
 
     void syncMoney() {
-        moneyContainer.text = "Funds: $funds ($costPerTravelTick cost per ticke to travel)";
+        moneyContainer.text = "Funds: $funds ($costPerTravelTick cost per tick to travel)";
     }
 
     Future setStartingTown() async {

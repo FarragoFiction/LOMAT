@@ -151,6 +151,7 @@ class Town extends PhysicalLocation {
   Future displayOnScreen(Element div) async {
       print("trying to display on screen, but has init been called yet? ${genome.simpleGenes.length}");
       roads = await Road.spawnRandomRoadsForTown(this);
+
       super.displayOnScreen(div);
       //auto play not allowed but we can try cuz this might not be first screen
       startPlayingMusic();
@@ -163,6 +164,8 @@ class Town extends PhysicalLocation {
       });
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
+      firstTime = false;
+
       setNPCGoals();
   }
 
@@ -201,7 +204,7 @@ class Town extends PhysicalLocation {
       //can't do this if i'm the only existin gtown. cant do it over max.
       if(forceScramble) {
           return rand.pickFrom(allCacheButMe);
-      }else if(otherTownsExist && canMakeTown && rand.nextDouble() > 0.3) {
+      }else if(otherTownsExist && canMakeTown && rand.nextDouble() > 0.45) {
           Town ret = rand.pickFrom(allCacheButMe);
           return ret;
       }else {
