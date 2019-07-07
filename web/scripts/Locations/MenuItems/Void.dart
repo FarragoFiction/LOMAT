@@ -60,18 +60,14 @@ class VoidTravel extends MenuItem {
   }
 
   void voidSelf(me) async {
-    me.text = "As you wish, Guide. You will be starting over from now, at your current location.";
+    me.text = "As you wish, Guide. You will be starting over from now, at a random location.";
     SoundControl.instance.playSoundEffect("Dead_Jingle_light");
-    Game.instance.removeFunds(Game.instance.funds);
-    Town.cachedTowns.clear();
-    await Game.instance.setStartingTown();
-    await Game.instance.initializeTowns();
-    await Future.delayed(Duration(seconds: 2));
+    await Future.delayed(Duration(seconds: 1));
     me.remove();
-    Game.instance.addFunds(113); //start over.
-
+    await Game.instance.startOver(); //if i do this EVERY time i end up with more towns than i have
     doVoidTravel(); //pop back up
   }
+
 
   void voidTown(DivElement me, Town town, int cost) async {
     me.text = "As you wish, Guide. ${town.name} will be in the spotlight no more.";
@@ -137,7 +133,7 @@ class VoidTravel extends MenuItem {
     li.append(button);
     //print("I appended it to the menu holder with children ${holder.container.children.length}");
     button.classes.add("goDark");
-      button.text = "Void Self (All ${Game.instance.funds} funds)";
+      button.text = "Void Self (${Game.instance.funds-113} funds)";
       button.onClick.listen((Event e){
         voidSelf(me);
       });

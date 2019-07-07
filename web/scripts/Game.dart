@@ -61,6 +61,18 @@ class Game
     Game() {
     }
 
+
+    Future startOver() async {
+        Game.instance.removeFunds(Game.instance.funds);
+        Town.cachedTowns.clear();
+        Game.instance.addFunds(113); //start over.
+        await Game.instance.setStartingTown();
+        await Game.instance.initializeTowns();
+        currentLocation.teardown();
+        Town town = new Random().pickFrom(Town.cachedTowns);
+        town.displayOnScreen(container);
+    }
+
     void dismissTalkySection() {
         talkySection.teardown();
         talkySection = null;
