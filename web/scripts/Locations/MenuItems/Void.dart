@@ -53,7 +53,7 @@ class VoidTravel extends MenuItem {
     me.text = "As you wish, Guide.";
     SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
     await ( holder.location as Town).scrambleRoads(); //if i do this EVERY time i end up with more towns than i have
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     me.remove();
     doVoidTravel(); //pop back up
   }
@@ -63,8 +63,7 @@ class VoidTravel extends MenuItem {
     me.text = "As you wish, Guide.";
     SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
     Town.cachedTowns.remove(town);
-    //await ( holder.location as Town).scrambleRoads(); //if i do this EVERY time i end up with more towns than i have
-    await Future.delayed(Duration(seconds: 3));
+    await Future.delayed(Duration(seconds: 2));
     me.remove();
     doVoidTravel(); //pop back up
   }
@@ -82,9 +81,11 @@ class VoidTravel extends MenuItem {
     instructions.append(money);
     UListElement list = new UListElement()..classes.add("voidList");
     instructions.append(list);
+    scrambleItem(list,me);
     for(Town town in Town.cachedTowns) {
       townItem(town, list, me);
     }
+
 
 
     me.append(instructions);
