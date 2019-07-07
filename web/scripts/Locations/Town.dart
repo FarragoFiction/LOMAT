@@ -346,5 +346,6 @@ class Town extends PhysicalLocation {
         roads.forEach((Road road) {
             road.displayOption(this,parent,travelContainer);
         });
+        Road.shitGoBack(travelContainer);
     }
 }

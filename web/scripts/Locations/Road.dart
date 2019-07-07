@@ -180,6 +180,19 @@ class Road {
         });
     }
 
+    static void shitGoBack(Element container) {
+        Element div = new DivElement()..classes.add("dialogueSelectableItem");
+        div.classes.add("travelOption");
+        container.append(div);
+        String before = "";
+        div.setInnerHtml("Wait, Shit, Go Back.");
+
+        div.onClick.listen((Event t) {
+            container.remove();
+            SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
+        });
+    }
+
     static Future<List<Road>> spawnRandomRoadsForTown(Town town) async {
         Random rand = new Random(Town.nextTownSeed);
         List<Town> towns = await Town.makeAdjacentTowns(rand,town);
