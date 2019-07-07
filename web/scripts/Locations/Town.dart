@@ -185,26 +185,45 @@ class Town extends PhysicalLocation {
       SoundControl.instance.playMusicList(next, startPlayingMusic);
   }
 
-  //if there is room in the cache, 70% chance of making a child
-    //otherwise 30% chance of it being batshit insane
-  Future<Town> makeBaby() async {
-      if(cachedTowns.length < minTowns ||(cachedTowns.length < maxTowns && rand.nextDouble()>0.7)) {
-          Town coparentSource = rand.pickFrom(cachedTowns);
-          TownGenome coparent = null;
-          if(coparentSource != null) {
-              coparent = coparentSource.genome;
-          }
-          List<LOMATNPC> npcs = await generateProceduralNPCs();
+  static bool get canMakeTown => cachedTowns.length < minTowns;
+  List<Town> get allCacheButMe {
+      List<Town> ret = new List<Town>.from(cachedTowns);
+          ret.remove(this);
+          print("all cache but me is ${ret.length} long");
+      return ret;
+  }
 
-          Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,await genome.breed(coparent,rand));
-          //await town.initGenome();
-          proceduralIntroInit();
-          return town;
-      }else {
-          Town ret = rand.pickFrom(cachedTowns);
-          ret.firstTime = false;
+  bool get otherTownsExist => allCacheButMe.length >1;
+
+  //if there is room in the cache, 30% chance of making a child
+    //otherwise 30% chance of it being pulled from somewhere before
+  Future<Town> makeBaby([bool forceScramble = false]) async {
+      //can't do this if i'm the only existin gtown. cant do it over max.
+      if(forceScramble) {
+          return rand.pickFrom(allCacheButMe);
+      }else if(otherTownsExist && canMakeTown && rand.nextDouble() > 0.3) {
+          Town ret = rand.pickFrom(allCacheButMe);
           return ret;
+      }else {
+          return await spawnNewBaby();
       }
+
+  }
+
+  Future<Town> spawnNewBaby() async {
+    Town coparentSource = rand.pickFrom(cachedTowns);
+    TownGenome coparent = null;
+    if (coparentSource != null) {
+        coparent = coparentSource.genome;
+    }
+    List<LOMATNPC> npcs = await generateProceduralNPCs();
+
+    Town town = new Town.dontevercallthisblindly(
+        await generateProceduralName(nextTownSeed), npcs, null,
+        await genome.breed(coparent, rand));
+    //await town.initGenome();
+    proceduralIntroInit();
+    return town;
   }
 
   String get nextSong {
