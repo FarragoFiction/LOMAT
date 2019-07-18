@@ -150,6 +150,11 @@ class Town extends PhysicalLocation {
   @override
   Future displayOnScreen(Element div) async {
       print("trying to display on screen, but has init been called yet? ${genome.simpleGenes.length}");
+      if(rand.nextDouble()>0.6){ //yn shows up 1/3 of the time.
+          npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
+      }
+      print("npc list is is ${Game.instance.wanderingNPCs}");
+
       roads = await Road.spawnRandomRoadsForTown(this);
 
       super.displayOnScreen(div);
@@ -327,6 +332,10 @@ class Town extends PhysicalLocation {
         arrivingNPCs.forEach((LOMATNPC npc) {
             before = "$before <br> ${npc.leavingMessage} ${npc.name} leaves the party with a dejected SQWAWK!!!!!";
         });
+        if(npcs.length >0) {
+            before = "$before <br> In the distance, you see, ${npcs.join(",")}";
+        }
+
         flavorTextElement.setInnerHtml("$introductionText$before");
         CipherEngine.applyRandom(flavorTextElement);
         container.append(flavorTextElement);

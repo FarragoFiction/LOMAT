@@ -120,10 +120,7 @@ class Game
         wanderingNPCs.add(NPCFactory.lilscumbag());
         //wanderingNPCs.add(NPCFactory.loki());
         //wanderingNPCs.add(NPCFactory.grim());
-        wanderingNPCs.add(NPCFactory.yn());
-        wanderingNPCs.add(NPCFactory.yn());
-        wanderingNPCs.add(NPCFactory.yn());
-
+        //yn will be spawned at town time
         print('after initialization, npcs are $wanderingNPCs');
     }
 

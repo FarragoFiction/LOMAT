@@ -14,6 +14,7 @@ abstract class YNMaker {
 
     //every time you spawn yn, he is different
     static NonGullLOMATNPC spawnAYN(int seed) {
+        print("yn is being spawned with seed $seed");
         Random rand = new Random(seed);
         TalkyLevel level = new TalkyLevel(new List<TalkyItem>(),null);
         NonGullLOMATNPC yn = new NonGullLOMATNPC("YN",level,new ImageElement(src: "images/Seagulls/dainsleif.png"));

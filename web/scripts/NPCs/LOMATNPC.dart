@@ -63,7 +63,11 @@ class LOMATNPC {
 
     @override
     String toString() {
-        return name;
+        if(this is NonGullLOMATNPC) {
+            return name;
+        }else {
+            return "Gull $name";
+        }
     }
 
     String get diseasePhrase {
@@ -366,8 +370,7 @@ abstract class NPCFactory {
     }
 
     //TODO: FUTURE JR, FIGURE OUT HOW TO SPAWN A YN BASED ON WHAT TOWN THEY ARE IN. RANDOMLY PICK WHETHER YN IS IN A GIVEN TOWN.
-    static LOMATNPC yn() {
-        Random rand = new Random();
+    static LOMATNPC yn(Random rand) {
         return YNMaker.spawnAYN(rand.nextInt());
     }
 
