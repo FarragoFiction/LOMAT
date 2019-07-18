@@ -365,9 +365,10 @@ abstract class NPCFactory {
         return testNPC;
     }
 
-    //TODO spawn many yns.
+    //TODO: FUTURE JR, FIGURE OUT HOW TO SPAWN A YN BASED ON WHAT TOWN THEY ARE IN. RANDOMLY PICK WHETHER YN IS IN A GIVEN TOWN.
     static LOMATNPC yn() {
-        return YNMaker.spawnAYN(13);
+        Random rand = new Random();
+        return YNMaker.spawnAYN(rand.nextInt());
     }
 
     //TODO eventaully all this is serialized.

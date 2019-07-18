@@ -121,6 +121,8 @@ class Game
         //wanderingNPCs.add(NPCFactory.loki());
         //wanderingNPCs.add(NPCFactory.grim());
         wanderingNPCs.add(NPCFactory.yn());
+        wanderingNPCs.add(NPCFactory.yn());
+        wanderingNPCs.add(NPCFactory.yn());
 
         print('after initialization, npcs are $wanderingNPCs');
     }
