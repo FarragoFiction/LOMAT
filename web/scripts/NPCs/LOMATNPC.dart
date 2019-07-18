@@ -26,6 +26,8 @@ import 'dart:html';
 import 'package:CommonLib/Random.dart';
 import 'package:CommonLib/Utility.dart';
 
+import 'YNMaker.dart';
+
 class LOMATNPC {
     //TODO have town they want to go to, have their recruit text mention it. maybe can mention CURRENT_NEAREST_TOWN or GOAL_TOWN
     //TODO most kleptomaniac birds, have them swipe shit out of your inventory as an effect
@@ -363,16 +365,9 @@ abstract class NPCFactory {
         return testNPC;
     }
 
-    //TODO eventaully all this is serialized.
+    //TODO spawn many yns.
     static LOMATNPC yn() {
-        List<TalkyItem> talkyItems = new List<TalkyItem>();
-        TalkyLevel level = new TalkyLevel(talkyItems,null);
-        NonGullLOMATNPC testNPC = new NonGullLOMATNPC("YN",level,new ImageElement(src: "images/Seagulls/dainsleif.png"));
-
-        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"???", 3,null);
-        TalkyQuestion question1 = new TalkyQuestion("???",tr,level);
-
-        return testNPC;
+        return YNMaker.spawnAYN(13);
     }
 
     //TODO eventaully all this is serialized.
