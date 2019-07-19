@@ -354,7 +354,10 @@ abstract class NPCFactory {
         TalkyQuestion question1 = new TalkyQuestion("Uh. Hello?",tr,level);
         return testNPC;*/
         String data = "Lil Scumbag:___ N4IgdghgtgpiBcIAyBLANgAgMoGMCuUARhAOYgA0IaMEAbimCQLIwDOrpciGAKgPIARPhigQA1jAys8AJ0k0cACwwA5AAoBhDIoisMEDPlYAXAPZQM1OgxIi2HEjAB0FEDgh5WMPgDMBNY0UEEAhCVlM0PGMYNABPDDBTQJtXRQAHBAAOAFZKY1i0rhAAflLXYwg0MVikGFoYhFAKqtiASWioVgQAbVAAExRWNLQIWJ4YAA9jYIBVRScMAAkYtFNi8pkUEkcZLvhugF08gqKeSuqARTw2YxRTMFc5IfuvRpABoZGxyenEM4k9CQIDISMQSAsAKIQYwLABCEBQLjym22MF2PSOIGa1Vq9TQb2xbQ6e0OAF9joVgmcWgAlNhpF5wSi6cI4FDQmB9CFQJJ3B7wADMpNJB3JIBQUBIWBkOGCimMxjS8AA9MrVu40IpTCZ4NkBQKAEwG5USzisZVYGgkPBoNDm1BoAD6uAIYKcaUYIFJQA";
-        return LOMATNPC.loadFromDataString(data);
+
+        NonGullLOMATNPC npc =  LOMATNPC.loadFromDataString(data);
+        npc.avatar.src = "images/Seagulls/Lil_Scumbag.png"; //it actually encodes it as having the full url (localhost nad all)
+        return npc;
     }
 
     //TODO eventaully all this is serialized.
