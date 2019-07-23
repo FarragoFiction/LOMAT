@@ -26,6 +26,7 @@ class PassPhraseObject {
 
     static List<PassPhraseObject> load() {
         List<String> phrases = PassPhraseHandler.foundPhrases;
+        print("found phrases is $phrases");
         List<PassPhraseObject> ret = new List<PassPhraseObject>();
         phrases.forEach((String s) => ret.add(new PassPhraseObject(s)) );
         return ret;
@@ -34,15 +35,15 @@ class PassPhraseObject {
     static Future<void> displayArt(List<PassPhraseObject> phrases, Element element) async {
         print("checing ${phrases.length} phrases");
         for(PassPhraseObject phrase in phrases) {
-            try {
+            if(phrase.passPhrase.isNotEmpty) {
+                print("trying to find phrase ${phrase.passPhrase}");
                 ImageElement art = await phrase.loadArt();
                 if (art != null) {
                     //TODO fuck this shit up
                     element.append(art);
                 }
-            }on Exception {
-                print("??? Exception");
             }
+
         }
     }
 
