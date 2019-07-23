@@ -11,7 +11,7 @@ import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
 import '../NPCs/LOMATNPC.dart';
 import '../NPCs/NonGullLOMATNPC.dart';
-import '../NPCs/PassPhraseHandler.dart';
+import '../PassPhrases/PassPhraseHandler.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 

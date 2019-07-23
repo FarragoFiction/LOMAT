@@ -2,10 +2,12 @@ import 'dart:async';
 import 'dart:html';
 
 abstract class PassPhraseHandler {
+    static String key = "AUDIOLOGSCASETTELIBRARY";
+
+    static List<String> get foundPhrases => window.localStorage[key].split(",");
 
     //if you haven't already heard this tape, add it.
     static void storeTape(String tapeName) {
-        String key = "AUDIOLOGSCASETTELIBRARY";
         if(window.localStorage == null) {
             print("saving isn't possible....you don't have local storage");
             return;

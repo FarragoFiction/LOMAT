@@ -11,6 +11,7 @@ import '../NPCs/NonGullLOMATNPC.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
+import '../PassPhrases/PassPhraseObject.dart';
 import '../Sections/TalkySection.dart';
 
 DivElement div = querySelector('#output');
@@ -24,10 +25,15 @@ void main()  async{
     }*/
     //testCiphers();
     loadGull();
-    loadGull();
+    //loadGull();
+    testPhrases();
 
     //testAnimation();
     //testTombstone();
+}
+
+void testPhrases() {
+    PassPhraseObject.displayArt(PassPhraseObject.load(), div);
 }
 
 void loadGull() {
