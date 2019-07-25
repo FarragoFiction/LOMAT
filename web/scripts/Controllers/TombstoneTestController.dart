@@ -44,9 +44,7 @@ void loadGulls() {
     //and that right AFTER roger is returning ebony has the wrong one.
     //do they somehow share the same palette reference?
     //....VOID PALETTE
-    print("going to animate");
     for(LOMATNPC npc in npcs) {
-        print("${npc.animation.palette}");
         div.append(npc.animation.element);    }
 
 }
