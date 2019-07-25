@@ -49,7 +49,9 @@ class NonGullLOMATNPC extends LOMATNPC {
       causeOfDeath = json.getValue("causeOfDeath");
       hp = json.getValue("hp");
       talkyLevel = TalkyLevel.loadFromJSON(this,new JsonHandler(json.getValue("talkyLevel")));
-      avatar = new ImageElement(src: json.getValue("imgSrc"));
+      String rawSrc = json.getValue("imgSrc");
+      List<String> parts = rawSrc.split("Seagulls/");
+      avatar = new ImageElement(src: parts.last);
       avatar.classes.add("npcImage");
   }
 

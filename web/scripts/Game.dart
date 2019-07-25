@@ -115,9 +115,12 @@ class Game
     //creates the initial npcs
     void initializeNPCS() async {
         //as a test, make 1 set npcs and 4 random ones.
-        await makeAmagalmates();
+        //await makeAmagalmates();
         wanderingNPCs.add(NPCFactory.jrTest());
         wanderingNPCs.add(NPCFactory.lilscumbag());
+        wanderingNPCs.add(NPCFactory.rogerKoon());
+        wanderingNPCs.add(NPCFactory.ebony());
+
         //wanderingNPCs.add(NPCFactory.loki());
         //wanderingNPCs.add(NPCFactory.grim());
         //yn will be spawned at town time
