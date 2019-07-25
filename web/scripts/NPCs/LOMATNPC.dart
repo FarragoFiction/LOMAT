@@ -267,8 +267,8 @@ class LOMATNPC {
         return textEngine.phrase("wigglername_all");
     }
 
-    //TODO not gonna use this for the real game or anything, but good for testing
     static Future<LOMATNPC> generateRandomNPC(int seed) async {
+        print("spawning a random npc. bad. stop. not till fenrir");
         Random rand = new Random(seed);
         List<TalkyItem> talkyItems = new List<TalkyItem>();
 

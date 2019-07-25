@@ -51,7 +51,13 @@ class NonGullLOMATNPC extends LOMATNPC {
       talkyLevel = TalkyLevel.loadFromJSON(this,new JsonHandler(json.getValue("talkyLevel")));
       String rawSrc = json.getValue("imgSrc");
       List<String> parts = rawSrc.split("Seagulls/");
-      avatar = new ImageElement(src: parts.last);
+      //if it actually split, just grab out the url where npcs go
+      if(parts.length > 1) {
+        rawSrc = "images/Seagulls/${parts.last}";
+      }else {
+          rawSrc = parts.last;
+      }
+      avatar = new ImageElement(src: rawSrc);
       avatar.classes.add("npcImage");
   }
 

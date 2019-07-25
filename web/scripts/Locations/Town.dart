@@ -224,7 +224,7 @@ class Town extends PhysicalLocation {
     if (coparentSource != null) {
         coparent = coparentSource.genome;
     }
-    List<LOMATNPC> npcs = await generateProceduralNPCs();
+    List<LOMATNPC> npcs = Game.instance.findWanderingNPCS();
 
     Town town = new Town.dontevercallthisblindly(
         await generateProceduralName(nextTownSeed), npcs, null,
@@ -295,6 +295,7 @@ class Town extends PhysicalLocation {
 
 
   static Future<List<LOMATNPC>> generateProceduralNPCs() async {
+      print("no bad stop fenrir only");
       List<LOMATNPC> ret = new List<LOMATNPC>();
       int npcAmount = new Random(nextTownSeed).nextInt(5)+1;
       for(int i = 0; i<npcAmount; i++) {
