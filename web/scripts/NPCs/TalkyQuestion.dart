@@ -35,7 +35,7 @@ class TalkyQuestion extends TalkyItem {
         TalkyResponse response = TalkyResponse.loadFromJSON(npc, new JsonHandler(json.getValue("response")),null);
         TalkyItem ret = new TalkyQuestion(TalkyItem.loadDisplayTextFromJSON(json),response, owner);
         ret.loadTriggersFromJSON( json);
-        print("loading question from json, ${ret.displayText}");
+        //print("loading question from json, ${ret.displayText}");
 
         return ret;
     }

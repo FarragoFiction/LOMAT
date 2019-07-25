@@ -118,8 +118,9 @@ class Game
         //await makeAmagalmates();
         wanderingNPCs.add(NPCFactory.jrTest());
         wanderingNPCs.add(NPCFactory.lilscumbag());
-        wanderingNPCs.add(NPCFactory.rogerKoon());
         wanderingNPCs.add(NPCFactory.ebony());
+        wanderingNPCs.add(NPCFactory.rogerKoon());
+
 
         //wanderingNPCs.add(NPCFactory.loki());
         //wanderingNPCs.add(NPCFactory.grim());

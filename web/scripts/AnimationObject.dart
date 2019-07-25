@@ -109,7 +109,33 @@ class GullAnimation  extends AnimationObject{
     }
 
     GullAnimation.withoutPalette(int this.hatNumber, int this.bodyNumber):super(17, 20, 254, 288) {
-        palette = voidPalette; //default
+        palette = new Palette()
+            ..add("edge",new Colour.fromStyleString("#000000"))
+            ..add("accent1Light",new Colour.fromStyleString("#000000"))
+            ..add("accent1Dark",new Colour.fromStyleString("#000000"))
+            ..add("hairLight",new Colour.fromStyleString("#000000"))
+            ..add("hairMid",new Colour.fromStyleString("#000000"))
+            ..add("hairDark",new Colour.fromStyleString("#000000"))
+            ..add("accent2Light",new Colour.fromStyleString("#000000"))
+            ..add("accent2Dark",new Colour.fromStyleString("#000000"))
+            ..add("misc1",new Colour.fromStyleString("#222222"))
+            ..add("misc2",new Colour.fromStyleString("#888888"))
+            ..add("misc3",new Colour.fromStyleString("#444444"))
+            ..add("sheet",new Colour.fromStyleString("#000000"));
+    }
+
+    void copyPalette(Palette newP) {
+        int i = 0;
+        List<String> names = new List.from(palette.names);
+        //handles if the two paletttes match, or not.
+        for(String name in newP.names) {
+            if(palette.names.contains(name)) {
+                palette.add(name, newP[name], true);
+            }else {
+                if(i < palette.names.length)palette.add(names[i], newP[name], true);
+            }
+            i++;
+        }
     }
 
     static GullAnimation get randomAnimation {
