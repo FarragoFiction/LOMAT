@@ -38,7 +38,7 @@ void testPhrases() {
 
 void loadGulls() {
     List<LOMATNPC> npcs = List<LOMATNPC>();
-    npcs.add(NPCFactory.ebony());
+    npcs.add(NPCFactory.skol());
     npcs.add(NPCFactory.rogerKoon());
     //i can confirm that right before returning, ebony has the right color
     //and that right AFTER roger is returning ebony has the wrong one.
@@ -86,5 +86,5 @@ void testAnimation() {
 
 void testTombstone() {
     Tombstone t = new Tombstone();
-    t.drawSelf(div,null);
+    t.drawSelf(div,null, false);
 }

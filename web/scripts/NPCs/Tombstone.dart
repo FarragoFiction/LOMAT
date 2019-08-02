@@ -34,6 +34,7 @@ import 'package:LoaderLib/Loader.dart';
 class Tombstone {
     static String NAMETAG = "#NAME#";
     static String CODTAG = "#COD#";
+    Road road; //not for serializing, just for clicking
     //a tombstone has one piece of content for each "fridge magnet" attached to it.
     //can have up to 8?
     //each magent has everything possible inside it (don't drill too deep yo)
@@ -54,15 +55,19 @@ class Tombstone {
         init();
     }
 
-    Future<Null> drawSelf(Element container, Road road) async {
+    Future<Null> drawSelf(Element container, Road road, bool readOnly) async {
+        print("trying to draw self");
         DivElement me = new DivElement();
         container.append(me);
+        this.road = road;
         cachedCanvas = await makeCanvas();
         drawText(cachedCanvas);
         me.append(cachedCanvas);
         //TODO have canvas be cached so it can be drawn to.
         //TODO have builder draw itself
-        me.append(makeBuilder());
+        if(!readOnly) {
+            me.append(makeBuilder());
+        }
         ButtonElement button = new ButtonElement()..text ="Accept and Move On";
         button.classes.add("menuItem");
         button.id = "acceptDeath";
@@ -124,12 +129,14 @@ class Tombstone {
 
     ProceduralLayerParallax spawnTrailsona(PhysicalLocation parent) {
         //y is from top
+
         ProceduralLayerParallax layer =  new ProceduralLayerParallax(600, 475,100,false, "images/tombstone.png", parent);
         //TODO huh this doesn't seem to work
         //is it becaue the fog is on top?
         layer.image.style.pointerEvents = "auto";
         layer.image.onClick.listen((Event e) {
-            window.alert("TODO: need to have a mouse  over that displays name, and on click need to make popup showing grave details.");
+            road.stop();
+            drawSelf(Game.instance.container,road, true);
         });
         return layer;
     }

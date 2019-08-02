@@ -212,14 +212,15 @@ class TownGenome {
 
     //most events will be carefully crafted. but mutations....mutations are fair game for my aesthetic
     static RoadEvent randomEvent(Random rand) {
+         print("random event");
         WeightedList<Effect> effects = new WeightedList<Effect>();
         //TODO while these are weighted, the bred towns aren't, so need to ask pl about how to get an items weight
-        effects.add(new DelayEffect(1), 0.5);
-        effects.add(new DelayEffect(2), 0.5);
-        effects.add(new DelayEffect(3), 0.5);
-        effects.add(new DelayEffect(-1), 1);
-        effects.add(new DelayEffect(-2), 1);
-        effects.add(new DelayEffect(-3), 1);
+        //effects.add(new DelayEffect(1), 0.5);
+        //effects.add(new DelayEffect(2), 0.5);
+        //effects.add(new DelayEffect(3), 0.5);
+        //effects.add(new DelayEffect(-1), 1);
+        //effects.add(new DelayEffect(-2), 1);
+        //effects.add(new DelayEffect(-3), 1);
         effects.add( new InstaKillEffect("act of RNGsus"), 1);
         effects.add( new InstaKillEffect("choked on Stolen Dorito"), 0.3);
         effects.add( new DiseaseEffect(), 3);

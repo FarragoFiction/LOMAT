@@ -220,7 +220,7 @@ class LOMATNPC {
         grave.npc = this;
         Game.instance.eject(this);
         SoundControl.instance.playSoundEffect("Dead_jingle_bells");
-        grave.drawSelf(Game.instance.container, road);
+        grave.drawSelf(Game.instance.container, road,false);
     }
 
     void displayDialogue(Element container, LOMATSection screen) {
