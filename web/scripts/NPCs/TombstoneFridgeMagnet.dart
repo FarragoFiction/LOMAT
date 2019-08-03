@@ -231,6 +231,7 @@ class TombstoneFridgeMagnet {
         content.add(new TombstoneFridgeMagnet("bug", []));
         content.add(new TombstoneFridgeMagnet("bear", []));
         content.add(new TombstoneFridgeMagnet("duck", []));
+        content.add(new TombstoneFridgeMagnet("pimp", []));
         content.add(new TombstoneFridgeMagnet("ant", []));
         content.add(new TombstoneFridgeMagnet("ayll", []));
         content.add(new TombstoneFridgeMagnet("dvvk", []));
@@ -244,6 +245,8 @@ class TombstoneFridgeMagnet {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("kick", []));
         content.add(new TombstoneFridgeMagnet("kill", []));
+        content.add(new TombstoneFridgeMagnet("dodge", []));
+        content.add(new TombstoneFridgeMagnet("guide", []));
         content.add(new TombstoneFridgeMagnet("punch", []));
         content.add(new TombstoneFridgeMagnet("yeet", []));
         content.add(new TombstoneFridgeMagnet("travel", []));
@@ -329,6 +332,9 @@ class TombstoneFridgeMagnet {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("lost", []));
         content.add(new TombstoneFridgeMagnet("found", []));
+        content.add(new TombstoneFridgeMagnet("moist", []));
+        content.add(new TombstoneFridgeMagnet("sneaky", []));
+        content.add(new TombstoneFridgeMagnet("confused", []));
         content.add(new TombstoneFridgeMagnet("dead", []));
         content.add(new TombstoneFridgeMagnet("cold", []));
         content.add(new TombstoneFridgeMagnet("hungry", []));
@@ -442,6 +448,7 @@ class TombstoneFridgeMagnet {
     static TombstoneFridgeMagnet get bullshit {
         List<TombstoneFridgeMagnet> content = new List<TombstoneFridgeMagnet>();
         content.add(new TombstoneFridgeMagnet("the", []));
+        content.add(new TombstoneFridgeMagnet("this", []));
         content.add(new TombstoneFridgeMagnet("a", []));
         content.add(new TombstoneFridgeMagnet("an", []));
         content.add(new TombstoneFridgeMagnet("of", []));
