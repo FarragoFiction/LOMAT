@@ -11,7 +11,7 @@ class ProceduralLayerParallax extends ProceduralLayer {
 
   ProceduralLayerParallax(int x, int y, int height, bool turnways, String imageLocation, PhysicalLocation parent) : super(x, y, height, turnways, imageLocation, parent) {
       animate();
-      if(parent is Trail) {
+      if(parent is TrailLocation) {
           //so it knows how to remove you.
           parent.treeLayers.add(this);
       }

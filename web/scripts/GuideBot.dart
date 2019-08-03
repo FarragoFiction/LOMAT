@@ -157,7 +157,7 @@ class GuideBot {
         acceptDeath();
         //if we aren't on the trail anymore, we arrived (technically we can hunt from here but i have no clue how i wanna handle that)
         //tbh i might disable that entirely
-        if(Game.instance.currentLocation != null && !(Game.instance.currentLocation is Trail)) {
+        if(Game.instance.currentLocation != null && !(Game.instance.currentLocation is TrailLocation)) {
             bored = true;
             return;
         }

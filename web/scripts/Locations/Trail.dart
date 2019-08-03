@@ -15,7 +15,7 @@ import 'package:CommonLib/Colours.dart';
 import 'package:CommonLib/Random.dart';
 
 //eventually subclasses will have events and shit hwatever, not doing now
-class Trail extends PhysicalLocation {
+class TrailLocation extends PhysicalLocation {
     List<ParallaxLayer> paralaxLayers = new List<ParallaxLayer>();
     List<ProceduralLayerParallax> treeLayers = new List<ProceduralLayerParallax>();
     Wagon wagon;
@@ -27,7 +27,7 @@ class Trail extends PhysicalLocation {
     //rolling road functionality into a trail. smdh.
     Road road;
 
-  Trail(Road this.road,PhysicalLocation prev) : super(prev);
+  TrailLocation(Road this.road,PhysicalLocation prev) : super(prev);
 
 
 

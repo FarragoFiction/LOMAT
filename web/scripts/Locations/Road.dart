@@ -24,7 +24,7 @@ class Road {
     Town sourceTown;
     Town destinationTown;
     bool plzStopKThnxBai = false;
-    Trail trail;
+    TrailLocation trail;
     //distance is voided at first
     int travelTimeInMS;
     int timeRemaining;
@@ -77,7 +77,7 @@ class Road {
         plzStopKThnxBai = true;
     }
 
-    Future<Null> startLoops(Trail trail) async {
+    Future<Null> startLoops(TrailLocation trail) async {
         this.trail = trail;
         //wait at least one second before starting because its jarring if you start right off the bat with an event.
         new Timer(new Duration(milliseconds: Game.instance.eventAmount), () => eventLoop());
@@ -176,7 +176,7 @@ class Road {
             container.remove();
             prevLocation.teardown();
             SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
-            new Trail(this,prevLocation)..displayOnScreen(parent);
+            new TrailLocation(this,prevLocation)..displayOnScreen(parent);
         });
     }
 

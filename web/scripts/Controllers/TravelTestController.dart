@@ -1,9 +1,9 @@
 import '../Locations/Trail.dart';
 import 'dart:html';
 
-Trail trail;
+TrailLocation trail;
 DivElement div = querySelector('#output');
 void main() {
-    trail = new Trail(null,null);
+    trail = new TrailLocation(null,null);
     trail.displayOnScreen(div);
 }
