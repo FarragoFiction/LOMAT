@@ -6,6 +6,7 @@ import 'Locations/Events/Effects/DiseaseEffect.dart';
 import 'Locations/Events/Effects/InstaKillEffect.dart';
 import 'Locations/Events/RoadEvent.dart';
 import 'Locations/PhysicalLocation.dart';
+import 'Locations/Road.dart';
 import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
 import 'NPCs/LOMATNPC.dart';
@@ -61,6 +62,24 @@ class Game
     Game() {
     }
 
+    void testTombstones() {
+        for(int i = 0; i<3; i++) {
+            //just a tombstone spawning adds it to the list
+            new Tombstone.withoutNPC("GameTest$i", "???", "???");
+        }
+    }
+
+    List<Tombstone> tombstonesForRoad(Road road){
+        //go through all tombstones known
+        //if either road name matches yours (or is null) return true
+        List<Tombstone> ret = new List<Tombstone>();
+        for(Tombstone tombstone in graves) {
+            if(tombstone.townNames.isEmpty || tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name)) {
+                ret.add(tombstone);
+            }
+        }
+        return ret;
+    }
 
     Future startOver(PhysicalLocation doop) async {
         Game.instance.removeFunds(Game.instance.funds);

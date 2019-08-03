@@ -115,6 +115,7 @@ class Tombstone {
     }
 
     void init() {
+        Game.instance.graves.add(this);
         //these have no children so test that first
         //TODO have at least one with children, test it drills down right
         /*
