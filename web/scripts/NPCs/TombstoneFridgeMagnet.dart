@@ -45,6 +45,7 @@ class TombstoneFridgeMagnet {
     void loadJSON(JsonHandler json) {
         content.clear(); //you are root now
         displayText = json.getValue("displayText");
+        spaceBefore = false; //space will be in the saved word
         print("display text i loaded is $displayText");
     }
 

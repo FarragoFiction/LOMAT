@@ -87,7 +87,7 @@ void testAnimation() {
 }
 
 void testTombstone() {
-    Tombstone t = Tombstone.loadFromJSON(jsonEncode({"npcName":"TEST","npcCOD":"?????","goalTownName":null,"content":[{"displayText":" dodge"},{"displayText":"d"},{"displayText":" this"},{"displayText":" moist"},{"displayText":" pimp"},{"displayText":" in"},{"displayText":" the"},{"displayText":" grave"}]}));
+    Tombstone t = Tombstone.loadFromJSON("${jsonEncode({"npcName":"JRTest","npcCOD":"Getting Wasted","goalTownName":"JRBurg","content":[{"displayText":" dodge"},{"displayText":"d"},{"displayText":" this"},{"displayText":" moist"},{"displayText":" pimp"},{"displayText":" in"},{"displayText":" the"},{"displayText":" grave"}]})}");
     div.appendHtml("${t.toJSON()}");
     t.drawSelf(div,null, false);
 }
