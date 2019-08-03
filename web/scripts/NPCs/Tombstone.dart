@@ -5,6 +5,10 @@
 //but yes , TODO if the cause of death is null the Tombstone tears itself down.
 //TODO make page just for testing the builder in this
 
+import 'dart:convert';
+
+import 'package:CommonLib/Compression.dart';
+
 import '../Game.dart';
 import '../Locations/Layers/ProceduralLayerParallax.dart';
 import '../Locations/PhysicalLocation.dart';
@@ -34,6 +38,7 @@ import 'package:LoaderLib/Loader.dart';
 class Tombstone {
     static String NAMETAG = "#NAME#";
     static String CODTAG = "#COD#";
+    static String labelPattern = ":___ ";
     //dont respawn plz
     bool onTrail = false;
     Road road; //not for serializing, just for clicking
@@ -238,6 +243,22 @@ class Tombstone {
         //TODO draw epilogue
         return canvas;
     }
+
+    String toDataString() {
+        return  "$npcName$labelPattern${LZString.compressToEncodedURIComponent(jsonEncode(toJSON()))}";
+    }
+
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        ret["npcName"] = npcName;
+        ret ["npcCOD"] = npcCOD;
+        ret["goalTownName"] = goalTownName;
+        List<Map<dynamic, dynamic>> contentJSON = new List<Map<dynamic,dynamic>>();
+        content.forEach((TombstoneFridgeMagnet item)=> contentJSON.add(item.toJSON()));
+        ret["content"] = contentJSON;
+        return ret;
+    }
+
 
     Element makeBuilder() {
         //print("making builder");

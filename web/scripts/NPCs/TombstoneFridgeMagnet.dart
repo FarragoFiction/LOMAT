@@ -32,6 +32,12 @@ class TombstoneFridgeMagnet {
 
     TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
 
+    Map<dynamic, dynamic> toJSON(){
+        Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
+        ret["displayText"] = displayText;
+        ret["spaceBefore"] = spaceBefore;
+        return ret;
+    }
     //if the parent is null i'm the top level
     Element makeBuilder(Tombstone tombstone, TombstoneFridgeMagnet parent) {
         //initial state is just a box with your display text in it
