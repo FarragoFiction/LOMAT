@@ -242,6 +242,8 @@ class Tombstone {
     Element makeBuilder() {
         //print("making builder");
         DivElement container = new DivElement()..classes.add("tombstoneBuilderContainer");
+        DivElement warning = new DivElement()..classes.add("tombstoneWarning")..text = "Your eulogy will be read by other versions of yourself. What do you wish to guide those other selves to?";
+        container.append(warning);
         //for each content object, draw it (it'll handle making a menu box thingy)
         content.forEach((TombstoneFridgeMagnet magnet) {
             container.append(magnet.makeBuilder(this, null));

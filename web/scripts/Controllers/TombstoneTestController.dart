@@ -29,7 +29,7 @@ void main()  async{
     testPhrases();
 
     //testAnimation();
-    //testTombstone();
+    testTombstone();
 }
 
 void testPhrases() {
