@@ -298,7 +298,6 @@ class Tombstone {
         List<dynamic> aThing = json.getArray("content");
         //print("a thing is $aThing");
         content.clear();
-        print("athing is $aThing");
         for(dynamic thing in aThing) {
             content.add((TombstoneFridgeMagnet.loadFromJSON(new JsonHandler(thing))));
         }

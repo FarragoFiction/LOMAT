@@ -70,16 +70,9 @@ class Game
     void init() {
         // TODO eventually load tombstones from server
         // TODO and load certain save data facts from local storage
-        testTombstones();
+        Tombstone.loadFromTIMEHOLE();
     }
 
-    void testTombstones() {
-        print("testing tombstones");
-        for(int i = 0; i<3; i++) {
-            //just a tombstone spawning adds it to the list
-            new Tombstone.withoutNPC("GameTest$i", "???", "???");
-        }
-    }
 
     List<Tombstone> tombstonesForRoad(Road road){
         //go through all tombstones known
