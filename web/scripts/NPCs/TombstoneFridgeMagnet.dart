@@ -46,7 +46,7 @@ class TombstoneFridgeMagnet {
         content.clear(); //you are root now
         displayText = json.getValue("displayText");
         spaceBefore = false; //space will be in the saved word
-        print("display text i loaded is $displayText");
+       // print("display text i loaded is $displayText");
     }
 
     Map<dynamic, dynamic> toJSON(){

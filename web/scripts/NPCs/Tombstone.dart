@@ -73,8 +73,8 @@ class Tombstone {
         init();
     }
 
-    static Tombstone loadFromJSON(String jsonString) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+    static Tombstone loadFromJSON(JsonHandler json) {
+        print("json for tombstone is $json");
         Tombstone ret = new Tombstone.withoutNPC(null, null, null);
         ret.loadJSON(json);
         return ret;
@@ -258,7 +258,7 @@ class Tombstone {
     }
 
     static Tombstone loadFromDataString(String dataString) {
-        return loadFromJSON(LZString.decompressFromEncodedURIComponent(removeLabelFromString(dataString)));
+        return loadFromJSON(new JsonHandler(jsonDecode(LZString.decompressFromEncodedURIComponent(removeLabelFromString(dataString)))));
     }
 
 
@@ -276,13 +276,29 @@ class Tombstone {
         }
     }
 
+    static Future<void> loadFromTIMEHOLE() async {
+        String url = "http://localhost:3000/tombstone_timeholds.json";
+        print("trying to load from $url");
+        try {
+            await HttpRequest.getString(url)
+                .then((String response) => {
+                Game.instance.loadTombstones(jsonDecode(response))
+            }
+            );
+        }catch(error, trace) {
+            window.console.error(error);
+        }
+    }
+
     void loadJSON(JsonHandler json) {
         npcName = json.getValue("npcName");
+        print("name is $npcName");
         npcCOD = json.getValue("npcCOD");
         goalTownName = json.getValue("goalTownName");
         List<dynamic> aThing = json.getArray("content");
         //print("a thing is $aThing");
         content.clear();
+        print("athing is $aThing");
         for(dynamic thing in aThing) {
             content.add((TombstoneFridgeMagnet.loadFromJSON(new JsonHandler(thing))));
         }

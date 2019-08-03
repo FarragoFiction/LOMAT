@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:CommonLib/Collection.dart';
+import 'package:CommonLib/Utility.dart';
 
 import 'AnimationObject.dart';
 import 'Locations/Events/Effects/DelayEffect.dart';
@@ -101,6 +104,15 @@ class Game
         doop.teardown();
         Town town = new Random().pickFrom(Town.cachedTowns);
         town.displayOnScreen(container);
+    }
+
+    void loadTombstones(List<dynamic> loadedTombstones) {
+        print("graves has ${graves.length} before loading");
+        for(Map<dynamic,dynamic>json in loadedTombstones) {
+            //will add too graves list
+            Tombstone.loadFromJSON(new JsonHandler(jsonDecode(json["tombstoneJSON"])));
+        }
+        print("graves has ${graves.length} after loading");
     }
 
     void dismissTalkySection() {
