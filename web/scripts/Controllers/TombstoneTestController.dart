@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:CommonLib/Compression.dart';
 import 'package:CommonLib/Random.dart';
 
@@ -85,9 +87,7 @@ void testAnimation() {
 }
 
 void testTombstone() {
-    Tombstone t = new Tombstone.withoutNPC("TEST", null, "?????");
+    Tombstone t = Tombstone.loadFromJSON(jsonEncode({"npcName":"TEST","npcCOD":"?????","goalTownName":null,"content":[{"displayText":" dodge"},{"displayText":"d"},{"displayText":" this"},{"displayText":" moist"},{"displayText":" pimp"},{"displayText":" in"},{"displayText":" the"},{"displayText":" grave"}]}));
     div.appendHtml("${t.toJSON()}");
     t.drawSelf(div,null, false);
-    div.appendHtml("${t.toJSON()}");
-
 }

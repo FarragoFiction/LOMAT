@@ -36,15 +36,16 @@ class TombstoneFridgeMagnet {
 
     TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
 
-    static TombstoneFridgeMagnet loadFromJSON(String jsonString) {
-        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+    static TombstoneFridgeMagnet loadFromJSON(JsonHandler json) {
         TombstoneFridgeMagnet ret = new TombstoneFridgeMagnet(null, List<TombstoneFridgeMagnet>());
         ret.loadJSON(json);
         return ret;
     }
 
     void loadJSON(JsonHandler json) {
+        content.clear(); //you are root now
         displayText = json.getValue("displayText");
+        print("display text i loaded is $displayText");
     }
 
     Map<dynamic, dynamic> toJSON(){

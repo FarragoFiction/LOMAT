@@ -98,6 +98,7 @@ class Tombstone {
         button.style.width = "500px";
         rememberRoad(road);
         button.onClick.listen((Event e) {
+            print("${jsonEncode(toJSON())}");
             acceptAndMoveOn(me,road);
         });
         me.append(button);
@@ -281,8 +282,9 @@ class Tombstone {
         goalTownName = json.getValue("goalTownName");
         List<dynamic> aThing = json.getArray("content");
         //print("a thing is $aThing");
+        content.clear();
         for(dynamic thing in aThing) {
-            (TombstoneFridgeMagnet.loadFromJSON(thing));
+            content.add((TombstoneFridgeMagnet.loadFromJSON(new JsonHandler(thing))));
         }
     }
 
