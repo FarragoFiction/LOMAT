@@ -88,8 +88,8 @@ void testAnimation() {
 }
 
 Future<void> testTombstone() async{
-    Tombstone t = Tombstone.loadFromJSON(new JsonHandler({"npcName":"JRTest","npcCOD":"Getting Wasted","goalTownName":"JRBurg","content":[{"displayText":" dodge"},{"displayText":"d"},{"displayText":" this"},{"displayText":" moist"},{"displayText":" pimp"},{"displayText":" in"},{"displayText":" the"},{"displayText":" grave"}]}));
+    Tombstone t = new Tombstone.withoutNPC("JRTest", "JRBurg","getting wasted");
     div.appendHtml("${t.toJSON()}");
-   // t.drawSelf(div,null, false);
+    t.drawSelf(div,null, false);
     Tombstone.loadFromTIMEHOLE();
 }

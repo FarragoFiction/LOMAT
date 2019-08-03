@@ -68,8 +68,8 @@ class Game
     }
 
     void init() {
-        // TODO eventually load tombstones from server
         // TODO and load certain save data facts from local storage
+        //async, but don't care when it loads
         Tombstone.loadFromTIMEHOLE();
     }
 

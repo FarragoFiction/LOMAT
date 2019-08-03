@@ -9,6 +9,7 @@ import 'dart:convert';
 
 import 'package:CommonLib/Compression.dart';
 import 'package:CommonLib/Utility.dart';
+import 'package:http/http.dart';
 
 import '../Game.dart';
 import '../Locations/Layers/ProceduralLayerParallax.dart';
@@ -98,10 +99,18 @@ class Tombstone {
         button.style.width = "500px";
         rememberRoad(road);
         button.onClick.listen((Event e) {
-            print("${jsonEncode(toJSON())}");
+            sendTimeholeData();
             acceptAndMoveOn(me,road);
         });
         me.append(button);
+    }
+
+    void sendTimeholeData() {
+        //don't just always send okay?
+        if(!onTrail) {
+            String url = "http://localhost:3000/tombstone_timeholds";
+            post(url, body: {"tombstoneJSON": jsonEncode(toJSON())});
+        }
     }
 
 
