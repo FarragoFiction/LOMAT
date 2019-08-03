@@ -1,4 +1,4 @@
-import '../Locations/Trail.dart';
+import '../Locations/TrailLocation.dart';
 import 'dart:html';
 
 TrailLocation trail;

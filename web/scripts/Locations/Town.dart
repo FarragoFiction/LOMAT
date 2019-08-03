@@ -16,7 +16,7 @@ import 'MenuItems/Talk.dart';
 import 'PhysicalLocation.dart';
 import 'Road.dart';
 import 'TownGenome.dart';
-import 'Trail.dart';
+import 'TrailLocation.dart';
 import 'dart:async';
 import 'dart:html';
 

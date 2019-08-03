@@ -9,7 +9,7 @@ import 'Events/Effects/DelayEffect.dart';
 import 'Events/RoadEvent.dart';
 import 'PhysicalLocation.dart';
 import 'Town.dart';
-import 'Trail.dart';
+import 'TrailLocation.dart';
 import 'dart:async';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
@@ -88,10 +88,12 @@ class Road {
 
     Future<Null> startLoops(TrailLocation trail) async {
         this.trail = trail;
+        this.tombstones.shuffle();
         //wait at least one second before starting because its jarring if you start right off the bat with an event.
         new Timer(new Duration(milliseconds: Game.instance.eventAmount), () => eventLoop());
         new Timer(new Duration(milliseconds: Game.instance.diseaseAmount), () => diseaseLoop());
         new Timer(new Duration(milliseconds: Game.instance.travelAmount), () => timerLoop());
+
     }
 
     void stop() {
@@ -145,13 +147,28 @@ class Road {
         //no more loop plz.
         if(plzStopKThnxBai) return;
         await window.animationFrame;
-        for(RoadEvent event in events) {
-            if(await event.triggered(this)){
+        bool eventHappened = false;
+        //yes, if there are dead gulls on a trail it makes events less likely
+        Random rand = new Random();
+        for(Tombstone tombstone in tombstones) {
+            if(rand.nextBool()) {
+                tombstone.spawnTrailsona(trail);
+                eventHappened = true;
+                tombstones.remove(tombstone); // can i avoid a concurrent modification via breaks?
                 break;
             }
         }
+
+        if(!eventHappened) {
+            for (RoadEvent event in events) {
+                if (await event.triggered(this)) {
+                    eventHappened = true;
+                    break;
+                }
+            }
+        }
         //every ten seconds
-        new Timer(new Duration(milliseconds: 10000), () => eventLoop());
+        new Timer(new Duration(milliseconds: Game.instance.eventAmount), () => eventLoop());
     }
 
     Future<Null> diseaseLoop() async{
@@ -164,7 +181,7 @@ class Road {
             npc.diseaseTick(this);
         }
         //every ten seconds
-        new Timer(new Duration(milliseconds: 1000), () => diseaseLoop());
+        new Timer(new Duration(milliseconds: Game.instance.diseaseAmount), () => diseaseLoop());
     }
 
 

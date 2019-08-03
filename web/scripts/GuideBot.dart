@@ -5,7 +5,7 @@ import 'package:CommonLib/Random.dart';
 import 'package:CommonLib/Utility.dart';
 
 import 'Game.dart';
-import 'Locations/Trail.dart';
+import 'Locations/TrailLocation.dart';
 
 class GuideBot {
     static GuideBot _instance;

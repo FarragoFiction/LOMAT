@@ -1,5 +1,5 @@
 import '../PhysicalLocation.dart';
-import '../Trail.dart';
+import '../TrailLocation.dart';
 import 'ProceduralLayer.dart';
 import 'dart:async';
 import 'dart:html';

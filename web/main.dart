@@ -5,7 +5,7 @@ import 'scripts/Locations/Events/Effects/DelayEffect.dart';
 import 'scripts/Locations/Events/RoadEvent.dart';
 import 'scripts/Locations/Town.dart';
 import 'scripts/Locations/TownGenome.dart';
-import 'scripts/Locations/Trail.dart';
+import 'scripts/Locations/TrailLocation.dart';
 import 'scripts/NPCs/LOMATNPC.dart';
 
 Town town;
