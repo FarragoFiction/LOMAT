@@ -8,6 +8,7 @@
 import 'dart:convert';
 
 import 'package:CommonLib/Compression.dart';
+import 'package:CommonLib/Utility.dart';
 
 import '../Game.dart';
 import '../Locations/Layers/ProceduralLayerParallax.dart';
@@ -70,6 +71,13 @@ class Tombstone {
 
     Tombstone.withoutNPC(String this.npcName, String this.goalTownName, String this.npcCOD) {
         init();
+    }
+
+    static Tombstone loadFromJSON(String jsonString) {
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        Tombstone ret = new Tombstone.withoutNPC(null, null, null);
+        ret.loadJSON(json);
+        return ret;
     }
 
     Future<Null> drawSelf(Element container, Road road, bool readOnly) async {
@@ -246,6 +254,36 @@ class Tombstone {
 
     String toDataString() {
         return  "$npcName$labelPattern${LZString.compressToEncodedURIComponent(jsonEncode(toJSON()))}";
+    }
+
+    static Tombstone loadFromDataString(String dataString) {
+        return loadFromJSON(LZString.decompressFromEncodedURIComponent(removeLabelFromString(dataString)));
+    }
+
+
+    static String removeLabelFromString(String ds) {
+        try {
+            ds = Uri.decodeQueryComponent(ds); //get rid of any url encoding that might exist
+        }catch(error, trace){
+            //print("couldn't decode query component, probably because doll name had a % in $ds . $error $trace");
+        }
+        List<String> parts = ds.split("$labelPattern");
+        if(parts.length == 1) {
+            return parts[0];
+        }else {
+            return parts[1];
+        }
+    }
+
+    void loadJSON(JsonHandler json) {
+        npcName = json.getValue("npcName");
+        npcCOD = json.getValue("npcCOD");
+        goalTownName = json.getValue("goalTownName");
+        List<dynamic> aThing = json.getArray("content");
+        //print("a thing is $aThing");
+        for(dynamic thing in aThing) {
+            (TombstoneFridgeMagnet.loadFromJSON(thing));
+        }
     }
 
     Map<dynamic, dynamic> toJSON(){

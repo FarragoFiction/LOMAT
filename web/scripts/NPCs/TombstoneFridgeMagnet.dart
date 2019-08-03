@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:CommonLib/Utility.dart';
+
 import 'Tombstone.dart';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
@@ -31,6 +35,17 @@ class TombstoneFridgeMagnet {
     }
 
     TombstoneFridgeMagnet(String this.displayText, List<TombstoneFridgeMagnet> this.content, {this.spaceBefore: true} );
+
+    static TombstoneFridgeMagnet loadFromJSON(String jsonString) {
+        JsonHandler json = new JsonHandler(jsonDecode(jsonString));
+        TombstoneFridgeMagnet ret = new TombstoneFridgeMagnet(null, List<TombstoneFridgeMagnet>());
+        ret.loadJSON(json);
+        return ret;
+    }
+
+    void loadJSON(JsonHandler json) {
+        displayText = json.getValue("displayText");
+    }
 
     Map<dynamic, dynamic> toJSON(){
         Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
