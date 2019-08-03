@@ -86,5 +86,8 @@ void testAnimation() {
 
 void testTombstone() {
     Tombstone t = new Tombstone.withoutNPC("TEST", null, "?????");
+    div.appendHtml("${t.toJSON()}");
     t.drawSelf(div,null, false);
+    div.appendHtml("${t.toJSON()}");
+
 }

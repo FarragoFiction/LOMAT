@@ -34,8 +34,7 @@ class TombstoneFridgeMagnet {
 
     Map<dynamic, dynamic> toJSON(){
         Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
-        ret["displayText"] = displayText;
-        ret["spaceBefore"] = spaceBefore;
+        ret["displayText"] = getChosenRoot();
         return ret;
     }
     //if the parent is null i'm the top level
