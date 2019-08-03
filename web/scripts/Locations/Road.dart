@@ -2,6 +2,7 @@ import 'package:CommonLib/Collection.dart';
 
 import '../Game.dart';
 import '../NPCs/LOMATNPC.dart';
+import '../NPCs/Tombstone.dart';
 import '../SoundControl.dart';
 import 'Events/Effects/ArriveEffect.dart';
 import 'Events/Effects/DelayEffect.dart';
@@ -22,6 +23,7 @@ class Road {
     static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 100;
 
     Town sourceTown;
+    List<Tombstone> tombstones = new List<Tombstone>();
     Town destinationTown;
     bool plzStopKThnxBai = false;
     TrailLocation trail;
