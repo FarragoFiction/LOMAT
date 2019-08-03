@@ -47,6 +47,7 @@ class Game
     static Game get instance {
         if(_instance == null) {
             _instance = new Game();
+            _instance.init(); //if init were part of new game weird things happen if other things wanna grab the instance
         }
         return _instance;
     }
@@ -60,9 +61,17 @@ class Game
     Element moneyContainer;
 
     Game() {
+
+    }
+
+    void init() {
+        // TODO eventually load tombstones from server
+        // TODO and load certain save data facts from local storage
+        testTombstones();
     }
 
     void testTombstones() {
+        print("testing tombstones");
         for(int i = 0; i<3; i++) {
             //just a tombstone spawning adds it to the list
             new Tombstone.withoutNPC("GameTest$i", "???", "???");
@@ -73,8 +82,9 @@ class Game
         //go through all tombstones known
         //if either road name matches yours (or is null) return true
         List<Tombstone> ret = new List<Tombstone>();
+        Random rand = new Random();
         for(Tombstone tombstone in graves) {
-            if(tombstone.townNames.isEmpty || tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name)) {
+            if((tombstone.townNames.isEmpty && rand.nextDouble() >0.7) || (tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name))) {
                 ret.add(tombstone);
             }
         }
@@ -294,12 +304,12 @@ class Game
         DelayEffect largeEffect = new DelayEffect(3);
         ret.events.clear();
         ret.events = new WeightedList<RoadEvent>();
-        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 0.01));
+        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 9870.01));
         ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.1));
         ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} spends the night shivering in wet boots.", new DiseaseEffect(), 0.05));
         ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} mentions finding interesting new friends back in the last town.", new DiseaseEffect(), 0.00005));
 
-        ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.5));
+        ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.01));
         ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
         ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3));
 
