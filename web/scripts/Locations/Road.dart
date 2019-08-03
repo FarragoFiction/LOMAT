@@ -60,7 +60,7 @@ class Road {
 
     void testTombstones() {
         for(int i = 0; i<3; i++) {
-            tombstones.add(new Tombstone.withoutNPC("Test$i", null, null));
+            tombstones.add(new Tombstone.withoutNPC("Test$i", "???", "???"));
         }
     }
 
@@ -151,8 +151,8 @@ class Road {
         //yes, if there are dead gulls on a trail it makes events less likely
         Random rand = new Random();
         for(Tombstone tombstone in tombstones) {
-            if(rand.nextBool()) {
-                tombstone.spawnTrailsona(trail);
+            if(true || rand.nextBool()) {
+                tombstone.spawnTrailsona(trail,this);
                 eventHappened = true;
                 tombstones.remove(tombstone); // can i avoid a concurrent modification via breaks?
                 break;

@@ -34,6 +34,8 @@ import 'package:LoaderLib/Loader.dart';
 class Tombstone {
     static String NAMETAG = "#NAME#";
     static String CODTAG = "#COD#";
+    //dont respawn plz
+    bool onTrail = false;
     Road road; //not for serializing, just for clicking
     //a tombstone has one piece of content for each "fridge magnet" attached to it.
     //can have up to 8?
@@ -69,7 +71,6 @@ class Tombstone {
         print("trying to draw self");
         DivElement me = new DivElement();
         container.append(me);
-        this.road = road;
         cachedCanvas = await makeCanvas();
         drawText(cachedCanvas);
         me.append(cachedCanvas);
@@ -101,7 +102,9 @@ class Tombstone {
         me.remove();
         me = null; //for garbage collection probably.
         road.start(); //will start up animation and dhow it too
-        spawnTrailsona(road.trail);
+        if(!onTrail) {
+            spawnTrailsona(road.trail, road);
+        }
     }
 
     Future<Null> redraw() async {
@@ -137,12 +140,10 @@ class Tombstone {
         content.addAll(tmp);
     }
 
-    ProceduralLayerParallax spawnTrailsona(PhysicalLocation parent) {
+    ProceduralLayerParallax spawnTrailsona(PhysicalLocation parent, Road road) {
         //y is from top
-
-        ProceduralLayerParallax layer =  new ProceduralLayerParallax(600, 475,100,false, "images/tombstone.png", parent);
-        //TODO huh this doesn't seem to work
-        //is it becaue the fog is on top?
+        onTrail = true; //so i know how to dismiss self
+        ProceduralLayerParallax layer =  new ProceduralLayerParallax(800, 475,100,false, "images/tombstone.png", parent);
         layer.image.style.pointerEvents = "auto";
         layer.image.onClick.listen((Event e) {
             road.stop();

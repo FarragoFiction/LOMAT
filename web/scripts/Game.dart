@@ -39,7 +39,7 @@ class Game
     //TODO probably deprecating this, void travel makes it unneeded
     int travelAmount = 1000; //default, if you go slower or faster it changes.
     int diseaseAmount = 1000; //default, if you go slower or faster it changes.
-    int eventAmount = 1000; //default, if you go slower or faster it changes.
+    int eventAmount = 5000; //default, if you go slower or faster it changes.
 
     int get costPerTravelTick => ((partyMembers.length + 1) * (eventAmount/1000).ceil());
 
