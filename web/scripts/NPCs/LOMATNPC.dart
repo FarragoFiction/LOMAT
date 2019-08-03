@@ -216,8 +216,7 @@ class LOMATNPC {
         //TODO i need to hide the trail when the road stops
         //TODO i need to show the trail when the road starts
         //TODO need to display the tombstone and shove the consort into it
-        Tombstone grave = new Tombstone();
-        grave.npc = this;
+        Tombstone grave = new Tombstone(this);
         Game.instance.eject(this);
         SoundControl.instance.playSoundEffect("Dead_jingle_bells");
         grave.drawSelf(Game.instance.container, road,false);

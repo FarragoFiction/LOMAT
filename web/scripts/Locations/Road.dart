@@ -54,7 +54,14 @@ class Road {
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
         timeRemaining = travelTimeInMS;
+        testTombstones();
 
+    }
+
+    void testTombstones() {
+        for(int i = 0; i<3; i++) {
+            tombstones.add(new Tombstone.withoutNPC("Test$i", null, null));
+        }
     }
 
     void addDelay(int delayInMS) {

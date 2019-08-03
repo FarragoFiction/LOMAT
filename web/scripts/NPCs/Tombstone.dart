@@ -50,8 +50,18 @@ class Tombstone {
     //need to match at least two of these for this to spawn
     //no repeats plz
     Set<String> townNames = new Set<String>();
+    String npcName = "WWWWWWWW";
+    String npcCOD =  "?????";
+    String goalTownName;
 
-    Tombstone() {
+    Tombstone(LOMATNPC npc) {
+        npcName = npc.name;
+        goalTownName = npc.goalTownName;
+        npcCOD = npc.causeOfDeath;
+        init();
+    }
+
+    Tombstone.withoutNPC(String this.npcName, String this.goalTownName, String this.npcCOD) {
         init();
     }
 
@@ -143,27 +153,11 @@ class Tombstone {
 
 
 
-    String get npcName {
-        if(npc != null) {
-            return npc.name;
-        }else {
-            return "WWWWWWWW";
-        }
-    }
-
-    String get npcCOD {
-        if(npc != null) {
-            return npc.causeOfDeath;
-        }else {
-            return "WWWWWWWW";
-        }
-    }
-
     //peperony and chease
     String get fullEpilogue {
         String goal = "";
-        if(npc.goalTownName != null) {
-            goal = "Now they will never get to ${npc.goalTownName}.";
+        if(goalTownName != null) {
+            goal = "Now they will never get to ${goalTownName}.";
         }
         String ret = "$epilogue $goal";
         ret = ret.replaceAll(NAMETAG, npcName);

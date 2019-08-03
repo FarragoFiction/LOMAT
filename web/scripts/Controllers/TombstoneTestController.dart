@@ -85,6 +85,6 @@ void testAnimation() {
 }
 
 void testTombstone() {
-    Tombstone t = new Tombstone();
+    Tombstone t = new Tombstone.withoutNPC("TEST", null, "?????");
     t.drawSelf(div,null, false);
 }
