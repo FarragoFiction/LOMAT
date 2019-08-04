@@ -13,7 +13,8 @@ class ProceduralLayer extends StaticLayer {
     int width = 0;
     int height = 0;
     bool turnways = false;
-  ProceduralLayer(int this.x, int this.y, int this.height,bool this.turnways, String imageLocation, PhysicalLocation parent) : super(imageLocation, parent, 5);
+    ProceduralLayer(int this.x, int this.y, int this.height,bool this.turnways, String imageLocation, PhysicalLocation parent) : super(imageLocation, parent, 5);
+    ProceduralLayer.fromImage(int this.x, int this.y, int this.height,bool this.turnways, ImageElement image, PhysicalLocation parent) : super.fromImage(image, parent, 5);
 
   void init() {
       zIndex = yToZIndex(y,height);

@@ -17,6 +17,14 @@ class ProceduralLayerParallax extends ProceduralLayer {
       }
   }
 
+    ProceduralLayerParallax.fromImage(int x, int y, int height, bool turnways, ImageElement image, PhysicalLocation parent) : super.fromImage(x, y, height, turnways, image, parent) {
+        animate();
+        if(parent is TrailLocation) {
+            //so it knows how to remove you.
+            parent.treeLayers.add(this);
+        }
+    }
+
   Future<Null> animate() async{
       //todo when i go off screen spawn a new tree
       if(removeMePlease) return;

@@ -107,7 +107,7 @@ class Game
         print("graves has ${graves.length} before loading");
         for(Map<dynamic,dynamic>json in loadedTombstones) {
             //will add too graves list
-            Tombstone.loadFromJSON(new JsonHandler(jsonDecode(json["tombstoneJSON"])));
+            Tombstone.loadFromJSON(new JsonHandler(jsonDecode(json["tombstoneJSON"])))..cameFromOnline = true;
         }
         graves.shuffle();
         print("graves has ${graves.length} after loading");

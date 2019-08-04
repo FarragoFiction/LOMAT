@@ -14,8 +14,14 @@ class StaticLayer {
         init();
     }
 
+    StaticLayer.fromImage(ImageElement this.image, PhysicalLocation this.parent, int this.zIndex) {
+        init();
+    }
+
     void init() {
-        image = new ImageElement(src: imageLocation);
+        if(image == null) {
+            image = new ImageElement(src: imageLocation);
+        }
         image.style.zIndex = "$zIndex"; //auto sorts things by speed
         image.style.left = "0px";
         image.classes.add("parallaxLayer");

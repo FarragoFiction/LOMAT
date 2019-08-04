@@ -41,6 +41,7 @@ class Tombstone {
     static String NAMETAG = "#NAME#";
     static String CODTAG = "#COD#";
     static String labelPattern = ":___ ";
+    bool cameFromOnline = false;
     //dont respawn plz
     bool onTrail = false;
     Road road; //not for serializing, just for clicking
@@ -170,16 +171,20 @@ class Tombstone {
         content.addAll(tmp);
     }
 
-    ProceduralLayerParallax spawnTrailsona(PhysicalLocation parent, Road road) {
+    Future<void> spawnTrailsona(PhysicalLocation parent, Road road) async {
         //y is from top
         onTrail = true; //so i know how to dismiss self
-        ProceduralLayerParallax layer =  new ProceduralLayerParallax(800, 475,100,false, "images/tombstone.png", parent);
+        if(cachedCanvas == null) {
+            cachedCanvas = await makeCanvas();
+        }
+        CanvasElement tinycanvas = new CanvasElement(width: 140, height: 100);
+        tinycanvas.context2D.drawImageScaled(cachedCanvas,0,0,140,100);
+        ProceduralLayerParallax layer =  new ProceduralLayerParallax.fromImage(800, 475,100,false, new ImageElement(src:tinycanvas.toDataUrl()), parent);
         layer.image.style.pointerEvents = "auto";
         layer.image.onClick.listen((Event e) {
             road.stop();
             drawSelf(Game.instance.container,road, true);
         });
-        return layer;
     }
 
 
@@ -262,7 +267,9 @@ class Tombstone {
 
     Future<CanvasElement> makeCanvas() async {
         CanvasElement canvas = new CanvasElement(width: 800, height: 600);
+        ImageElement timehole = await Loader.getResource("images/TIME.png");
         ImageElement img = await Loader.getResource("images/tombstone.png");
+        canvas.context2D.drawImage(timehole,0,0);
         canvas.context2D.drawImage(img,0,0);
         //TODO draw epilogue
         return canvas;
