@@ -108,8 +108,11 @@ class Tombstone {
     void sendTimeholeData() {
         //don't just always send okay?
         if(!onTrail) {
-            String url = "http://localhost:3000/tombstone_timeholds";
-            post(url, body: {"tombstoneJSON": jsonEncode(toJSON())});
+            //String url = "http://localhost:3000/tombstone_timeholds";
+            String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds";
+            Map<String,String> body = {"tombstoneJSON": jsonEncode(toJSON())};
+            print("body is $body");
+            post(url, body: body);
         }
     }
 
@@ -124,9 +127,12 @@ class Tombstone {
         Game.instance.graves.add(this);
         me.remove();
         me = null; //for garbage collection probably.
-        road.start(); //will start up animation and dhow it too
-        if(!onTrail) {
-            spawnTrailsona(road.trail, road);
+        //test
+        if(road != null) {
+            road.start(); //will start up animation and dhow it too
+            if (!onTrail) {
+                spawnTrailsona(road.trail, road);
+            }
         }
     }
 
@@ -286,7 +292,9 @@ class Tombstone {
     }
 
     static Future<void> loadFromTIMEHOLE() async {
-        String url = "http://localhost:3000/tombstone_timeholds.json";
+       // String url = "http://localhost:3000/tombstone_timeholds.json";
+        String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds.json";
+
         print("trying to load from $url");
         try {
             await HttpRequest.getString(url)

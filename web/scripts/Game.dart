@@ -79,8 +79,9 @@ class Game
         //if either road name matches yours (or is null) return true
         List<Tombstone> ret = new List<Tombstone>();
         Random rand = new Random();
+        graves.shuffle();
         for(Tombstone tombstone in graves) {
-            if((tombstone.townNames.isEmpty && rand.nextDouble() >0.7) || (tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name))) {
+            if((tombstone.townNames.isEmpty && rand.nextDouble() >0.5) || (tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name))) {
                 ret.add(tombstone);
             }
         }
@@ -105,6 +106,7 @@ class Game
             //will add too graves list
             Tombstone.loadFromJSON(new JsonHandler(jsonDecode(json["tombstoneJSON"])));
         }
+        graves.shuffle();
         print("graves has ${graves.length} after loading");
     }
 
