@@ -171,15 +171,20 @@ class Tombstone {
         content.addAll(tmp);
     }
 
-    Future<void> spawnTrailsona(PhysicalLocation parent, Road road) async {
-        //y is from top
-        onTrail = true; //so i know how to dismiss self
+    Future<ImageElement> get image async {
         if(cachedCanvas == null) {
             cachedCanvas = await makeCanvas();
         }
         CanvasElement tinycanvas = new CanvasElement(width: 140, height: 100);
         tinycanvas.context2D.drawImageScaled(cachedCanvas,0,0,140,100);
-        ProceduralLayerParallax layer =  new ProceduralLayerParallax.fromImage(800, 475,100,false, new ImageElement(src:tinycanvas.toDataUrl()), parent);
+        return new ImageElement(src:tinycanvas.toDataUrl());
+    }
+
+    Future<void> spawnTrailsona(PhysicalLocation parent, Road road) async {
+        //y is from top
+        onTrail = true; //so i know how to dismiss self
+        ImageElement waited_image  = await image;
+        ProceduralLayerParallax layer =  new ProceduralLayerParallax.fromImage(800, 475,100,false, waited_image, parent);
         layer.image.style.pointerEvents = "auto";
         layer.image.onClick.listen((Event e) {
             road.stop();

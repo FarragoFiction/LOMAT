@@ -92,4 +92,6 @@ Future<void> testTombstone() async{
     div.appendHtml("${t.toJSON()}");
     t.drawSelf(div,null, false);
     Tombstone.loadFromTIMEHOLE();
+    ImageElement waitedImage = await t.image;
+    div.append(waitedImage);
 }
