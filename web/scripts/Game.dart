@@ -81,12 +81,15 @@ class Game
         Random rand = new Random();
         graves.shuffle();
         for(Tombstone tombstone in graves) {
-            if((tombstone.townNames.isEmpty && rand.nextDouble() >0.5) || (tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name))) {
+            if(canUseTIMEHOLEtombstone(tombstone, rand,ret.length) || (tombstone.townNames.contains(road.destinationTown.name) ||  tombstone.townNames.contains(road.sourceTown.name))) {
                 ret.add(tombstone);
             }
         }
         return ret;
     }
+
+    //dont just have hundreds, you have to have no cities and a random chance
+    bool canUseTIMEHOLEtombstone(Tombstone tombstone, Random rand, int length) => (length < 3 &&tombstone.townNames.isEmpty && rand.nextDouble() >0.8);
 
     Future startOver(PhysicalLocation doop) async {
         Game.instance.removeFunds(Game.instance.funds);
@@ -152,15 +155,15 @@ class Game
     void initializeNPCS() async {
         //as a test, make 1 set npcs and 4 random ones.
         //await makeAmagalmates();
-        wanderingNPCs.add(NPCFactory.jrTest());
+        //wanderingNPCs.add(NPCFactory.jrTest());
         wanderingNPCs.add(NPCFactory.lilscumbag());
         wanderingNPCs.add(NPCFactory.ebony());
         wanderingNPCs.add(NPCFactory.rogerKoon());
         wanderingNPCs.add(NPCFactory.skol());
         wanderingNPCs.add(NPCFactory.halja());
         wanderingNPCs.add(NPCFactory.the_kid());
-        wanderingNPCs.add(NPCFactory.loki());
-        wanderingNPCs.add(NPCFactory.grim());
+        //wanderingNPCs.add(NPCFactory.loki());
+        //wanderingNPCs.add(NPCFactory.grim());
         //yn will be spawned at town time
         print('after initialization, npcs are $wanderingNPCs');
     }
@@ -311,12 +314,12 @@ class Game
         DelayEffect largeEffect = new DelayEffect(3);
         ret.events.clear();
         ret.events = new WeightedList<RoadEvent>();
-        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 9870.01));
+        ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 1));
         ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.1));
-        ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} spends the night shivering in wet boots.", new DiseaseEffect(), 0.05));
-        ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} mentions finding interesting new friends back in the last town.", new DiseaseEffect(), 0.00005));
+        ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} spends the night shivering in wet boots.", new DiseaseEffect(), 0.5));
+        ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} mentions finding interesting new friends back in the last town.", new DiseaseEffect(), 0.05));
 
-        ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.01));
+        //ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.01));
         ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
         ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3));
 
