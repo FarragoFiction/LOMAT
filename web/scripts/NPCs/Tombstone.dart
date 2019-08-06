@@ -174,6 +174,7 @@ class Tombstone {
     Future<ImageElement> get image async {
         if(cachedCanvas == null) {
             cachedCanvas = await makeCanvas();
+            drawText(cachedCanvas);
         }
         CanvasElement tinycanvas = new CanvasElement(width: 140, height: 100);
         tinycanvas.context2D.drawImageScaled(cachedCanvas,0,0,140,100);

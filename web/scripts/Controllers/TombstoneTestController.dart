@@ -89,6 +89,7 @@ void testAnimation() {
 
 Future<void> testTombstone() async{
     Tombstone t = new Tombstone.withoutNPC("JRTest", "JRBurg","getting wasted");
+    t.cameFromOnline = true;
     div.appendHtml("${t.toJSON()}");
     t.drawSelf(div,null, false);
     Tombstone.loadFromTIMEHOLE();
