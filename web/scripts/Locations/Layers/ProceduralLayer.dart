@@ -18,7 +18,9 @@ class ProceduralLayer extends StaticLayer {
 
   void init() {
       zIndex = yToZIndex(y,height);
-      image = new ImageElement(src: imageLocation);
+      if(image == null) {
+          image = new ImageElement(src: imageLocation);
+      }
       image.style.height = "$height px";
       image.height = height;
       image.style.zIndex = "$zIndex"; //auto sorts things by speed

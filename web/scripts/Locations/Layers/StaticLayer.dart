@@ -19,8 +19,12 @@ class StaticLayer {
     }
 
     void init() {
+        print("initializing $this with image $image");
         if(image == null) {
+            print("i reset image to have imagelocation $imageLocation");
             image = new ImageElement(src: imageLocation);
+        }else {
+            print("i made a tombstone probably, i am $this");
         }
         image.style.zIndex = "$zIndex"; //auto sorts things by speed
         image.style.left = "0px";

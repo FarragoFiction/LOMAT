@@ -6,6 +6,7 @@ import 'package:CommonLib/Utility.dart';
 
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
+import '../Game.dart';
 import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
@@ -89,10 +90,22 @@ void testAnimation() {
 
 Future<void> testTombstone() async{
     Tombstone t = new Tombstone.withoutNPC("JRTest", "JRBurg","getting wasted");
-    t.cameFromOnline = true;
+    t.cameFromOnline = false;
     div.appendHtml("${t.toJSON()}");
     t.drawSelf(div,null, false);
     Tombstone.loadFromTIMEHOLE();
     ImageElement waitedImage = await t.image;
     div.append(waitedImage);
+    queryTimehole();
+}
+
+Future<void> queryTimehole() async{
+
+    await Tombstone.loadFromTIMEHOLE();
+    List<Tombstone> graves = Game.instance.graves;
+    for(Tombstone t in graves) {
+        ImageElement waitedImage = await t.image;
+        div.append(waitedImage);
+    }
+
 }

@@ -43,7 +43,7 @@ class Game
     //TODO probably deprecating this, void travel makes it unneeded
     int travelAmount = 1000; //default, if you go slower or faster it changes.
     int diseaseAmount = 1000; //default, if you go slower or faster it changes.
-    int eventAmount = 5000; //default, if you go slower or faster it changes.
+    int eventAmount = 3000; //default, if you go slower or faster it changes.
 
     int get costPerTravelTick => ((partyMembers.length + 1) * (eventAmount/1000).ceil());
 
@@ -312,6 +312,8 @@ class Game
         DelayEffect smallDelay = new DelayEffect(1);
         DelayEffect mediumEffect = new DelayEffect(2);
         DelayEffect largeEffect = new DelayEffect(3);
+        DelayEffect largeEffectBackwards = new DelayEffect(-13);
+
         ret.events.clear();
         ret.events = new WeightedList<RoadEvent>();
         ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 1));
@@ -322,6 +324,7 @@ class Game
         //ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.01));
         ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
         ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3));
+        ret.events.add(new RoadEvent("Absolutely Get Stoked","BY THE FATHERS MANY EYES, your SWEET VIKING LAND BOAT is really booking it.", largeEffectBackwards, 0.3));
 
         return ret;
     }

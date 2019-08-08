@@ -176,12 +176,26 @@ class Tombstone {
             cachedCanvas = await makeCanvas();
             drawText(cachedCanvas);
         }
-        CanvasElement tinycanvas = new CanvasElement(width: 140, height: 100);
+        final CanvasElement tinycanvas = new CanvasElement(width: 140, height: 100);
         tinycanvas.context2D.drawImageScaled(cachedCanvas,0,0,140,100);
         return new ImageElement(src:tinycanvas.toDataUrl());
     }
 
     Future<void> spawnTrailsona(PhysicalLocation parent, Road road) async {
+        //y is from top
+        onTrail = true; //so i know how to dismiss self
+        ImageElement waited_image  = await image;
+        ProceduralLayerParallax layer =  new ProceduralLayerParallax.fromImage(800, 475,100,false,waited_image, parent);
+        layer.image.style.pointerEvents = "auto";
+        layer.image.onClick.listen((Event e) {
+            road.stop();
+            drawSelf(Game.instance.container,road, true);
+        });
+        return layer;
+    }
+
+
+    Future<void> spawnTrailsonaOld(PhysicalLocation parent, Road road) async {
         //y is from top
         onTrail = true; //so i know how to dismiss self
         ImageElement waited_image  = await image;
@@ -191,6 +205,8 @@ class Tombstone {
             road.stop();
             drawSelf(Game.instance.container,road, true);
         });
+
+
     }
 
 
@@ -273,11 +289,12 @@ class Tombstone {
 
     Future<CanvasElement> makeCanvas() async {
         CanvasElement canvas = new CanvasElement(width: 800, height: 600);
-        ImageElement timehole = await Loader.getResource("images/TIME.png");
+        if(cameFromOnline) {
+            ImageElement timehole = await Loader.getResource("images/TIME.png");
+            canvas.context2D.drawImage(timehole,0,0);
+        }
         ImageElement img = await Loader.getResource("images/tombstone.png");
-        canvas.context2D.drawImage(timehole,0,0);
         canvas.context2D.drawImage(img,0,0);
-        //TODO draw epilogue
         return canvas;
     }
 
