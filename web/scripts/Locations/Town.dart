@@ -88,7 +88,16 @@ class Town extends PhysicalLocation {
        }
   }
 
-  Future<void> initGenome() async{
+
+    void testFenrir() {
+        layers.add(new StaticLayer("images/Enemies/FenrirBottom.gif", this, 1));
+        layers.add(new StaticLayer("images/Enemies/FenrirMid.gif", this, 1,true));
+        layers.add(new StaticLayer("images/Enemies/FenrirTop.gif", this, 1));
+
+    }
+
+
+    Future<void> initGenome() async{
     if(genome == null) {
         //oh no the genome has async elements
         genome = new TownGenome(new Random(seed), new Map<String, String>() );
@@ -125,6 +134,7 @@ class Town extends PhysicalLocation {
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.GROUNDKEY], this, 1));
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.MIDGROUNDKEY], this, 1));
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.FOREGROUNDKEY], this, 1));
+      testFenrir();
   }
 
    String get bg {
@@ -170,7 +180,6 @@ class Town extends PhysicalLocation {
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
       firstTime = false;
-
       setNPCGoals();
   }
 

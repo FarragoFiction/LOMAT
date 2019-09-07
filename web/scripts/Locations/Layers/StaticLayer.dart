@@ -7,10 +7,11 @@ class StaticLayer {
     PhysicalLocation parent;
     int zIndex;
     int speed;
+    bool fade;
 
 
 
-    StaticLayer(String this.imageLocation, PhysicalLocation this.parent, int this.zIndex) {
+    StaticLayer(String this.imageLocation, PhysicalLocation this.parent, int this.zIndex, [bool this.fade = false]) {
         init();
     }
 
@@ -25,6 +26,9 @@ class StaticLayer {
             image = new ImageElement(src: imageLocation);
         }else {
             print("i made a tombstone probably, i am $this");
+        }
+        if(fade) {
+            image.classes.add("startFade");
         }
         image.style.zIndex = "$zIndex"; //auto sorts things by speed
         image.style.left = "0px";
