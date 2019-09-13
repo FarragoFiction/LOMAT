@@ -100,18 +100,20 @@ class Town extends PhysicalLocation {
 
     Future<void> initGenome() async{
     if(genome == null) {
+        print("debug intro: genome was null for $name");
         //oh no the genome has async elements
         genome = new TownGenome(new Random(seed), new Map<String, String>() );
         await genome.init();
     }else {
-      //print("genome wasn't null for $name");
+      print("debug intro: genome wasn't null for $name");
     }
-    proceduralIntroInit();
+    proceduralIntroInit("genome init");
 
   }
 
-  String proceduralIntroInit() {
+  String proceduralIntroInit(String reason) {
       introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
+      print("debug intro because $reason for $name is $introductionText");
   }
 
 
@@ -202,7 +204,11 @@ class Town extends PhysicalLocation {
   void startPlayingMusic() {
       String next = nextSong;
       //print("starting to play the next song $next from list ${genome.playList}");
-      SoundControl.instance.playMusicList(next, startPlayingMusic);
+      window.onMouseMove.listen((Event e){
+          if(SoundControl.instance.bgMusic.paused) {
+              SoundControl.instance.playMusicList(next, startPlayingMusic);
+          }
+      });
   }
 
   static bool get canMakeTown => cachedTowns.length < minTowns;
@@ -242,7 +248,7 @@ class Town extends PhysicalLocation {
         await generateProceduralName(nextTownSeed), npcs, null,
         await genome.breed(coparent, rand));
     //await town.initGenome();
-    proceduralIntroInit();
+    town.proceduralIntroInit("spawn new baby");
     return town;
   }
 
@@ -280,14 +286,14 @@ class Town extends PhysicalLocation {
           window.console.warn(
               "getting a void town, this is probably a problem");
           TownGenome ret = new TownGenome(new Random(13), null);
-          ret.startText = "";
-          ret.middleText = "";
-          ret.endText = "";
-          ret.playList = <String>["", "", "", "", "", ""];
+          ret.startText = "You arrive in INSERTNAMEHERE. You are not supposed to be here.";
+          ret.middleText = "You are not supposed to be here.";
+          ret.endText = "You feel the presence of FENRIR.";
           ret.foreground = "${TownGenome.foregroundBase}/0.png";
           ret.midGround = "${TownGenome.midgroundBase}/0.png";
           ret.ground = "${TownGenome.groundBase}/0.png";
           ret.background = "${TownGenome.backgroundBase}/0.png";
+
           ;
           voidTown = new Town.dontevercallthisblindly(
               "The Void", [], null, ret)
