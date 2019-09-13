@@ -160,7 +160,7 @@ class Town extends PhysicalLocation {
   @override
   Future displayOnScreen(Element div) async {
       print("trying to display on screen, but has init been called yet? ${genome.simpleGenes.length}");
-      if(rand.nextDouble()>0.6){ //yn shows up 1/3 of the time.
+      if(rand.nextDouble()>0.95){ //yn shows up 5% of the time.
           npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
       }
       print("npc list is is ${Game.instance.wanderingNPCs}");
