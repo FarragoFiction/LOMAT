@@ -73,6 +73,12 @@ class VoidTravel extends MenuItem {
     SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
     Game.instance.removeFunds(cost);
     Town.cachedTowns.remove(town);
+    if(town == Game.instance.currentLocation) {
+      town.teardown();
+      Town.voidTown.displayOnScreen(Game.instance.container);
+      Game.instance.currentLocation = Town.voidTown;
+
+    }
     await Future.delayed(Duration(seconds: 2));
     me.remove();
     doVoidTravel(); //pop back up
@@ -140,7 +146,6 @@ class VoidTravel extends MenuItem {
   }
 
   void townItem(Town town, UListElement list, DivElement me) {
-    if(town != holder.location) {
       String neighbor = "";
       if ((holder.location as Town).neighbors.contains(town)) {
         neighbor = " (nearby)";
@@ -167,7 +172,4 @@ class VoidTravel extends MenuItem {
       li.append(span);
 
     }
-  }
-
-
 }
