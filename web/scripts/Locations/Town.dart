@@ -243,16 +243,16 @@ class Town extends PhysicalLocation {
         coparent = coparentSource.genome;
     }
     List<LOMATNPC> npcs = Game.instance.findWanderingNPCS();
-/*
+
     Town town = new Town.dontevercallthisblindly(
         await generateProceduralName(nextTownSeed), npcs, null,
         await genome.breed(coparent, rand));
     await town.initGenome();
     town.proceduralIntroInit("spawn new baby");
     return town;
-    */
-      await generateProceduralName(nextTownSeed);
-      Town town = new Town.dontevercallthisblindly("plz work",[],null,Game.instance.startingGenome());
+
+      //await generateProceduralName(nextTownSeed);
+      //Town town = new Town.dontevercallthisblindly("plz work",[],null,Game.instance.startingGenome());
     return town;
 
 
