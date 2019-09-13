@@ -103,7 +103,7 @@ class Town extends PhysicalLocation {
         print("debug intro: genome was null for $name");
         //oh no the genome has async elements
         genome = new TownGenome(new Random(seed), new Map<String, String>() );
-        await genome.init();
+        await genome.init("town wants to init a new genome");
     }else {
       print("debug intro: genome wasn't null for $name");
     }
@@ -243,13 +243,19 @@ class Town extends PhysicalLocation {
         coparent = coparentSource.genome;
     }
     List<LOMATNPC> npcs = Game.instance.findWanderingNPCS();
-
+/*
     Town town = new Town.dontevercallthisblindly(
         await generateProceduralName(nextTownSeed), npcs, null,
         await genome.breed(coparent, rand));
-    //await town.initGenome();
+    await town.initGenome();
     town.proceduralIntroInit("spawn new baby");
     return town;
+    */
+      await generateProceduralName(nextTownSeed);
+      Town town = new Town.dontevercallthisblindly("plz work",[],null,Game.instance.startingGenome());
+    return town;
+
+
   }
 
   String get nextSong {
@@ -308,6 +314,7 @@ class Town extends PhysicalLocation {
     return "$name";
   }
 
+  // TODO for some reason this part breaks the void town.
   static Future<String> generateProceduralName(nextSeed ) async {
       TextEngine textEngine = new TextEngine(nextSeed);
       await textEngine.loadList("towns");

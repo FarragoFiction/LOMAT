@@ -97,10 +97,11 @@ class TownGenome {
     //TODO let towns breed plz
     TownGenome(Random this.rand,Map<String, String> this.simpleGenes) {
         if(rand == null) rand = new Random();
-        if(simpleGenes == null) init();
+        if(simpleGenes == null) init("constructor");
     }
 
-    Future<Null> init() async{
+    Future<Null> init(String reason) async{
+         print("intro debug: initing $this because $reason, before bg was ${simpleGenes}");
         simpleGenes = new Map<String, String>();
         TextEngine textEngine = new TextEngine(rand.nextInt());
         //TODO: have things like industry or whatever for towns to consistently reference
@@ -129,7 +130,9 @@ class TownGenome {
     Future<TownGenome> breed(TownGenome coparent, Random rand) async{
          //child will have random values so to get mutations just don't over ride
          TownGenome child = new TownGenome(rand,null);
-         await child.init();
+
+         await child.init("bred child init");
+
          //take each key and pick either parent or coparent or mutate (3% chance)
         for(String key in simpleGenes.keys) {
             if(rand.nextDouble() < genomeStability) {
