@@ -33,6 +33,7 @@ class Town extends PhysicalLocation {
     static String INSERTNAMEHERE = "INSERTNAMEHERE";
     //TODO load from localStorage
     static List<Town> cachedTowns = [];
+    static Town voidTown;
     static int maxTowns = 85; //TODO configure this.
     static int minTowns = 13; //just long enough that you don't notice at first what's going on.
     int seed = 0;
@@ -134,7 +135,9 @@ class Town extends PhysicalLocation {
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.GROUNDKEY], this, 1));
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.MIDGROUNDKEY], this, 1));
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.FOREGROUNDKEY], this, 1));
-      testFenrir();
+      if(this == voidTown) {
+          testFenrir();
+      }
   }
 
    String get bg {
@@ -271,21 +274,27 @@ class Town extends PhysicalLocation {
       return town;
   }
 
-  //should never spawn, technically
-  static Town getVoidTown() {
-      window.console.warn("getting a void town, this is probably a problem");
-      TownGenome ret = new TownGenome(new Random(13),null);
-      ret.startText = "";
-      ret.middleText = "";
-      ret.endText = "";
-      ret.playList = <String>["","","","","",""];
-      ret.foreground = "${TownGenome.foregroundBase}/0.png";
-      ret.midGround = "${TownGenome.midgroundBase}/0.png";
-      ret.ground = "${TownGenome.groundBase}/0.png";
-      ret.background = "${TownGenome.backgroundBase}/0.png";;
-      Town town =  new Town.dontevercallthisblindly("The Void",[],null,ret)..introductionText ="You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of DENNIS.";
-      town.initGenome(); //in theory this not being awaited means the void town might crash
-      return town;
+  //fenrir is in the void
+  static void initVoidTown() async {
+      if(voidTown == null) {
+          window.console.warn(
+              "getting a void town, this is probably a problem");
+          TownGenome ret = new TownGenome(new Random(13), null);
+          ret.startText = "";
+          ret.middleText = "";
+          ret.endText = "";
+          ret.playList = <String>["", "", "", "", "", ""];
+          ret.foreground = "${TownGenome.foregroundBase}/0.png";
+          ret.midGround = "${TownGenome.midgroundBase}/0.png";
+          ret.ground = "${TownGenome.groundBase}/0.png";
+          ret.background = "${TownGenome.backgroundBase}/0.png";
+          ;
+          voidTown = new Town.dontevercallthisblindly(
+              "The Void", [], null, ret)
+              ..introductionText = "You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of FENRIR.";
+         await voidTown.initGenome(); //in theory this not being awaited means the void town might crash
+          print("void town bg = ${voidTown.bg}");
+      }
   }
 
   @override
@@ -304,7 +313,6 @@ class Town extends PhysicalLocation {
 
 
   static Future<List<LOMATNPC>> generateProceduralNPCs() async {
-      print("no bad stop fenrir only");
       List<LOMATNPC> ret = new List<LOMATNPC>();
       int npcAmount = new Random(nextTownSeed).nextInt(5)+1;
       for(int i = 0; i<npcAmount; i++) {

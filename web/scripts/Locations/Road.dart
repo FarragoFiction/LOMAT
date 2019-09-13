@@ -45,11 +45,11 @@ class Road {
         //road to nowhere is go.
         if(sourceTown == null) {
             print("source town was null, but destination town is ${destinationTown}");
-            sourceTown = Town.getVoidTown();
+            sourceTown = Town.voidTown;
         }
         if(destinationTown == null) {
             print("destination town was null, but source town is ${sourceTown}");
-            destinationTown = Town.getVoidTown();
+            destinationTown = Town.voidTown;
         }
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);

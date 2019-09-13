@@ -13,6 +13,7 @@ DivElement div = querySelector('#output');
 Future<void> main() async{
   Game game = Game.instance;
   await game.initializeNPCS();
+  await Town.initVoidTown();
   await game.setStartingTown();
   await game.initializeTowns();
 
