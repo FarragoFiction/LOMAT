@@ -291,10 +291,9 @@ class Game
     }
 
     Future setStartingTown() async {
-        //Town town = new Town.dontevercallthisblindly("city2",findWanderingNPCS(),null,startingGenome());
-        Town town = Town.voidTown;
+        Town town = new Town.dontevercallthisblindly("city2",findWanderingNPCS(),null,startingGenome());
+        //Town town = voidTown;
         //don't overwrite genome
-       //await  town.initGenome();
         currentLocation = town;
     }
 
