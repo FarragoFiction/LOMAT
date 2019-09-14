@@ -164,24 +164,15 @@ class Town extends PhysicalLocation {
 
   @override
   Future displayOnScreen(Element div) async {
-      print("trying to display $name on screen, but has init been called yet? ${genome.midGround}");
       if(rand.nextDouble()>0.95){ //yn shows up 5% of the time.
           npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
       }
-      print("npc list is is ${Game.instance.wanderingNPCs}");
 
       roads = await Road.spawnRandomRoadsForTown(this);
 
       super.displayOnScreen(div);
       //auto play not allowed but we can try cuz this might not be first screen
       startPlayingMusic();
-      container.onClick.listen((Event e)
-      {
-          //don't play more than once unless you came from a diff place
-          if(!SoundControl.instance.musicPlaying || !SoundControl.instance.bgMusic.src.contains("Slice")) {
-             startPlayingMusic();
-          }
-      });
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
       firstTime = false;
@@ -203,11 +194,12 @@ class Town extends PhysicalLocation {
 
   void startPlayingMusic() {
       String next = nextSong;
-      //print("starting to play the next song $next from list ${genome.playList}");
-      window.onMouseMove.listen((Event e){
-          if(SoundControl.instance.bgMusic.paused) {
-              SoundControl.instance.playMusicList(next, startPlayingMusic);
-          }
+      print("trying to play the next song $next from list ${genome.playList}");
+      StreamSubscription ss;
+      ss = window.onMouseMove.listen((Event e){
+          //print("the mouse moved so i'm trying  $next from list ${genome.playList} happen");
+          ss.cancel();
+          SoundControl.instance.playMusicList(next, startPlayingMusic);
       });
   }
 
@@ -288,7 +280,7 @@ class Town extends PhysicalLocation {
           "getting a void town, this is probably a problem");
       Map<String, String> simpleGenes = new Map<String, String>();
       simpleGenes[TownGenome.BGIMAGEKEY] = "${TownGenome.backgroundBase}/0.png";
-      simpleGenes[TownGenome.GROUNDKEY] = "${TownGenome.groundBase}/0.png";
+      simpleGenes[TownGenome.GROUNDKEY] = "${TownGenome.groundBase}/3.png";
       simpleGenes[TownGenome.MIDGROUNDKEY] = "${TownGenome.midgroundBase}/0.png";
       simpleGenes[TownGenome.FOREGROUNDKEY] = "${TownGenome.foregroundBase}/0.png";
       simpleGenes[TownGenome.STARTTEXT] = "You arrive in INSERTNAMEHERE.";
@@ -306,9 +298,7 @@ class Town extends PhysicalLocation {
       voidTown = new Town.dontevercallthisblindly(
           "The Void", [], null, ret)
           ..introductionText = "You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of FENRIR.";
-      print("intro debug void about to be initing: void town bg = ${voidTown.bg}");
       await voidTown.initGenome(); //in theory this not being awaited means the void town might crash
-      print("intro debug void done initing: void town bg = ${voidTown.bg}");
       Town.cachedTowns.remove(voidTown);
   }
 

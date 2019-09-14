@@ -75,6 +75,7 @@ class VoidTravel extends MenuItem {
     Town.cachedTowns.remove(town);
     if(town == Game.instance.currentLocation) {
       town.teardown();
+      SoundControl.instance.bgMusic.pause();
       Town.voidTown.displayOnScreen(Game.instance.container);
       Game.instance.currentLocation = Town.voidTown;
 

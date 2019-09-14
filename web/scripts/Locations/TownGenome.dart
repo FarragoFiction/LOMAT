@@ -104,7 +104,6 @@ class TownGenome {
     }
 
     Future<Null> init(String reason) async{
-         print("intro debug start: initing $townName because $reason, before bg was ${simpleGenes}");
         simpleGenes = new Map<String, String>();
         TextEngine textEngine = new TextEngine(rand.nextInt());
         //TODO: have things like industry or whatever for towns to consistently reference
