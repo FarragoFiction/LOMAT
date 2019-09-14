@@ -102,7 +102,7 @@ class Town extends PhysicalLocation {
     if(genome == null) {
         print("debug intro: genome was null for $name");
         //oh no the genome has async elements
-        genome = new TownGenome(new Random(seed), new Map<String, String>() );
+        genome = new TownGenome("$name",new Random(seed), new Map<String, String>() );
         await genome.init("town wants to init a new genome");
     }else {
       print("debug intro: genome wasn't null for $name");
@@ -164,7 +164,7 @@ class Town extends PhysicalLocation {
 
   @override
   Future displayOnScreen(Element div) async {
-      print("trying to display on screen, but has init been called yet? ${genome.simpleGenes.length}");
+      print("trying to display $name on screen, but has init been called yet? ${genome.midGround}");
       if(rand.nextDouble()>0.95){ //yn shows up 5% of the time.
           npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
       }
@@ -251,10 +251,6 @@ class Town extends PhysicalLocation {
     town.proceduralIntroInit("spawn new baby");
     return town;
 
-      //await generateProceduralName(nextTownSeed);
-      //Town town = new Town.dontevercallthisblindly("plz work",[],null,Game.instance.startingGenome());
-    return town;
-
 
   }
 
@@ -288,25 +284,23 @@ class Town extends PhysicalLocation {
 
   //fenrir is in the void
   static void initVoidTown() async {
-      if(voidTown == null) {
-          window.console.warn(
-              "getting a void town, this is probably a problem");
-          TownGenome ret = new TownGenome(new Random(13), null);
-          ret.startText = "You arrive in INSERTNAMEHERE. You are not supposed to be here.";
-          ret.middleText = "You are not supposed to be here.";
-          ret.endText = "You feel the presence of FENRIR.";
-          ret.foreground = "${TownGenome.foregroundBase}/0.png";
-          ret.midGround = "${TownGenome.midgroundBase}/0.png";
-          ret.ground = "${TownGenome.groundBase}/0.png";
-          ret.background = "${TownGenome.backgroundBase}/0.png";
+      window.console.warn(
+          "getting a void town, this is probably a problem");
+      TownGenome ret = new TownGenome("void town",new Random(13), null);
+      ret.startText = "You arrive in INSERTNAMEHERE. You are not supposed to be here.";
+      ret.middleText = "You are not supposed to be here.";
+      ret.endText = "You feel the presence of FENRIR.";
+      ret.foreground = "${TownGenome.foregroundBase}/0.png";
+      ret.midGround = "${TownGenome.midgroundBase}/0.png";
+      ret.ground = "${TownGenome.groundBase}/0.png";
+      ret.background = "${TownGenome.backgroundBase}/0.png";
 
-          ;
-          voidTown = new Town.dontevercallthisblindly(
-              "The Void", [], null, ret)
-              ..introductionText = "You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of FENRIR.";
-         await voidTown.initGenome(); //in theory this not being awaited means the void town might crash
-          print("void town bg = ${voidTown.bg}");
-      }
+      ;
+      voidTown = new Town.dontevercallthisblindly(
+          "The Void", [], null, ret)
+          ..introductionText = "You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of FENRIR.";
+     await voidTown.initGenome(); //in theory this not being awaited means the void town might crash
+      print("void town bg = ${voidTown.bg}");
   }
 
   @override

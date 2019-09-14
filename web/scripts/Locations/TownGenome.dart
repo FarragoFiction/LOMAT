@@ -9,10 +9,13 @@ import 'Layers/StaticLayer.dart';
 import 'package:CommonLib/Random.dart';
 import 'package:CommonLib/src/collection/weighted_lists.dart';
 
+import 'Town.dart';
+
 class TownGenome {
     //its a hash so i can do genetic combination of towns because what can i say i love genetic algorithms
     //the simplest genes are just strings
     Map<String, String> simpleGenes;
+    String townName; //used for debugging purposes
     Random rand;
     //higher means more stable
     double genomeStability = .5;
@@ -95,13 +98,13 @@ class TownGenome {
 
     //lets you take in a list of genes for premade towns
     //TODO let towns breed plz
-    TownGenome(Random this.rand,Map<String, String> this.simpleGenes) {
+    TownGenome(String this.townName, Random this.rand,Map<String, String> this.simpleGenes) {
         if(rand == null) rand = new Random();
         if(simpleGenes == null) init("constructor");
     }
 
     Future<Null> init(String reason) async{
-         print("intro debug: initing $this because $reason, before bg was ${simpleGenes}");
+         print("intro debug: initing $townName because $reason, before bg was ${simpleGenes}");
         simpleGenes = new Map<String, String>();
         TextEngine textEngine = new TextEngine(rand.nextInt());
         //TODO: have things like industry or whatever for towns to consistently reference
@@ -129,7 +132,7 @@ class TownGenome {
 
     Future<TownGenome> breed(TownGenome coparent, Random rand) async{
          //child will have random values so to get mutations just don't over ride
-         TownGenome child = new TownGenome(rand,null);
+         TownGenome child = new TownGenome("unnamed child",rand,null);
          await child.init("bred child init");
          //take each key and pick either parent or coparent or mutate (3% chance)
         for(String key in simpleGenes.keys) {
@@ -201,6 +204,7 @@ class TownGenome {
     }
 
     static String randomMidground(Random rand) {
+         print("trying to get random midground");
         int fileNumber =  rand.nextIntRange(1,maxMGs);
         return "$midgroundBase$fileNumber.png";
     }
