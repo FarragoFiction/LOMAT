@@ -286,21 +286,30 @@ class Town extends PhysicalLocation {
   static void initVoidTown() async {
       window.console.warn(
           "getting a void town, this is probably a problem");
-      TownGenome ret = new TownGenome("void town",new Random(13), null);
-      ret.startText = "You arrive in INSERTNAMEHERE. You are not supposed to be here.";
-      ret.middleText = "You are not supposed to be here.";
-      ret.endText = "You feel the presence of FENRIR.";
-      ret.foreground = "${TownGenome.foregroundBase}/0.png";
-      ret.midGround = "${TownGenome.midgroundBase}/0.png";
-      ret.ground = "${TownGenome.groundBase}/0.png";
-      ret.background = "${TownGenome.backgroundBase}/0.png";
-
+      Map<String, String> simpleGenes = new Map<String, String>();
+      simpleGenes[TownGenome.BGIMAGEKEY] = "${TownGenome.backgroundBase}/0.png";
+      simpleGenes[TownGenome.GROUNDKEY] = "${TownGenome.groundBase}/0.png";
+      simpleGenes[TownGenome.MIDGROUNDKEY] = "${TownGenome.midgroundBase}/0.png";
+      simpleGenes[TownGenome.FOREGROUNDKEY] = "${TownGenome.foregroundBase}/0.png";
+      simpleGenes[TownGenome.STARTTEXT] = "You arrive in INSERTNAMEHERE.";
+      simpleGenes[TownGenome.MIDDLETEXT] = "You are not supposed to be here.";
+      simpleGenes[TownGenome.ENDTEXT] = "You feel the presence of FENRIR.";
+      simpleGenes[TownGenome.STARTSONG1] = "wind0";
+      simpleGenes[TownGenome.STARTSONG2] = "wind1";
+      simpleGenes[TownGenome.MIDDLESONG1] =  "wind2";
+      simpleGenes[TownGenome.MIDDLESONG2] =  "wind3";
+      simpleGenes[TownGenome.ENDSONG1] =  "wind4";
+      simpleGenes[TownGenome.ENDSONG2] =  "wind2";
+      TownGenome ret = new TownGenome("void town",new Random(13), simpleGenes);
       ;
+
       voidTown = new Town.dontevercallthisblindly(
           "The Void", [], null, ret)
           ..introductionText = "You arrive in INSERTNAMEHERE. You are not supposed to be here. You feel the presence of FENRIR.";
-     await voidTown.initGenome(); //in theory this not being awaited means the void town might crash
-      print("void town bg = ${voidTown.bg}");
+      print("intro debug void about to be initing: void town bg = ${voidTown.bg}");
+      await voidTown.initGenome(); //in theory this not being awaited means the void town might crash
+      print("intro debug void done initing: void town bg = ${voidTown.bg}");
+      Town.cachedTowns.remove(voidTown);
   }
 
   @override
