@@ -130,9 +130,7 @@ class TownGenome {
     Future<TownGenome> breed(TownGenome coparent, Random rand) async{
          //child will have random values so to get mutations just don't over ride
          TownGenome child = new TownGenome(rand,null);
-
          await child.init("bred child init");
-
          //take each key and pick either parent or coparent or mutate (3% chance)
         for(String key in simpleGenes.keys) {
             if(rand.nextDouble() < genomeStability) {
@@ -153,7 +151,7 @@ class TownGenome {
          WeightedList<RoadEvent> ret = new WeightedList<RoadEvent>();
         for(int i = 0; i<events.length; i++) {
             if(rand.nextDouble() < genomeStability) {
-                if (coParentEvents != null && coParentEvents.length < i && rand.nextBool()) {
+                if (coParentEvents != null &&  i <coParentEvents.length && rand.nextBool()) {
                     ret.add(coParentEvents[i]); //TODO ask pl how to get the weight for this item out
                 }else {
                    ret.add(events[i]);
