@@ -8,6 +8,9 @@ import 'package:CommonLib/Random.dart';
 
 class InstaKillEffect extends Effect {
     @override
+    ImageElement image = new ImageElement(src: "images/EventIcons/instagib.png");
+
+    @override
     String name = "InstaKillEffect";
     @override
     int amount;

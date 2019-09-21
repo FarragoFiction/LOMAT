@@ -8,6 +8,8 @@ import 'dart:html';
 import 'package:CommonLib/Random.dart';
 
 class DiseaseEffect extends Effect {
+    ImageElement image = new ImageElement(src: "images/EventIcons/sick.png");
+
     @override
     String name = "DiseaseEffect";
     @override

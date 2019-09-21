@@ -52,14 +52,24 @@ void testPhrases() {
 
 void loadGulls() {
     List<LOMATNPC> npcs = List<LOMATNPC>();
-    npcs.add(NPCFactory.skol());
-    npcs.add(NPCFactory.rogerKoon());
+    npcs.add(NPCFactory.halja());
+    npcs.add(NPCFactory.lilscumbag());
+    npcs.add(NPCFactory.grim());
+    npcs.add(NPCFactory.loki());
+    npcs.add(NPCFactory.yn(new Random()));
+
+
     //i can confirm that right before returning, ebony has the right color
     //and that right AFTER roger is returning ebony has the wrong one.
     //do they somehow share the same palette reference?
     //....VOID PALETTE
     for(LOMATNPC npc in npcs) {
-        div.append(npc.animation.element);    }
+        if(npc is NonGullLOMATNPC) {
+            div.append((npc as NonGullLOMATNPC).avatar);
+        }else {
+            div.append(npc.animation.element);
+        }
+    }
 
 }
 

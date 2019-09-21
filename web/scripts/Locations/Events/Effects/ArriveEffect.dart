@@ -9,6 +9,9 @@ class ArriveEffect extends Effect {
     int amount;
 
     @override
+    ImageElement image = new ImageElement(src: "images/EventIcons/instagib.png");
+
+    @override
     String get flavorText =>  "You somehow slip in the cracks of reality and arrive immediatly at your destination.";
 
     ArriveEffect(int this.amount);
