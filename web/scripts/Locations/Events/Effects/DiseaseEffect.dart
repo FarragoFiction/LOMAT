@@ -14,6 +14,7 @@ class DiseaseEffect extends Effect {
     String name = "DiseaseEffect";
     @override
     int amount;
+    Disease disease;
 
 
     //so i can refer to them in flavor text.
@@ -23,7 +24,7 @@ class DiseaseEffect extends Effect {
     @override
     String get flavorText =>  "${RoadEvent.PARTYMEMBER} gets $diseaseName. $diseaseEffect";
 
-    DiseaseEffect();
+    DiseaseEffect([Disease disease]);
 
     //pick a random npc
   @override
@@ -32,7 +33,10 @@ class DiseaseEffect extends Effect {
     Game game = Game.instance;
     target = new Random().pickFrom(game.partyMembers);
     targetName = target.name;
-    Disease disease = await Disease.generateProcedural(Disease.convertWordToNumber(road.sourceTown.name));
+    if(disease == null) {
+        disease = await Disease.generateProcedural(
+            Disease.convertWordToNumber(road.sourceTown.name));
+    }
     diseaseName = disease.name;
     diseaseEffect = disease.description;
     target.addDisease(disease);
