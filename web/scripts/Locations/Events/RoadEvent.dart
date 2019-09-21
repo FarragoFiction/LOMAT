@@ -70,14 +70,19 @@ class RoadEvent {
 
     Future<bool> triggered(Road road) async {
         //if a specific party member has to exist,
-        if(requiredPartyMember != null && Game.instance.partyMembers.contains(requiredPartyMember)) {
-            if (random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
-                //effect will set relevant info like target name, have it go first
-                await effect.apply(road);
-                popup(Game.instance.container);
-                return true;
-            }
+        if(requiredPartyMember != null && !Game.instance.partyMembers.contains(requiredPartyMember)) {
+            return false;
         }
+
+        if (random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
+            //effect will set relevant info like target name, have it go first
+            await effect.apply(road);
+            popup(Game.instance.container);
+            return true;
+        }
+
+
+
         return false;
     }
 

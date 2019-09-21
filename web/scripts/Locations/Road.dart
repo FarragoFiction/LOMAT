@@ -53,6 +53,7 @@ class Road {
         }
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
+
         Game.instance.partyMembers.forEach((LOMATNPC npc) {
             npc.partyEvents.forEach((RoadEvent event) {
                 event.requiredPartyMember = npc;
@@ -60,18 +61,12 @@ class Road {
             });        });
 
         sourceTown.npcs.forEach((LOMATNPC npc) {
-            npc.roadEvents.forEach((RoadEvent event) {
-                event.requiredPartyMember = npc;
-                events.add(event);
-            });        });
-
-        destinationTown.npcs.forEach((LOMATNPC npc) {
-            npc.roadEvents.forEach((RoadEvent event) {
-                event.requiredPartyMember = npc;
-                events.add(event);
-            });
+            events.addAll(npc.roadEvents);
         });
 
+        destinationTown.npcs.forEach((LOMATNPC npc) {
+            events.addAll(npc.roadEvents);
+        });
         timeRemaining = travelTimeInMS;
         loadTombstones();
 
@@ -176,7 +171,7 @@ class Road {
         print("event loop is happening, about to test tombstones, count is ${tombstones.length}");
         for(Tombstone tombstone in tombstones) {
             //more likely to get event than tombstone
-            if(rand.nextDouble() > 0.75) {
+            if(rand.nextDouble() > 0.95) {
                 print("going to spawn a trailsona for a tombstone");
                 tombstone.spawnTrailsona(trail,this);
                 eventHappened = true;

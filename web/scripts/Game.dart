@@ -157,12 +157,12 @@ class Game
         //as a test, make 1 set npcs and 4 random ones.
         //await makeAmagalmates();
         //wanderingNPCs.add(NPCFactory.jrTest());
-        wanderingNPCs.add(NPCFactory.lilscumbag());
+        //wanderingNPCs.add(NPCFactory.lilscumbag());
         wanderingNPCs.add(NPCFactory.ebony());
-        wanderingNPCs.add(NPCFactory.rogerKoon());
-        wanderingNPCs.add(NPCFactory.skol());
+        //wanderingNPCs.add(NPCFactory.rogerKoon());
+        //wanderingNPCs.add(NPCFactory.skol());
         wanderingNPCs.add(NPCFactory.halja());
-        wanderingNPCs.add(NPCFactory.the_kid());
+        //wanderingNPCs.add(NPCFactory.the_kid());
         //wanderingNPCs.add(NPCFactory.loki());
         //wanderingNPCs.add(NPCFactory.grim());
         //yn will be spawned at town time

@@ -378,8 +378,11 @@ abstract class NPCFactory {
 
         List<RoadEvent> roadEvents = new List<RoadEvent>();
         roadEvents.add(new RoadEvent("A Sudden Realization","You suddenly feel as if you understand everything. Wait. No. It's just indigestion.", effect, 13.0));
+        LOMATNPC halja =  LOMATNPC.loadFromDataString(dataString);
 
-        return LOMATNPC.loadFromDataString(dataString);
+        TalkyResponse tr4 = new TalkyResponse(halja,<TalkyItem>[new TalkyRecruit(halja,null)],"Graceful, raging, a vicious, exceptional speciman. I would love to join you.", TalkyItem.HAPPY,null);
+        TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,halja.talkyLevel);
+        return halja;
     }
 
     static LOMATNPC skol() {
