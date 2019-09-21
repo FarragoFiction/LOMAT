@@ -356,7 +356,7 @@ abstract class NPCFactory {
 
         List<RoadEvent> partyEvents = new List<RoadEvent>();
         partyEvents.add(new RoadEvent("Pine After Death","Ebony stops the wagon in order to gaze longingly at the horizon and think about Death.", effect, 1.0));
-        partyEvents.add(new RoadEvent("Join Death","Ebony finally joins her crush, Death.", die, 0.3));
+        partyEvents.add(new RoadEvent("Join Death","Ebony finally joins her crush, Death.", die, 0.8));
 
         List<RoadEvent> roadEvents = new List<RoadEvent>();
         roadEvents.add(new RoadEvent("A Chill Wind","A sudden chill wind, as if somewhere, someone were walking over your grave, overtakes the wagon.", effect, 1.0));

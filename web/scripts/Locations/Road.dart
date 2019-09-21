@@ -171,7 +171,8 @@ class Road {
         Random rand = new Random();
         print("event loop is happening, about to test tombstones, count is ${tombstones.length}");
         for(Tombstone tombstone in tombstones) {
-            if(rand.nextBool()) {
+            //more likely to get event than tombstone
+            if(rand.nextDouble() > 0.75) {
                 print("going to spawn a trailsona for a tombstone");
                 tombstone.spawnTrailsona(trail,this);
                 eventHappened = true;
