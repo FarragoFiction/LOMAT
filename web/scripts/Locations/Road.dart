@@ -53,6 +53,18 @@ class Road {
         }
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
+        Game.instance.partyMembers.forEach((LOMATNPC npc) {
+            events.addAll(npc.partyEvents);
+        });
+
+        sourceTown.npcs.forEach((LOMATNPC npc) {
+            events.addAll(npc.partyEvents);
+        });
+
+        destinationTown.npcs.forEach((LOMATNPC npc) {
+            events.addAll(npc.partyEvents);
+        });
+
         timeRemaining = travelTimeInMS;
         loadTombstones();
 

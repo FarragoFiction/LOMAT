@@ -5,6 +5,7 @@ import 'package:TextEngine/TextEngine.dart';
 
 import '../AnimationObject.dart';
 import '../Game.dart';
+import '../Locations/Events/RoadEvent.dart';
 import '../Locations/Road.dart';
 import '../Locations/Town.dart';
 import '../Sections/LOMATSection.dart';
@@ -37,6 +38,11 @@ class LOMATNPC {
     String leavingMessage = " TODO make sure each NPC has a custom leaving message.";
     GullAnimation animation;
     static String labelPattern = ":___ ";
+
+    //if you're in the party, the events get added to the road
+    List<RoadEvent>  partyEvents = new List<RoadEvent>();
+    //if you're in either town on  a road, your events get added to the road.
+    List<RoadEvent>  roadEvents = new List<RoadEvent>();
 
 
     SinglePartyMember myStatsView;
