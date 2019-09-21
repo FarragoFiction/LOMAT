@@ -7,7 +7,11 @@ import 'package:CommonLib/Utility.dart';
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../Game.dart';
+import '../Locations/Events/Effects/ArriveEffect.dart';
 import '../Locations/Events/Effects/DelayEffect.dart';
+import '../Locations/Events/Effects/DiseaseEffect.dart';
+import '../Locations/Events/Effects/Effect.dart';
+import '../Locations/Events/Effects/InstaKillEffect.dart';
 import '../Locations/Events/RoadEvent.dart';
 import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
@@ -40,9 +44,9 @@ void main()  async{
 }
 
 void testEvents() {
-    DelayEffect largeEffect = new DelayEffect(3)..image.src = "images/EventIcons/ebony.png";;
-    DelayEffect largeEffectBackwards = new DelayEffect(-13)..image.src = "images/EventIcons/raidho.png";
-    RoadEvent event = new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3);
+    Effect largeEffect = new DelayEffect(3);
+    DelayEffect largeEffectBackwards = new DelayEffect(13)..image.src = "images/EventIcons/raidho.png";
+    RoadEvent event = new RoadEvent("???","JR is testing, be careful. Oh god.", largeEffect, 0.3);
     event.popup(div);
 }
 
@@ -53,12 +57,6 @@ void testPhrases() {
 void loadGulls() {
     List<LOMATNPC> npcs = List<LOMATNPC>();
     npcs.add(NPCFactory.halja());
-    npcs.add(NPCFactory.lilscumbag());
-    npcs.add(NPCFactory.grim());
-    npcs.add(NPCFactory.loki());
-    npcs.add(NPCFactory.yn(new Random()));
-
-
     //i can confirm that right before returning, ebony has the right color
     //and that right AFTER roger is returning ebony has the wrong one.
     //do they somehow share the same palette reference?
