@@ -325,9 +325,9 @@ class Game
 
         //ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.01));
         ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
-        ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3));
-        ret.events.add(new RoadEvent("Absolutely Get Stoked","BY THE FATHERS MANY EYES, uh. Is that drunken revelry in the distance you hear? You better go a little bit faster to make sure you avoid it.", largeEffectBackwards, 0.6));
-        ret.events.add(new RoadEvent("Be Lucky!!!!!!!!","Oh, hey. While repairing your SWEET VIKING LAND BOAT you happened to find some funds!", new MoneyEffect(13), 0.5));
+        ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.2));
+        ret.events.add(new RoadEvent("Absolutely Get Stoked","BY THE FATHERS MANY EYES, uh. Is that drunken revelry in the distance you hear? You better go a little bit faster to make sure you avoid it.", largeEffectBackwards, 0.4));
+        ret.events.add(new RoadEvent("Be Lucky!!!!!!!!","Oh, hey. While repairing your SWEET VIKING LAND BOAT you happened to find some funds!", new MoneyEffect(13), 0.3));
 
         return ret;
     }

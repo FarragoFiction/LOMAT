@@ -241,7 +241,7 @@ class TownGenome {
         String noun = rand.pickFrom(shittyNouns);
         String adj = rand.pickFrom(shittyAdj);
         String flavor = rand.pickFrom(shittyFlavor);
-        return (new RoadEvent("$adj $noun","$adj $noun $flavor", rand.pickFrom(effects), 0.5));
+        return (new RoadEvent("$adj $noun","$adj $noun $flavor", rand.pickFrom(effects), 0.1));
 
     }
 
