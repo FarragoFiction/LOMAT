@@ -88,6 +88,10 @@ class Road {
         //TODO stop the parallax from happening maybe??? wagon is stopped.
     }
 
+    void addDosh(int amount) {
+        Game.instance.addFunds(amount);
+    }
+
     void applyArriveEffect() {
         trail.arrive();
     }

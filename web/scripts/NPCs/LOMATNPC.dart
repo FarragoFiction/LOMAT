@@ -355,7 +355,7 @@ abstract class NPCFactory {
         InstaKillEffect die = new InstaKillEffect("Loving Death")..image.src = "images/EventIcons/ebony.png";
 
         List<RoadEvent> partyEvents = new List<RoadEvent>();
-        partyEvents.add(new RoadEvent("Pine After Death","Ebony stops the wagon in order to gaze longingly at the horizon and think about Death.", effect, 1.0));
+        partyEvents.add(new RoadEvent("Pine After Death","Ebony stops the wagon in order to gaze longingly at the horizon and think about Death and her favorite store, Cold Opinion.", effect, 1.0));
         partyEvents.add(new RoadEvent("Join Death","Ebony finally joins her crush, Death.", die, 0.8));
 
         List<RoadEvent> roadEvents = new List<RoadEvent>();

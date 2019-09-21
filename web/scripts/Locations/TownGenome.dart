@@ -4,6 +4,7 @@ import 'Events/Effects/DelayEffect.dart';
 import 'Events/Effects/DiseaseEffect.dart';
 import 'Events/Effects/Effect.dart';
 import 'Events/Effects/InstaKillEffect.dart';
+import 'Events/Effects/MoneyEffect.dart';
 import 'Events/RoadEvent.dart';
 import 'Layers/StaticLayer.dart';
 import 'package:CommonLib/Random.dart';
@@ -229,8 +230,10 @@ class TownGenome {
         effects.add( new InstaKillEffect("act of RNGsus"), 0.001);
         effects.add( new InstaKillEffect("choked on Stolen Dorito"), 0.03);
         effects.add( new DiseaseEffect(), 3);
+        effects.add(new MoneyEffect(13), 4440.95);
 
-        //TODO make them better at being random. use text engine and shit. these are for mutations.
+
+            //TODO make them better at being random. use text engine and shit. these are for mutations.
         List<String> shittyNouns = <String> ["Vikings","Bears","Pirates","Ninjas","Bandits","Ghosts","Exorcists"];
         List<String> shittyAdj = <String> ["Screaming","Wailing","Pious","Angry","Hungry","Greedy","Shitty","Berserk"];
         List<String> shittyFlavor = <String>["attack you out of nowhere.","block the path for hours.","ask you never ending questions.","ask you to sign a petition.","tell you knock knock jokes for hours.","steal your wheels.","insult your favorite kind of bird.","mock your horns."];

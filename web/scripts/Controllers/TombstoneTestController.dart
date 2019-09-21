@@ -12,6 +12,7 @@ import '../Locations/Events/Effects/DelayEffect.dart';
 import '../Locations/Events/Effects/DiseaseEffect.dart';
 import '../Locations/Events/Effects/Effect.dart';
 import '../Locations/Events/Effects/InstaKillEffect.dart';
+import '../Locations/Events/Effects/MoneyEffect.dart';
 import '../Locations/Events/RoadEvent.dart';
 import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
@@ -44,10 +45,10 @@ void main()  async{
 }
 
 void testEvents() {
-    Effect largeEffect = new DelayEffect(3);
+    Effect largeEffect = new MoneyEffect(-3);
     DelayEffect largeEffectBackwards = new DelayEffect(13)..image.src = "images/EventIcons/raidho.png";
     LOMATNPC ebony = NPCFactory.ebony();
-    RoadEvent event = ebony.roadEvents.last;
+    RoadEvent event = new RoadEvent("Test", "Don't worry about it. It's probably fine.", largeEffect,33);
     event.popup(div);
 }
 
