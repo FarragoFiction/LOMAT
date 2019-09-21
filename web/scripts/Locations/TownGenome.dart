@@ -230,7 +230,8 @@ class TownGenome {
         effects.add( new InstaKillEffect("act of RNGsus"), 0.001);
         effects.add( new InstaKillEffect("choked on Stolen Dorito"), 0.03);
         effects.add( new DiseaseEffect(), 3);
-        effects.add(new MoneyEffect(13), 4440.95);
+        effects.add(new MoneyEffect(13), 0.95);
+        effects.add(new DelayEffect(3), 0.95);
 
 
             //TODO make them better at being random. use text engine and shit. these are for mutations.

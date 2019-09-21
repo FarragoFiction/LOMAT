@@ -48,7 +48,7 @@ void testEvents() {
     Effect largeEffect = new MoneyEffect(-3);
     DelayEffect largeEffectBackwards = new DelayEffect(13)..image.src = "images/EventIcons/raidho.png";
     LOMATNPC ebony = NPCFactory.ebony();
-    RoadEvent event = new RoadEvent("Test", "Don't worry about it. It's probably fine.", largeEffect,33);
+    RoadEvent event = new RoadEvent("Test", "Don't worry about it. It's probably fine.", largeEffect,1);
     event.popup(div);
 }
 

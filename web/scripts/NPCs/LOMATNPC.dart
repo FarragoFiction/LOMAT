@@ -373,12 +373,12 @@ abstract class NPCFactory {
         MoneyEffect moenyEffect = new MoneyEffect(13);
 
         List<RoadEvent> partyEvents = new List<RoadEvent>();
-        partyEvents.add(new RoadEvent("Arrive","Halja stops the wagon, enigmatically claiming she has reached her destination.", die, 5.8));
-        partyEvents.add(new RoadEvent("Fund Gigglesnort","Halja hands a frankly ridiculous amount of funds to you with a mysterious smile. 'Beyond other needs, empty silver.' This definitely made sense. Definitely. ", new MoneyEffect(85), 13.0));
+        partyEvents.add(new RoadEvent("Arrive","Halja stops the wagon, enigmatically claiming she has reached her destination.", die, 1.0));
+        partyEvents.add(new RoadEvent("Fund Gigglesnort","Halja hands a frankly ridiculous amount of funds to you with a mysterious smile. 'Beyond other needs, empty silver.' This definitely made sense. Definitely. ", new MoneyEffect(85), 1.0));
 
         List<RoadEvent> roadEvents = new List<RoadEvent>();
-        roadEvents.add(new RoadEvent("A Sudden Realization","You suddenly feel as if you understand everything. Wait. No. It's just indigestion.", effect, 13.0));
-        roadEvents.add(new RoadEvent("A Confused Feeling","You spend a very long time paused on the side of the road, wondering if hidden messages are anywhere..", new DelayEffect(3), 18883.0));
+        roadEvents.add(new RoadEvent("A Sudden Realization","You suddenly feel as if you understand everything. Wait. No. It's just indigestion.", effect, 1.0));
+        roadEvents.add(new RoadEvent("A Confused Feeling","You spend a very long time paused on the side of the road, wondering if hidden messages are anywhere..", new DelayEffect(3), 1.0));
         LOMATNPC halja =  LOMATNPC.loadFromDataString(dataString);
 
         TalkyResponse tr4 = new TalkyResponse(halja,<TalkyItem>[new TalkyRecruit(halja,null)],"Graceful, raging, a vicious, exceptional speciman. I would love to join you.", TalkyItem.HAPPY,null);

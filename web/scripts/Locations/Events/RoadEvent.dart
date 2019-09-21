@@ -29,7 +29,7 @@ class RoadEvent {
     DivElement flavorTextElement;
     DivElement titleElement;
 
-    //higher is more likely to happen
+    //1.0 is guaranteed to happen if asked.
     double oddsOfHapening = 0.5;
     Effect effect;
     RoadEvent(String this.title, String this.flavorText, Effect this.effect, double this.oddsOfHapening);

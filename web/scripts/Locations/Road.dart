@@ -32,7 +32,7 @@ class Road {
     int timeRemaining;
     int elapsedTime = 0;
     //TODO comes from  source and destination towns
-    WeightedList<RoadEvent> events = new WeightedList<RoadEvent>();
+    List<RoadEvent> events = new List<RoadEvent>();
 
     String get label {
         return "Traveling to $destinationTown: $timeRemaining";
@@ -181,6 +181,7 @@ class Road {
         }
 
         if(!eventHappened) {
+            events.shuffle(); //don't just always do it in the same order if you only care about the first to hit
             for (RoadEvent event in events) {
                 if (await event.triggered(this)) {
                     eventHappened = true;
