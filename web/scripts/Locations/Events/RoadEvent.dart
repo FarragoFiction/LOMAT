@@ -1,6 +1,7 @@
 //displays a popup if triggered and applies an event to the game.
 
 import '../../Game.dart';
+import '../../NPCs/LOMATNPC.dart';
 import '../../SoundControl.dart';
 import '../Road.dart';
 import 'Effects/DelayEffect.dart';
@@ -20,6 +21,7 @@ class RoadEvent {
     static String PARTYMEMBER = "PARTYMEMBER"; //to replace
     String title = "???";
     String flavorText = "An event happens!!!";
+    LOMATNPC requiredPartyMember;
     DivElement container;
     String get fullFlavorText {
         return "$flavorText <br><br>${effect.flavorText}";
@@ -67,12 +69,14 @@ class RoadEvent {
     }
 
     Future<bool> triggered(Road road) async {
-        print("checking trigger for event $title");
-        if(random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
-            //effect will set relevant info like target name, have it go first
-            await effect.apply(road);
-            popup(Game.instance.container);
-            return true;
+        //if a specific party member has to exist,
+        if(requiredPartyMember != null && Game.instance.partyMembers.contains(requiredPartyMember)) {
+            if (random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
+                //effect will set relevant info like target name, have it go first
+                await effect.apply(road);
+                popup(Game.instance.container);
+                return true;
+            }
         }
         return false;
     }

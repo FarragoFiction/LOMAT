@@ -46,7 +46,8 @@ void main()  async{
 void testEvents() {
     Effect largeEffect = new DelayEffect(3);
     DelayEffect largeEffectBackwards = new DelayEffect(13)..image.src = "images/EventIcons/raidho.png";
-    RoadEvent event = new RoadEvent("???","JR is testing, be careful. Oh god.", largeEffect, 0.3);
+    LOMATNPC ebony = NPCFactory.ebony();
+    RoadEvent event = ebony.roadEvents.last;
     event.popup(div);
 }
 

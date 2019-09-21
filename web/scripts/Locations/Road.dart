@@ -54,15 +54,22 @@ class Road {
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
         Game.instance.partyMembers.forEach((LOMATNPC npc) {
-            events.addAll(npc.partyEvents);
-        });
+            npc.partyEvents.forEach((RoadEvent event) {
+                event.requiredPartyMember = npc;
+                events.add(event);
+            });        });
 
         sourceTown.npcs.forEach((LOMATNPC npc) {
-            events.addAll(npc.partyEvents);
-        });
+            npc.roadEvents.forEach((RoadEvent event) {
+                event.requiredPartyMember = npc;
+                events.add(event);
+            });        });
 
         destinationTown.npcs.forEach((LOMATNPC npc) {
-            events.addAll(npc.partyEvents);
+            npc.roadEvents.forEach((RoadEvent event) {
+                event.requiredPartyMember = npc;
+                events.add(event);
+            });
         });
 
         timeRemaining = travelTimeInMS;
