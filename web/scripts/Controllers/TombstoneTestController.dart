@@ -7,6 +7,8 @@ import 'package:CommonLib/Utility.dart';
 import '../AnimationObject.dart';
 import '../CipherEngine.dart';
 import '../Game.dart';
+import '../Locations/Events/Effects/DelayEffect.dart';
+import '../Locations/Events/RoadEvent.dart';
 import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
@@ -27,13 +29,21 @@ void main()  async{
     for(int i = 0; i<10; i++) {
         await testTown();
     }*/
-    //testCiphers();
+    testEvents();
+    testCiphers();
     loadGulls();
     //loadGull();
     testPhrases();
 
     //testAnimation();
     testTombstone();
+}
+
+void testEvents() {
+    DelayEffect largeEffect = new DelayEffect(3)..image.src = "images/EventIcons/ebony.png";;
+    DelayEffect largeEffectBackwards = new DelayEffect(-13)..image.src = "images/EventIcons/raidho.png";
+    RoadEvent event = new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.3);
+    event.popup(div);
 }
 
 void testPhrases() {

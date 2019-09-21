@@ -5,6 +5,8 @@ import 'dart:html';
 abstract class Effect {
     String name = "abstractEffect";
     int amount;
+    //means only one event on screen at a time
+    ImageElement image = new ImageElement(src: "images/EventIcons/raidho.png");
     LOMATNPC target;
     String get flavorText =>  "Nothing happens, but $amount big anyways.";
     //your road will handle this

@@ -321,6 +321,11 @@ html, body {
 
 }
 
+.eventIcon{
+    float: left;
+    padding-right: 20px;
+}
+
 .menuItem{
     border: 3px solid #00071af;
     background-color: #00164f;

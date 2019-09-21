@@ -40,13 +40,16 @@ class RoadEvent {
 
     }
 
-    void popup(Road road) {
+    void popup(Element gameContainer) {
         DivElement container = new DivElement()..classes.add("event");
         //animation or displaying a grave stone or whatever.
         //don't append to the road cuz things like deaths will hide it and then you wont see this
-        Game.instance.container.append(container);
+        gameContainer.append(container);
 
         titleElement = new DivElement();
+        ImageElement img = effect.image;
+        img.classes.add("eventIcon");
+        container.append(img);
         titleElement.setInnerHtml("<h2>$title</h2>");
         container.append(titleElement);
         flavorTextElement = new DivElement();
@@ -56,7 +59,7 @@ class RoadEvent {
         container.append(flavorTextElement);
         SoundControl.instance.playSoundEffect("254286__jagadamba__mechanical-switch");
 
-        Game.instance.container.onClick.listen((Event e)
+        gameContainer.onClick.listen((Event e)
         {
             container.remove();
         });
@@ -68,7 +71,7 @@ class RoadEvent {
         if(random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
             //effect will set relevant info like target name, have it go first
             await effect.apply(road);
-            popup(road);
+            popup(Game.instance.container);
             return true;
         }
         return false;
