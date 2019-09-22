@@ -22,6 +22,8 @@ class RoadEvent {
     String title = "???";
     String flavorText = "An event happens!!!";
     LOMATNPC requiredPartyMember;
+    LOMATNPC antiRequiredPartyMember;
+
     DivElement container;
     String get fullFlavorText {
         return "$flavorText <br><br>${effect.flavorText}";
@@ -71,6 +73,10 @@ class RoadEvent {
     Future<bool> triggered(Road road) async {
         //if a specific party member has to exist,
         if(requiredPartyMember != null && !Game.instance.partyMembers.contains(requiredPartyMember)) {
+            return false;
+        }
+        //if, for example, Ebony is in your party, no Grim Events will hit.
+        if(antiRequiredPartyMember != null && Game.instance.partyMembers.contains(requiredPartyMember)) {
             return false;
         }
 

@@ -363,7 +363,9 @@ abstract class NPCFactory {
         List<RoadEvent> roadEvents = new List<RoadEvent>();
         roadEvents.add(new RoadEvent("A Chill Wind","A sudden chill wind, as if somewhere, someone were walking over your grave, overtakes the wagon.", effect, 13.0));
 
-        return LOMATNPC.loadFromDataString(dataString)..partyEvents=partyEvents..roadEvents=roadEvents;    }
+        Game.instance.ebony =  LOMATNPC.loadFromDataString(dataString)..partyEvents=partyEvents..roadEvents=roadEvents;
+        return Game.instance.ebony;
+    }
 
     static LOMATNPC halja() {
         //String dataString = "Halja:___ N4IgdghgtgpiBcIASEA2ArCIA0JUwgDcBLMAcwFkYBnaiMuRAAgBUB5AETaaggGsYTagFcAToIIBjABZMAcgAUAwk2kRqTCE0nDqAFwD2UJviKkyPGnQYA6HCEkRdMNgDMOBPdIQgIAI2oDVGE9GFQATyYwAy9ze2kABwQADgBWXD1whMYQAHFhVFR7ABNiagJy6gQAbQBdDLQ+cIAZGEIwhFA9RvCASVCoKvhq0FLqBNQIcJYYAA89HwB1NT1tCDAmcINhJlDCy00-bdXYjTJoGAB+ez1RYjIGUSG6jKyclh6ARWEaPWIDMD2cTjAHlTogMYTKYzeY+FhIXoAZSYuQAghQAKJMRa9ZrNJi9OQANTYzSJWIAYhiAErUgCahNyrCQWIA5Ii2ABVZrItgU5lYjgY1EcVmsbjwjG9alMCmE1H46kYxEsRlMBTNVFKDE2JiIz6LVGLADSAEJzeabncHjAnjV6iBuqgmq12kV4F0ev0YIN7QBfV7ZOE9ak0BKguC4dSBSTECChYoYqAxf6A+AARgATAAGP0B0ZlKHTOYLRDLeNrDZbHZ7VAHfzHXbSMq7AwAdzA1wy1sez1Akz8HUQqOTwjAegpY+KVVwxCg4dE3XHiwMomKCDABVQs-nq6Xel644Q6ezuYdmSDiA+zvC31+qaBYYj4Mhk2LsMQ+sNJot5qYGPJek2DkLFCWZJFxUWOQmCUVE5FZFhZV6XJOSVJguUQpA2EWcUmGaYVyQJFg7G7e5e3tBob1dIdPRvb1fWGWoA0dN5gxvUMQTAMEo1oAxY3jGBE2TP4AWPU882wAtxjfGFSxARYIGIPRsBMYgBBU6tWXEJhigIYou0dHtbT7PB-CHEAR22cdJzAad7DnBd9xXNcNy3HdHPWA8jwzE8-XPViry+H59AfXBgXDLjGCkotZJ8L8jTNX8mDpZVdQxAANLUWGaOk8N6Y0sXhVFiIJVkKCYIURRIwyyOMijHR6aj3Vopp6OeJjA3eEMn0i+xoz4uMEyTFNRIzcT8whQsZJLJZpEiCBtOrHTgXKYpVIETQmDIaQDH0Azblqu1hn7Mz3Qs0drKnGcQAcvdPOc9d4E3Qp3Lu8dD1LE8z06timjvELRLCnqwQ9SbpOhGbEAAIQxLDmg4JgKFy6k2Bh5E6QAejkfajKOl4GqotoaIJ1qBhM18IY-eTFOU9aYA07YtMEXSIH0q1DpMgdzMsscJyu+zd0Xe7V0e57txuwX9w+49fP8y8QGvP7gpEwEgc4kHoumqn4p-JKUsRNLMqUbLcuafLCqQYrdV6MqKuFDhqoOm08fPRqieakm+jJ-0fsC9jgcjXxeP4obhIfMbcz85iLy6-31cD-qQ8E4aVbEyPJLBmLIfklZK02bZdjCOtYEORtYBxjn6pj37b2V0KQHC59QYp985LpLkmFRNDJXVFGFBZRFegxBGWRR7EsOxXF8RQ3ohQFPC2BVPUuR5dD+XhCDNTkBH2AFaUkLkBUmCVFU1Q1LUdXZ532sol13fBJ1SZ9dro4ChXuvjvrg8G5Ow9Gr6JKa0pnJDgBh847DbJ5VsTB0AGFIJYCu18q5v0VrXe8gMG4BxfFNYBSwV4I16KaS4eoDQJV-KaK+5FGK3xaPfUGj8vbPxqEA1uPhQySFEMIJSiCqH42rogJUShqScl6KqFgGIKAgCjr7d+ccIrcSDjGH+QkRppgAdI3wYA5zxnDqAFYchhBQEHKIBAABmXARxijhAMUY20ZjcAJDQDAPQoQfC5HTEoAAtKiVwnioDFCJKiIJrgoaZmKKgAAWosIkZAkCeLIMUWYZA6S5Chsk4o6UFC2V6EE4oOSgkFNRAAXiKVIv0QA";
@@ -388,7 +390,12 @@ abstract class NPCFactory {
 
     static LOMATNPC skol() {
         String dataString = "Sköll Svelger:___ N4IgdghgtgpiBcIDKBrAbwGwwAiQNxgwHMYAnEAGhAxgjwEswiBZGAZzYhIRGwBUA8gBEB2KBBQxsbAK6kptAMYALbADkACgGFsyiG2wRsimWwAuAeyjYadRkTHtOJAHSUQiiKZgCAZkNozZR4IACM2CwwZM0IAT2wwCyD7d2UABwQADgBWKjNYtLhEAHEZLHcAE3o2Whq2BABtAF08iAwUWIAZGAIMBFAzNo6ASRioevgG0Cq2NIwIWL4YAA8zHgB1PTNjCDBsWIsZbBisR0NQw+3kgyJoGAB+dzNSeiISUgnmvIKikD4h2IARRk7DM9AsYHc8lmEJq-RAMzmCyWqx4fAAEsMkNhigBBZgAUWw62GnU62GGagAagJOlSiQAxAkAJWZAE1KcV+OiiQByJACACqnWxAgZ3KJQgJuKEvP4ogxBOGzOwDMpuPJzIJSD4nOwGk6uK0BJcuEB61x6wA0gBCO12p4vN5kT4tECDdpdHqEeEekZjV0AX2+hTRAOZ7DSsLgVH0EUU9AgMQqBKgSXBkPgAEYAEwABkDwem1SRixWa0QmyTOz2ByOJxwsHOl2OymqxwsAHcwI88k73p9QPNQj7ELi0zIwGYGZOKvUqPQoFHSIMp+sLKQKggwGUMAulxvV2ZhlOEFm8wW3flQ4h-p7gaCM1DI9H4Yj5mXUYgkObLbb7Ta2AEvS7ICGoRKUtyWLyusajYFouJqLyfCqsMxSClq2BCih6ICOs8rYJ00r0hSfBuH2rwDo0V4At0vS+gCowwOM1HBu6Pxhp6EYwmAcKxhwFgJkmMApmmYIQmeF6FhQxazB+KIViA6wQPQZgUDY9CSOpda8vI2AVLQFS9u6-Yuo0Q5hKOIDjocU4zmAc7uIuy5Huum7bru+4ubsx6ntm56BleHG3gCD7mE+VDQlGvFFLJpYKTwP4WtaAGAWy2qmgSAAaRp8J0bKEcMVpEhiuJkRSvLMNgUoyuRJmUWZkw0Z6dGjgMjEBqxIa-HeHTcdFfEgHGgmJsmqbphJ2ZSUWCIlvJ5YbMo8QQHpdb6dCNQVBpkiGNgRDKBY5jGc8DUfOZ1CWX0Y4TnZs7ziAzmHj5blbvAO5YF5T1TieFbnpe3WcR0YXiZCkUvjFb5zciC2IAAQgSuGdEI2DMAVzICPD2JsgA9Gox2mWdTWtC13pXe1npMSxkxxfNX5KSpanbTA2mHLpUgGRARmOqdg4XSOV3WTd053U5B4rs9G6ve9e4PWLR4-WeAVBTefyhSC4USWDPFwvANPQ3TSV-ql2DpUgmU5VoeUFZ0RUleiZWmsMlXVdKQh1SdzqE187q0aTDEU51TVsdePXhuDg3DUJY1iU+U0FoFwfBarXHhzGQ0CVHInjSDknxzJs1yfrilVtsni1ocxyEI2UhhC2sD4zz1EAyF97qznWsDbFBfxTDIBskK2C4phir6ujGg8kgwwEsjPLo8SuHEqS5LocMUoSoRAg6rgQoilh4oYtBhpqMjggSsqqFqBq2BajqeoGkaJrc57rrEx0rVkz7AfMUGzfJ31qfuEjqNLOMdJp-WknrT8ikhAWH2BXTsPkOzYAAFYWEYI4Buz8m7sRVr1IEbcIogCiq+XW3dabFx3sjYYNp7hmmSv+e0T8qJE0-m-P2pC-SxEprzd8RceARkUKQGQqlMHMO9iHfhBItDMkFMMXUfACTMBAAnX+eD+qvn4vGYBokJqZnASooaYBFxJljqALYagZBQBHOQeAOYqAXAqLECxViyAIDsSANIbQYBmBiDwYoWYtAAFpcQhJCVSUJvhYY5gqAAfTiTEog6JAlEAqMsIgbJiiw3ScwAAXrk0JuIKjDBCTALKGBsi4gALyVOUYGIAA";
-        return LOMATNPC.loadFromDataString(dataString);
+        List<RoadEvent> partyEvents = new List<RoadEvent>();
+        //TODO skol events
+        List<RoadEvent> roadEvents = new List<RoadEvent>();
+        roadEvents.add(new RoadEvent("Sun Swallower","You suddenly feel very hungry, as if you could eat the entire sun in one gulp. You spend some time on the road hunting to placate your hunger.", new MoneyEffect(13), 13.0));
+
+        return LOMATNPC.loadFromDataString(dataString)..partyEvents=partyEvents..roadEvents=roadEvents;
     }
 
     static LOMATNPC the_kid() {
@@ -408,8 +415,12 @@ abstract class NPCFactory {
 
     static LOMATNPC lilscumbag() {
         String data = "Lil Scumbag:___ N4IgdghgtgpiBcIAyBLANgAgMoGMCuUARhAOYgA0IaMEAbimCQLIwDOrpciGAKgPIARPhigQA1jAys8AJ0k0cACwwA5AAoBhDIoisMEDPlYAXAPZQM1OgxIi2HEjAB0FEDgh5WMPgDMBNY0UEEAhCVlM0PGMYNABPDDBTQJtXRQAHBAAOAFZKY1i0rhAAflLXYwg0MVikGFoYhFAKqtiASWioVgQAbVAAExRWNLQIWJ4YAA9jYIBVRScMAAkYtFNi8pkUEkcZLvhugF08gqKeSuqARTw2YxRTMFc5IfuvRpABoZGxyenEM4k9CQIDISMQSAsAKIQYwLABCEBQLjym22MF2PSOIGa1Vq9TQb2xbQ6e0OAF9joVgmcWgAlNhpF5wSi6cI4FDQmB9CFQJJ3B7wADMpNJB3JIBQUBIWBkOGCimMxjS8AA9MrVu40IpTCZ4NkBQKAEwG5USzisZVYGgkPBoNDm1BoAD6uAIYKcaUYIFJQA";
+        List<RoadEvent> roadEvents = new List<RoadEvent>();
+        roadEvents.add(new RoadEvent("Gargbage!!!!","A sudden stench fills your nostrils. Your SWEET VIKING LAND BOAT has run over a fetid bag of hot garbage. You do notice some FUNDS inside, though, and brave the stink to acquire them.", new MoneyEffect(13)..image.src="images/EventIcons/Lil_Scumbag.png", 1.0));
+        roadEvents.add(new RoadEvent("So Cute!!!!","You spend several minutes appreciating an adorable oppossum consort.", new DelayEffect(3)..image.src="images/EventIcons/Lil_Scumbag.png", 1.0));
+        roadEvents.add(new RoadEvent("Bork Bork!!!!","Out of nowhere, Skol spots an adorable oppossum and immediately starts growling and barking his head off and chasing her around. You waste a LOT of time trying to get him to stop.", new DelayEffect(13)..image.src="images/EventIcons/Lil_Scumbag.png", 1.0)..requiredPartyMember=Game.instance.skol);
 
-        NonGullLOMATNPC npc =  LOMATNPC.loadFromDataString(data);
+        NonGullLOMATNPC npc =  LOMATNPC.loadFromDataString(data)..roadEvents=roadEvents;
         return npc;
     }
 
@@ -421,6 +432,7 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"A completely normal seagull, obviously!", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. What are you?",tr,level);
+
 
         return testNPC;
     }
@@ -438,6 +450,9 @@ abstract class NPCFactory {
 
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"Yeah, but don't tell that one gull. She's freaking obsessed with me.", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Are you...the grim reaper?",tr,level);
+        List<RoadEvent> roadEvents = new List<RoadEvent>();
+        roadEvents.add(new RoadEvent("Radical","You see a dope af skeleton on a skateboard doing tricks in the distance. You feel inspired to go faster yourself.", new DelayEffect(-3)..image.src="images/EventIcons/grim_reaper.png", 1.0)..antiRequiredPartyMember=Game.instance.ebony);
+        roadEvents.add(new RoadEvent("Death Aproaches","After confirming Ebony wasn't anywhere nearby, the Grim Reaper takes a party member from you. Them's the breaks.", new InstaKillEffect("Death Himself"), 1.0)..antiRequiredPartyMember=Game.instance.ebony);
 
         return testNPC;
     }

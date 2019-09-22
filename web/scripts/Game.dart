@@ -35,6 +35,9 @@ class Game
 {
     static Game _instance;
     bool partySectionDisplayed = false;
+    LOMATNPC ebony; //needed for grim to keep track of.
+    LOMATNPC skol; //needed to bark at lil scumbag
+
     PhysicalLocation currentLocation;
     PartySection partySection;
     TalkySection talkySection;
