@@ -76,7 +76,7 @@ class RoadEvent {
             return false;
         }
         //if, for example, Ebony is in your party, no Grim Events will hit.
-        if(antiRequiredPartyMember != null && Game.instance.partyMembers.contains(requiredPartyMember)) {
+        if(antiRequiredPartyMember != null && Game.instance.partyMembers.contains(antiRequiredPartyMember)) {
             return false;
         }
 
