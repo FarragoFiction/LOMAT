@@ -15,7 +15,9 @@ class TalkyLevel {
     TalkyLevel parent;
     TalkySection screen;
 
-    TalkyLevel(List<TalkyItem> this.talkyItems, TalkyLevel this.parent);
+    TalkyLevel(List<TalkyItem> this.talkyItems, TalkyLevel this.parent) {
+        talkyItems.forEach((TalkyItem item) => (item.owner = this));
+    }
 
     Map<dynamic, dynamic> toJSON(){
         Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
