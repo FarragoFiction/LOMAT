@@ -38,7 +38,7 @@ abstract class YNMaker {
 
     static List<TalkyItem> getSubQuestions(NonGullLOMATNPC yn,Random rand ) {
         List<TalkyItem> ret = new List<TalkyItem>();
-        int subquestions = rand.nextIntRange(0,5);
+        int subquestions = rand.nextIntRange(0,4);
         for(int i = 0; i<subquestions; i++) {
             ret.add(miscQuip(yn, rand));
         }
