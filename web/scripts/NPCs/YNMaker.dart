@@ -3,6 +3,7 @@ import 'dart:html';
 
 import 'package:CommonLib/Random.dart';
 
+import 'LOMATNPC.dart';
 import 'NonGullLOMATNPC.dart';
 import 'TalkyItem.dart';
 import 'TalkyLevel.dart';
@@ -28,7 +29,9 @@ abstract class YNMaker {
         treeQuip(yn, level, rand); //TODO lock to trees
         birdQuips(yn, level, rand);
         //TODO add road events for these yns.
-
+        //TODO future jr, this is a shitty hack, but makes it so whatever bug get fixed
+        //TODO the bug is that if you go into sub questions for yn, you can never leave them
+        yn = LOMATNPC.loadFromDataString(yn.toDataString());
         return yn;
 
     }

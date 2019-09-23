@@ -339,7 +339,7 @@ class Tombstone {
 
     void loadJSON(JsonHandler json) {
         npcName = json.getValue("npcName");
-        print("name is $npcName");
+        //print("name is $npcName");
         npcCOD = json.getValue("npcCOD");
         goalTownName = json.getValue("goalTownName");
         List<dynamic> aThing = json.getArray("content");

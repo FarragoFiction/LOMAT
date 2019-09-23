@@ -53,9 +53,7 @@ class TalkyResponse extends TalkyItem {
         CipherEngine.applyRandom(div);
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
         npc.emote(associatedEmotion);
-        for(TalkyItem talkyItem in talkyLevel.talkyItems) {
-            talkyItem.display(container);
-        }
+        talkyLevel.display(cont);
     }
 
     void onClick() {

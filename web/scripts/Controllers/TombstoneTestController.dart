@@ -48,6 +48,7 @@ void main()  async{
 void testYN() {
     NonGullLOMATNPC yn = NPCFactory.yn(new Random());
     TalkySection talkySection = new TalkySection(yn, div);
+    div.appendHtml("${yn.toDataString()}");
 }
 
 void testEvents() {

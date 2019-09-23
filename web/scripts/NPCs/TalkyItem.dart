@@ -63,7 +63,7 @@ abstract class TalkyItem {
         }else if(type == TalkyRecruit.TYPE) {
             return TalkyRecruit.loadFromJSON(npc,json, owner);
         }else {
-            throw("I don't know how to parse type $type");
+            throw("I don't know how to parse type $type in json ${json.data}");
         }
     }
 
