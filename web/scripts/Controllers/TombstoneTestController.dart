@@ -34,7 +34,8 @@ void main()  async{
     for(int i = 0; i<10; i++) {
         await testTown();
     }*/
-    testEvents();
+    //testEvents();
+    testYN();
     testCiphers();
     loadGulls();
     //loadGull();
@@ -42,6 +43,11 @@ void main()  async{
 
     //testAnimation();
     testTombstone();
+}
+
+void testYN() {
+    NonGullLOMATNPC yn = NPCFactory.yn(new Random());
+    TalkySection talkySection = new TalkySection(yn, div);
 }
 
 void testEvents() {
