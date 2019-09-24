@@ -42,6 +42,7 @@ class LOMATNPC {
     Town currentTown; //so i can remove them from it when they get recruited. or the town is destroyed. ;)
     String leavingMessage = " TODO make sure each NPC has a custom leaving message.";
     GullAnimation animation;
+    String associatedPodcast; //if null, leak random
     static String labelPattern = ":___ ";
 
     //if you're in the party, the events get added to the road
@@ -230,7 +231,11 @@ class LOMATNPC {
         Tombstone grave = new Tombstone(this);
         Game.instance.eject(this);
         SoundControl.instance.playSoundEffect("Dead_jingle_bells");
-        PassPhraseHandler.leak();
+        if(associatedPodcast != null) {
+            PassPhraseHandler.storeTape(associatedPodcast);
+        }else {
+            PassPhraseHandler.leak();
+        }
         grave.drawSelf(Game.instance.container, road,false);
     }
 
@@ -398,7 +403,8 @@ abstract class NPCFactory {
         List<RoadEvent> roadEvents = new List<RoadEvent>();
         roadEvents.add(new RoadEvent("Sun Swallower","You suddenly feel very hungry, as if you could eat the entire sun in one gulp. You spend some time on the road hunting to placate your hunger.", new MoneyEffect(13), 13.0));
 
-        return LOMATNPC.loadFromDataString(dataString)..partyEvents=partyEvents..roadEvents=roadEvents;
+        Game.instance.skol = LOMATNPC.loadFromDataString(dataString)..partyEvents=partyEvents..roadEvents=roadEvents;
+        return Game.instance.skol;
     }
 
     static LOMATNPC the_kid() {
