@@ -406,3 +406,10 @@ html, body {
     border-radius: 13px;
     z-index: 10;
 }
+
+
+select{
+    background: #9fa2ab;
+    border: 3px solid #5f5f7f;
+    border-radius: 13px;
+}

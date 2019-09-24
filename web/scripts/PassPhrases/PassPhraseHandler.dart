@@ -9,7 +9,7 @@ abstract class PassPhraseHandler {
     static String key = "AUDIOLOGSCASETTELIBRARY";
 
     static List<String> get foundPhrases => window.localStorage[key].split(",");
-    static List<String> potentialLeaks = <String>["answersthree", "riddlesthree","gigglesnort"];
+    static List<String> potentialLeaks = <String>["answersthree", "riddlesthree","gigglesnort","cheetohTimeline","cheetoTimeline2","ab2","goodboi","hahawhoops","karmicRetribution1","karmicRetribution2","karmicRetribution3","karmicRetribution4","karmicRetribution12","nebulousHarmony62","nebulousHarmony7","nebulousHarmony2","metalPrince","shogun12","shogun10","shogun11","shogun6","you_said_e","ab6","yearnfulNode14","yearnfulNode11","yearnfulNode10","yearnfulNode7","tin","aluminum","omelas","nope","either_will_thicken","roseofeden","note_to_self","tableGuardian1","tableGuardian5","tableGuardian7","tableGuardian6","find_me","shittypuzzles","lte","herstory","whoshogunactuallyis","turtles2","smokey","smokeyEternal","ship1","ship2"];
 
     static void cullRepeats() {
         List<String> toRemove = new List<String>();

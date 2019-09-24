@@ -109,7 +109,8 @@ class Tombstone {
 
     void assignPassPhrase(DivElement me) {
       DivElement passPhraseContainer = new DivElement()..classes.add("passPhraseDropDownContainer");
-      SelectElement select = new SelectElement();
+      SelectElement select = new SelectElement()..classes.add("custom-select");
+      //TODO sort alphabetically
       PassPhraseHandler.foundPhrases.forEach((String phrase) {
         OptionElement opt = new OptionElement(value: phrase)..text = phrase;
         select.append(opt);
