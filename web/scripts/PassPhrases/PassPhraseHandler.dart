@@ -40,7 +40,7 @@ abstract class PassPhraseHandler {
             if (window.localStorage.containsKey(key)) {
                 final String existing = window.localStorage[key];
                 final List<String> parts = existing.split(",");
-                if (!parts.contains(tapeName)) {
+                if (tapeName != null && !parts.contains(tapeName)) {
                     window.localStorage[key] = "$existing,$tapeName";
                     popup(querySelector("#output"), null, "Passphrase '$tapeName' Unlocked! Click to listen!",0, tapeName);
                 }

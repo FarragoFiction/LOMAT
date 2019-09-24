@@ -109,8 +109,16 @@ class Tombstone {
 
     void assignPassPhrase(DivElement me) {
       DivElement passPhraseContainer = new DivElement()..classes.add("passPhraseDropDownContainer");
-      passPhraseContainer.appendHtml("todo make this a drop down to pick from. when you pick a phrase, change associated passphrase");
-      passPhraseContainer.appendHtml(PassPhraseHandler.foundPhrases.join(","));
+      SelectElement select = new SelectElement();
+      PassPhraseHandler.foundPhrases.forEach((String phrase) {
+        OptionElement opt = new OptionElement(value: phrase)..text = phrase;
+        select.append(opt);
+      });
+      select.onChange.listen((Event e) {
+        associatedPassPhrase = select.selectedOptions.first.value;
+        print("changing passphrase to $associatedPassPhrase");
+      });
+      passPhraseContainer.append(select);
       me.append(passPhraseContainer);
     }
 
@@ -134,6 +142,7 @@ class Tombstone {
 
     void acceptAndMoveOn(Element me, Road road) {
         Game.instance.graves.add(this);
+        print("my json is ${toJSON()}");
         me.remove();
         me = null; //for garbage collection probably.
         //test
