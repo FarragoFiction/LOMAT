@@ -12,6 +12,7 @@ import '../Locations/Events/Effects/MoneyEffect.dart';
 import '../Locations/Events/RoadEvent.dart';
 import '../Locations/Road.dart';
 import '../Locations/Town.dart';
+import '../PassPhrases/PassPhraseHandler.dart';
 import '../Sections/LOMATSection.dart';
 import '../Sections/PartySection.dart';
 import '../SoundControl.dart';
@@ -229,6 +230,7 @@ class LOMATNPC {
         Tombstone grave = new Tombstone(this);
         Game.instance.eject(this);
         SoundControl.instance.playSoundEffect("Dead_jingle_bells");
+        PassPhraseHandler.leak();
         grave.drawSelf(Game.instance.container, road,false);
     }
 

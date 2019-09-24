@@ -22,6 +22,7 @@ import '../NPCs/NonGullLOMATNPC.dart';
 import '../NPCs/Tombstone.dart';
 import 'dart:html';
 
+import '../PassPhrases/PassPhraseHandler.dart';
 import '../PassPhrases/PassPhraseObject.dart';
 import '../Sections/TalkySection.dart';
 
@@ -34,15 +35,16 @@ void main()  async{
     for(int i = 0; i<10; i++) {
         await testTown();
     }*/
-    //testEvents();
-    testYN();
-    testCiphers();
-    loadGulls();
-    //loadGull();
     testPhrases();
 
+    //testEvents();
+   // testYN();
+    //testCiphers();
+    //loadGulls();
+    //loadGull();
+
     //testAnimation();
-    testTombstone();
+    //testTombstone();
 }
 
 void testYN() {
@@ -60,7 +62,9 @@ void testEvents() {
 }
 
 void testPhrases() {
-    PassPhraseObject.displayArt(PassPhraseObject.load(), div);
+    //PassPhraseObject.displayArt(PassPhraseObject.load(), div);
+    print("leaking passphrase");
+    PassPhraseHandler.leak();
 }
 
 void loadGulls() {

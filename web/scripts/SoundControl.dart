@@ -22,6 +22,7 @@ class SoundControl { //to major tom
 
 
     AudioElement soundEffects = new AudioElement();
+    AudioElement passPhraseAudio = new AudioElement();
     AudioElement bgMusic = new AudioElement()..volume = 0.1;
 
     //manicInsomniac
@@ -30,6 +31,13 @@ class SoundControl { //to major tom
         if(bgMusic.canPlayType("audio/mpeg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.mp3";
         if(bgMusic.canPlayType("audio/ogg").isNotEmpty) bgMusic.src = "Music/${locationWithoutExtension}.ogg";
         bgMusic.play();
+    }
+
+    void playPodcast(String locationWithoutExtension) {
+        passPhraseAudio.loop  = false;
+        if(passPhraseAudio.canPlayType("audio/mpeg").isNotEmpty) passPhraseAudio.src = "http://farragnarok.com/PodCasts/${locationWithoutExtension}.mp3";
+        if(passPhraseAudio.canPlayType("audio/ogg").isNotEmpty) passPhraseAudio.src = "http://farragnarok.com/PodCasts/${locationWithoutExtension}.ogg";
+        passPhraseAudio.play();
     }
 
     void cancelAllSubscriptions() {

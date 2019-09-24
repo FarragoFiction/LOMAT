@@ -1,10 +1,34 @@
 import 'dart:async';
 import 'dart:html';
 
+import 'package:CommonLib/Random.dart';
+
+import '../SoundControl.dart';
+
 abstract class PassPhraseHandler {
     static String key = "AUDIOLOGSCASETTELIBRARY";
 
     static List<String> get foundPhrases => window.localStorage[key].split(",");
+    static List<String> potentialLeaks = <String>["answersthree", "riddlesthree","gigglesnort"];
+
+    static void cullRepeats() {
+        List<String> toRemove = new List<String>();
+        potentialLeaks.forEach((String phrase) {
+            if(foundPhrases.contains(phrase)){
+                toRemove.add(phrase);
+            }
+        });
+        toRemove.forEach((String phrase) => potentialLeaks.remove(phrase));
+
+    }
+
+    //if you want to leak consort specific files, just store tape
+    static void leak() {
+        cullRepeats();
+        String leak = new Random().pickFrom(potentialLeaks);
+        print("going to leak $leak");
+        storeTape(leak);
+    }
 
     //if you haven't already heard this tape, add it.
     static void storeTape(String tapeName) {
@@ -18,7 +42,7 @@ abstract class PassPhraseHandler {
                 final List<String> parts = existing.split(",");
                 if (!parts.contains(tapeName)) {
                     window.localStorage[key] = "$existing,$tapeName";
-                    popup(querySelector("#output"), null, "Passphrase '$tapeName' Unlocked! (todo list page)",0);
+                    popup(querySelector("#output"), null, "Passphrase '$tapeName' Unlocked! Click to listen!",0, tapeName);
                 }
             } else {
                 window.localStorage[key] = tapeName;
@@ -28,7 +52,7 @@ abstract class PassPhraseHandler {
         }
     }
 
-    static Future<void> popup(Element container, Element currentPopup, String text, int tick) async {
+    static Future<void> popup(Element container, Element currentPopup, String text, int tick, String phrase) async {
         int maxTicks = 3;
 
         if(currentPopup != null && tick == 0) {
@@ -52,6 +76,9 @@ abstract class PassPhraseHandler {
 
                 ..text = text;
             container.append(currentPopup);
+            currentPopup.onClick.listen((Event e) {
+                SoundControl.instance.playPodcast(phrase);
+            });
         }
         if(tick == 1) {
             currentPopup.animate([{"opacity": 100},{"opacity": 0}], 9000);
@@ -59,7 +86,7 @@ abstract class PassPhraseHandler {
 
         if(tick < maxTicks) {
             new Timer(new Duration(milliseconds: 4000), () =>
-                popup(container, currentPopup,text, tick+1));
+                popup(container, currentPopup,text, tick+1,phrase));
         }else {
            currentPopup.remove();
         }
