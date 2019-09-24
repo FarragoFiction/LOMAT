@@ -123,7 +123,7 @@ Future<void> testTombstone() async{
     Tombstone t = new Tombstone.withoutNPC("JRTest", "JRBurg","getting wasted");
     t.cameFromOnline = false;
     div.appendHtml("${t.toJSON()}");
-    t.drawSelf(div,null, false);
+    t.drawSelf(div,null, true);
     Tombstone.loadFromTIMEHOLE();
     ImageElement waitedImage = await t.image;
     div.append(waitedImage);

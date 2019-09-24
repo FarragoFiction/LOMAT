@@ -325,14 +325,6 @@ html, body {
     position:relative;
 }
 
-.passPhraseDropDownContainer{
-    position: absolute;
-    top: 100px;
-    right: 100px;
-    width: 200px;
-    overflow: hidden;
-}
-
 .eventIcon{
     float: left;
     padding-right: 20px;
@@ -409,6 +401,13 @@ html, body {
 
 
 select{
+    background: #9fa2ab;
+    border: 3px solid #5f5f7f;
+    border-radius: 13px;
+    margin-bottom: 10px;
+}
+
+option{
     background: #9fa2ab;
     border: 3px solid #5f5f7f;
     border-radius: 13px;

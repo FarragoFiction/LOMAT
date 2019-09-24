@@ -16,6 +16,7 @@ import '../Locations/Layers/ProceduralLayerParallax.dart';
 import '../Locations/PhysicalLocation.dart';
 import '../Locations/Road.dart';
 import '../PassPhrases/PassPhraseHandler.dart';
+import '../SoundControl.dart';
 import 'LOMATNPC.dart';
 import 'TombstoneFridgeMagnet.dart';
 import 'dart:async';
@@ -92,8 +93,16 @@ class Tombstone {
         drawText(cachedCanvas);
         me.append(cachedCanvas);
         if(!readOnly) {
-            assignPassPhrase(me);
             me.append(makeBuilder());
+        }else {
+            ButtonElement button = new ButtonElement()..text ="Play Podcast ${associatedPassPhrase}";
+            button.classes.add("menuItem");
+            button.style.width = "500px";
+            button.onClick.listen((Event e) {
+                SoundControl.instance.playPodcast(associatedPassPhrase);
+                PassPhraseHandler.storeTape(associatedPassPhrase);
+            });
+            me.append(button);
         }
         ButtonElement button = new ButtonElement()..text ="Accept and Move On";
         button.classes.add("menuItem");
@@ -107,21 +116,7 @@ class Tombstone {
         me.append(button);
     }
 
-    void assignPassPhrase(DivElement me) {
-      DivElement passPhraseContainer = new DivElement()..classes.add("passPhraseDropDownContainer");
-      SelectElement select = new SelectElement()..classes.add("custom-select");
-      //TODO sort alphabetically
-      PassPhraseHandler.foundPhrases.forEach((String phrase) {
-        OptionElement opt = new OptionElement(value: phrase)..text = phrase;
-        select.append(opt);
-      });
-      select.onChange.listen((Event e) {
-        associatedPassPhrase = select.selectedOptions.first.value;
-        print("changing passphrase to $associatedPassPhrase");
-      });
-      passPhraseContainer.append(select);
-      me.append(passPhraseContainer);
-    }
+
 
     void sendTimeholeData() {
         //don't just always send okay?
@@ -388,6 +383,8 @@ class Tombstone {
 
         DivElement warning = new DivElement()..classes.add("tombstoneWarning")..text = "Your eulogy will be read by other versions of yourself. What do you wish to guide those other selves to?";
         container.append(warning);
+        assignPassPhrase(container);
+
         //for each content object, draw it (it'll handle making a menu box thingy)
         content.forEach((TombstoneFridgeMagnet magnet) {
             container.append(magnet.makeBuilder(this, null));
@@ -396,6 +393,29 @@ class Tombstone {
 
 
         return container;
+    }
+
+    void   assignPassPhrase(DivElement me) {
+        DivElement passPhraseContainer = new DivElement()..classes.add("passPhraseDropDownContainer");
+        DivElement element = new DivElement()..text = "Associated PodCast:"..classes.add("tombstoneWarning");
+        me.append(element);
+        SelectElement select = new SelectElement()..classes.add("custom-select");
+        //TODO sort alphabetically
+        List<String> phrases = PassPhraseHandler.foundPhrases;
+        phrases.sort();
+        OptionElement opt = new OptionElement(value: "null")..text = "null";
+        opt.selected = true;
+        select.append(opt);
+        phrases.forEach((String phrase) {
+            OptionElement opt = new OptionElement(value: phrase)..text = phrase;
+            select.append(opt);
+        });
+        select.onChange.listen((Event e) {
+            associatedPassPhrase = select.selectedOptions.first.value;
+            print("changing passphrase to $associatedPassPhrase");
+        });
+        passPhraseContainer.append(select);
+        me.append(passPhraseContainer);
     }
 
 
