@@ -15,6 +15,7 @@ import '../Game.dart';
 import '../Locations/Layers/ProceduralLayerParallax.dart';
 import '../Locations/PhysicalLocation.dart';
 import '../Locations/Road.dart';
+import '../PassPhrases/PassPhraseHandler.dart';
 import 'LOMATNPC.dart';
 import 'TombstoneFridgeMagnet.dart';
 import 'dart:async';
@@ -85,14 +86,13 @@ class Tombstone {
 
     Future<Null> drawSelf(Element container, Road road, bool readOnly) async {
         print("trying to draw self");
-        DivElement me = new DivElement();
+        DivElement me = new DivElement()..classes.add("tombstoneContainer");;
         container.append(me);
         cachedCanvas = await makeCanvas();
         drawText(cachedCanvas);
         me.append(cachedCanvas);
-        //TODO have canvas be cached so it can be drawn to.
-        //TODO have builder draw itself
         if(!readOnly) {
+            assignPassPhrase(me);
             me.append(makeBuilder());
         }
         ButtonElement button = new ButtonElement()..text ="Accept and Move On";
@@ -105,6 +105,13 @@ class Tombstone {
             acceptAndMoveOn(me,road);
         });
         me.append(button);
+    }
+
+    void assignPassPhrase(DivElement me) {
+      DivElement passPhraseContainer = new DivElement()..classes.add("passPhraseDropDownContainer");
+      passPhraseContainer.appendHtml("todo make this a drop down to pick from. when you pick a phrase, change associated passphrase");
+      passPhraseContainer.appendHtml(PassPhraseHandler.foundPhrases.join(","));
+      me.append(passPhraseContainer);
     }
 
     void sendTimeholeData() {
@@ -368,12 +375,16 @@ class Tombstone {
     Element makeBuilder() {
         //print("making builder");
         DivElement container = new DivElement()..classes.add("tombstoneBuilderContainer");
+
         DivElement warning = new DivElement()..classes.add("tombstoneWarning")..text = "Your eulogy will be read by other versions of yourself. What do you wish to guide those other selves to?";
         container.append(warning);
         //for each content object, draw it (it'll handle making a menu box thingy)
         content.forEach((TombstoneFridgeMagnet magnet) {
             container.append(magnet.makeBuilder(this, null));
         });
+
+
+
         return container;
     }
 

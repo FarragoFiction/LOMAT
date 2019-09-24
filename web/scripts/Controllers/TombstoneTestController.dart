@@ -44,7 +44,7 @@ void main()  async{
     //loadGull();
 
     //testAnimation();
-    //testTombstone();
+    testTombstone();
 }
 
 void testYN() {

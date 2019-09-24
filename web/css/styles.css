@@ -321,6 +321,18 @@ html, body {
 
 }
 
+.tombstoneContainer{
+    position:relative;
+}
+
+.passPhraseDropDownContainer{
+    position: absolute;
+    top: 100px;
+    right: 100px;
+    width: 200px;
+    overflow: hidden;
+}
+
 .eventIcon{
     float: left;
     padding-right: 20px;
