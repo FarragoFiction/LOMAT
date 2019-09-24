@@ -56,6 +56,7 @@ class Tombstone {
     String imageLoc = "TODO";
     //the rest is procedural.
     String epilogue = "They died of $CODTAG.";
+    String associatedPassPhrase;
 
     //need to match at least two of these for this to spawn
     //no repeats plz
@@ -341,6 +342,7 @@ class Tombstone {
         npcName = json.getValue("npcName");
         //print("name is $npcName");
         npcCOD = json.getValue("npcCOD");
+        associatedPassPhrase = json.getValue("associatedPassPhrase");
         goalTownName = json.getValue("goalTownName");
         List<dynamic> aThing = json.getArray("content");
         //print("a thing is $aThing");
@@ -354,6 +356,7 @@ class Tombstone {
         Map<dynamic, dynamic> ret = new Map<dynamic, dynamic>();
         ret["npcName"] = npcName;
         ret ["npcCOD"] = npcCOD;
+        ret["associatedPassPhrase"] = associatedPassPhrase;
         ret["goalTownName"] = goalTownName;
         List<Map<dynamic, dynamic>> contentJSON = new List<Map<dynamic,dynamic>>();
         content.forEach((TombstoneFridgeMagnet item)=> contentJSON.add(item.toJSON()));
