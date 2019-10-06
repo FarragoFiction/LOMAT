@@ -78,6 +78,7 @@ class Game
         Tombstone.loadFromTIMEHOLE();
         if(getParameterByName("seerOfVoid",null)!= null) {
             ButtonElement button = new ButtonElement()..text = "Peer Into the Void Y/N???";
+            button.style.zIndex = "10000"; //always be on top plz
             querySelector("body").append(button);
             button.onClick.listen((Event e) {
                 toggleVoid();

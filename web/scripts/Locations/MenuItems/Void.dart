@@ -1,3 +1,5 @@
+import 'package:CommonLib/NavBar.dart';
+
 import '../../Game.dart';
 import '../../SoundControl.dart';
 import '../Town.dart';
@@ -28,6 +30,32 @@ class VoidTravel extends MenuItem {
     querySelector("body").append(me);
     ImageElement image = new ImageElement(src: "images/yeflask.png")..style.opacity="0.3";
     me.append(image);
+    if(getParameterByName("seerOfVoid",null)!= null) {
+      ButtonElement button = new ButtonElement()..text = "Peer Into the Void Y/N???";
+      button.style.zIndex = "10000"; //always be on top plz
+      me.append(button);
+      button.onClick.listen((Event e) {
+        toggleVoid();
+      });
+    }
+    DivElement doop = new DivElement();
+    doop.classes.add("void");
+    doop.id = "HEYTHEREWHOISSHOGUNFANS";
+    bool nidhogPurified = false; // TODO actually wire this up, lohae doesn't share this tho
+    if(nidhogPurified) {
+      DivElement div = new DivElement()..text = "Oh god. That...esteemed collegue just found out that the AllFather has been altered. He is insisting on playing his own Land and beating it as quickly as possible. This is terrible.";
+      ButtonElement button = new ButtonElement()..text = "Oh Shit.";
+      button.onClick.listen((Event e) {
+        window.alert("TODO");
+      });
+      doop.append(div);
+      doop.append(button);
+    }else {
+      DivElement div = new DivElement()..text = "As a superior, transtimeline being such as yourself, you are aware of many things. The AllFather is not yet altered in this timeline, so you will continue to do your job faithfully. ";
+      doop.append(div);
+    }
+    me.append(doop);
+
     image.onClick.listen((Event e) {
       window.alert("You cannot get ye flask!");
     });
