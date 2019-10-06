@@ -4,6 +4,11 @@
 }
 
 @font-face {
+    font-family: nunito;
+    src: url("../Fonts/nunito/Nunito-Regular.ttf");
+}
+
+@font-face {
     font-family: land;
     src: url("../Fonts/CARIMA.TTF");
 }
@@ -320,6 +325,11 @@ html, body {
     box-shadow: 0px 3px 13px #888888;
 
 }
+
+.void{
+  display:none;
+}
+
 
 .tombstoneContainer{
     position:relative;

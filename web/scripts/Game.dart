@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:CommonLib/Collection.dart';
+import 'package:CommonLib/NavBar.dart';
 import 'package:CommonLib/Utility.dart';
 
 import 'AnimationObject.dart';
@@ -75,6 +76,13 @@ class Game
         // TODO and load certain save data facts from local storage
         //async, but don't care when it loads
         Tombstone.loadFromTIMEHOLE();
+        if(getParameterByName("seerOfVoid",null)!= null) {
+            ButtonElement button = new ButtonElement()..text = "Peer Into the Void Y/N???";
+            querySelector("body").append(button);
+            button.onClick.listen((Event e) {
+                toggleVoid();
+            });
+        }
     }
 
 
