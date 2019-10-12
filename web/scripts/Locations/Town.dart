@@ -163,7 +163,10 @@ class Town extends PhysicalLocation {
 
   @override
   Future displayOnScreen(Element div) async {
-      npcs = await Game.instance.findWanderingNPCS();
+      if(this != voidTown) {
+          npcs = await Game.instance.findWanderingNPCS();
+      }
+      print("wandering npcs for $name = $npcs");
 
       if(rand.nextDouble()>0.95){ //yn shows up 5% of the time.
           npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
@@ -233,8 +236,6 @@ class Town extends PhysicalLocation {
     if (coparentSource != null) {
         coparent = coparentSource.genome;
     }
-    List<LOMATNPC> npcs = Game.instance.findWanderingNPCS();
-
     Town town = new Town.dontevercallthisblindly(
         await generateProceduralName(nextTownSeed), npcs, null,
         await genome.breed(coparent, rand));

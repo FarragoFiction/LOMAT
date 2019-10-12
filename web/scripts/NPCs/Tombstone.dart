@@ -79,7 +79,7 @@ class Tombstone {
     }
 
     static Tombstone loadFromJSON(JsonHandler json) {
-        print("json for tombstone is $json");
+        //print("json for tombstone is $json");
         Tombstone ret = new Tombstone.withoutNPC(null, null, null);
         ret.loadJSON(json);
         return ret;

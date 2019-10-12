@@ -20,12 +20,12 @@ class StaticLayer {
     }
 
     void init() {
-        print("initializing $this with image $image");
+        //print("initializing $this with image $image");
         if(image == null) {
-            print("i reset image to have imagelocation $imageLocation");
+            //print("i reset image to have imagelocation $imageLocation");
             image = new ImageElement(src: imageLocation);
         }else {
-            print("i made a tombstone probably, i am $this");
+            //print("i made a tombstone probably, i am $this");
         }
         if(fade) {
             image.classes.add("startFade");

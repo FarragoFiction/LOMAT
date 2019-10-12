@@ -129,7 +129,7 @@ class TownGenome {
         events.add(randomEvent(rand));
         events.add(randomEvent(rand));
         //TODO should there be any mist??? animated gif??? ask artists
-         print("intro debug end: initing $townName because $reason, after bg was ${simpleGenes[MIDGROUNDKEY]}");
+        // print("intro debug end: initing $townName because $reason, after bg was ${simpleGenes[MIDGROUNDKEY]}");
 
     }
 

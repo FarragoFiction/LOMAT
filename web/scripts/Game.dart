@@ -50,7 +50,7 @@ class Game
     int maxPartySize = 5;
     //TODO probably deprecating this, void travel makes it unneeded
     int travelAmount = 1000; //default, if you go slower or faster it changes.
-    int diseaseAmount = 1000; //default, if you go slower or faster it changes.
+    int diseaseAmount = 2000; //default, if you go slower or faster it changes.
     int eventAmount = 3000; //default, if you go slower or faster it changes.
 
     int get costPerTravelTick => ((partyMembers.length + 1) * (eventAmount/1000).ceil());
@@ -192,7 +192,6 @@ class Game
     }
 
     List<LOMATNPC> findWanderingNPCS() {
-        print("wandering npcs is $wanderingNPCs");
         if(wanderingNPCs.isEmpty) return [];
         Random rand = new Random();
         List<LOMATNPC> ret = <LOMATNPC>[];
@@ -203,7 +202,6 @@ class Game
                 ret.add(choice);
                 wanderingNPCs.remove(choice);
             }
-
         }
         return ret;
     }
@@ -308,7 +306,7 @@ class Game
     }
 
     Future setStartingTown() async {
-        Town town = new Town.dontevercallthisblindly("city2",findWanderingNPCS(),null,startingGenome());
+        Town town = new Town.dontevercallthisblindly("city2",new List<LOMATNPC>(),null,startingGenome());
         //town = Town.voidTown;
         //don't overwrite genome
         currentLocation = town;
