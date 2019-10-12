@@ -51,7 +51,7 @@ class VoidTravel extends MenuItem {
       doop.append(div);
       doop.append(button);
     }else {
-      DivElement div = new DivElement()..text = "As a superior, transtimeline being such as yourself, you are aware of many things. The AllFather is not yet altered in this timeline, so you will continue to do your job faithfully. ";
+      DivElement div = new DivElement()..text = "As a superior, transtimeline being such as yourself, you are aware of many things. The AllFather is not yet altered in this timeline, so you will continue to do your job faithfully. Of course. Should you wish to change this, I am sure the Alligators can guide you.</void> ";
       doop.append(div);
     }
     me.append(doop);

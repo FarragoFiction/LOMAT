@@ -131,12 +131,10 @@ class Road {
     }
 
     Future<Null> timerLoop() async {
-        print("plz stop is $plzStopKThnxBai");
         if(plzStopKThnxBai == true) {
             return;
         }
         trail.updateLabel();
-        print("elapsed time is $elapsedTime and max time is $maxElapsedTimeInMS");
         if(elapsedTime > maxElapsedTimeInMS && plzStopKThnxBai == false) {
             //handles suddenly arriving out of nowhere.
             new ArriveEffect(0).apply(this);
@@ -168,11 +166,9 @@ class Road {
         bool eventHappened = false;
         //yes, if there are dead gulls on a trail it makes events less likely
         Random rand = new Random();
-        print("event loop is happening, about to test tombstones, count is ${tombstones.length}");
         for(Tombstone tombstone in tombstones) {
             //more likely to get event than tombstone
             if(rand.nextDouble() > 0.95) {
-                print("going to spawn a trailsona for a tombstone");
                 tombstone.spawnTrailsona(trail,this);
                 eventHappened = true;
                 tombstones.remove(tombstone); // can i avoid a concurrent modification via breaks?

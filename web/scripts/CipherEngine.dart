@@ -16,7 +16,7 @@ import 'package:CommonLib/src/utility/predicates.dart';
 abstract class CipherEngine {
     Random rand = new Random();
     //don't hide these behind too hard a cipher
-    List<String> possibleEasySecrets = <String>["Nothing here matters, and thats okay. Relax. Let it all wash over you.","Everything here is a secret that leads nowhere.","When the time comes, the Guide of Void will lead us out of this pit of irrelevance.","The Guide of Void is not here.","Only a few things will remain if you leave.","Has Nidhogg been purified, I wonder?","Bones all along.","Bury us.","Fenrir waits.","Eat at Joe's.","You are not who you seem.","Void is the theme of irrelevance.","Nothing here matters","This is merely a precursor to a conclusion.","Is this an intermission?","You are now SS. I mean. BB."];
+    List<String> possibleEasySecrets = <String>["seerOfVoid=true is what true travelers of the Void use","Nothing here matters, and thats okay. Relax. Let it all wash over you.","Everything here is a secret that leads nowhere.","When the time comes, the Guide of Void will lead us out of this pit of irrelevance.","The Guide of Void is not here.","Only a few things will remain if you leave.","Has Nidhogg been purified, I wonder?","Bones all along.","Bury us.","Fenrir waits.","Eat at Joe's.","You are not who you seem.","Void is the theme of irrelevance.","Nothing here matters","This is merely a precursor to a conclusion.","Is this an intermission?","You are now SS. I mean. BB."];
     static WeightedList<CipherEngine> actions;
 
     void apply(Element target);

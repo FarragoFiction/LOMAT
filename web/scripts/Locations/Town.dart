@@ -8,6 +8,7 @@ import '../NPCs/LOMATNPC.dart';
 import '../Sections/TalkySection.dart';
 import '../SoundControl.dart';
 import 'Events/RoadEvent.dart';
+import 'Fenrir.dart';
 import 'HuntingGrounds.dart';
 import 'Layers/ProceduralLayer.dart';
 import 'Layers/StaticLayer.dart';
@@ -100,12 +101,10 @@ class Town extends PhysicalLocation {
 
     Future<void> initGenome() async{
     if(genome == null) {
-        print("debug intro: genome was null for $name");
         //oh no the genome has async elements
         genome = new TownGenome("$name",new Random(seed), new Map<String, String>() );
         await genome.init("town wants to init a new genome");
     }else {
-      print("debug intro: genome wasn't null for $name");
     }
     proceduralIntroInit("genome init");
 
@@ -113,7 +112,6 @@ class Town extends PhysicalLocation {
 
   String proceduralIntroInit(String reason) {
       introductionText = "${genome.startText}<br><Br>${genome.middleText}<br><br>${genome.endText}";
-      print("debug intro because $reason for $name is $introductionText");
   }
 
 
@@ -176,6 +174,7 @@ class Town extends PhysicalLocation {
       startPlayingMusic();
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
+
       firstTime = false;
       setNPCGoals();
   }
@@ -183,7 +182,6 @@ class Town extends PhysicalLocation {
   //in theory an npc could accidentally be recruited befor they have a destination?
     //probably should have a thing where if town name is null, just let them off at next stop?
   Future<Null> setNPCGoals() async {
-      print("cachedTowns is ${cachedTowns}");
       npcs.forEach((LOMATNPC npc) async {
             Town town = rand.pickFrom(cachedTowns);
             if(town == this) {
@@ -195,10 +193,8 @@ class Town extends PhysicalLocation {
 
   void startPlayingMusic() {
       String next = nextSong;
-      print("trying to play the next song $next from list ${genome.playList}");
       StreamSubscription ss;
       ss = window.onMouseMove.listen((Event e){
-          //print("the mouse moved so i'm trying  $next from list ${genome.playList} happen");
           ss.cancel();
           SoundControl.instance.playMusicList(next, startPlayingMusic);
       });
@@ -208,7 +204,7 @@ class Town extends PhysicalLocation {
   List<Town> get allCacheButMe {
       List<Town> ret = new List<Town>.from(cachedTowns);
           ret.remove(this);
-          print("all cache but me is ${ret.length} long");
+          //print("all cache but me is ${ret.length} long");
       return ret;
   }
 
@@ -370,6 +366,9 @@ class Town extends PhysicalLocation {
 
   void dismissFlavorText() {
       flavorTextElement.remove();
+      if(this == Town.voidTown) {
+          Fenrir.wakeUP(container);
+      }
   }
 
     void doTalky() {
@@ -377,7 +376,7 @@ class Town extends PhysicalLocation {
         if(npcs.isNotEmpty) {
             Game.instance.popupTalkySection(rand.pickFrom(npcs), container);
         }else {
-            print("trying to do talk but no one came");
+            //print("trying to do talk but no one came");
             Game.instance.popup("But no one came...");
         }
     }
