@@ -336,7 +336,7 @@ class Game
         ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(new Disease("Dysentery","Like that one game", 8,5)), 1));
         ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 0.1));
         ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.1));
-        ret.events.add(new RoadEvent("A Cactus Or Something","A lone cactus sits in the road. It's friendly aura compels ${RoadEvent.PARTYMEMBER} to give it a hug.", new DiseaseEffect(new Disease("Dysentery"," Doing this has caused them to contract Needle Affliction.", 8,5)), 0.5));
+        ret.events.add(new RoadEvent("A Cactus Or Something","A lone cactus sits in the road. It's friendly aura compels ${RoadEvent.PARTYMEMBER} to give it a hug.", new DiseaseEffect(new Disease("Needle Affliction."," Doing this has caused them to contract Needle Affliction.", 8,5))..image.src="images/EventIcons/cactus.png", 0.5));
         ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} spends the night shivering in wet boots.", new DiseaseEffect(), 0.5));
         ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} mentions finding interesting new friends back in the last town.", new DiseaseEffect(), 0.05));
 

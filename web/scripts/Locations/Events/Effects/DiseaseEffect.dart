@@ -24,7 +24,7 @@ class DiseaseEffect extends Effect {
     @override
     String get flavorText =>  "${RoadEvent.PARTYMEMBER} gets $diseaseName. $diseaseEffect";
 
-    DiseaseEffect([Disease disease]);
+    DiseaseEffect([Disease this.disease]);
 
     //pick a random npc
   @override

@@ -20,7 +20,7 @@ class Road {
     static int minTimeInS = 1;
     static int maxTimeInS = 4;
     //manic says multiple of 3.43 seconds are best for music reasons
-    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 60;
+    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 30;
 
     Town sourceTown;
     List<Tombstone> tombstones = new List<Tombstone>();
@@ -68,6 +68,7 @@ class Road {
         destinationTown.npcs.forEach((LOMATNPC npc) {
             events.addAll(npc.roadEvents);
         });
+        events.shuffle();
         timeRemaining = travelTimeInMS;
         loadTombstones();
 

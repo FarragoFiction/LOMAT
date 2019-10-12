@@ -28,7 +28,7 @@ class Disease {
         ReCase rc = new ReCase(name);
         name = rc.titleCase;
 
-        return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, desc,rand.nextInt(10),rand.nextInt(10)));
+        return Future.delayed( Duration(seconds: 1), () =>  new Disease(name, desc,rand.nextInt(10+3),rand.nextInt(10)+3));
     }
 
 
