@@ -36,7 +36,7 @@ TODO: npcs bring events with them
 class Game
 {
     static Game _instance;
-    GameStats gameStats = GameStats.instance;
+    GameStats gameStats = GameStats.load();
     bool partySectionDisplayed = false;
     LOMATNPC ebony; //needed for grim to keep track of.
     LOMATNPC skol; //needed to bark at lil scumbag

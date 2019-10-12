@@ -138,6 +138,7 @@ class Town extends PhysicalLocation {
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.MIDGROUNDKEY], this, 1));
       layers.add(new StaticLayer(genome.simpleGenes[TownGenome.FOREGROUNDKEY], this, 1));
       if(this == voidTown) {
+          Game.instance.gameStats.visitAGoodBoi();
           testFenrir();
       }
   }

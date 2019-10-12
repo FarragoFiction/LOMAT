@@ -225,10 +225,8 @@ class LOMATNPC {
         //(as well as rendering the mini tombstone on the road)
         road.stop(); //you can turn this on again later
         //it LOOKS like its still going, but the progresion is turned off which is what matters
-        //TODO i need to hide the trail when the road stops
-        //TODO i need to show the trail when the road starts
-        //TODO need to display the tombstone and shove the consort into it
         Tombstone grave = new Tombstone(this);
+        Game.instance.gameStats.mournTheDead(grave);
         Game.instance.eject(this);
         SoundControl.instance.playSoundEffect("Dead_jingle_bells");
         if(associatedPodcast != null) {

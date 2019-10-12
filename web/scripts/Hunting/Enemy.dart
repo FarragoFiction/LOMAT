@@ -1,4 +1,5 @@
 import '../Game.dart';
+import '../GameStats.dart';
 import '../Locations/Layers/ProceduralLayer.dart';
 import '../Locations/PhysicalLocation.dart';
 import '../SoundControl.dart';
@@ -81,6 +82,7 @@ abstract class Enemy {
         removeMePlease = true;
         Game.instance.addFunds(gristDropped);
         image.remove();
+        Game.instance.gameStats.killedAnInnocent();
     }
 
     void vanish() {

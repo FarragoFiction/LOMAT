@@ -7,6 +7,8 @@
 
 import 'dart:html';
 
+import 'package:CommonLib/Logging.dart';
+import 'package:CommonLib/NavBar.dart';
 import 'package:CommonLib/Random.dart';
 import 'package:CommonLib/src/collection/weighted_lists.dart';
 import 'package:CommonLib/src/utility/predicates.dart';
@@ -14,7 +16,7 @@ import 'package:CommonLib/src/utility/predicates.dart';
 abstract class CipherEngine {
     Random rand = new Random();
     //don't hide these behind too hard a cipher
-    List<String> possibleEasySecrets = <String>["Bones all along.","Bury us.","Fenrir waits.","Eat at Joe's."];
+    List<String> possibleEasySecrets = <String>["Nothing here matters, and thats okay. Relax. Let it all wash over you.","Everything here is a secret that leads nowhere.","When the time comes, the Guide of Void will lead us out of this pit of irrelevance.","The Guide of Void is not here.","Only a few things will remain if you leave.","Has Nidhogg been purified, I wonder?","Bones all along.","Bury us.","Fenrir waits.","Eat at Joe's.","You are not who you seem.","Void is the theme of irrelevance.","Nothing here matters","This is merely a precursor to a conclusion.","Is this an intermission?","You are now SS. I mean. BB."];
     static WeightedList<CipherEngine> actions;
 
     void apply(Element target);
@@ -40,6 +42,15 @@ abstract class CipherEngine {
         rand.pickFrom(copyActions).apply(target);
     }
 
+    static void voidPrint(String text, [int size = 18]) {
+        String color = "#ffffff";
+        if(getParameterByName("seerOfVoid",null)!= null) {
+            color = "#020d1c";
+        }
+        String consortCss = "font-family: 'Nunito', Courier, monospace;color:${color};font-size: ${size}px;font-weight: bold;";
+        fancyPrint("???: $text",consortCss);
+    }
+
 }
 
 class HiddenDivCipher extends CipherEngine {
@@ -56,6 +67,19 @@ class HiddenDivCipher extends CipherEngine {
     return true;
   }
 }
+
+class ConsoleCipher extends CipherEngine {
+
+    @override
+    void apply(Element target) {
+        CipherEngine.voidPrint(pickSecret());
+    }
+    @override
+    bool canApply(Element target) {
+        return true;
+    }
+}
+
 
 class MouseOverCipher extends CipherEngine {
 
