@@ -163,6 +163,8 @@ class Town extends PhysicalLocation {
 
   @override
   Future displayOnScreen(Element div) async {
+      npcs = await Game.instance.findWanderingNPCS();
+
       if(rand.nextDouble()>0.95){ //yn shows up 5% of the time.
           npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
       }
@@ -265,8 +267,7 @@ class Town extends PhysicalLocation {
   }
 
   static Future<Town> generateProceduralTown(Random rand) async {
-      List<LOMATNPC> npcs = await Game.instance.findWanderingNPCS();
-      Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), npcs,null,null);
+      Town town = new Town.dontevercallthisblindly(await generateProceduralName(nextTownSeed), <LOMATNPC>[],null,null);
       await town.initGenome();
       return town;
   }

@@ -93,8 +93,29 @@ class Fenrir {
     static void wakeUP(Element container) {
         sayHello(container);
         int time = new Random().nextIntRange(1000,10000);
+        gullsGratitude(container);
         new Timer(new Duration(milliseconds: time), () =>
             beChatty(container));
+    }
+
+    static void gullsGratitude(Element container) {
+        GameStats gs = Game.instance.gameStats;
+        for(Tombstone t in gs.theDead) {
+            if (t.npcName.contains("Ebony")) gullPopup(
+                "Ebony: FINALLY, I FEEL DEATH'S COLD EMBRACE ONCE AGAIN!!!!!",
+                container);
+            if (t.npcName.contains("Sköll")) gullPopup(
+                "Sköll Svelger: YOU DID IT, I ALWAYS BELIEVED IN YOU CHAMP!!!!!", container);
+            if (t.npcName.contains("Roger")) gullPopup(
+                "Roger: FINALLY, THE DEAD ARE BACK TO THEIR PROPER ZONING!!!!!",
+                container);
+            if (t.npcName.contains("Halja")) gullPopup(
+                "Halja: AS I WAS TRYING TO TELL YOU, WE WERE ALWAYS DEAD.NOW WE MAY FINALLY STOP WEARING THESE EMBARASSING SKELETAL FORMS!!!!!",
+                container);
+            if (t.npcName.contains("Kid")) gullPopup(
+                "The Kid: FINALLY I CAN GO BACK TO FARMING ALL THESE GODDAMN ICEBLOCKS IN THE AFTERLIFE!!!!!",
+                container);
+        }
     }
 
     static void beChatty(Element container) {
@@ -160,6 +181,20 @@ class Fenrir {
             currentPopup.remove();
         }
 
+    }
+
+    static Future<void> gullPopup(String text, Element container,[DivElement currentPopup]) async {
+
+        if(currentPopup == null) {
+            currentPopup = new DivElement()
+                ..classes.add("gullPopup")..classes.add("void")
+                ..text = text;
+            container.append(currentPopup);
+        }
+        Random rand = new Random();
+        rand.nextInt();
+        new Timer(new Duration(milliseconds: 20000), () =>
+            currentPopup.remove());
     }
 
 }

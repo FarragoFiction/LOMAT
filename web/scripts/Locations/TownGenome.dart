@@ -243,7 +243,7 @@ class TownGenome {
         String adj = rand.pickFrom(shittyAdj);
         String flavor = rand.pickFrom(shittyFlavor);
         if(rand.nextDouble() > 0.9) {
-            return new RoadEvent("A Cactus Or Something","A lone cactus sits in the road. It's friendly aura compels ${RoadEvent.PARTYMEMBER} to give it a hug.", new DiseaseEffect(new Disease("Needle Affliction"," Doing this has caused them to contract Needle Affliction.", 8,5))..image.src="images/EventIcons/cactus.png", 0.5);
+            return new RoadEvent("A Cactus Or Something","A lone cactus sits in the road. It's friendly aura compels ${RoadEvent.PARTYMEMBER} to give it a hug.", new DiseaseEffect(new Disease("Needle Affliction"," It hurts.", 8,5))..image.src="images/EventIcons/cactus.png", 0.5);
         }
         return (new RoadEvent("$adj $noun","$adj $noun $flavor", rand.pickFrom(effects), 0.01));
 

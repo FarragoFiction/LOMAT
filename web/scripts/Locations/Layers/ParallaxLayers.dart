@@ -36,7 +36,6 @@ class ParallaxLayer extends StaticLayer {
 
 
     void move() {
-        print("moving $this");
         int x = int.parse(image.style.left.replaceAll("px", ""));
         x = x - speed;
         //if i am less than -0, no longer on screen, go away
