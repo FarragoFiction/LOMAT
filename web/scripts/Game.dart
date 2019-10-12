@@ -15,6 +15,7 @@ import 'Locations/PhysicalLocation.dart';
 import 'Locations/Road.dart';
 import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
+import 'NPCs/Disease.dart';
 import 'NPCs/LOMATNPC.dart';
 import 'NPCs/TalkyItem.dart';
 import 'NPCs/TalkyLevel.dart';
@@ -307,7 +308,7 @@ class Game
 
     Future setStartingTown() async {
         Town town = new Town.dontevercallthisblindly("city2",findWanderingNPCS(),null,startingGenome());
-        town = Town.voidTown;
+        //town = Town.voidTown;
         //don't overwrite genome
         currentLocation = town;
     }
@@ -332,13 +333,14 @@ class Game
 
         ret.events.clear();
         ret.events = new WeightedList<RoadEvent>();
+        ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(new Disease("Dysentery","Like that one game", 8,5)), 1));
         ret.events.add(new RoadEvent("Lightning Strike","A lightning bolt comes out of nowhere, striking ${RoadEvent.PARTYMEMBER}.", new InstaKillEffect("lightning to the face"), 0.1));
         ret.events.add(new RoadEvent("Diss the Sentry","A sentry blocks the way, and ${RoadEvent.PARTYMEMBER} is really rude to them.", new InstaKillEffect("dissing a sentry"), 0.1));
+        ret.events.add(new RoadEvent("A Cactus Or Something","A lone cactus sits in the road. It's friendly aura compels ${RoadEvent.PARTYMEMBER} to give it a hug.", new DiseaseEffect(new Disease("Dysentery"," Doing this has caused them to contract Needle Affliction.", 8,5)), 0.5));
         ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} spends the night shivering in wet boots.", new DiseaseEffect(), 0.5));
         ret.events.add(new RoadEvent("Disease!!!","${RoadEvent.PARTYMEMBER} mentions finding interesting new friends back in the last town.", new DiseaseEffect(), 0.05));
 
         //ret.events.add(new RoadEvent("Road Work Being Done","You encounter a group of sqwawking 'ghosts' in the middle of the road. They refuse to move.", smallDelay, 0.01));
-        ret.events.add(new RoadEvent("Get Homaged","${RoadEvent.PARTYMEMBER} gets dysentery or something.", new DiseaseEffect(), 0.25));
         ret.events.add(new RoadEvent("Absolutely Get Wrecked","BY ODINS LEFT VESTIGAL VENOM SACK, your wago...I mean SWEET VIKING LAND BOAT breaks down.", largeEffect, 0.2));
         ret.events.add(new RoadEvent("Absolutely Get Stoked","BY THE FATHERS MANY EYES, uh. Is that drunken revelry in the distance you hear? You better go a little bit faster to make sure you avoid it.", largeEffectBackwards, 0.4));
         ret.events.add(new RoadEvent("Be Lucky!!!!!!!!","Oh, hey. While repairing your SWEET VIKING LAND BOAT you happened to find some funds!", new MoneyEffect(13), 0.3));

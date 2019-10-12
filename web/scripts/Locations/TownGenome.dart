@@ -1,5 +1,6 @@
 import 'package:TextEngine/TextEngine.dart';
 
+import '../NPCs/Disease.dart';
 import 'Events/Effects/DelayEffect.dart';
 import 'Events/Effects/DiseaseEffect.dart';
 import 'Events/Effects/Effect.dart';
@@ -241,6 +242,9 @@ class TownGenome {
         String noun = rand.pickFrom(shittyNouns);
         String adj = rand.pickFrom(shittyAdj);
         String flavor = rand.pickFrom(shittyFlavor);
+        if(rand.nextDouble() > 0.9) {
+            return new RoadEvent("A Cactus Or Something","A lone cactus sits in the road. It's friendly aura compels ${RoadEvent.PARTYMEMBER} to give it a hug.", new DiseaseEffect(new Disease("Dysentery"," Doing this has caused them to contract Needle Affliction.", 8,5)), 0.5);
+        }
         return (new RoadEvent("$adj $noun","$adj $noun $flavor", rand.pickFrom(effects), 0.01));
 
     }

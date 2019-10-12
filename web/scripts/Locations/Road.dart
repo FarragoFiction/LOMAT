@@ -20,7 +20,7 @@ class Road {
     static int minTimeInS = 1;
     static int maxTimeInS = 4;
     //manic says multiple of 3.43 seconds are best for music reasons
-    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 100;
+    static int maxElapsedTimeInMS= DelayEffect.measureUnitInMS * 60;
 
     Town sourceTown;
     List<Tombstone> tombstones = new List<Tombstone>();
@@ -56,7 +56,8 @@ class Road {
 
         Game.instance.partyMembers.forEach((LOMATNPC npc) {
             npc.partyEvents.forEach((RoadEvent event) {
-                event.requiredPartyMember = npc;
+                //don't overwrite skol or whatever, but don't let something happen post death either
+                if(event.requiredPartyMember == null) event.requiredPartyMember = npc;
                 events.add(event);
             });        });
 
@@ -135,6 +136,7 @@ class Road {
             return;
         }
         trail.updateLabel();
+        print("elapsed time is $elapsedTime and max elapsed is $maxElapsedTimeInMS");
         if(elapsedTime > maxElapsedTimeInMS && plzStopKThnxBai == false) {
             //handles suddenly arriving out of nowhere.
             new ArriveEffect(0).apply(this);

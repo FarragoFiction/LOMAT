@@ -20,11 +20,11 @@ class Fenrir {
 
     static String get opinion {
         GameStats gs = Game.instance.gameStats;
-        if(gs.theDead.isEmpty && gs.voidVisits < 3) {
+        if(gs.theDead.isEmpty && gs.voidVisits < 2) {
             return NEUTRAL;
         }else if(gs.theDead.isEmpty) {
             return HAPPY;
-        }else if(gs.theDead.length < 3) {
+        }else if(gs.theDead.length < 2) {
             return NEUTRAL;
         }else {
             return ANGRY;
@@ -37,7 +37,7 @@ class Fenrir {
     static List<String> neutralHellos = <String>["BORK!!!!!","FRIEND?????","!!!!! a friend?????  A FRIEND!!!!!"];
     static List<String> angryHellos = <String>["BORK!!!!!","GRRRR!!!!!","go AWAY!!!!!"];
     //bork goes with everything, add things to these sections based on stats
-    static List<String> _happyPhrases = <String>["BORK!!!!!","my WHOLE BODY is a big TAIL and I am WAGGING it for my FRIEND!!!!!"];
+    static List<String> _happyPhrases = <String>["BORK!!!!!","my WHOLE BODY is a big TAIL and I am WAGGING it for my FRIEND!!!!!","BEST FRIEND I WISH I HAD MORE THAN BUGS TO FEED YOU!!!!!","i wish i HADNT EATEN ALL THE NOT-BUGS so you could have some GOOD CRUNCH!!!!!"];
     static List<String> _neutralPhrases = <String>["BORK!!!!!","boy these CHAINS get REALLY REALLY REALLY REALLY REALLY cold here!!!!!"];
     static List<String> _angryPhrases = <String>["BORK!!!!!","GRRRR!!!!!","i HATE you!!!!!","you're BAD and UNIMPORTANT and FAKE and NO ONE LIKES YOU!!!!!","you can't just TAKE THEM AWAY FROM ME!!!!!","put them BACK!!!!! they aren't HAPPY in the GROUND!!!!!","You're just a FAKE GUIDE!!!!! You aren't IMPORTANT and you can't BEAT ME!!!!!","BORK BORK BORK BORK BORK!!!!!","you're FAKE and UNIMPORTANT and IRRELEVANT and NONE OF THIS EVEN MATTERS!!!!","you aren't a REAL player!!!!!"];
 

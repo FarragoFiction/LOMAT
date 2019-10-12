@@ -5,6 +5,7 @@
 import 'CipherEngine.dart';
 import 'NPCs/Tombstone.dart';
 
+//TODO please have a credit screen thanking contest winners and GhoulPen
 class GameStats {
     int helplessBugsKilled = 0;
     List<Tombstone> theDead = new List<Tombstone>();
