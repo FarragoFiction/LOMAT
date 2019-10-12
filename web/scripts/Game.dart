@@ -5,6 +5,7 @@ import 'package:CommonLib/NavBar.dart';
 import 'package:CommonLib/Utility.dart';
 
 import 'AnimationObject.dart';
+import 'GameStats.dart';
 import 'Locations/Events/Effects/DelayEffect.dart';
 import 'Locations/Events/Effects/DiseaseEffect.dart';
 import 'Locations/Events/Effects/InstaKillEffect.dart';
@@ -35,6 +36,7 @@ TODO: npcs bring events with them
 class Game
 {
     static Game _instance;
+    GameStats gameStats = GameStats.instance;
     bool partySectionDisplayed = false;
     LOMATNPC ebony; //needed for grim to keep track of.
     LOMATNPC skol; //needed to bark at lil scumbag
