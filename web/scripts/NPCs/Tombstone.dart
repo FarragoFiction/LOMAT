@@ -43,7 +43,7 @@ class Tombstone {
     static String NAMETAG = "#NAME#";
     static String CODTAG = "#COD#";
     static String labelPattern = ":___ ";
-    bool cameFromOnline = false;
+    int onlineID; //only set if came from online
     //dont respawn plz
     bool onTrail = false;
     Road road; //not for serializing, just for clicking
@@ -85,6 +85,10 @@ class Tombstone {
         return ret;
     }
 
+    void setID(int id) {
+        onlineID = id;
+    }
+
     Future<Null> drawSelf(Element container, Road road, bool readOnly) async {
         print("trying to draw self");
         DivElement me = new DivElement()..classes.add("tombstoneContainer");;
@@ -95,14 +99,9 @@ class Tombstone {
         if(!readOnly) {
             me.append(makeBuilder());
         }else {
-            ButtonElement button = new ButtonElement()..text ="Play Podcast ${associatedPassPhrase}";
-            button.classes.add("menuItem");
-            button.style.width = "500px";
-            button.onClick.listen((Event e) {
-                SoundControl.instance.playPodcast(associatedPassPhrase);
-                PassPhraseHandler.storeTape(associatedPassPhrase);
-            });
-            me.append(button);
+            makePlayButton(me);
+            makeVoteButtons(me);
+
         }
         ButtonElement button = new ButtonElement()..text ="Accept and Move On";
         button.classes.add("menuItem");
@@ -114,6 +113,40 @@ class Tombstone {
             acceptAndMoveOn(me,road);
         });
         me.append(button);
+    }
+
+    void makePlayButton(DivElement me) {
+      ButtonElement button = new ButtonElement()..text ="Play Podcast ${associatedPassPhrase}";
+      button.classes.add("menuItem");
+      button.style.width = "500px";
+      button.onClick.listen((Event e) {
+          SoundControl.instance.playPodcast(associatedPassPhrase);
+          PassPhraseHandler.storeTape(associatedPassPhrase);
+      });
+      me.append(button);
+    }
+
+    void makeVoteButtons(DivElement me) {
+        if(onlineID == null) return;
+        DivElement judgement = new DivElement();
+        me.append(judgement);
+        ButtonElement buttonUp = new ButtonElement()..text ="Judge Good";
+        buttonUp.classes.add("menuItem");
+        buttonUp.style.width = "250px";
+        buttonUp.onClick.listen((Event e) {
+            String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds/${onlineID}/upvote";
+            put(url);
+        });
+        judgement.append(buttonUp);
+
+        ButtonElement buttonDown = new ButtonElement()..text ="Judge Bad";
+        buttonDown.classes.add("menuItem");
+        buttonDown.style.width = "250px";
+        buttonDown.onClick.listen((Event e) {
+            String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds/${onlineID}/downvote";
+            put(url);
+        });
+        judgement.append(buttonDown);
     }
 
 
@@ -302,7 +335,7 @@ class Tombstone {
 
     Future<CanvasElement> makeCanvas() async {
         CanvasElement canvas = new CanvasElement(width: 800, height: 600);
-        if(cameFromOnline) {
+        if(onlineID != null) {
             ImageElement timehole = await Loader.getResource("images/TIME.png");
             canvas.context2D.drawImage(timehole,0,0);
         }
