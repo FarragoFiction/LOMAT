@@ -136,6 +136,10 @@ class Tombstone {
         buttonUp.onClick.listen((Event e) {
             String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds/${onlineID}/upvote";
             put(url);
+            judgement.text = "You Have Judged Your Fellow Observer As Good";
+            judgement.style.fontSize = "18px";
+            judgement.style.color="white";
+
         });
         judgement.append(buttonUp);
 
@@ -145,6 +149,10 @@ class Tombstone {
         buttonDown.onClick.listen((Event e) {
             String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds/${onlineID}/downvote";
             put(url);
+            judgement.text = "You Have Judged Your Fellow Observer As Bad";
+            judgement.style.fontSize = "18px";
+            judgement.style.color="white";
+
         });
         judgement.append(buttonDown);
     }
