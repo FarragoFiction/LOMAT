@@ -30,14 +30,6 @@ class VoidTravel extends MenuItem {
     querySelector("body").append(me);
     ImageElement image = new ImageElement(src: "images/yeflask.png")..style.opacity="0.3";
     me.append(image);
-    if(getParameterByName("seerOfVoid",null)!= null) {
-      ButtonElement button = new ButtonElement()..text = "Peer Into the Void Y/N???";
-      button.style.zIndex = "10000"; //always be on top plz
-      me.append(button);
-      button.onClick.listen((Event e) {
-        toggleVoid();
-      });
-    }
     DivElement doop = new DivElement();
     doop.classes.add("void");
     doop.id = "HEYTHEREWHOISSHOGUNFANS";
@@ -51,7 +43,7 @@ class VoidTravel extends MenuItem {
       doop.append(div);
       doop.append(button);
     }else {
-      DivElement div = new DivElement()..text = "As a superior, transtimeline being such as yourself, you are aware of many things. The AllFather is not yet altered in this timeline, so you will continue to do your job faithfully. Of course. Should you wish to change this, I am sure the Alligators can guide you.</void> ";
+      DivElement div = new DivElement()..text = "As a superior, transtimeline being such as yourself, you are aware of many things. The AllFather is not yet altered in this timeline, so you will continue to do your job faithfully. Of course. Should you wish to change this, I am sure the Alligators can guide you. ";
       doop.append(div);
     }
     me.append(doop);

@@ -362,6 +362,11 @@ html, body {
 }
 
 .void{
+   background-color:navy;
+   color:white;
+}
+
+html:not([data-seerOf=void]) .void {
   display:none;
 }
 
