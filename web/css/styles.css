@@ -400,6 +400,14 @@ html:not([data-seerOf=void]) .void {
     transform: translateY(-5px);
 }
 
+.goDark:active{
+    transform: translateY(-5px);
+}
+
+.voidButton:active{
+    transform: translateY(-5px);
+}
+
 
 .menuItem:hover{
     box-shadow: 0px 3px 13px #888888;
