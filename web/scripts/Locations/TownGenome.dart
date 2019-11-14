@@ -28,10 +28,10 @@ class TownGenome {
     static String groundBase = "${imagesLocationBase}/grounds/";
     static String midgroundBase = "${imagesLocationBase}/midgrounds/";
     static String foregroundBase = "${imagesLocationBase}/foregrounds/";
-    static int maxBGs = 5;
-    static int maxGs =4;
-    static int maxMGs = 6;
-    static int maxFGs = 4;
+    static int maxBGs = 6;
+    static int maxGs =5;
+    static int maxMGs = 7;
+    static int maxFGs = 5;
     //TODO what kinds of enemies can be hunted should also be a gene
     //TODO breed two towns together because i have problems and that problem is loving genetic algorithms
     //TODO add list of npc genomes
