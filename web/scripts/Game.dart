@@ -17,6 +17,7 @@ import 'Locations/Town.dart';
 import 'Locations/TownGenome.dart';
 import 'NPCs/Disease.dart';
 import 'NPCs/LOMATNPC.dart';
+import 'NPCs/NonGullLOMATNPC.dart';
 import 'NPCs/TalkyItem.dart';
 import 'NPCs/TalkyLevel.dart';
 import 'NPCs/TalkyQuestion.dart';
@@ -37,6 +38,7 @@ TODO: npcs bring events with them
 class Game
 {
     static Game _instance;
+    NonGullLOMATNPC lilScumbag;
     GameStats gameStats = GameStats.load();
     bool partySectionDisplayed = false;
     LOMATNPC ebony; //needed for grim to keep track of.
@@ -184,6 +186,15 @@ class Game
         }
     }
 
+    LOMATNPC findLilScumbag() {
+        if(wanderingNPCs.contains(lilScumbag)) {
+            wanderingNPCs.remove(lilScumbag);
+            return lilScumbag;
+        }else {
+            return lilScumbag;
+        }
+    }
+
     List<LOMATNPC> findWanderingNPCS() {
         if(wanderingNPCs.isEmpty) return [];
         Random rand = new Random();
@@ -191,7 +202,8 @@ class Game
         int npcs = rand.nextIntRange(1,3);
         for(int i = 0; i< npcs; i++) {
             LOMATNPC choice = rand.pickFrom(wanderingNPCs);
-            if(choice != null) {
+            //shouldn't happen but be careful becaues multiple recruits keep happening
+            if(choice != null && !partyMembers.contains(choice)) {
                 ret.add(choice);
                 wanderingNPCs.remove(choice);
             }

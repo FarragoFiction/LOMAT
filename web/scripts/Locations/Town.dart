@@ -165,13 +165,19 @@ class Town extends PhysicalLocation {
   Future displayOnScreen(Element div) async {
       if(this != voidTown) {
           npcs = await Game.instance.findWanderingNPCS();
+          if(genome.background.contains("5.png")) {
+              LOMATNPC scumbag = Game.instance.findLilScumbag();
+              if (scumbag != null) {
+                  npcs.add(scumbag);
+              }
+          }
       }
       print("wandering npcs for $name = $npcs");
 
       if(rand.nextDouble()>0.95){ //yn shows up 5% of the time.
           npcs.add(NPCFactory.yn(rand)); //yn only exists if the town is a real place
       }
-
+      npcs.forEach((LOMATNPC npc) => npc.currentTown = this);
       roads = await Road.spawnRandomRoadsForTown(this);
 
       super.displayOnScreen(div);

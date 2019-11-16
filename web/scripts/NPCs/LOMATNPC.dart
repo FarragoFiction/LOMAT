@@ -434,8 +434,8 @@ abstract class NPCFactory {
         roadEvents.add(new RoadEvent("So Cute!!!!","You spend several minutes appreciating an adorable oppossum consort.", new DelayEffect(2)..image.src="images/EventIcons/Lil_Scumbag.png", 1.0));
         roadEvents.add(new RoadEvent("Bork Bork!!!!","Out of nowhere, Skol spots an adorable oppossum and immediately starts growling and barking his head off and chasing her around. You waste a LOT of time trying to get him to stop.", new DelayEffect(2)..image.src="images/EventIcons/Lil_Scumbag.png", 1.0)..requiredPartyMember=Game.instance.skol);
 
-        NonGullLOMATNPC npc =  LOMATNPC.loadFromDataString(data)..roadEvents=roadEvents;
-        return npc;
+        Game.instance.lilScumbag = LOMATNPC.loadFromDataString(data)..roadEvents=roadEvents;
+        return Game.instance.lilScumbag;
     }
 
     //TODO eventaully all this is serialized.
