@@ -213,7 +213,7 @@ class Game
 
     bool recruit(LOMATNPC npc) {
         print("before recruiting $npc, party members length is ${partyMembers.length} and is $partyMembers");
-        if(partyMembers.length >= maxPartySize) {
+        if(partyMembers.length >= maxPartySize || partyMembers.contains(npc)) {
             return false;
         }
         SoundControl.instance.playSoundEffect("Dead_Jingle");
