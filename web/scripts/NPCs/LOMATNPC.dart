@@ -54,6 +54,7 @@ class LOMATNPC {
 
     SinglePartyMember myStatsView;
     String causeOfDeath = "absolutely nothing";
+    bool dead = false;
     int _hp = 85;
     //if its null its good
     //make sure this goes into the json yo
@@ -217,6 +218,8 @@ class LOMATNPC {
     //takes in a road becaue tombstones go on roads
     void die(String cod, Road road) {
         animation.keepLooping = false; //tear down
+        currentTown = null;
+        dead = true;
         causeOfDeath = cod;
         hp = -1;
         //okay what needs to happen here is the road needs to plzStopKThanxBai and then
@@ -366,7 +369,8 @@ abstract class NPCFactory {
 
     static LOMATNPC rogerKoon() {
         String dataString = "Roger Koon:___ N4IgdghgtgpiBcIBKB7A5jATgAgNIpTBABoQAbGCANwEsw0BZGAZ2YgwRGwBUB5AEV7YoEANYxszAK6YJlAMYALbADkACgGFsiiM2wRs8qcwAuKKNgrU6aYSzYYAdCRDyIxmLwBm-SicWcEABGzChkUiYwZACe2GAo-jYuigAOCAAcAKykJtEpcIgA4lJkZC4AJjTMlNXMCADaALo5EGSi0QAyMFRRCKAmre0AkpFQdfD1oJXMKWQQ0dwwAB4mnADqOiaGEGDY0ShS2JGldvpBB1uJemjQMAD8LiaYNGgYmONNOXkFINyD0QBFKQsEw0QguWQzQjVPogaazeaLFacbgACSGAGVsIUAIIMACi2DWQw6HWwQxUADVeB1KYSAGL4pBIACaFMKPFRhIA5BjeABVDpY3j0zmE-j4nH8bk8IRo-FDJDYekUnFkpD4jHcdnYNQdHEafGObAYgFrHFrXAAQhtNsez1eWA+zRAAzanW6vXg-X+IxgYwajQAvl98ij-kgWCloXBSLpQvIaBBIuV8VAEmCiPAAIwAJgADEGQ1MqgiFstVogNsntrt9odjmRTsELkdFFUjigAO5gB45B1vD6gOZBL0gHHpqRgEz0qflOqkGhQaOYAbTtYoTDlBBgEpkRfLzdrkxDacIbP5wsu3JhxB-d1AkGZiFRmOw+FzcvIxCm82W202tg+J0qyvAqISFKcpisprCo2AaDiKjctwypDIU-IatgAooaivBrLK2AdJKdLktwzj9i8g6Bi07pdD0ZTeq6vqjM6Iaut84bupGUJgDCcasCgibJjAqbpqC4I5peRbECWMyfkilYgGsEA0CYxCWDQ4jqfW3KyNg5SUOUfaugOToNMOwRjhOBzTrOYDzi4S4rseG5bjue4Hs5OwnmeOYXkG14cXe-yPqYz6kJC0a8QUsllgpnC-ha1oAdgLKasa+IABoGtwHQsoRQy4ISaI4mR5Lcgw2ASlK5EmZRZkTNe-x0V6Prun6AaNWxN4-Pe7TcVFfEgPGglJimaYZhJF6FsWcKlvJFbrIosQQHp9b6ZC1TlBp4j6NgaCKCgpjGU89XvOZ5CWQx46TrZc4LiATlHt5rnbvAu6lJ5z3TqelbTQFoa9SFwJheCEWvtF77zYii2IAAQviuEdPw2AMPlSC8AjWIsgA9CoJ2medjU0e0LUMW1wwsRdH4w9+SkqWpO0wNpBy6RIBkQEZ9pnUOl2jtd1lTjO92OYeq4vZub0ffuj1i8ev3nv5gW3r8wNPmDICRW+jE01+imJf+KVpRiGXZRouX5R0hXFaipXGkMFVVZK-C1adjpE58TG0Z65Ne5T-qsYDnH9RDQ0jUJ41ic+kkzcGQfBVxoexsNAkRyJE3iVm-2zbr8VVpstZ7AcRxRE2sBnK2sAEzz1HsSrfWAiDmcvjxMI69DeucCyArYDimHyrqGNqFyGJDPiKNchjRK4USJJkuhQwSmKhG8FqJoCkKWGimi0H6ioKN8GKiqoSoarYBqWo6nqBpGtz7vOiTHr0bCbr+51TTdUFquJ63yfh2N6co5TSkjnDuecQD8BQEXQ4XZvKdmwAAKxQHQOw1d761x6sHRu6siDg1-lDOStNFJrA3ijIYVo7gmjNElACVo75UWJn7J+rUmEdV5rnWGyAYDyEwFIVSaCGGe0wYgDUGgkD8iGNqbg+IGAgACp-euEYk4uH-sJUSk0s4gLjsNMAS5kzR1AJsFQUgoCjkwAgbIIBzjlGiMY0xWALGkBSK0GAJhIicEKCgIY-JeAAE4ljpC8AAKVwBiUQXZ8RwxxPSIJGJ+QAC95AAGYVAAH1UQBOgCkAAjuUVESB8xeFSWQVJABaMA3BUmZXpF4bgaAAC89S5FBiAA";
-        return LOMATNPC.loadFromDataString(dataString)..associatedPodcast="ill_sue_you";
+        Game.instance.roger_koon = LOMATNPC.loadFromDataString(dataString)..associatedPodcast="ill_sue_you";
+        return Game.instance.roger_koon;
     }
 
     static LOMATNPC ebony() {
@@ -401,12 +405,12 @@ abstract class NPCFactory {
         List<RoadEvent> roadEvents = new List<RoadEvent>();
         roadEvents.add(new RoadEvent("A Sudden Realization","You suddenly feel as if you understand everything. Wait. No. It's just indigestion.", effect, 1.0));
         roadEvents.add(new RoadEvent("A Confused Feeling","You spend a very long time paused on the side of the road, wondering if hidden messages are anywhere..", new DelayEffect(3), 1.0));
-        LOMATNPC halja =  LOMATNPC.loadFromDataString(dataString);
+        Game.instance.halja =  LOMATNPC.loadFromDataString(dataString);
 
-        TalkyResponse tr4 = new TalkyResponse(halja,<TalkyItem>[new TalkyRecruit(halja,null)],"Graceful, raging, a vicious, exceptional speciman. I would love to join you.", TalkyItem.HAPPY,null);
-        TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,halja.talkyLevel);
-        halja.associatedPodcast="dead_all_along";
-        return halja;
+        TalkyResponse tr4 = new TalkyResponse(Game.instance.halja,<TalkyItem>[new TalkyRecruit(Game.instance.halja,null)],"Graceful, raging, a vicious, exceptional speciman. I would love to join you.", TalkyItem.HAPPY,null);
+        TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,Game.instance.halja.talkyLevel);
+        Game.instance.halja.associatedPodcast="dead_all_along";
+        return Game.instance.halja;
     }
 
     static LOMATNPC skol() {
@@ -427,7 +431,8 @@ abstract class NPCFactory {
 
     static LOMATNPC the_kid() {
         String dataString = "The Kid:___ N4IgdghgtgpiBcIAqALGACA0gSwCYgBoQAbGCAN2zAHMBZGAZwYmrkXSQHkART9KCAGsMDAK4AnDGQDGKdADkACgGF0KCA3QR000QwAuAeyjpSFKtX6NmrAHSEQ0iHpicAZtzL6UCEBABGDIbEovowxACe6GCG3hYOKAAOCAAcAKxE+hGJbCAA4qLExA642Axk5QwIANoAupkQxIIRADIw5OEIoPqNzQCSYVBV8NWgpQyJxBARSDAAHvq+AOrq+joQYOgRhqLoYUVWWv47a3Ga1NAwAPwO+uLY1Kziw3WZ2blIvREAiqKM+thDGAHJIJkDyl0QONJtNZgtfEgABJ9ADK6DyAEFaABRdBLPotFroPryABqnBapNxADFsQAlOkATRJeQ4iNxAHIUZwAKotNGcals3HcbEY7gcjh8JHYvp09DUkkYol07EopAs9CKFoY5TY2zoFHfJYYpaYACElstt3ujxgzxq9RAPSarXanXg3S+AxgQ0dAF83jkEV86YxEuC4EQNEFpNgIGFcNioLFAcD4ABGABMAAZ-YGxmUYTN5otECsE+tNttdvtiIcAic9igyntDAB3MA3TK2p4vUBTfwekAYlOiMD6anj3BVIjYKAR8Q9CdLQzifDwMCFYhzhdr5f6PoThAZnN5p1ZYOIT6u37-NMg8ORyHQqYl+GII0ms1Wy3obFUkynDyLiJJsqiUpLPI6DKBi8gckgCp9HkPKqugvKIYinBLFK6AtGKVLEkg9g9g8faOg0rptB0xSes63qDC8tSBs67whq6YZgmAELRkwhhxgmMBJimAJAieZ75gQhYTG+cJliASwQNg+gEKY2DCKpNYcpI6C4GQuDds6vb2v2JABMOo47BOU5gDODjzouB6ruuCBbkUu6ORsh7Hpmp7+hebHXl8d4GA+RCghG3FsNJxZyb4X6mhav7oIyaoGtiAAaupIC0jJ4X0mC4kiGLEcSHK0OgoriiRRlkSZFH0VR7q0V6ro+n6IzMUGHyhk+UUODG-HxomyapmJmYSQWUJFrJpbLCgUQQDpNa6aC5S4GpwhaOg1AoIYBiGXcdUOiMA7mbRI5jtZ06ziADn7l5zkbm5O53XuS5eUeZanue3Xsc0IWicC4V9RCdGvrCc2IAAQtiWEtNw6C0HldKcLDaKMgA9PIh3GSdryNc01Eeq1-SMTUMWzR+ClKSpm0wJpOzaRgekQAZNrHaZg4WVdk43fZ71OWuz3bh5D0Tl9J5+QFV7IMFfyhWJINcWDlOQ9TCU-slqUoulWXKDleUtAVRWIiVBp9OVlVitwNVHXa+MXl8xMtYTETtUxLGXj1HGg1Gfh8QJI0iQ+E15v5XuBXLvsq-7g1B0Jo1A+J4dSdNMnq-JFZrE41Y7Hs4T1rARxNrAuOcw13v-T8CvJ8rkWq+nsVQyAjK8ugGJoTKWqo4o7Ion02KI+yqN4lheIEkSKF9KKwp4Zw6qGry-LoUKSIQTq8iI1wwpykh8jKugqrqpq2q6vqHMO0xlFE81kIumTvqe39QUxw3ceB8Nich+NP2SWr755LcEMFsfO7YvJtnQAAK0MFQKw5cr6VyjjeAGtcwogAis+cGM1M7LGXojPo5oriGmNIlX85pL7kU6jfN0NF74MSfhTJuVN5JhmkOIUQykEFUIJlXRAqplB0h5H0DUSBsS0BABHF+0dmicXfgNT+glhJjXTH-KRfgwDzgTKHUAqx5CiCgEOcQJ4iDHFwBEfRhj7QmJAIkRoMB9BhF8HkAALHkaG1A3DkAxAATgzBiAJbhoZZlwAARzSIyAJiIAC01BcBzGoIydxiSABaghsTKG+BiaGGJcB9ACUsbgSxYIAF4SmSP9EAA";
-        return LOMATNPC.loadFromDataString(dataString)..associatedPodcast="just_rages_for_a_while";
+        Game.instance.the_kid = LOMATNPC.loadFromDataString(dataString)..associatedPodcast="just_rages_for_a_while";
+        return Game.instance.the_kid;
     }
 
     static LOMATNPC blank() {

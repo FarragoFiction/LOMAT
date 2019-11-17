@@ -43,6 +43,9 @@ class Game
     bool partySectionDisplayed = false;
     LOMATNPC ebony; //needed for grim to keep track of.
     LOMATNPC skol; //needed to bark at lil scumbag
+    LOMATNPC roger_koon;
+    LOMATNPC the_kid;
+    LOMATNPC halja;
     bool amagalmatesMode = false;
     PhysicalLocation currentLocation;
     PartySection partySection;
@@ -193,6 +196,16 @@ class Game
         }else {
             return lilScumbag;
         }
+    }
+
+    bool amalgmationTime() {
+        if(amagalmatesMode) return false; //don't infinite loop
+        if(!halja.dead) return false;
+        if(!the_kid.dead) return false;
+        if(!roger_koon.dead) return false;
+        if(!skol.dead) return false;
+        if(!ebony.dead) return false;
+        return true;
     }
 
     void beginAmalgamatesMode() async{

@@ -118,6 +118,7 @@ class Fenrir {
 
     }
 
+    //TODO start this when all gulls are dead.
     static void amaglamationMode(Element container) {
         DivElement me = DivElement()..classes.add("amalgamationPopup");
         dynamic listener;
