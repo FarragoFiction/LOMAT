@@ -37,11 +37,11 @@ void main()  async{
         await testTown();
     }*/
     //testPhrases();
-    testAmagalmationMode();
+    //testAmagalmationMode();
     //testEnding();
     //testEvents();
    // testYN();
-    //testCiphers();
+    testCiphers();
     //loadGulls();
     //loadGull();
 
@@ -128,9 +128,11 @@ Future<Null> testTown() async {
 }
 
 void testCiphers() {
-    Element otherTest = new DivElement()..text = "it is not the Titan, nor the Reaper.";
+    Element otherTest = new DivElement()..text = "the quick brown fox jumped over the lazy dog, but there is no titan or reaper";
     div.append(otherTest);
-    CipherEngine.applyRandom(otherTest);
+    CesarCipher cc = new CesarCipher(4);
+    cc.apply(otherTest);
+    //CipherEngine.applyRandom(otherTest, true);
 }
 
 void testAnimation() {

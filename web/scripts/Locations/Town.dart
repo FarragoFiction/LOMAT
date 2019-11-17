@@ -366,7 +366,7 @@ class Town extends PhysicalLocation {
         }
 
         flavorTextElement.setInnerHtml("$introductionText$before");
-        CipherEngine.applyRandom(flavorTextElement);
+        CipherEngine.applyRandom(flavorTextElement,Game.instance.amagalmatesMode);
         container.append(flavorTextElement);
   }
 

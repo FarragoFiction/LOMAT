@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:CommonLib/Utility.dart';
 
 import '../CipherEngine.dart';
+import '../Game.dart';
 import 'LOMATNPC.dart';
 import 'TalkyEnd.dart';
 import 'TalkyItem.dart';
@@ -50,7 +51,7 @@ class TalkyResponse extends TalkyItem {
     @override
     void display(Element cont) {
         super.display(cont);
-        CipherEngine.applyRandom(div);
+        CipherEngine.applyRandom(div, Game.instance.amagalmatesMode);
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
         npc.emote(associatedEmotion);
         talkyLevel.display(cont);
