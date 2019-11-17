@@ -131,7 +131,7 @@ class CesarCipher extends CipherEngine {
         int index = CipherEngine.letters.indexOf(char.toLowerCase());
         if(index != null && index >= 0) {
             int new_index = (index + key) % 26; //don't go over 26 plz
-            replaced = "$replaced${CipherEngine.letters[new_index]}";
+            replaced = "$replaced${CipherEngine.letters[new_index].toUpperCase()}";
         }else {
             replaced = "$replaced$char"; //no change
         }
