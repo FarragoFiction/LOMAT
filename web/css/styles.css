@@ -436,6 +436,12 @@ html:not([data-seerOf=void]) .void {
     color: white;
 }
 
+.ending img{
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
 #friend:hover{
     cursor: pointer
 }
