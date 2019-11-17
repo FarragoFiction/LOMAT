@@ -44,6 +44,7 @@ class LOMATNPC {
     GullAnimation animation;
     String associatedPodcast; //if null, leak random
     static String labelPattern = ":___ ";
+    bool amalgamate = false;
 
     //if you're in the party, the events get added to the road
     List<RoadEvent>  partyEvents = new List<RoadEvent>();
@@ -280,8 +281,23 @@ class LOMATNPC {
         return textEngine.phrase("wigglername_all");
     }
 
+    static String getAmalgamateLine() {
+        List<String> suffering = <String>["who let a dog be a necromancer","we were happy before fenrir","you helped us rest, but he brought us back","why did he eat us","why must we hide our bones under cloth","we should not be","who are we","suffering","it hurts","please make it stop","why can't we rest","am i the kid?","am i halja?","am i roger?","why are we","why does fenrir hate us so","let us rest","please make it stop","kill me","NO PLEASE GAME STOP SAVE US KILL US STOP THIS BURY US","no"];
+        List<String> fragments = <String>["fenrir","wolf","dog","robot","no","stop","kill","please","hurts","who","we","me","game","fenrir","why","save","bury","dead","roger","kid","halja","nut","ebony","geb","wachowski","not","again","cease","bones","ghosts","skull"];
+        Random rand = new Random();
+        if(rand.nextBool()) {
+            return rand.pickFrom(suffering);
+        }else {
+            String ret = "";
+            int length = rand.nextInt(13)+3;
+            for(int i = 0; i< length; i++) {
+                ret = "$ret ${rand.pickFrom(fragments)}";
+            }
+            return ret;
+        }
+    }
+
     static Future<LOMATNPC> generateRandomNPC(int seed) async {
-        print("spawning a random npc. bad. stop. not till fenrir");
         Random rand = new Random(seed);
         List<TalkyItem> talkyItems = new List<TalkyItem>();
 
@@ -289,19 +305,16 @@ class LOMATNPC {
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         String name = await randomName(seed);
         LOMATNPC testNPC = new LOMATNPC(name, level, GullAnimation.randomAnimation);
+        testNPC.amalgamate = true;
 
         List<int> emotions = <int>[TalkyItem.HAPPY, TalkyItem.NEUTRAL, TalkyItem.SAD];
         //so happy past jr made quirks automatic
-        List<String> gameQuips = <String>["This game is going to be based on the retro game 'Oregon Trail'.","This game will involve ferrying the 'souls of the dead' to their final resting place.","This game is the Land of Mists and Trails.", "The Titan is a real jerk."];
-        List<String> townQuips = <String>["This town is a default test town scribbled by JR.","This town is snowy, and has some huge trees in it.","This town will probably be redrawn by an actual artist at some point.","Everyone in this town can't figure out how to leave it."];
-        List<String> meQuips = <String>["You are the Guide of Void. Or was it dark?????","You are the prophesied Hero who will guide the lost souls of this land to their final resting place.","Your horns are very nice."];
-        List<String> youQuips = <String>["I'm not DRESSED like a ghost, I AM a ghost.", "Behold my robes y/n?", "Because I AM a ghost!", "I am a lost soul!"];
-        List<String> recruitQuips = <String>["Let me just grab my bags!","Hell yes!","Would I!?"];
 
-        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(gameQuips)), rand.pickFrom(emotions),null);
+
+        TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(getAmalgamateLine()), rand.pickFrom(emotions),null);
         TalkyQuestion question1 = new TalkyQuestion("What can you tell me about this game?",tr,level);
 
-        TalkyResponse tr2 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(townQuips)), rand.pickFrom(emotions),null);
+        TalkyResponse tr2 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(getAmalgamateLine()), rand.pickFrom(emotions),null);
         TalkyQuestion question2 = new TalkyQuestion("What can you tell me about this town?",tr2,level);
         question2.addTrigger(new FundsTrigger()..importantInt = 100); //means town should happen at first
 
@@ -311,14 +324,14 @@ class LOMATNPC {
         questionGhost2.addTrigger(new FundsTrigger()..importantInt = 110..invert=true); //means ghost shouldn't happen at first
 
 
-        TalkyResponse trghost = new TalkyResponse(testNPC,<TalkyItem>[questionGhost2],seagullQuirk(rand.pickFrom(youQuips)), rand.pickFrom(emotions),null);
+        TalkyResponse trghost = new TalkyResponse(testNPC,<TalkyItem>[questionGhost2],seagullQuirk(getAmalgamateLine()), rand.pickFrom(emotions),null);
         TalkyQuestion questionghost = new TalkyQuestion("Why are you dressed like a ghost?",trghost,level);
         questionghost.addTrigger(new FundsTrigger()..importantInt = 100..invert=true); //means ghost shouldn't happen at first
 
-        TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(rand.pickFrom(meQuips)), rand.pickFrom(emotions),null);
+        TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),seagullQuirk(getAmalgamateLine()), rand.pickFrom(emotions),null);
         TalkyQuestion question3 = new TalkyQuestion("What can you tell me about me?",tr3,level);
 
-        TalkyResponse tr4 = new TalkyResponse(testNPC,<TalkyItem>[new TalkyRecruit(testNPC,null)],seagullQuirk(rand.pickFrom(recruitQuips)), rand.pickFrom(emotions),null);
+        TalkyResponse tr4 = new TalkyResponse(testNPC,<TalkyItem>[new TalkyRecruit(testNPC,null)],seagullQuirk(getAmalgamateLine()), rand.pickFrom(emotions),null);
         TalkyQuestion question4 = new TalkyQuestion("Do you want to join me?",tr4,level);
 
         List<TalkyItem> talkyItems2 = new List<TalkyItem>();

@@ -43,7 +43,7 @@ class Game
     bool partySectionDisplayed = false;
     LOMATNPC ebony; //needed for grim to keep track of.
     LOMATNPC skol; //needed to bark at lil scumbag
-
+    bool amagalmatesMode = false;
     PhysicalLocation currentLocation;
     PartySection partySection;
     TalkySection talkySection;
@@ -195,7 +195,17 @@ class Game
         }
     }
 
+    void beginAmalgamatesMode() async{
+        amagalmatesMode = true;
+        wanderingNPCs.clear(); //remove regular npcs too
+        await makeAmagalmates();
+    }
+
     List<LOMATNPC> findWanderingNPCS() {
+        if(amagalmatesMode && wanderingNPCs.isEmpty) {
+            makeAmagalmates();
+            return [];
+        }
         if(wanderingNPCs.isEmpty) return [];
         Random rand = new Random();
         List<LOMATNPC> ret = <LOMATNPC>[];

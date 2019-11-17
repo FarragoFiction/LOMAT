@@ -37,7 +37,8 @@ void main()  async{
         await testTown();
     }*/
     //testPhrases();
-    testEnding();
+    testAmagalmationMode();
+    //testEnding();
     //testEvents();
    // testYN();
     //testCiphers();
@@ -46,6 +47,10 @@ void main()  async{
 
     //testAnimation();
     //testTombstone();
+}
+
+void testAmagalmationMode() {
+    Fenrir.amaglamationMode(div);
 }
 
 void testEnding() {
