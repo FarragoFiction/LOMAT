@@ -38,10 +38,10 @@ void main()  async{
     }*/
     //testPhrases();
     //testAmagalmationMode();
-    //testEnding();
+    testEnding();
     //testEvents();
    // testYN();
-    testCiphers();
+    //testCiphers();
     //loadGulls();
     //loadGull();
 
