@@ -14,6 +14,7 @@ import '../Locations/Events/Effects/Effect.dart';
 import '../Locations/Events/Effects/InstaKillEffect.dart';
 import '../Locations/Events/Effects/MoneyEffect.dart';
 import '../Locations/Events/RoadEvent.dart';
+import '../Locations/Fenrir.dart';
 import '../Locations/HuntingGrounds.dart';
 import '../Locations/Town.dart';
 import '../NPCs/Disease.dart';
@@ -35,8 +36,8 @@ void main()  async{
     for(int i = 0; i<10; i++) {
         await testTown();
     }*/
-    testPhrases();
-
+    //testPhrases();
+    testEnding();
     //testEvents();
    // testYN();
     //testCiphers();
@@ -44,7 +45,11 @@ void main()  async{
     //loadGull();
 
     //testAnimation();
-    testTombstone();
+    //testTombstone();
+}
+
+void testEnding() {
+    Fenrir.printText(div);
 }
 
 void testYN() {

@@ -404,6 +404,15 @@ html:not([data-seerOf=void]) .void {
     transform: translateY(-5px);
 }
 
+.ending{
+    position: relative;
+    color: white;
+}
+
+.story{
+    position: absolute;
+}
+
 .voidButton:active{
     transform: translateY(-5px);
 }
