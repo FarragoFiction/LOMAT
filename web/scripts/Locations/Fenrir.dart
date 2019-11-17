@@ -65,16 +65,55 @@ class Fenrir {
     static void printText(Element container){
         DivElement me = DivElement()..classes.add("ending");
         container.append(me);
-        //TODO unencrypt
-        DivElement friend = new DivElement()..setInnerHtml(LZString.decompressFromEncodedURIComponent(friendText))..classes.add("story");
-        DivElement observer = new DivElement()..setInnerHtml(LZString.decompressFromEncodedURIComponent(observerText))..classes.add("story");
-        DivElement heir = new DivElement()..setInnerHtml(LZString.decompressFromEncodedURIComponent(inheritanceText))..classes.add("story");
-        DivElement gigglesnort = new DivElement()..setInnerHtml(LZString.decompressFromEncodedURIComponent(gigglesnortText))..classes.add("story");
+        String ft = LZString.decompressFromEncodedURIComponent(friendText);
+        String ot = LZString.decompressFromEncodedURIComponent(observerText);
+        String ht = LZString.decompressFromEncodedURIComponent(inheritanceText);
+        String gt = LZString.decompressFromEncodedURIComponent(gigglesnortText);
+
+        DivElement friend = new DivElement()..setInnerHtml("<h1>Friend</h1>$ft")..classes.add("story");
+        DivElement observer = new DivElement()..setInnerHtml("<h1>Observer</h1>$ot")..classes.add("story");
+        DivElement heir = new DivElement()..setInnerHtml("<h1>Inheritance</h1>$ht")..classes.add("story");
+        DivElement gigglesnort = new DivElement()..setInnerHtml("<h1>Gigglesnort</h1>$gt <br><br>WARNING: IF YOU VOID OUT GIGGLESNORT YOU VOID OUT YOUR ABILITY TO CONTROL WITHOUT WASTING. But. Of course. You need to see the text. I'm not going to just give you the answer to this puzzle with no work now, am I ;) ;) ;)")..classes.add("story");
 
         me.append(friend);
         me.append(observer);
         me.append(heir);
         me.append(gigglesnort);
+        querySelector("#friend").onClick.listen((Event e) {
+            if(!friend.classes.contains("void")){
+             friend.classes.add("void");
+            }else{
+                friend.classes.remove("void");
+            }
+            window.scrollTo(0,0);
+        });
+
+        querySelector("#heir").onClick.listen((Event e) {
+            if(!heir.classes.contains("void")){
+                heir.classes.add("void");
+            }else{
+                heir.classes.remove("void");
+            }
+            window.scrollTo(0,0);
+        });
+
+        querySelector("#observer").onClick.listen((Event e) {
+            if(!observer.classes.contains("void")){
+                observer.classes.add("void");
+            }else{
+                observer.classes.remove("void");
+            }
+            window.scrollTo(0,0);
+        });
+
+        querySelector("#gigglesnort").onClick.listen((Event e) {
+            if(!gigglesnort.classes.contains("void")){
+                gigglesnort.classes.add("void");
+            }else{
+                gigglesnort.classes.remove("void");
+            }
+            window.scrollTo(0,0);
+        });
 
     }
 

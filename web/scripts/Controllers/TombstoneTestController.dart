@@ -49,7 +49,23 @@ void main()  async{
 }
 
 void testEnding() {
-    Fenrir.printText(div);
+    div.appendHtml("HI WRANGLERS, BELOW IS THE *STORY* FORM OF THE ENDING, WITH ALL THREE TIMELINES VISIBLE SO YOU CAN GIVE FEEDBACK. BELOW *THAT* WILL BE SCRAMBLED *PUZZLE* FORM<BR><BR>");
+    DivElement next = new DivElement();
+    next.style.backgroundColor = "white";
+    next.appendHtml("Three Versions:");
+    String ft = LZString.decompressFromEncodedURIComponent(Fenrir.friendText);
+    String ot = LZString.decompressFromEncodedURIComponent(Fenrir.observerText);
+    String ht = LZString.decompressFromEncodedURIComponent(Fenrir.inheritanceText);
+    String gt = LZString.decompressFromEncodedURIComponent(Fenrir.gigglesnortText);
+    DivElement friend = new DivElement()..setInnerHtml("<h1>Friend</h1>$ft");
+    DivElement observer = new DivElement()..setInnerHtml("<h1>Observer</h1>$ot");
+    DivElement heir = new DivElement()..setInnerHtml("<h1>Inheritance</h1>$ht");
+    next.append(friend);
+    next.append(observer);
+    next.append(heir);
+    div.append(next);
+    Fenrir.printText(next);
+
 }
 
 void testYN() {

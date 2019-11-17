@@ -409,6 +409,22 @@ html:not([data-seerOf=void]) .void {
     color: white;
 }
 
+#friend:hover{
+    cursor: pointer
+}
+
+#heir:hover{
+    cursor: pointer
+}
+
+#observer:hover{
+    cursor: pointer
+}
+
+#gigglesnort:hover{
+    cursor: pointer
+}
+
 .story{
     position: absolute;
 }
