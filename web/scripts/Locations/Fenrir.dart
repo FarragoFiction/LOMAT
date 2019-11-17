@@ -70,9 +70,9 @@ class Fenrir {
         String ht = LZString.decompressFromEncodedURIComponent(inheritanceText);
         String gt = LZString.decompressFromEncodedURIComponent(gigglesnortText);
 
-        DivElement friend = new DivElement()..setInnerHtml("<h1>Friend</h1>$ft")..classes.add("story");
-        DivElement observer = new DivElement()..setInnerHtml("<h1>Observer</h1>$ot")..classes.add("story");
-        DivElement heir = new DivElement()..setInnerHtml("<h1>Inheritance</h1>$ht")..classes.add("story");
+        DivElement friend = new DivElement()..setInnerHtml("<h1>Friend</h1>$ft<br><br>Want to Learn More about YNBot? <a target = 'blank' href = 'http://farragofiction.com/ABEmail'>AB's Email: knucklesisgross@gmail.com, Passphrase: dodge_this_moist_pimp</a> or <a target = 'blank' href = 'https://archiveofourown.org/chapters/50697950?show_comments=true&view_full_work=false#comment_260804131'>ynBot's a03</a>", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("story");
+        DivElement observer = new DivElement()..setInnerHtml("<h1>Observer</h1>$ot <br><a target = 'blank' href = 'http://farragofiction.com/AudioLogs/?passPhrase=butler_b'>AudioLogs</a>", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("story");
+        DivElement heir = new DivElement()..setInnerHtml("<h1>Inheritance</h1>$ht", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("story");
         DivElement gigglesnort = new DivElement()..setInnerHtml("<h1>Gigglesnort</h1>$gt <br><br>WARNING: IF YOU VOID OUT GIGGLESNORT YOU VOID OUT YOUR ABILITY TO CONTROL WITHOUT WASTING. But. Of course. You need to see the text. I'm not going to just give you the answer to this puzzle with no work now, am I ;) ;) ;)")..classes.add("story");
 
         me.append(friend);
