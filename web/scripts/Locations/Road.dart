@@ -35,7 +35,9 @@ class Road {
     List<RoadEvent> events = new List<RoadEvent>();
 
     String get label {
-        return "Traveling to $destinationTown: $timeRemaining";
+        String mode = "Steady";
+        if(Game.instance.dangerousMode) mode = "Grueling";
+        return "$mode Travel to $destinationTown: $timeRemaining";
     }
 
     Element get container => trail.container;

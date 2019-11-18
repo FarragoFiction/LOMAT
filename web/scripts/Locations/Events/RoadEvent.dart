@@ -83,6 +83,12 @@ class RoadEvent {
             return false;
         }
 
+        if((effect is DiseaseEffect || effect is InstaKillEffect) && Game.instance.dangerousMode) {
+            return true; //yeah no.
+        }else if(Game.instance.dangerousMode) {
+            return false; //shhhh, only disease and death now
+        }
+
         if (random.nextDouble() < oddsOfHapening && effect.isValid(road)) {
             //effect will set relevant info like target name, have it go first
             await effect.apply(road);
@@ -90,9 +96,7 @@ class RoadEvent {
             return true;
         }
 
-        if((effect is DiseaseEffect || effect is InstaKillEffect) && Game.instance.dangerousMode) {
-            return true; //yeah no.
-        }
+
         return false;
     }
 
