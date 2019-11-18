@@ -45,6 +45,7 @@ class Game
     LOMATNPC skol; //needed to bark at lil scumbag
     LOMATNPC roger_koon;
     LOMATNPC the_kid;
+    bool dangerousMode = false;
     LOMATNPC halja;
     bool amagalmatesMode = false;
     PhysicalLocation currentLocation;

@@ -69,6 +69,18 @@ class VoidTravel extends MenuItem {
     });
   }
 
+  void toggleDangerousMode(DivElement me, int cost) async{
+    String type = "DANGEROUS";
+    if(Game.instance.dangerousMode) type = "SAFE";
+    me.text = "As you wish, Guide. Things will now be more $type for your gull party members.";
+    Game.instance.dangerousMode = !Game.instance.dangerousMode;
+    SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
+    Game.instance.removeFunds(cost);
+    await Future.delayed(Duration(seconds: 2));
+    me.remove();
+    doVoidTravel(); //pop back up
+  }
+
   void scrambleVoid(DivElement me, int cost) async {
     me.text = "As you wish, Guide. The towns at the edge of your current locations light will be altered.";
     SoundControl.instance.playSoundEffect("121990__tomf__coinbag");
@@ -120,6 +132,7 @@ class VoidTravel extends MenuItem {
     instructions.append(list);
     voidSelfItem(list,me);
     scrambleItem(list,me);
+    dangerousItem(list,me);
     for(Town town in Town.cachedTowns) {
       townItem(town, list, me);
     }
@@ -148,6 +161,31 @@ class VoidTravel extends MenuItem {
         button.text = "Insufficent Funds to Scromble";
         button.classes.add("disabledVoid");
       }
+
+  }
+
+  void dangerousItem(UListElement list, DivElement me) {
+    LIElement li = new LIElement();
+    list.append(li);
+
+    Element button = new DivElement();
+    li.append(button);
+    //print("I appended it to the menu holder with children ${holder.container.children.length}");
+    button.classes.add("goDark");
+    int cost = 13;
+    String text = "Be Grueling (More Dangerous)";
+    if(Game.instance.dangerousMode) {
+      text = "Be Steady (More Safe)";
+    }
+    if(cost < Game.instance.funds) {
+      button.text = "$text (13 funds)";
+      button.onClick.listen((Event e){
+        toggleDangerousMode(me,cost);
+      });
+    }else {
+      button.text = "Insufficent Funds to $text";
+      button.classes.add("disabledVoid");
+    }
 
   }
 

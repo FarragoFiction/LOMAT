@@ -5,9 +5,12 @@ import '../../NPCs/LOMATNPC.dart';
 import '../../SoundControl.dart';
 import '../Road.dart';
 import 'Effects/DelayEffect.dart';
+import 'Effects/DiseaseEffect.dart';
 import 'Effects/Effect.dart';
 import 'dart:html';
 import 'package:CommonLib/Random.dart';
+
+import 'Effects/InstaKillEffect.dart';
 
 class RoadEvent {
     //TODO integrate both title and flavor text to suppor text engine hooks.
@@ -87,8 +90,9 @@ class RoadEvent {
             return true;
         }
 
-
-
+        if((effect is DiseaseEffect || effect is InstaKillEffect) && Game.instance.dangerousMode) {
+            return true; //yeah no.
+        }
         return false;
     }
 

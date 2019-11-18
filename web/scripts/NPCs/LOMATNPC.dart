@@ -69,9 +69,14 @@ class LOMATNPC {
         }
     }
     void diseaseTick(Road road) {
+        double attackPower = 1.0;
+        double healingPower = 1.0;
+        if(Game.instance.dangerousMode) {
+            attackPower = 10.0;
+            healingPower = 0.1;
+        }
         new List<Disease>.from(diseases).forEach((Disease d) {
-            //TODO have modifiers based on road pace or something
-            d.tick(this, road, 1.0, 1.0);
+            d.tick(this, road, attackPower, healingPower);
         });
     }
 
