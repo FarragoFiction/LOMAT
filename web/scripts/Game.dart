@@ -180,6 +180,8 @@ class Game
         wanderingNPCs.add(NPCFactory.loki());
         wanderingNPCs.add(NPCFactory.grim());
         //yn will be spawned at town time
+        //TODO remove this after testing
+        wanderingNPCs.forEach((LOMATNPC npc) => npc.dead = true);
         print('after initialization, npcs are $wanderingNPCs');
     }
 

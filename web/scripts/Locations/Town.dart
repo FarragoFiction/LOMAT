@@ -376,7 +376,7 @@ class Town extends PhysicalLocation {
       flavorTextElement.remove();
       if(this == Town.voidTown) {
           if(Game.instance.amalgmationTime()) {
-              Fenrir.amaglamationMode(container);
+              Fenrir.amaglamationMode(querySelector("body"));
           }else{
               Fenrir.wakeUP(container);
           }

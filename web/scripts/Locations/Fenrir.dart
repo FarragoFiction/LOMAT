@@ -118,7 +118,6 @@ class Fenrir {
 
     }
 
-    //TODO start this when all gulls are dead.
     static void amaglamationMode(Element container) {
         DivElement me = DivElement()..classes.add("amalgamationPopup");
         dynamic listener;
@@ -136,6 +135,10 @@ class Fenrir {
         me.append(text);
         me.append(angry);
         Game.instance.beginAmalgamatesMode();
+        me.onClick.listen((MouseEvent e) {
+            me.remove();
+            Game.instance.startOver(Game.instance.currentLocation);
+        });
     }
 
 
