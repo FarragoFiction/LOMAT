@@ -6,6 +6,7 @@ import '../NPCs/Tombstone.dart';
 import '../SoundControl.dart';
 import 'Events/Effects/ArriveEffect.dart';
 import 'Events/Effects/DelayEffect.dart';
+import 'Events/Effects/DiseaseEffect.dart';
 import 'Events/RoadEvent.dart';
 import 'PhysicalLocation.dart';
 import 'Town.dart';
@@ -55,6 +56,10 @@ class Road {
         }
         events.addAll(sourceTown.events);
         events.addAll(destinationTown.events);
+        if(Game.instance.dangerousMode) {
+            //there will ALWAYS be a disease
+            events.add(new RoadEvent("Disease!!!","The grueling pace finally takes the toll on ${RoadEvent.PARTYMEMBER}.", new DiseaseEffect(), 0.5));
+        }
 
         Game.instance.partyMembers.forEach((LOMATNPC npc) {
             npc.partyEvents.forEach((RoadEvent event) {
@@ -171,13 +176,16 @@ class Road {
         bool eventHappened = false;
         //yes, if there are dead gulls on a trail it makes events less likely
         Random rand = new Random();
-        for(Tombstone tombstone in tombstones) {
-            //more likely to get event than tombstone
-            if(rand.nextDouble() > 0.95) {
-                tombstone.spawnTrailsona(trail,this);
-                eventHappened = true;
-                tombstones.remove(tombstone); // can i avoid a concurrent modification via breaks?
-                break;
+        if(!Game.instance.dangerousMode) {
+            for (Tombstone tombstone in tombstones) {
+                //more likely to get event than tombstone
+                if (rand.nextDouble() > 0.95) {
+                    tombstone.spawnTrailsona(trail, this);
+                    eventHappened = true;
+                    tombstones.remove(
+                        tombstone); // can i avoid a concurrent modification via breaks?
+                    break;
+                }
             }
         }
 

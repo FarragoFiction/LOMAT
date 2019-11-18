@@ -55,9 +55,9 @@ class Game
     List<Tombstone> graves = new List<Tombstone>();
     int maxPartySize = 5;
     //TODO probably deprecating this, void travel makes it unneeded
-    int travelAmount = 1000; //default, if you go slower or faster it changes.
-    int diseaseAmount = 2000; //default, if you go slower or faster it changes.
-    int eventAmount = 3000; //default, if you go slower or faster it changes.
+    int get travelAmount => dangerousMode?500:2000;
+    int get diseaseAmount => dangerousMode?1000:2000;
+    int get eventAmount => dangerousMode?1000:2000;
 
     int get costPerTravelTick => ((partyMembers.length + 1) * (eventAmount/1000).ceil());
 

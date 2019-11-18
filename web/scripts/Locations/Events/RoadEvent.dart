@@ -84,6 +84,8 @@ class RoadEvent {
         }
 
         if((effect is DiseaseEffect || effect is InstaKillEffect) && Game.instance.dangerousMode) {
+            await effect.apply(road);
+            popup(Game.instance.container);
             return true; //yeah no.
         }else if(Game.instance.dangerousMode) {
             return false; //shhhh, only disease and death now
