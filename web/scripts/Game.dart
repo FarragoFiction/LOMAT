@@ -84,6 +84,11 @@ class Game
     void init() {
         // TODO and load certain save data facts from local storage
         //async, but don't care when it loads
+        dynamic ss;
+        ss = window.onClick.listen((Event e) {
+            SoundControl().playTheWind();
+            ss.cancel;
+        });
         handleVoid();
         Tombstone.loadFromTIMEHOLE();
     }

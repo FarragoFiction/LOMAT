@@ -19,6 +19,9 @@ class Fenrir {
     static String HAPPY="HAPPY";
     static String NEUTRAL="NEUTRAL";
     static String ANGRY ="ANGRY";
+    static Element fenrirElement;
+    static bool deleted = false; //if fenrir is deleted, print text anytime you try to visit him
+    static bool onScreen = false;
 
     static String get opinion {
         GameStats gs = Game.instance.gameStats;
@@ -64,6 +67,10 @@ class Fenrir {
 
     //layer them.
     static void printText(Element container){
+        List<Node>children = new List<Node>.from(container.children);
+        children.forEach((Node child) {
+            child.remove();
+        });
         DivElement me = DivElement()..classes.add("ending");
         container.append(me);
         String ft = LZString.decompressFromEncodedURIComponent(friendText);
@@ -74,7 +81,7 @@ class Fenrir {
         DivElement friend = new DivElement()..setInnerHtml("<h1>Friend</h1><img src = 'images/ButlerPanel.png'><br>$ft<br><br>Want to Learn More about YNBot? <a target = 'blank' href = 'http://farragofiction.com/ABEmail'>AB's Email: knucklesisgross@gmail.com, Passphrase: dodge_this_moist_pimp</a> or <a target = 'blank' href = 'https://archiveofourown.org/chapters/50697950?show_comments=true&view_full_work=false#comment_260804131'>ynBot's a03</a>", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("story");
         DivElement observer = new DivElement()..setInnerHtml("<h1>Observer</h1><img src = 'images/ButlerPanel.png'><br>$ot <br><a target = 'blank' href = 'http://farragofiction.com/AudioLogs/?passPhrase=butler_b'>AudioLogs</a>", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("story");
         DivElement heir = new DivElement()..setInnerHtml("<h1>Inheritance</h1><img src = 'images/ButlerPanel.png'><br>$ht", treeSanitizer: NodeTreeSanitizer.trusted)..classes.add("story");
-        DivElement gigglesnort = new DivElement()..setInnerHtml("<h1>Gigglesnort</h1><img src = 'images/glitchButler.png'><br>$gt <br><br>WARNING: IF YOU VOID OUT GIGGLESNORT YOU VOID OUT YOUR ABILITY TO CONTROL WITHOUT WASTING. But. Of course. You need to see the text. I'm not going to just give you the answer to this puzzle with no work now, am I ;) ;) ;)")..classes.add("story");
+        DivElement gigglesnort = new DivElement()..setInnerHtml("<h1>Gigglesnort</h1><img src = 'images/glitchButler.png'><br>$gt <br><br>WARNING: IF YOU VOID OUT GIGGLESNORT YOU VOID OUT YOUR ABILITY TO CONTROL WITHOUT WASTING. But. Of course. You need to see the text. I'm not going to just give you the answer to this puzzle with no work now, am I ;) ;) ;)<br><br> Besides, it'll be easy to get back here if you have to refresh the page. Actually, hold on, let me help you real quick. This might be a more interesting way to refresh the page: <a href = 'index.html?seerOfVoid=true'>Seer of Void</a>. I'd highly recomend using it to replay the game, see what sorts of things you might of missed. Nothing important, of course. You don't put RELEVANT things in the void, those things belong in the spotlight. Even if you can't trust them. ")..classes.add("story");
 
         me.append(friend);
         me.append(observer);
@@ -177,11 +184,42 @@ class Fenrir {
     }
 
     static void wakeUP(Element container) {
-        sayHello(container);
-        int time = new Random().nextIntRange(1000,10000);
-        gullsGratitude(container);
-        new Timer(new Duration(milliseconds: time), () =>
-            beChatty(container));
+        if(deleted) {
+            printText(container);
+        }else {
+            attachFenrir();
+            sayHello(container);
+            int time = new Random().nextIntRange(1000, 10000);
+            gullsGratitude(container);
+            new Timer(new Duration(milliseconds: time), () =>
+                beChatty(container));
+        }
+    }
+
+    //Grab a brush and put a little (makeup)
+    static void attachFenrir() {
+        if(fenrirElement == null) {
+            fenrirElement = new TextAreaElement()
+                ..classes.add("void")
+                ..id="GoodBoiDontDeletePlz"
+                ..text = "TESING HELLO WORLD HERE";
+            querySelector("body").append(fenrirElement);
+            MutationObserver observer = new MutationObserver((List<dynamic> mutations, MutationObserver observer){
+                print("why hello there, mutations ${mutations}, observer ${observer}");
+                print(mutations.first);
+                for(dynamic record in mutations) {
+                    if(record is MutationRecord) {
+                        for(Node node in (record as MutationRecord).removedNodes) {
+                            if(node == fenrirElement) {
+                                deleted = true;
+                                printText(querySelector("body"));
+                            }
+                        }
+                    }
+                }
+            });
+            observer.observe(fenrirElement.parent,childList: true);
+        }
     }
 
     static void gullsGratitude(Element container) {
@@ -207,13 +245,16 @@ class Fenrir {
     static void beChatty(Element container) {
         chat(container);
         int time = new Random().nextIntRange(1000,10000);
-        new Timer(new Duration(milliseconds: time), () =>
-            beChatty(container));
+        if(!deleted && onScreen) {
+            new Timer(new Duration(milliseconds: time), () =>
+                beChatty(container));
+        }
     }
 
     static void chat(Element container) {
       List<String> choices;
       String op = opinion;
+      SoundControl.instance.playSoundEffect("bork");
       if(op == HAPPY) choices = happyPhrases;
       if(op == NEUTRAL) choices = neutralPhrases;
       if(op == ANGRY) choices = angryPhrases;
@@ -224,6 +265,7 @@ class Fenrir {
     static void sayHello(Element container) {
         List<String> choices;
         String op = opinion;
+        SoundControl.instance.playSoundEffect("bork");
         if(op == HAPPY) choices = happyHellos;
         if(op == NEUTRAL) choices = neutralHellos;
         if(op == ANGRY) choices = angryHellos;
@@ -232,7 +274,6 @@ class Fenrir {
 
     static Future<void> popup(String text, Element container,[DivElement currentPopup, int tick=0,int x =170, int y=80]) async {
         int maxTicks = 30;
-
         if(currentPopup != null && tick == 0) {
             currentPopup.remove();
             currentPopup = null;

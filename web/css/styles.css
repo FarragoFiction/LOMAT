@@ -434,6 +434,7 @@ html:not([data-seerOf=void]) .void {
 .ending{
     position: relative;
     color: white;
+    padding: 100px;
 }
 
 .ending img{

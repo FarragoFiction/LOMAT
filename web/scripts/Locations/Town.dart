@@ -149,6 +149,7 @@ class Town extends PhysicalLocation {
   @override
   void teardown() {
       super.teardown();
+      Fenrir.onScreen = false;
       List<LOMATNPC> tmp = new List.from(npcs);
       tmp.forEach((LOMATNPC npc) => npcLeaves(npc, false));
       SoundControl.instance.stopMusic();
@@ -205,7 +206,7 @@ class Town extends PhysicalLocation {
   void startPlayingMusic() {
       String next = nextSong;
       StreamSubscription ss;
-      ss = window.onMouseMove.listen((Event e){
+      ss = window.onMouseDown.listen((Event e){
           ss.cancel();
           SoundControl.instance.playMusicList(next, startPlayingMusic);
       });
@@ -378,6 +379,7 @@ class Town extends PhysicalLocation {
           if(Game.instance.amalgmationTime()) {
               Fenrir.amaglamationMode(querySelector("body"));
           }else{
+              Fenrir.onScreen = true;
               Fenrir.wakeUP(container);
           }
       }
