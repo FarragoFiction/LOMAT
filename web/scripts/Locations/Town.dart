@@ -120,10 +120,11 @@ class Town extends PhysicalLocation {
   void init() {
       rand.setSeed(name.length);
       drawTown();
-
-      parent.onClick.listen((Event e)
+        dynamic ss;
+      ss =parent.onClick.listen((Event e)
       {
           dismissFlavorText();
+          ss.cancel();
       });
       showFlavorText();
       menu = new MenuHolder(parent,this);
