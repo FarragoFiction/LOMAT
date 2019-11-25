@@ -341,7 +341,9 @@ class Game
     }
 
     Future setStartingTown() async {
-        Town town = new Town.dontevercallthisblindly("city2",new List<LOMATNPC>(),null,startingGenome());
+        Town town = new Town.dontevercallthisblindly("Landing Site",new List<LOMATNPC>(),null,startingGenome());
+        town.proceduralIntroInit("Starting Town");
+
         //town = Town.voidTown;
         //don't overwrite genome
         currentLocation = town;
@@ -351,9 +353,9 @@ class Game
 //eventually load from JSON
     TownGenome  startingGenome() {
         TownGenome ret = new TownGenome("starting town",new Random(13),new Map<String, String>());
-        ret.startText = "You arrive in beautiful INSERTNAMEHERE, the jewel of LOMAT.";
-        ret.middleText = "Or at least that's what you'd think if it were in its finished state.  Sadly, it appears to have been shittly drawn by a WASTE or something, and everything in it is in test mode and half finished.";
-        ret.endText = " well, beats looking at a blank white screen, you suppose.";
+        ret.startText = "The majestic SWEET VIKING BOAT crashes uselessly on the decidedly non liquid water of the frozen wastelands of the Land of Mists and Trails. Whether a cruel prank or mere careless oversight, it seems the Oracles of the Golden Moon failed to warn the Player of LOMAT, Eirikr Kharun, not to bother bringing his boat.  ";
+        ret.middleText = "You waste no time converting it to a SWEET VIKING LAND BOAT and resolve to figure out just how this crazy land works.";
+        ret.endText = "You feel...really optimistic. You were born to play this game, and boy will you.";
         ret.playList = <String>["Trails_Slice1","Trails_Slice2","Trails_Slice3","Trails_Slice4","Trails_Slice5","Trails_Slice6"];
         ret.foreground = "${TownGenome.foregroundBase}/5.png";
         ret.midGround = "${TownGenome.midgroundBase}/7.png";

@@ -43,7 +43,7 @@ class Town extends PhysicalLocation {
     static int nextTownSeed = 0;
     Random rand = new Random();
     int numTrees = 3;
-    String name = "city2";
+    String name = "Landing Site";
     Element travelContainer;
     int playListIndex = 0;
     bool firstTime = true;
