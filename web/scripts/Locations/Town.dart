@@ -314,7 +314,6 @@ class Town extends PhysicalLocation {
     return "$name";
   }
 
-  // TODO for some reason this part breaks the void town.
   static Future<String> generateProceduralName(nextSeed ) async {
       TextEngine textEngine = new TextEngine(nextSeed);
       await textEngine.loadList("towns");

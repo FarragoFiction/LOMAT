@@ -5,25 +5,37 @@ TextEngine Word List
 @adjectives
 
 TownNames
+    #noun# #townEndings2#
+    #townStarts# #townMiddles# #townEndings2#: 0.5
     #noun##townEndings#
+    #townStarts# #noun# #townEndings2#: 0.5
     #townStarts# #noun##townEndings#: 0.5
     #adjective##townEndings#
+    #adjective# #townEndings2#
     #townStarts# #adjective##townEndings#: 0.5
+    #townStarts# #adjective# #townEndings2#: 0.5
     #townMiddles##townEndings#
+    #townMiddles# #townEndings2#
     #townStarts# #townMiddles##townEndings#: 0.5
 
+
 townEndings
-     Town
-     City
     burg
     ton
     borough
     borg
     gard: 3
-     Village
-     Villa: 0.2
-     Vista: 0.3
-     Island: 0.1
+
+townEndings2
+    Town
+    City
+    Unit
+    River: 0.5
+    Village
+    Fort
+    Villa: 0.5
+    Vista: 0.5
+    Island: 0.2
 
 townStarts
     Fort
@@ -46,6 +58,11 @@ townMiddles
     Seagull
     Ghost
     Angry
+    Eagle
+    Robot
+    Possum
+    Garbage
+    Trash
     Envious
     Not-On-Main
     Lazy
