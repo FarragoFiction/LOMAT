@@ -183,8 +183,6 @@ class Town extends PhysicalLocation {
       roads = await Road.spawnRandomRoadsForTown(this);
 
       super.displayOnScreen(div);
-      //auto play not allowed but we can try cuz this might not be first screen
-      startPlayingMusic();
       Element labelElement = new DivElement()..text = "$name"..classes.add("townLable");
       container.append(labelElement);
 
@@ -204,13 +202,12 @@ class Town extends PhysicalLocation {
       });
   }
 
-  void startPlayingMusic() {
+  void startPlayingMusic([bool firstTime=false]) {
       String next = nextSong;
-      StreamSubscription ss;
-      ss = window.onMouseDown.listen((Event e){
-          ss.cancel();
-          SoundControl.instance.playMusicList(next, startPlayingMusic);
-      });
+      if(firstTime) {
+        SoundControl.instance.scaleUpVolume();
+      }
+      SoundControl.instance.playMusicList(next, startPlayingMusic);
   }
 
   static bool get canMakeTown => cachedTowns.length < minTowns;
@@ -374,6 +371,8 @@ class Town extends PhysicalLocation {
 
 
   void dismissFlavorText() {
+      //auto play not allowed but we can try cuz this might not be first screen
+      startPlayingMusic(true);
       flavorTextElement.remove();
       if(this == Town.voidTown) {
           if(Game.instance.amalgmationTime()) {

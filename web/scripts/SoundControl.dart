@@ -73,6 +73,18 @@ class SoundControl { //to major tom
         }
     }
 
+    void scaleUpVolume([bool firstTime=true]) {
+        if(firstTime == true) {
+            bgMusic.volume = 0;
+        }else {
+            bgMusic.volume = bgMusic.volume+0.001;
+        }
+        if(bgMusic.volume < 1.0) {
+            new Timer(
+                new Duration(milliseconds: 100), () => scaleUpVolume(false));
+        }
+    }
+
     //calback should be whatever handles setting up the next part of the song.
     //intial problems are the pause between songs, is it loading?
     void playMusicList(String locationWithoutExtension, Action callback) {
