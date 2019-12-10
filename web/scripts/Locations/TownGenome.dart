@@ -28,7 +28,7 @@ class TownGenome {
     static String groundBase = "${imagesLocationBase}/grounds/";
     static String midgroundBase = "${imagesLocationBase}/midgrounds/";
     static String foregroundBase = "${imagesLocationBase}/foregrounds/";
-    static int maxBGs = 6;
+    static int maxBGs = 7;
     static int maxGs =5;
     static int maxMGs = 7;
     static int maxFGs = 5;
