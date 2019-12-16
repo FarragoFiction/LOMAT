@@ -461,7 +461,6 @@ abstract class NPCFactory {
         return Game.instance.lilScumbag;
     }
 
-    //TODO eventaully all this is serialized.
     static LOMATNPC loki() {
         List<TalkyItem> talkyItems = new List<TalkyItem>();
         TalkyLevel level = new TalkyLevel(talkyItems,null);
@@ -470,11 +469,16 @@ abstract class NPCFactory {
         TalkyResponse tr = new TalkyResponse(testNPC,new List<TalkyItem>(),"A completely normal seagull, obviously!", 3,null);
         TalkyQuestion question1 = new TalkyQuestion("Uh. What are you?",tr,level);
 
+        TalkyResponse tr2 = new TalkyResponse(testNPC,new List<TalkyItem>(),"They're after my special Loki Charms, but no matter!", 3,null);
+        TalkyQuestion question2 = new TalkyQuestion("Why are you here?",tr2,level);
+
+        TalkyResponse tr3 = new TalkyResponse(testNPC,new List<TalkyItem>(),"Hee! Hee! Hee!", 3,null);
+        TalkyQuestion question3 = new TalkyQuestion("What is even going on?",tr3,level);
+
 
         return testNPC;
     }
 
-    //TODO: FUTURE JR, FIGURE OUT HOW TO SPAWN A YN BASED ON WHAT TOWN THEY ARE IN. RANDOMLY PICK WHETHER YN IS IN A GIVEN TOWN.
     static LOMATNPC yn(Random rand) {
         return YNMaker.spawnAYN(rand.nextInt());
     }

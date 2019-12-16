@@ -360,7 +360,7 @@ class Game
         ret.foreground = "${TownGenome.foregroundBase}/5.png";
         ret.midGround = "${TownGenome.midgroundBase}/7.png";
         ret.ground = "${TownGenome.groundBase}/5.png";
-        ret.background = "${TownGenome.backgroundBase}/6.png";
+        ret.background = "${TownGenome.backgroundBase}/7.png";
         DelayEffect smallDelay = new DelayEffect(1);
         DelayEffect mediumEffect = new DelayEffect(2);
 
