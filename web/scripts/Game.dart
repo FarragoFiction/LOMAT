@@ -44,6 +44,7 @@ class Game
     LOMATNPC ebony; //needed for grim to keep track of.
     LOMATNPC skol; //needed to bark at lil scumbag
     LOMATNPC roger_koon;
+    LOMATNPC wazowski;
     LOMATNPC the_kid;
     bool dangerousMode = false;
     LOMATNPC halja;
