@@ -46,6 +46,7 @@ class Game
     LOMATNPC roger_koon;
     LOMATNPC wazowski;
     LOMATNPC geb;
+    LOMATNPC nut;
     LOMATNPC the_kid;
     bool dangerousMode = false;
     LOMATNPC halja;

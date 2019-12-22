@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:CommonLib/Compression.dart';
+import 'package:CommonLib/NavBar.dart';
 import 'package:TextEngine/TextEngine.dart';
 
 import '../AnimationObject.dart';
@@ -312,6 +313,12 @@ class LOMATNPC {
 
         TalkyLevel level = new TalkyLevel(talkyItems,null);
         String name = await randomName(seed);
+        //you can meet her
+        if(getParameterByName("seerOfVoid",null)!= null) {
+            if(!Game.instance.wanderingNPCs.contains(Game.instance.nut) && !Game.instance.partyMembers.contains(Game.instance.nut)){
+                return Game.instance.nut;
+            }
+        }
         LOMATNPC testNPC = new LOMATNPC(name, level, GullAnimation.randomAnimation);
         testNPC.amalgamate = true;
 
@@ -448,8 +455,15 @@ abstract class NPCFactory {
 
     static LOMATNPC geb() {
         String dataString = "Geb:___ N4IgdghgtgpiBcIDiMBGIA0IA2MIDcBLMAcwFkYBnSiEuRAAgBUB5AERYaggGsYHKAVwBO-PAGMAFgwByABQDCDSREoMIDcYMoAXAPZQGuAsRJcqNOgDpMIcRG0wWAMzZ4dkhCAipKe7II6MNgAngxgeh6mtpIADggAHACsWDohsfTIgtjYtgAmhJR4RZQIANoAuqkQ2DwhADIw+MEIoDo1dQCSQVCl8GWgBZSx2BAhTDAAHjpeAOqSeuqiDCF6ggD8tjrChCR0wn2VqemZTB0hAIqCVDqEemC2osP3Ra0gQyNjE9NeneqG2D0eh4pgYzj0wi4YUBuiMemaGFkgRsqR2exgB3KVRA7VqDSaLXgbXO3RgvSxAF9jhkvGc8QAlKixF5wLCqPziQgQIJ5ACiUEidwe8AAjAAmAAMFKpg0Kn3GUxmiHmi0KDAAYjAwDthJtUbt9odQKNUISQABBAWCMA6dXWvKlLCEKDM4TtG2zCF5BBgbLYJ0uiHunSdG0IEUSqXYtI0xB0upXG5Cx5MllvD6jBU-RAACX44mE1xyYX0y1g6liEDdYOEBihcOaKJxaMNWOqeMazVyRJxJJ6hwqVJxJ1p50ZzzArzZ1D0nO5MD5Atu93DkelGFlw0z3yVIHm3IA5GoSHpQfc9c2DRijTgfGbLWsbXawA7bM7XcHPcJvfBfTkAx+EA2qGSoihGFLRiOcbnImujJlgTzMpO9CbvKO6-Aw9yhAIMAwDwDD6AwpoMKI1qEDyDAAO7kdIUDQnosKAo2Wwtteba9h2BLdsSeKkuS-SDtSpxjqmyG2Oys5cjy-KCiuoprjK7xytuipeOayweBi-BASWohUJhYAMPULBkOaTAXtsV6Yv0xp3t2FpWk+9qOiA75BkBOhfj+f7+q5gZuh5IGrlGQmjnisHLg8CGia8PYZl8qmIAAahihChIiURqKML4MGqqgMHkeB5Ooah0coeBuk2lnotZRwcXUnaEjxXT9uUqEqdme4QORiLYIQfCIqsggHsshUQHkFmsbVtmmvZD7Wrazlvv5n5ej6foAe5wFhqK4GQbGIDxpc1xwSu0UTrF7UJZ1+46AwjjKPlfXOPwhHlpRkhavWn1VjoaiFZQhDLGqpqrDl5GTVZA7tg1XFvLiLVkgOQ4xsJDIxay3gznO0lLsm8lShBKNQYdIkXZjEk4wuMmRcF65XVmu63ZoQErGsBHBNg5jqKgax3bAkM1dDw4HUdEXwSAiFpnFynXbuACaayQuI-jFT91bUTk4QEpCPARJRBGfQVMCxB4mHOPWTH8OCkJlTCd0yMiLFQ+xCP4l28N9kjlKhdB6Pk+J2NSdTeNyRGhOCd4YDOty+OgCoOiO1AprCIkWC83kIRJynacgJWuA6EEXhIAA+gALOa5rOCXADsABsSWV1XABCYoOiEADKTDmjmAC0JB5JMJDyzm9IyHXAAalHqr3lHms35p5J0lcwLMCQAMwkAAvFvIDSkAA";
-        //Game.instance.geb = LOMATNPC.loadFromDataString(dataString)..associatedPodcast="ground_nut"; todo record this
+        Game.instance.geb = LOMATNPC.loadFromDataString(dataString)..associatedPodcast="ground_nut";
         return Game.instance.geb;
+    }
+
+    //never actually spawns
+    static LOMATNPC nut() {
+        String dataString = "Nut:___ N4IgdghgtgpiBcIByBXALiANCANjCAbgJZgDmAsjAM5USlyIAEAKgPIAirjUEA1jIyooATgPwBjABaMkABQDCjSRCqMIjcSipoA9lEZ5CJUt2q16AOiwhxELTFYAzdvjSSEICACMqOnOhgcAE9GMB03Y2tJAAcEAA4AVmw0IOiGEABxFBwcawATIip8IqoEAG0AXWSIHF4ggBkYAkCEUDQauoBJNBgoUvgy0AKqaJwIIOYYAA8MRAB1SR01UUYgnRQAfms0YSJSemF+yuTU9OYOoIBFFGo0Ih0wa1ERh6LWkGHR8cmZj06Acn0qDQFkYADEYGBdsJQk0YDDdtE0nlTIxHMI9Iw3AIAIKOHrCHBERwwTAGIj8JQCAoo7GMcKSeFUKzJXb7JnlKogdq1Bpw3LwNoXbq9I4VAC+JzSHnOvIAStRoq84NgVL5xEQID08gBRKDhe6PeAARgATAAGcWSoaFL4TaazEALJaFcGQ6FbVl7A5HUBjLwtRA4-UoMBoMGhvKlbBEKBK4TtMNzHTCPIIMDZHAxuMpxNoTphhDG82WrkpaWIWV1a63Q1PRXK96fMb237zAQAd3hAhqOEY9DQdzIjHstKWdLxBKJJMYHcZYDdUKICKISJgKN8sHpjhHqnWaG3jCIIMY2zZPs51V5jWaAqFvJFfU5ku5pxlFwVLzAb1VNB0Gq1dc9QNB4ixLK1MBtEYWx+R0Fi1f5VFIHRjHpMBPW5c8OQGP1vEDEBg3WMMIzAKNrFjeM82TVN00zbNKIgMMC1mY1i3FMs30rC4a20OtsGeJVvwYKC7Vgv5ASxYQglQ3RGFECApG4EIcB0bQDB0ZoyQyGAvDJOclg7DpVDpBl4UEIg8gEHQdzpZoiBwFlMO9bDjm5C4b0De8uh6J8BglKUzg-BshOsNV-01bVgLuUCTXA60PltGCHQ8HEVmxFZGJCHYYGoNDGHqVhyBxZgMJ2ZzDnKXCAwFAiQ2IyNoxACjc0YtBqLTeAMxyeiWqYwtYtLAL315HjosefjgreQUEug75ksQJAdDJB5gixRlGC8YRGKkXLoiIeENWHY80QxfQCoACRxHVHLK9kKr8q86g8u83IfHzfRm0T5qdCBjzJIl+DJNYUH+FZLIgPJSqw+7BlwPCasI0Nwwa8icwTVr2to7qmrRvNmKLNiOIrEAqyuG5eNAiavymkSkrbEAAE1qFBABlEhxAETo1H0XiciPBcJ3xeFp05xg8iWMID3EDSzKgEIvAeXKO2PaRxBUtw1GM9bTMOMWdBu6GxUevlb3eHlvNFZ8hq4+VJpVTw-wAyL9TGsDLXYl9y0C23qftsKnaAl26wGiDabm+n4KlxjVnWLFAj7LdvH3UwofKo3X2J0nRr4kABMbabm3Dx0Gdj5W+bAOEEQkaRBanYlSXMsAOZjlBlgESXJOyEIaiIZpQQBHmUykg208vV6nv5M3hXeq2M+9upP0En8HfVCLA5Ao1i3d-zPDAWMtWD0BlDQVAoADYQEAANmwBW8iCU-z6v7BohqGBB3SDIAH0ABYcTxT+ADsl8ABqf88QACFTRRiCCzZgOJzoAFpSB5CmKQBm505RIEvgADQ7GCBBHYcTgJxHkTof8vA6gAKrsFIAAXloSAK0QA";
+        Game.instance.geb = LOMATNPC.loadFromDataString(dataString);
+        return Game.instance.nut;
     }
 
     static LOMATNPC blank() {
