@@ -45,6 +45,7 @@ class Game
     LOMATNPC skol; //needed to bark at lil scumbag
     LOMATNPC roger_koon;
     LOMATNPC wazowski;
+    LOMATNPC geb;
     LOMATNPC the_kid;
     bool dangerousMode = false;
     LOMATNPC halja;
@@ -183,6 +184,10 @@ class Game
         wanderingNPCs.add(NPCFactory.skol());
         wanderingNPCs.add(NPCFactory.halja());
         wanderingNPCs.add(NPCFactory.the_kid());
+        //three extra
+        wanderingNPCs.add(NPCFactory.wazowski());
+        wanderingNPCs.add(NPCFactory.geb());
+
         wanderingNPCs.add(NPCFactory.loki());
         wanderingNPCs.add(NPCFactory.grim());
         //yn will be spawned at town time
