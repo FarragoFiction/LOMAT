@@ -179,7 +179,8 @@ class Tombstone {
 
     void acceptAndMoveOn(Element me, Road road) {
         Game.instance.graves.add(this);
-        print("my json is ${toJSON()}");
+        print("my datastring is ${toDataString()}");
+
         me.remove();
         me = null; //for garbage collection probably.
         //test

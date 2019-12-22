@@ -38,7 +38,7 @@ void main()  async{
     }*/
     //testPhrases();
     //testAmagalmationMode();
-    testEnding();
+    //testEnding();
     //testEvents();
    // testYN();
     //testCiphers();
@@ -46,7 +46,7 @@ void main()  async{
     //loadGull();
 
     //testAnimation();
-    //testTombstone();
+    testTombstone();
 }
 
 void testAmagalmationMode() {
@@ -148,14 +148,10 @@ void testAnimation() {
 }
 
 Future<void> testTombstone() async{
-    Tombstone t = new Tombstone.withoutNPC("JRTest", "JRBurg","getting wasted");
-    t.setID(13);
-    div.appendHtml("${t.toJSON()}");
-    t.drawSelf(div,null, true);
-    Tombstone.loadFromTIMEHOLE();
-    ImageElement waitedImage = await t.image;
-    div.append(waitedImage);
-    queryTimehole();
+    //Tombstone t = new Tombstone(NPCFactory.nut());
+    Tombstone t = Tombstone.loadFromDataString("Nut:___ N4IgdgDgxgcghgWwKYgFwhgVwC4gDTjQDCA8gCJogCic2SYABAEICeDAYvQE4CWX+IOAGchAeyg9aSACYAFYUNkALLsJTowPaUtEBzXQN2i4AGwAqogO5h4yNGEwmTBKKLB13aANqhpPIRAmcCxmSAAeuOgMJqIiIAC+eL7+gcGhEZQM-gxwDBBWSFwAZo4M2Eo8YAaJyQFBIeGRAjUgfnVpjZlwCUmtKfXpTQxKSE4MokU5DAgsQnRcLD21qQ0Z6AQtbSuDXWMTZSMIS33tq0MARm5IQgkAuvFAA");
+    div.appendHtml("${t.toDataString()}");
+    t.drawSelf(div,null, false);
 }
 
 Future<void> queryTimehole() async{

@@ -81,7 +81,7 @@ class Game
     Element moneyContainer;
 
     Game() {
-
+        graves.add(Tombstone.loadFromDataString("Nut:___ N4IgdgDgxgcghgWwKYgFwhgVwC4gDTjQDCA8gCJogCic2SYABAEICeDAYvQE4CWX+IOAGchAeyg9aSACYAFYUNkALLsJTowPaUtEBzXQN2i4AGwAqogO5h4yNGEwmTBKKLB13aANqhpPIRAmcCxmSAAeuOgMJqIiIAC+eL7+gcGhEZQM-gxwDBBWSFwAZo4M2Eo8YAaJyQFBIeGRAjUgfnVpjZlwCUmtKfXpTQxKSE4MokU5DAgsQnRcLD21qQ0Z6AQtbSuDXWMTZSMIS33tq0MARm5IQgkAuvFAA"));
     }
 
     void init() {
