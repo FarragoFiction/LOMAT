@@ -140,7 +140,7 @@ class GullAnimation  extends AnimationObject{
 
     static GullAnimation get randomAnimation {
         Random rand = new Random();
-        return new GullAnimation(rand.nextIntRange(1,7),rand.nextIntRange(1,7), randomPalette);
+        return new GullAnimation(rand.nextIntRange(1,8),rand.nextIntRange(1,8), randomPalette);
     }
 
 
