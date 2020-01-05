@@ -48,8 +48,12 @@ abstract class PhysicalLocation {
     }
 
     void teardown() {
-        container.remove();
-        menu.teardown();
+        if(container != null) {
+            container.remove();
+        }
+        if(menu != null) {
+            menu.teardown();
+        }
     }
 
     void init();
