@@ -35,6 +35,10 @@ abstract class PhysicalLocation {
     //used both for setting up the first time, and for reiniting if any screen needs to come back here
     void displayOnScreen(Element div) {
         if(div != null) parent = div;
+        if(Game.instance.currentLocation != null) {
+            //it probably tore itself down already but if it DIDN'T...well, you gotta do something.
+            Game.instance.currentLocation.teardown();
+        }
         container = new DivElement();
         container.classes.add("parallaxParent");
         //sprint("class added, width is ${container.style.width}");
