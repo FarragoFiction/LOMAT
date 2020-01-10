@@ -17,8 +17,8 @@ class TalkyRecruit extends TalkyItem {
 
     //TODO if already in party this shouldn't actually display
     @override
-    void display(Element cont) {
-        super.display(cont);
+    void display(Element cont, bool seagull) {
+        super.display(cont, seagull);
         div.setInnerHtml(">$displayText");
 
     }
@@ -43,7 +43,7 @@ class TalkyRecruit extends TalkyItem {
     }
 
 
-    void onClick() {
+    void onClick(bool seagull) {
         //get back up to talky level, then to talky section, then to npc, then ask game to recruit them.
         //TODO if there is no room in their party, display error popup
         bool worked = Game.instance.recruit(recruitTarget);

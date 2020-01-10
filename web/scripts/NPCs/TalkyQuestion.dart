@@ -16,8 +16,8 @@ class TalkyQuestion extends TalkyItem {
   }
 
   @override
-    void display(Element cont) {
-        super.display(cont);
+    void display(Element cont, bool seagull) {
+        super.display(cont, seagull);
         div.setInnerHtml(">$displayText");
     }
 
@@ -42,9 +42,9 @@ class TalkyQuestion extends TalkyItem {
 
 
 
-    void onClick() {
+    void onClick(bool seagull) {
         container.setInnerHtml("");
-        response.display(container);
+        response.display(container, seagull);
     }
 
 }

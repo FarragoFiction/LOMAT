@@ -49,15 +49,15 @@ class TalkyResponse extends TalkyItem {
 
 
     @override
-    void display(Element cont) {
-        super.display(cont);
+    void display(Element cont, bool seagull) {
+        super.display(cont, seagull);
         CipherEngine.applyRandom(div, Game.instance.amagalmatesMode);
         if(talkyEnd == null) talkyEnd = new TalkyEnd(talkyLevel);
         npc.emote(associatedEmotion);
-        talkyLevel.display(cont);
+        talkyLevel.display(cont, seagull);
     }
 
-    void onClick() {
+    void onClick(bool seagull) {
         //does nothing.
     }
 }

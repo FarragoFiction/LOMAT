@@ -12,13 +12,13 @@ class TalkyEnd extends TalkyItem {
     }
 
     @override
-    void display(Element cont) {
-        super.display(cont);
+    void display(Element cont, seagull) {
+        super.display(cont, seagull);
         div.setInnerHtml(">$displayText");
 
     }
 
-    void onClick() {
-        owner.goUpALevel(container);
+    void onClick(bool seagull) {
+        owner.goUpALevel(container, seagull);
     }
 }

@@ -44,20 +44,19 @@ class TalkyLevel {
         return ret;
     }
 
-    void display(Element container) {
-        print("displaying $this with children ${talkyItems.length}");
+    void display(Element container, bool seagull) {
         for(TalkyItem talkyItem in talkyItems) {
             if(talkyItem.triggered()) {
-                talkyItem.display(container);
+                talkyItem.display(container, seagull);
             }
         }
     }
 
-    void goUpALevel(Element container) {
+    void goUpALevel(Element container, bool seagull) {
         container.setInnerHtml("");
         if(parent != null) {
             print("Debug SubQuestions: I'm going up a level. my parent is $parent and has children ${parent.talkyItems.length}");
-            parent.display(container);
+            parent.display(container, seagull);
         }else {
             screen.teardown();
         }

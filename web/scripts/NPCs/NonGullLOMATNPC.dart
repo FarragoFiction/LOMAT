@@ -27,7 +27,7 @@ class NonGullLOMATNPC extends LOMATNPC {
       container.append(nameElement);
       container.append(avatar);
       container.append(div);
-      talkyLevel.display(div);
+      talkyLevel.display(div,false);
   }
 
   @override

@@ -257,7 +257,7 @@ class LOMATNPC {
         container.append(animation.element);
         animation.addClassToCanvas("npcImage");
         container.append(div);
-        talkyLevel.display(div);
+        talkyLevel.display(div, true);
     }
 
 
