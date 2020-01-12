@@ -512,6 +512,10 @@ html:not([data-seerOf=void]) .void {
     }
 }
 
+.money{
+    color: white;
+}
+
 .startFade {
     animation-name: startFade;
     animation-duration: 2.5s;

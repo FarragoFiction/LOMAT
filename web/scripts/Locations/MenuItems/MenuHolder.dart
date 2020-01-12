@@ -18,6 +18,7 @@ class MenuHolder {
 
     MenuHolder(Element parent, PhysicalLocation this.location) {
         container = new DivElement();
+
         parent.append(container);
         container.classes.add("menuHolder");
     }

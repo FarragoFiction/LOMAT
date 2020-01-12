@@ -348,6 +348,10 @@ class Game
 
     void syncMoney() {
         moneyContainer.text = "Funds: $funds ($costPerTravelTick cost per tick to travel)";
+        AnchorElement a = new AnchorElement(href: "http://www.farragofiction.com/PaldemicSim/login?username=pompousPsycho")..target = "blank";
+        ImageElement img = new ImageElement(src: "http://farragofiction.com/LOHAE/images/BGs/paldemic.png");
+        a.append(img);
+        moneyContainer.append(a);
     }
 
     Future setStartingTown() async {
