@@ -7,12 +7,14 @@ import 'MenuItem.dart';
 import 'dart:html';
 
 class CreditsButton extends MenuItem {
-  CreditsButton(MenuHolder holder) : super("Credits",holder);
+  CreditsButton(MenuHolder holder) : super("???",holder);
 
   @override
   void onClick() {
-      DivElement modal = new DivElement()..classes.add("flavorText");
-      List<String> credits = <String>["Coding: jadedResearcher", "Coding: paradoxLands", "Art: yearnfulNode", "Art: karmicRetribution", "Art: nebulousHarmony", "Art: insufferableOracle", "Art: karmicRetribution", "Fenrir Animations: Ghoul ","Contest Finalist: crimsonDestroyer ","Contest Finalist: cumulusCanine","Contest Finalist: retroStrategist ","Contest Finalist: Artful_Dodger ","Contest Finalist: DeathlyHealer ","Contest Semifinalist: cactus","Contest Semifinalist: cumulusCanine ","Contest Semifinalist: Coolthulhu","Contest Semifinalist: gull","Contest Semifinalist: ShyTenda ","Contest Semifinalist: RavenStar ","Contest Semifinalist: fakeanewie","Contest Semifinalist: RealMealodyHope "];
+      DivElement modal = new DivElement()..classes.add("credits");
+      HeadingElement header = new HeadingElement.h2()..text = "Credits";
+      modal.append(header);
+      List<String> credits = <String>["Coding: jadedResearcher", "Coding: paradoxLands", "Music: manicInsomniac","Art: yearnfulNode", "Art: karmicRetribution", "Art: nebulousHarmony", "Art: insufferableOracle", "Art: karmicRetribution", "Fenrir Animations: Ghoul ","Contest Finalist: crimsonDestroyer ","Contest Finalist: cumulusCanine","Contest Finalist: retroStrategist ","Contest Finalist: Artful_Dodger ","Contest Finalist: DeathlyHealer ","Contest Semifinalist: cactus","Contest Semifinalist: cumulusCanine ","Contest Semifinalist: Coolthulhu","Contest Semifinalist: gull","Contest Semifinalist: ShyTenda ","Contest Semifinalist: RavenStar ","Contest Semifinalist: fakeanewie","Contest Semifinalist: RealMealodyHope "];
       credits.forEach((String credit) => modal.append(new DivElement()..text = credit ));
       DivElement buttonHolder = new DivElement();
 
