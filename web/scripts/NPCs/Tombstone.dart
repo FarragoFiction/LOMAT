@@ -163,7 +163,7 @@ class Tombstone {
         //don't just always send okay?
         if(!onTrail) {
             //String url = "http://localhost:3000/tombstone_timeholds";
-            String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds";
+            String url = "https://plaguedoctors.herokuapp.com/tombstone_timeholds/createFromLOMAT";
             Map<String,String> body = {"tombstoneJSON": jsonEncode(toJSON())};
             print("body is $body");
             post(url, body: body);
