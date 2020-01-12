@@ -340,6 +340,8 @@ class Town extends PhysicalLocation {
       menu.addVoidTravel();
       menu.addBotButton();
       menu.addHunt();
+      menu.addCreditsButton();
+
   }
 
   void replaceTemplateText() {

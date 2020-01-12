@@ -1,5 +1,6 @@
 import '../PhysicalLocation.dart';
 import 'Back.dart';
+import 'CreditsButton.dart';
 import 'Hunt.dart';
 import 'MenuItem.dart';
 import 'Talk.dart';
@@ -35,6 +36,10 @@ class MenuHolder {
 
     void addBotButton() {
         _items.add(new GuideBotButton(this));
+    }
+
+    void addCreditsButton() {
+        _items.add(new CreditsButton(this));
     }
 
     void addTravel() {
