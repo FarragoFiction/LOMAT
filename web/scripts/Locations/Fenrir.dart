@@ -244,7 +244,6 @@ class Fenrir {
     }
 
     static void beChatty(Element container) {
-        print("i'm being chatty)");
         chat(container);
         int time = new Random().nextIntRange(1000,10000);
         if(!deleted && onScreen) {

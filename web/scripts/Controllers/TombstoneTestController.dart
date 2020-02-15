@@ -45,8 +45,8 @@ void main()  async{
     //loadGulls();
     //loadGull();
 
-    //testAnimation();
-    testTombstone();
+    testAnimation();
+    //testTombstone();
 }
 
 void testAmagalmationMode() {
